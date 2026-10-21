@@ -1,0 +1,6 @@
+# Historical Linux Qwen serving runtime; install on the inference machine only.
+vllm==0.32.0
+torch==2.13.0
+transformers==5.19.0
+huggingface-hub==2.2.0
+

@@ -1,0 +1,11 @@
+{
+ "scope":"Unfastened marker-free two-member corner alignment using articulated xArm7 chains; third arm carries parked nailer. No full crate or real-world validation.",
+ "sensor_inputs":["RGB camera pixels","fixed calibration","known nominal member dimensions","robot joint encoders/forward kinematics"],
+ "forbidden_runtime_inputs":["object pose/state","rendered segmentation IDs","true depth","true contact state"],
+ "development_seeds":[0,1,2],
+ "reserved_seeds":[7100,7101,7102,7103,7104],
+ "acceptance":{"pickup_bottom_clearance_m":0.05,"corner_gap_range_m":[0,0.005],"outer_face_flush_error_m":0.005,"square_error_deg":2,"height_error_m":0.003,"released_stable_s":2,"max_penetration_m":0.0005,"no_drops":true,"solver_warnings":0},
+ "comparison":"Establish diagnostic feasibility first; report camera estimates against evaluator truth separately. Freeze before reserved trials. Astra trials are actual individual live decision sequences, not inferred from primitive success.",
+ "physical_validation":false,
+ "no_runpod":true
+}

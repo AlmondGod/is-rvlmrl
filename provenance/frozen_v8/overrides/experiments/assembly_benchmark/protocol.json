@@ -1,0 +1,121 @@
+{
+  "version": "frame-supervision-v8",
+  "qwen_sampling_amendment": "Before any new held-out trial, replace the earlier coding-oriented sampler with Qwen's published thinking-mode general-task recommendation: temperature1.0,top_p0.95,top_k20,min_p0,presence_penalty1.5,repetition_penalty1.0. This is a documented default correction, not a sweep or task fine-tuning. Source: https://huggingface.co/Qwen/Qwen3.5-4B . v5 remains historical and is not pooled.",
+  "controller_handoff_amendment": "The first v5 pilot revealed a commanded-position discontinuity on placement completion, followed by drift during model waiting. Preserve the last issued settled target across that handoff. Keep the failed v5 run and retire its test set; use new paired layouts below after development-only delayed-controller validation. No changes to fixture geometry, nail strength, contact parameters or acceptance thresholds.",
+  "infrastructure_amendment": "Before model evaluation, the user explicitly authorized RunPod host x66zu9gx8yb73a for Qwen inference. Physics, observations, skills, test seeds and acceptance criteria are unchanged from v2. Simulation remains local.",
+  "qwen_weight_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "frame_occlusion_prior": "After four nail triggers and a visually verified frame, preserve the last RGB frame estimates when feeding the occluding sheet. This assumes a stationary fastened frame, not fresh measurement or hidden joint validation.",
+  "scope": "Pilot comparison of supervisory skill selection and visual checking; NOT code-policy or learned motor control.",
+  "models": [
+    "Qwen/Qwen3.5-4B",
+    "gpt-6-astra"
+  ],
+  "model_routes": {
+    "qwen": "vLLM 0.32.0, official weights BF16 on user-authorized RunPod RTX4000 Ada20GB",
+    "astra": "Codex CLI 0.162.0-alpha.17.2 configured for gpt-6-astra, user-authorized existing login"
+  },
+  "codex_amendment": "Before any held-out trial the user explicitly requested Codex instead of an Astra API key. Shared task instructions, skills, packet and original image bytes are preserved. Codex adds wrapper context and may preprocess attached images differently. Shell, view-image tools, apps/plugins, browser/computer use, memories and delegation are disabled. Any tool event invalidates the response. Fresh ephemeral sessions prevent prior-episode memory. The model identity is CLI-configured, not an independently returned immutable provider snapshot. No direct-Astra-API equivalence claim.",
+  "codex_token_budget": "Same 120-second request timeout and post-response 4096 reported output-token acceptance ceiling. Codex CLI has no documented generation-time max_output_tokens option; unlike Qwen, this ceiling cannot prevent oversampling. Report raw usage and flag violations. Hidden reasoning budgets are not matched.",
+  "codex_transport_limit": "One CLI invocation per decision, with unbounded connection retries disabled. Internal bounded transport retries are not independently controlled or counted. Qwen uses one HTTP attempt. The overall 120-second deadline applies to either route.",
+  "development_seed": 3,
+  "paired_evaluation_seeds": [
+    22001,
+    22002,
+    22003
+  ],
+  "order": [
+    [
+      22001,
+      "astra"
+    ],
+    [
+      22001,
+      "qwen"
+    ],
+    [
+      22002,
+      "qwen"
+    ],
+    [
+      22002,
+      "astra"
+    ],
+    [
+      22003,
+      "astra"
+    ],
+    [
+      22003,
+      "qwen"
+    ]
+  ],
+  "order_amendment": "Before either model produced any held-out result, reverse the planned within-pair order to start with Astra while the Qwen host's direct SSH connectivity is repaired. No seeds, budgets, physics or acceptance gates changed.",
+  "environment": {
+    "dt": 0.0005,
+    "fixture_half_width": 0.38,
+    "shoulder_half_span": 0.55,
+    "physical_nails": true,
+    "flip_profile": "clearance-stack",
+    "control_period_s": 0.02,
+    "perception_period_s": 0.1,
+    "image_height": 960,
+    "image_width": 1280,
+    "camera_indices": [
+      0,
+      2,
+      3
+    ]
+  },
+  "budgets": {
+    "simulated_seconds": 1200,
+    "model_calls": 32,
+    "max_output_tokens_per_call": 4096,
+    "request_timeout_wall_s": 120,
+    "model_request_attempts": 1,
+    "trial_wall_seconds": 3600
+  },
+  "model_settings": {
+    "qwen": {
+      "enable_thinking": true,
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 1.5,
+      "repetition_penalty": 1.0
+    },
+    "astra": {
+      "reasoning_effort": "low"
+    }
+  },
+  "history": "All prior compact commands and completion/rejection statuses, latest RGB only; identical construction for both models.",
+  "timing": "Model request executes asynchronously while simulation runs. Never apply a response before observation_sim_time + measured request wall latency. Record simulator lag and synchronous planner pauses; this is not a real-time deployment claim.",
+  "contact_gate_scope": "The unintended robot-workpiece contact classification is sampled every 20 ms during the flip only. Peak penetration is checked at physics substeps throughout the episode. The former does not prove absence of unintended contacts during earlier assembly stages.",
+  "acceptance": {
+    "max_penetration_m": 0.0005,
+    "member_xy_error_m": 0.006,
+    "member_yaw_error_deg": 1.0,
+    "member_tilt_deg": 1.0,
+    "panel_xy_error_m": 0.006,
+    "panel_z_error_m": 0.003,
+    "panel_tilt_deg": 1.0,
+    "panel_yaw_error_deg": 1.0,
+    "preflip_released_stable_s": 3.0,
+    "airborne_relative_position_m": 0.005,
+    "airborne_relative_angle_deg": 3.0,
+    "panel_up_dot_max": -0.98,
+    "fixture_clearance_m": 0.02,
+    "inverted_hold_s": 5.0,
+    "intact_fasteners": 8,
+    "solver_warnings": 0,
+    "unintended_robot_workpiece_contacts": 0
+  },
+  "failure_policy": "Count every started trial. Invalid JSON/schema, API failure, skill failure, numerical violation, stop, timeout or premature finish is retained; never silently restart. No tuning on evaluation episodes.",
+  "statistics": "Report raw n/3 and exact binomial intervals descriptively. Three paired cases cannot establish high reliability or general superiority.",
+  "hardware_and_pretraining_matching": "Same robot, original sensor image bytes, public packet, skills and downstream data (zero). Different model sizes, pretraining, inference hardware, wrapper context, internal image processing and token-cap enforcement remain confounds; not a representation ablation.",
+  "no_distillation": true,
+  "no_rl": true,
+  "no_runpod": false,
+  "physical_validation": false,
+  "released_pose_amendment": "Before any fresh held-out trial, delayed development regression showed an image-only false rejection of a sound frame: single-view rectangle fit exaggerated a corner gap. Extend the existing two-camera silhouette fit to released front/rear members with the same explicit surveyed planar support prior. Missing second-view evidence rejects the estimate; no target snapping or evaluator state. Held-out seeds remain unused. No physics or acceptance change."
+}

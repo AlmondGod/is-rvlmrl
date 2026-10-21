@@ -1,0 +1,11 @@
+{
+  "changed_files": [
+    "experiments/assembly_benchmark/test_benchmark.py",
+    "experiments/assembly_benchmark/codex_provider.py",
+    "experiments/assembly_benchmark/protocol.json",
+    "experiments/assembly_benchmark/README.txt"
+  ],
+  "physics_controller_files_identical": true,
+  "reuse": "delayed_full_v8",
+  "independent_audit_passes": true
+}

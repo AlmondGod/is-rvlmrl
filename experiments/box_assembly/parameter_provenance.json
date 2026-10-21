@@ -1,0 +1,222 @@
+{
+  "status": "all_parameters_unmeasured",
+  "hardware_product_selection": {
+    "wood": null,
+    "nails": null,
+    "glue": null,
+    "driving_tool": null
+  },
+  "parameters": {
+    "nail_length_m": {
+      "value": 0.025,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_intercept_N": {
+      "value": 35.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_slope_N_m": {
+      "value": 1800.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_drag_N_s_m": {
+      "value": 500.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_force_limit_N": {
+      "value": 110.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_energy_budget_J": {
+      "value": 4.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "drive_timeout_s": {
+      "value": 0.5,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nose_preload_N": {
+      "value": 2.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "tool_position_tolerance_m": {
+      "value": 0.002,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "tool_angle_tolerance_rad": {
+      "value": 0.12,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "max_mating_gap_m": {
+      "value": 0.0005,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "mating_slip_tolerance_m": {
+      "value": 0.001,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_stiffness_N_m": {
+      "value": 12000.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_damping_N_s_m": {
+      "value": 4.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_withdrawal_N": {
+      "value": 45.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_lateral_N": {
+      "value": 70.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_failure_displacement_m": {
+      "value": 0.004,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "nail_seating_tolerance_m": {
+      "value": 0.0005,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_flow_m3_s": {
+      "value": 1e-07,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_film_m": {
+      "value": 0.00015,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_nozzle_radius_m": {
+      "value": 0.003,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_open_time_s": {
+      "value": 300.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_clamp_force_per_patch_N": {
+      "value": 0.5,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_continuous_clamp_s": {
+      "value": 60.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_cure_t95_s": {
+      "value": 86400.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_stiffness_full_N_m": {
+      "value": 8000.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_damping_N_s_m": {
+      "value": 2.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_tensile_strength_Pa": {
+      "value": 400000.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_shear_strength_Pa": {
+      "value": 600000.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_failure_displacement_m": {
+      "value": 0.002,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "glue_handling_fraction": {
+      "value": 0.25,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    },
+    "chemistry_time_scale": {
+      "value": 1.0,
+      "source": "engineering_placeholder_not_vendor_or_literature_fit",
+      "measured": false,
+      "uncertainty": null
+    }
+  },
+  "adapter_assumptions": {
+    "tool_mass_kg": 1.28,
+    "stage_force_limit_N": 150,
+    "stage_torque_limit_Nm": 5,
+    "stage_translation_k_N_m": 1200,
+    "stage_translation_damping_N_s_m": 70,
+    "stage_rotation_k_Nm_rad": 18,
+    "stage_rotation_damping_Nm_s_rad": 2,
+    "tool_translation_rate_m_s": 0.1,
+    "tool_rotation_rate_rad_s": 1.0,
+    "pressure_distribution": "uniform over mating face",
+    "sensor_noise": "none; ideal placeholders"
+  },
+  "identification": "FASTENING_PROTOCOL.md; calibrate_drive.py fits only the quasistatic drive law",
+  "limitations": [
+    "not intended as a structural connection specification",
+    "actual arm/tool limits unknown",
+    "no physical measurements used"
+  ]
+}

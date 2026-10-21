@@ -1,0 +1,26 @@
+{
+  "request_sha256": "84cd339b68f7e28bc2bb0ecbcb0641a8f3f2818d495de3276fbac2507d1bdc92",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 8.471041125012562,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1589e-e234-7070-8d78-5f9a933e154e\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"finish\\\",\\\"index\\\":null,\\\"reason\\\":\\\"Fresh post-flip views show all four members retaining a rectangular frame against the plywood, with aligned corners and no visible separation or displaced parts. The flip is visually complete; hidden joint soundness remains unverified.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":13828,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":58,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:22:50.041737Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:22:50.043483Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:22:50.045037Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:22:50.046554Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:22:50.048122Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"finish\",\"index\":null,\"reason\":\"Fresh post-flip views show all four members retaining a rectangular frame against the plywood, with aligned corners and no visible separation or displaced parts. The flip is visually complete; hidden joint soundness remains unverified.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1589e-e234-7070-8d78-5f9a933e154e",
+    "usage": {
+      "input_tokens": 13828,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 58,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

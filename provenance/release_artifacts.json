@@ -1,0 +1,29 @@
+{
+  "tag": "research-snapshot-2026-10-21",
+  "assets": [
+    {
+      "filename": "assembly-evidence-2026-10-21.tar.gz",
+      "bytes": 429781044,
+      "sha256": "8382cef01aca791397eab1d86013214ab3fd568a929d69ab023b41d8a3145329",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/research-snapshot-2026-10-21/assembly-evidence-2026-10-21.tar.gz"
+    },
+    {
+      "filename": "scripted-development-success.mp4",
+      "bytes": 16040144,
+      "sha256": "67f5874fda0b9e768d0eb22aaa6e4f635510b38aad9a899055530889417820fd",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/research-snapshot-2026-10-21/scripted-development-success.mp4"
+    },
+    {
+      "filename": "astra-visible-finish-acceptance-failure.mp4",
+      "bytes": 16839883,
+      "sha256": "193826bed676b2fcb5d9875ca83fa8e851b863900d0fb5b12a3ba2d4bac21b97",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/research-snapshot-2026-10-21/astra-visible-finish-acceptance-failure.mp4"
+    },
+    {
+      "filename": "astra-penetration-failure.mp4",
+      "bytes": 9836330,
+      "sha256": "bdd10467ad8fed2d018e923433068b7efb3614a2832a2ca844c38eee8631c87d",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/research-snapshot-2026-10-21/astra-penetration-failure.mp4"
+    }
+  ]
+}

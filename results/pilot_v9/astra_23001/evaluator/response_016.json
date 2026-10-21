@@ -1,0 +1,26 @@
+{
+  "request_sha256": "4882d38556548c193242a6d09a9a2078441b5b3ebf98d857c22a1418e5099d82",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 12.028263374930248,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1586a-b44f-7172-b565-1a5ac4cc1a85\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"nail_panel\\\",\\\"index\\\":0,\\\"reason\\\":\\\"The released plywood appears flat and centered over the frame, and both grippers are clear. All four corner triggers are recorded but no panel triggers, so begin panel fastening at index 0.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":13061,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":56,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:25:50.436915Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:25:50.447963Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:25:50.504525Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:25:50.700988Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:25:50.730261Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:25:55.409523Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n",
+  "text": "{\"skill\":\"nail_panel\",\"index\":0,\"reason\":\"The released plywood appears flat and centered over the frame, and both grippers are clear. All four corner triggers are recorded but no panel triggers, so begin panel fastening at index 0.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1586a-b44f-7172-b565-1a5ac4cc1a85",
+    "usage": {
+      "input_tokens": 13061,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 56,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

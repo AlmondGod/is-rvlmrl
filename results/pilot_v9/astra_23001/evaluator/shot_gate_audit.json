@@ -1,0 +1,254 @@
+{
+  "method": "Replay ray gates against pre-shot logged poses, independently verified against raw-state reconstruction. No controller input, re-simulation, parameter change or trial retry. Surrogate insertion only; no physical validation.",
+  "shots": [
+    {
+      "tool_position_tracking_error_mm": 1.6832803023475564,
+      "commanded_tip_clearance_above_true_panel_mm": null,
+      "nominal_panel_tip_clearance_mm": null,
+      "kind": "frame",
+      "index": 0,
+      "pre_shot_time_s": 314.57999999601714,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 1,
+          "entry_m": 0.003174000298470354,
+          "exit_m": 0.034583300206351746
+        },
+        {
+          "object": 0,
+          "entry_m": 0.03519869837260659,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        0,
+        1
+      ],
+      "receiver_embed_mm": 39.80130162739341,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 0.20858692746397903,
+      "commanded_tip_clearance_above_true_panel_mm": null,
+      "nominal_panel_tip_clearance_mm": null,
+      "kind": "frame",
+      "index": 1,
+      "pre_shot_time_s": 337.27999999548035,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 3,
+          "entry_m": 0.004093530138077013,
+          "exit_m": 0.02497824407685545
+        },
+        {
+          "object": 0,
+          "entry_m": 0.027998964640964463,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        0,
+        3
+      ],
+      "receiver_embed_mm": 47.001035359035534,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 1.4491199208138448,
+      "commanded_tip_clearance_above_true_panel_mm": null,
+      "nominal_panel_tip_clearance_mm": null,
+      "kind": "frame",
+      "index": 2,
+      "pre_shot_time_s": 361.7199999949024,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 3,
+          "entry_m": 0.004390852627322062,
+          "exit_m": 0.026284559269413286
+        },
+        {
+          "object": 2,
+          "entry_m": 0.02782263881228654,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        2,
+        3
+      ],
+      "receiver_embed_mm": 47.17736118771346,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 1.9349321330520164,
+      "commanded_tip_clearance_above_true_panel_mm": null,
+      "nominal_panel_tip_clearance_mm": null,
+      "kind": "frame",
+      "index": 3,
+      "pre_shot_time_s": 385.17999999434767,
+      "recorded_miss": true,
+      "reconstructed_reason": "joint_gap_too_large",
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 1,
+          "entry_m": 0.0033203281402776727,
+          "exit_m": 0.017916882547624424
+        },
+        {
+          "object": 2,
+          "entry_m": 0.02581018578399453,
+          "exit_m": 0.07325769912434157
+        }
+      ],
+      "expected_objects": [
+        1,
+        2
+      ],
+      "receiver_embed_mm": 47.447513340347044,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 3.7924965779624715,
+      "commanded_tip_clearance_above_true_panel_mm": 10.63083241352153,
+      "nominal_panel_tip_clearance_mm": 3.0,
+      "kind": "panel",
+      "index": 0,
+      "pre_shot_time_s": 532.9399999908536,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 4,
+          "entry_m": 0.00996097151752724,
+          "exit_m": 0.021961071074814934
+        },
+        {
+          "object": 0,
+          "entry_m": 0.021996479631987913,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        0,
+        4
+      ],
+      "receiver_embed_mm": 53.00352036801208,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 2.239705416152097,
+      "commanded_tip_clearance_above_true_panel_mm": 8.849238682574645,
+      "nominal_panel_tip_clearance_mm": 3.0,
+      "kind": "panel",
+      "index": 1,
+      "pre_shot_time_s": 568.1999999900198,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 4,
+          "entry_m": 0.00844504025247135,
+          "exit_m": 0.02044506017486311
+        },
+        {
+          "object": 1,
+          "entry_m": 0.020485426017779737,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        1,
+        4
+      ],
+      "receiver_embed_mm": 54.51457398222026,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 1.529080454342499,
+      "commanded_tip_clearance_above_true_panel_mm": 9.522147952377546,
+      "nominal_panel_tip_clearance_mm": 3.0,
+      "kind": "panel",
+      "index": 2,
+      "pre_shot_time_s": 596.1599999893587,
+      "recorded_miss": false,
+      "reconstructed_reason": null,
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 4,
+          "entry_m": 0.010097370946056594,
+          "exit_m": 0.022097395643952782
+        },
+        {
+          "object": 2,
+          "entry_m": 0.0221263864777187,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        2,
+        4
+      ],
+      "receiver_embed_mm": 52.8736135222813,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    },
+    {
+      "tool_position_tracking_error_mm": 1.8329742298245717,
+      "commanded_tip_clearance_above_true_panel_mm": 17.673011573312692,
+      "nominal_panel_tip_clearance_mm": 3.0,
+      "kind": "panel",
+      "index": 3,
+      "pre_shot_time_s": 625.8999999886554,
+      "recorded_miss": true,
+      "reconstructed_reason": "tool_too_far_from_surface",
+      "agrees_with_record": true,
+      "hits": [
+        {
+          "object": 4,
+          "entry_m": 0.017448875041437658,
+          "exit_m": 0.029448902418836232
+        },
+        {
+          "object": 3,
+          "entry_m": 0.029482707822804866,
+          "exit_m": 0.075
+        }
+      ],
+      "expected_objects": [
+        3,
+        4
+      ],
+      "receiver_embed_mm": 45.51729217719513,
+      "max_standoff_mm": 12.0,
+      "max_gap_mm": 6.0,
+      "minimum_embed_mm": 15.0
+    }
+  ],
+  "all_classifications_agree": true
+}

@@ -1,0 +1,22 @@
+2026-10-19. Blind starting-workpiece-pose experiment.
+Development: seeds 1,2,3; dynamic seed3. Prior nominal runs are development only.
+Test distribution: four face-up known-size boards on surveyed fixed supports.
+Within each side, permute long/short feeder lanes, jitter X ±12mm and Y ±35mm,
+yaw ±0.06rad. This does not test arbitrary clutter, piles, unknown support Z,
+unknown dimensions, camera miscalibration, or natural-wood appearance variability.
+Held-out seeds reserved before execution: 1001..1005. No tuning on these.
+Budget: five image-discovery evaluations and one full actual-Astra trial (1001).
+If the latter fails, preserve it as failure; further fixes become development and
+require a fresh explicitly frozen test set. Do not spend indefinitely rerunning.
+Acceptance: discovery4/4 correct identities, 3D center error <=6mm each.
+Full-run: all four freely carried/released boards <=6mm XY and <=1deg yaw;
+sheet <=6mm XY, <=3mm Z and <=1deg tilt; all eight abstract rays cross intended
+materials; >=3s release stability; maximum contact penetration <=0.5mm;
+finite state/no solver warnings; force support within5%; no workpiece attachments,
+no runtime GT in control, no dropped members. <=1800simseconds budget.
+Report raw denominators; a single success is not a reliability estimate.
+Runtime knowledge permitted: RGB, fixed camera calibration, robot/fixture encoders,
+known inventory/CAD/blueprint, surveyed fixture geometry, conservative feeder keepout.
+Forbidden: episode seed, workpiece reset positions, object GT, evaluator outcomes,
+object-coordinate fallback on missing detection. GT used ONLY for offline scoring.
+No OS sandbox: agent file access is an instruction contract. No physical validation.

@@ -1,0 +1,26 @@
+{
+  "request_sha256": "36784fa04048366ab1fafa20e02e1ef7625b25fa3ebd6551ef31aeab30a02cd1",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 10.442245624959469,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a158a9-f3fe-7261-ae5f-b44e4ba45aaf\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"feed_panel\\\",\\\"index\\\":null,\\\"reason\\\":\\\"The fresh overhead and angled views show the frame still flat with meeting corners, and the plywood remains on the right-side feeder. All four corner triggers are recorded, so feed the panel into the workspace next.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":12800,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":58,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:34:55.491279Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:34:55.493203Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:34:55.494962Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:34:55.496591Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:34:55.498200Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"feed_panel\",\"index\":null,\"reason\":\"The fresh overhead and angled views show the frame still flat with meeting corners, and the plywood remains on the right-side feeder. All four corner triggers are recorded, so feed the panel into the workspace next.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a158a9-f3fe-7261-ae5f-b44e4ba45aaf",
+    "usage": {
+      "input_tokens": 12800,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 58,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "arguments": {
+    "bundle": "/Users/almondgod/Repositories/phyla/outputs/assembly_benchmark/frozen_v8",
+    "out": "/Users/almondgod/Repositories/phyla/outputs/assembly_benchmark/delayed_full_v8",
+    "model": "astra",
+    "served_model": "HARNESS_TEST_ONLY",
+    "backend": "chat",
+    "base_url": "http://127.0.0.1:18770/v1",
+    "api_key_env": null,
+    "revision": "scripted-delay6",
+    "seed": 3,
+    "development_smoke": true,
+    "harness_test": true,
+    "seconds": 900.0
+  },
+  "freeze": {
+    "manifest_sha256": "46011d44a2b75019972a298f063f31c32e8330b91a9d61a12dd04efe57b27447",
+    "python": "3.12.9",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "source_files_and_assets": 193,
+    "physical_validation": false,
+    "no_runpod": false
+  },
+  "model_id": "gpt-6-astra",
+  "benchmark_scope": "Pilot comparison of supervisory skill selection and visual checking; NOT code-policy or learned motor control.",
+  "model_settings": {
+    "reasoning_effort": "low"
+  }
+}

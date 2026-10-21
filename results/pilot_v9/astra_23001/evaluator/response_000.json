@@ -1,0 +1,26 @@
+{
+  "request_sha256": "58d511b74c71572930ebe37fcbface4853bbfb7e999723155b8e5603af772b4e",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 34.843370833201334,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1585a-3bda-7452-91c3-d8102f618161\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"position_member\\\",\\\"index\\\":0,\\\"reason\\\":\\\"The central assembly bed is empty, with four loose members visible on the side racks. The longer left-side member is available to position as the front frame member.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":11280,\"cached_input_tokens\":1920,\"cache_write_input_tokens\":0,\"output_tokens\":49,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:07:51.007858Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:07:51.009848Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:07:51.011458Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:07:51.013074Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:07:51.014519Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:07:56.002464Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n2026-10-20T08:08:01.074086Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)\n",
+  "text": "{\"skill\":\"position_member\",\"index\":0,\"reason\":\"The central assembly bed is empty, with four loose members visible on the side racks. The longer left-side member is available to position as the front frame member.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1585a-3bda-7452-91c3-d8102f618161",
+    "usage": {
+      "input_tokens": 11280,
+      "cached_input_tokens": 1920,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 49,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

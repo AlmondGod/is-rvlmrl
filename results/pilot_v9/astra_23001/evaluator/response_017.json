@@ -1,0 +1,26 @@
+{
+  "request_sha256": "14e62e96c1e10238db7bf99a6c9d95cad6f6242624caacd95caba09ef80ff32e",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 18.10342716705054,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1586b-dbbc-7211-844e-de240a3ace77\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"nail_panel\\\",\\\"index\\\":1,\\\"reason\\\":\\\"The fresh views show the plywood remaining flat and aligned over the frame, with grippers clear. Only panel trigger 0 is recorded, so trigger panel index 1 next.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":13202,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":53,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:27:06.053613Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:27:06.058031Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:27:06.062645Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:27:06.066949Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:27:06.070892Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"nail_panel\",\"index\":1,\"reason\":\"The fresh views show the plywood remaining flat and aligned over the frame, with grippers clear. Only panel trigger 0 is recorded, so trigger panel index 1 next.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1586b-dbbc-7211-844e-de240a3ace77",
+    "usage": {
+      "input_tokens": 13202,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 53,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "scope": "Four separate flat frame members, articulated placement, one abstract pose-gated nail event per corner",
+  "physical_validation": false,
+  "development_seed": 0,
+  "held_out_camera_baseline_seeds": [
+    8300,
+    8301,
+    8302
+  ],
+  "held_out_budget": "One run per seed, no retries or tuning on this set",
+  "distribution": "Each feeder member independently perturbed +/-4 mm XY and +/-0.015 radians yaw; fixed lighting, calibrated cameras, geometry, mass and friction",
+  "actual_astra_budget": "One new development trial using composite position commands after the v1 camera trial failed during a prolonged midair hold. Preserve all prior failures.",
+  "numerical_comparison": "Same seed0 fixed camera sequence at 1 ms and 0.5 ms physics step",
+  "criteria": {
+    "member_center_xy_error_m": 0.006,
+    "member_yaw_error_deg": 1,
+    "member_tilt_deg": 1,
+    "member_height_error_m": 0.003,
+    "corner_gap_min_m": -0.001,
+    "corner_gap_max_m": 0.006,
+    "corner_outer_flush_m": 0.006,
+    "corner_square_error_deg": 1,
+    "corner_height_difference_m": 0.003,
+    "max_penetration_any_geom_m": 0.0005,
+    "solver_warnings": 0,
+    "unique_abstract_nails": 4,
+    "all_grippers_released_and_geometry_stable_s": 2,
+    "pickup_each_member_bottom_above_table_m": 0.05,
+    "pickup_retained_s": 0.5,
+    "pickup_no_table_support_N": 0.01,
+    "pickup_min_grip_N": 1,
+    "final_member_speed_m_per_s": 0.005
+  },
+  "not_measured_by_this_test": [
+    "Physical nail purchase or strength",
+    "Residual joint strength",
+    "Glue curing",
+    "Real robot accuracy",
+    "General perception robustness",
+    "Generalized Astra policy success rate",
+    "Hidden lengthwise slip under total endpoint occlusion"
+  ]
+}

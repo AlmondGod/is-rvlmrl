@@ -1,0 +1,20 @@
+{
+  "passes": false,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 1.1343693782247331e-05,
+  "last_flip": null,
+  "continuous_raw_time": true,
+  "reconstructed_pose_difference_m": 0.0,
+  "reconstructed_rotation_matrix_difference": 0.0,
+  "rows": 6007,
+  "force_and_substep_peaks_source": "recorded runtime instrumentation",
+  "geometry_and_contacts_source": "independent raw-state reconstruction",
+  "auditor_sha256": "a33b7f1b71274e310bb07e5c1ffc77bf18e7b7c597c4feb39f9d81da4858dc3f",
+  "frozen_manifest_sha256": "e3e7642677e25162b853f1a5d552f89810f5ab281aecf499c78d81508deba952",
+  "model_result": true
+}

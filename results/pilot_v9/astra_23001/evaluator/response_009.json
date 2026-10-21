@@ -1,0 +1,26 @@
+{
+  "request_sha256": "9e6ffc3b5310ffb39e43b143f30dcd9deecf964ca555f0d47631b1d273dab1bc",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 10.781125457957387,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a15860-f9d3-7721-a654-b25cd5239ce2\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"nail_corner\\\",\\\"index\\\":0,\\\"reason\\\":\\\"The images show four members lying flat in a closed rectangular frame, with the southwest corner visibly aligned. Both grippers are parked and no triggers are recorded, so begin with the southwest corner nail trigger.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":12180,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":58,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:15:12.858278Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:15:12.860717Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:15:12.862846Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:15:12.865005Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:15:12.867182Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"nail_corner\",\"index\":0,\"reason\":\"The images show four members lying flat in a closed rectangular frame, with the southwest corner visibly aligned. Both grippers are parked and no triggers are recorded, so begin with the southwest corner nail trigger.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a15860-f9d3-7721-a654-b25cd5239ce2",
+    "usage": {
+      "input_tokens": 12180,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 58,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

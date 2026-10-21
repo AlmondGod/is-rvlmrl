@@ -1,0 +1,26 @@
+{
+  "request_sha256": "488583e8a09e0215c6f2f36030073676a37f4678c213d24ee0289b90ac84c8a2",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 14.088051416911185,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a158a4-b58d-78a0-bc89-5bd89a248881\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"position_member\\\",\\\"index\\\":3,\\\"reason\\\":\\\"The front, left and rear members form three aligned sides on the bed, while the remaining short member is visible on the right rack. Position it along the open right edge to complete the frame outline.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":11945,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":57,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:29:11.826513Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:29:11.828503Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:29:11.830265Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:29:11.832166Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:29:11.834040Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"position_member\",\"index\":3,\"reason\":\"The front, left and rear members form three aligned sides on the bed, while the remaining short member is visible on the right rack. Position it along the open right edge to complete the frame outline.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a158a4-b58d-78a0-bc89-5bd89a248881",
+    "usage": {
+      "input_tokens": 11945,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 57,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

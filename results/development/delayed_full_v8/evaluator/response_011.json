@@ -1,0 +1,18 @@
+{
+  "response": {
+    "model": "HARNESS_TEST_ONLY",
+    "id": "mock",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "message": {
+          "content": "{\"skill\": \"nail_corner\", \"index\": 2, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+        }
+      }
+    ],
+    "usage": {}
+  },
+  "latency_wall_s": 6.00709925009869,
+  "request_sha256": "07bd0ba4c0841f0697f48e3b499580222bb30157fb80ebf03cc856de35839443",
+  "text": "{\"skill\": \"nail_corner\", \"index\": 2, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+}

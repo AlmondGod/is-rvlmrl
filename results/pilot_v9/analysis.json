@@ -1,0 +1,186 @@
+{
+  "manifest_sha256": "e3e7642677e25162b853f1a5d552f89810f5ab281aecf499c78d81508deba952",
+  "models": {
+    "Codex(gpt-6-astra)": {
+      "successes": 0,
+      "started_trials": 3,
+      "exact_binomial_95pct": [
+        0.0,
+        0.7075982261787134
+      ],
+      "all_attempt_latency_s": {
+        "n": 59,
+        "p50": 10.33472733385861,
+        "p95": 31.25950003371106,
+        "min": 5.958512415876612,
+        "max": 38.621410249965265
+      },
+      "completed_response_latency_s": {
+        "n": 59,
+        "p50": 10.33472733385861,
+        "p95": 31.25950003371106,
+        "min": 5.958512415876612,
+        "max": 38.621410249965265
+      },
+      "inference_errors": []
+    },
+    "Qwen/Qwen3.5-4B": {
+      "successes": 0,
+      "started_trials": 2,
+      "exact_binomial_95pct": [
+        0.0,
+        0.841886116991581
+      ],
+      "all_attempt_latency_s": {
+        "n": 2,
+        "p50": 120.1164889165666,
+        "p95": 120.13191517882515,
+        "min": 120.0993486251682,
+        "max": 120.13362920796499
+      },
+      "completed_response_latency_s": null,
+      "inference_errors": [
+        {
+          "trial": "qwen_23001",
+          "call": 0,
+          "error": "TimeoutError:timed out"
+        },
+        {
+          "trial": "qwen_23002",
+          "call": 0,
+          "error": "TimeoutError:timed out"
+        }
+      ]
+    }
+  },
+  "trials": [
+    {
+      "trial": "astra_23001",
+      "passes": false,
+      "failure_class": "acceptance_failure_after_finish",
+      "error": null,
+      "simulated_s": 784.5999999849026,
+      "wall_s": 1924.4333992081229,
+      "returned_calls": 22,
+      "submitted_observations": 22,
+      "completed_skills": 21,
+      "peak_penetration_mm": 0.2426523700369324,
+      "intact_fasteners": 6
+    },
+    {
+      "trial": "astra_23002",
+      "passes": false,
+      "failure_class": "acceptance_failure_after_finish",
+      "error": null,
+      "simulated_s": 780.5799999849977,
+      "wall_s": 1963.490789375035,
+      "returned_calls": 22,
+      "submitted_observations": 22,
+      "completed_skills": 21,
+      "peak_penetration_mm": 0.23441487637794503,
+      "intact_fasteners": 7
+    },
+    {
+      "trial": "astra_23003",
+      "passes": false,
+      "failure_class": "numerical",
+      "error": "RuntimeError('numerical_gate')",
+      "simulated_s": 504.3999999915285,
+      "wall_s": 850.3352752909996,
+      "returned_calls": 15,
+      "submitted_observations": 15,
+      "completed_skills": 14,
+      "peak_penetration_mm": 0.542075218898902,
+      "intact_fasteners": 3
+    },
+    {
+      "trial": "qwen_23001",
+      "passes": false,
+      "failure_class": "inference_infrastructure",
+      "error": "RuntimeError('TimeoutError:timed out')",
+      "simulated_s": 120.14000000039162,
+      "wall_s": 250.90024633309804,
+      "returned_calls": 1,
+      "submitted_observations": 1,
+      "completed_skills": 0,
+      "peak_penetration_mm": 0.011343693782247331,
+      "intact_fasteners": 0
+    },
+    {
+      "trial": "qwen_23002",
+      "passes": false,
+      "failure_class": "inference_infrastructure",
+      "error": "RuntimeError('TimeoutError:timed out')",
+      "simulated_s": 120.10000000039143,
+      "wall_s": 339.989004583098,
+      "returned_calls": 1,
+      "submitted_observations": 1,
+      "completed_skills": 0,
+      "peak_penetration_mm": 0.01147972706304048,
+      "intact_fasteners": 0
+    }
+  ],
+  "paired_initial_inputs": {
+    "23001": {
+      "both_models_present": true,
+      "identical_initial_inputs": true,
+      "details": {
+        "Codex(gpt-6-astra)": {
+          "images": {
+            "camera0": "7cd5c2f6b906a6acd01a224522f9c6e0eea3df97c27aed8dea9473d290f652c7",
+            "camera2": "49f3d1dbe5511c1e7cc3a04b39e5e23c73fece8beb1787f2c13177718c4d698b",
+            "camera3": "1c1659d423f781268679f2232775494da83da1178bfdd66c5345ad1c556e1856"
+          },
+          "packet_sha256": "f4ca915b31721e765904557d7e3f30939977ad053993190aaea50dfdc557e4e8"
+        },
+        "Qwen/Qwen3.5-4B": {
+          "images": {
+            "camera0": "7cd5c2f6b906a6acd01a224522f9c6e0eea3df97c27aed8dea9473d290f652c7",
+            "camera2": "49f3d1dbe5511c1e7cc3a04b39e5e23c73fece8beb1787f2c13177718c4d698b",
+            "camera3": "1c1659d423f781268679f2232775494da83da1178bfdd66c5345ad1c556e1856"
+          },
+          "packet_sha256": "f4ca915b31721e765904557d7e3f30939977ad053993190aaea50dfdc557e4e8"
+        }
+      }
+    },
+    "23002": {
+      "both_models_present": true,
+      "identical_initial_inputs": true,
+      "details": {
+        "Codex(gpt-6-astra)": {
+          "images": {
+            "camera0": "e341df243c70a1c5d76f77bd785c0d827553bfab4fd9217c9e72c85a9e9fb951",
+            "camera2": "dbedcc51fc205ea60b8ed65d2e727d32dfdfa03017124e34e05a74d9c5a150d3",
+            "camera3": "20b4af3fbb7fbcc4a4e5736e5adc4058ef8f86687ff124129dc46fc90e200a1e"
+          },
+          "packet_sha256": "f4ca915b31721e765904557d7e3f30939977ad053993190aaea50dfdc557e4e8"
+        },
+        "Qwen/Qwen3.5-4B": {
+          "images": {
+            "camera0": "e341df243c70a1c5d76f77bd785c0d827553bfab4fd9217c9e72c85a9e9fb951",
+            "camera2": "dbedcc51fc205ea60b8ed65d2e727d32dfdfa03017124e34e05a74d9c5a150d3",
+            "camera3": "20b4af3fbb7fbcc4a4e5736e5adc4058ef8f86687ff124129dc46fc90e200a1e"
+          },
+          "packet_sha256": "f4ca915b31721e765904557d7e3f30939977ad053993190aaea50dfdc557e4e8"
+        }
+      }
+    },
+    "23003": {
+      "both_models_present": false,
+      "identical_initial_inputs": false,
+      "details": {
+        "Codex(gpt-6-astra)": {
+          "images": {
+            "camera0": "9aa2963e7c841c2d9797d92fd7611a674662dde9f62dd86cc4b31c858a6a9783",
+            "camera2": "11b588f204d6ad1be06bb3e131fdae4305782c6a62827bc7faabc9b5c7b9a7e5",
+            "camera3": "bf980e5fcfc380f99d99359c8ced855ebf1675f7d3826cd97ca59fe9d77f3b7c"
+          },
+          "packet_sha256": "f4ca915b31721e765904557d7e3f30939977ad053993190aaea50dfdc557e4e8"
+        }
+      }
+    }
+  },
+  "scope": "Three-case supervisory pilot; not image dependence, code-vs-EE, learned motor control or physical validation.",
+  "latency_note": "Completed response latency excludes provider errors but may include invalid action JSON. Attempt latencies include timeouts; these are not uncensored completion times. An in-flight request at episode deadline may lack a returned-call record; compare submitted_observations with returned_calls.",
+  "confidence_note": "Exact intervals are descriptive. Three layouts do not establish high reliability or model superiority."
+}

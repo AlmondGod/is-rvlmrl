@@ -1,0 +1,22 @@
+{
+  "status": "development gates, freeze source before regression evaluation",
+  "continuous_scene": true,
+  "initial_free_workpieces": 5,
+  "workpiece_pose_writes_after_reset": 0,
+  "abstract_frame_nails": 4,
+  "abstract_panel_nails": 4,
+  "max_penetration_m": 0.0005,
+  "max_member_xy_error_m": 0.006,
+  "max_member_yaw_error_deg": 1,
+  "max_member_tilt_deg": 1,
+  "max_panel_xy_error_m": 0.006,
+  "max_panel_height_error_m": 0.003,
+  "max_panel_tilt_deg": 1,
+  "final_supported_duration_s": 3,
+  "mujoco_warnings": 0,
+  "all_finite": true,
+  "nominal_timestep_s": 0.001,
+  "repeat_timestep_s": 0.0005,
+  "physical_validation": false,
+  "structural_integrity_claim": false
+}

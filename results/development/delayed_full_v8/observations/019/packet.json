@@ -1,0 +1,601 @@
+{
+  "observation_index": 19,
+  "robot": {
+    "time": 500.29999999162544,
+    "tcp": [
+      [
+        -0.9004790543363105,
+        0.6463095629650611,
+        0.6498693289070152
+      ],
+      [
+        0.9001011611685592,
+        0.6476857742072252,
+        0.6501079392930071
+      ],
+      [
+        0.011301088683798893,
+        0.2591590028581909,
+        2.1412937092449216
+      ]
+    ],
+    "rotation": [
+      [
+        [
+          0.0010533305333964016,
+          -0.00017751030972157356,
+          0.9999994294922752
+        ],
+        [
+          0.9999992790405382,
+          -0.0005763661844981893,
+          -0.0010534326859191756
+        ],
+        [
+          0.0005765528508391848,
+          0.9999998181460384,
+          0.00017690307764328672
+        ]
+      ],
+      [
+        [
+          0.002196006855651328,
+          -0.0019359726388685772,
+          -0.999995714772734
+        ],
+        [
+          -0.9999975590657344,
+          -0.00024800647373099394,
+          -0.0021955307699437765
+        ],
+        [
+          -0.0002437549234685088,
+          0.9999980952495511,
+          -0.001936512537203089
+        ]
+      ],
+      [
+        [
+          -0.9663636057328522,
+          0.0670515734840218,
+          0.24828505393663336
+        ],
+        [
+          0.20620333197632995,
+          0.7789509315348354,
+          0.5922124890129142
+        ],
+        [
+          -0.15369309482491256,
+          0.6234898016442038,
+          -0.7665760887536289
+        ]
+      ]
+    ],
+    "joints": [
+      [
+        0.12186075725793837,
+        4.373629172836908,
+        -1.9704383748614083,
+        -2.4033690458349417,
+        1.693710515017048,
+        0.0005546988259405288
+      ],
+      [
+        -0.1192218303928409,
+        -1.2335511229164768,
+        1.97065691783804,
+        -0.739056671056273,
+        -1.692213465050225,
+        -0.0004800439106218461
+      ],
+      [
+        0.5679182071616994,
+        1.0799642305109998,
+        0.7974761005337585,
+        -0.4481797970255018,
+        -2.2559546422317993,
+        -2.0339616553831497
+      ]
+    ],
+    "joint_velocity": [
+      [
+        -0.0005180114974249639,
+        0.0005469835183297375,
+        1.9648339318249736e-05,
+        -0.0004581772016262124,
+        -0.00045628203777411063,
+        0.00018360388234829494
+      ],
+      [
+        0.000593420010189698,
+        -0.0006307241201799164,
+        -9.808152562718491e-05,
+        0.0005252690216180995,
+        0.0005234369588974975,
+        -1.5890105784434806e-05
+      ],
+      [
+        -0.04978446144751099,
+        0.01871879943419033,
+        -0.024643272100182214,
+        0.04248682351798307,
+        -0.014868139120313758,
+        0.04577993791570251
+      ]
+    ],
+    "gripper_command": [
+      0.0,
+      0.0
+    ],
+    "shuttle_x": 4.5e-322,
+    "rack_slide0": 0.19999999999999848,
+    "rack_slide1": 0.19999999999999848
+  },
+  "phase": "done",
+  "last_failure": null,
+  "camera_calibration": {
+    "0": {
+      "K": [
+        [
+          523.8280805132503,
+          0,
+          639.5
+        ],
+        [
+          0,
+          523.8280805132503,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.35
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          -0.2
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          1.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "2": {
+      "K": [
+        [
+          922.0714209461597,
+          0,
+          639.5
+        ],
+        [
+          0,
+          922.0714209461597,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0000000000000002,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.578017340794212,
+          -0.8160244810918286,
+          0.12240367213877423
+        ],
+        [
+          0.0,
+          0.8160244810918286,
+          -0.578017340794212,
+          1.5572467181044063
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "3": {
+      "K": [
+        [
+          1158.8225099390854,
+          0,
+          639.5
+        ],
+        [
+          0,
+          1158.8225099390854,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.9284766908714662,
+          -0.37139067638858647,
+          0.05570860154828783
+        ],
+        [
+          0.0,
+          0.37139067638858647,
+          -0.9284766908714662,
+          2.562595666841247
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "blueprint": {
+    "centers_m": [
+      [
+        0.0,
+        -0.4382,
+        0.152
+      ],
+      [
+        -0.4382,
+        0.0,
+        0.152
+      ],
+      [
+        0.0,
+        0.4382,
+        0.152
+      ],
+      [
+        0.4382,
+        0.0,
+        0.152
+      ]
+    ],
+    "member_sizes_m": [
+      [
+        0.038,
+        0.9144,
+        0.064
+      ],
+      [
+        0.038,
+        0.8344,
+        0.064
+      ],
+      [
+        0.038,
+        0.9144,
+        0.064
+      ],
+      [
+        0.038,
+        0.8344,
+        0.064
+      ]
+    ],
+    "panel_size_m": [
+      0.9744,
+      0.9744,
+      0.012
+    ],
+    "panel_goal_m": [
+      0.0,
+      0.0,
+      0.19
+    ]
+  },
+  "tool_triggers": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 235.21999999789372,
+      "tcp": [
+        -0.4379115003236918,
+        -0.39419929444352336,
+        0.18592617621064353
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 1,
+      "time": 256.4599999973915,
+      "tcp": [
+        0.43831698521820456,
+        -0.39593065921724974,
+        0.18651190492340722
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 2,
+      "time": 282.0399999967866,
+      "tcp": [
+        0.43680393193639827,
+        0.3969176591319251,
+        0.1866580851378384
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 3,
+      "time": 307.5999999961822,
+      "tcp": [
+        -0.43731548993336444,
+        0.39867485819496107,
+        0.18584059667731592
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 0,
+      "time": 443.01999999297993,
+      "tcp": [
+        -0.0019561796298710504,
+        -0.4354104035016312,
+        0.20209195015542392
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 1,
+      "time": 466.1799999924323,
+      "tcp": [
+        -0.4372258806806697,
+        0.0019490628760052268,
+        0.20234916266826236
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 2,
+      "time": 491.099999991843,
+      "tcp": [
+        0.0005958041159528144,
+        0.4402016667355248,
+        0.20333108417309537
+      ],
+      "triggered": true
+    }
+  ],
+  "command_history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 6.019999999999383,
+      "status": "completed",
+      "completed_sim_s": 37.89999999999894
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 44.02000000002816,
+      "status": "completed",
+      "completed_sim_s": 56.10000000008584
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 62.220000000115064,
+      "status": "completed",
+      "completed_sim_s": 91.34000000025411
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 97.42000000028314,
+      "status": "completed",
+      "completed_sim_s": 112.12000000035333
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 118.22000000038246,
+      "status": "completed",
+      "completed_sim_s": 144.50000000003897
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 150.61999999989425,
+      "status": "completed",
+      "completed_sim_s": 162.43999999961474
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 168.51999999947097,
+      "status": "completed",
+      "completed_sim_s": 190.9999999989394
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 197.11999999879467,
+      "status": "completed",
+      "completed_sim_s": 206.57999999857097
+    },
+    {
+      "command": {
+        "skill": "park_grippers",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 212.61999999842814,
+      "status": "completed",
+      "completed_sim_s": 212.63999999842767
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 218.7199999982839,
+      "status": "completed",
+      "completed_sim_s": 244.41999999767617
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 250.51999999753193,
+      "status": "completed",
+      "completed_sim_s": 261.7799999972657
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 267.81999999712286,
+      "status": "completed",
+      "completed_sim_s": 295.65999999646453
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 301.71999999632123,
+      "status": "completed",
+      "completed_sim_s": 312.7999999960592
+    },
+    {
+      "command": {
+        "skill": "feed_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 318.9199999959145,
+      "status": "completed",
+      "completed_sim_s": 370.73999999468913
+    },
+    {
+      "command": {
+        "skill": "position_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 376.81999999454536,
+      "status": "completed",
+      "completed_sim_s": 414.0999999936638
+    },
+    {
+      "command": {
+        "skill": "release_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 420.2199999935191,
+      "status": "completed",
+      "completed_sim_s": 429.1799999933072
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 435.2199999931644,
+      "status": "completed",
+      "completed_sim_s": 450.33999999280684
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 456.41999999266307,
+      "status": "completed",
+      "completed_sim_s": 475.47999999221236
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 481.51999999206953,
+      "status": "completed",
+      "completed_sim_s": 500.23999999162686
+    }
+  ]
+}

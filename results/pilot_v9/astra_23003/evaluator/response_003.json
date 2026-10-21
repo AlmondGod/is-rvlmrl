@@ -1,0 +1,26 @@
+{
+  "request_sha256": "e5b8c8dec823ae8b685eebfda8141aad4b67d0dfffbce9d87ae77ace25910339",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 10.091461791889742,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a158a2-85cb-7501-b6e8-21d2ea7dca5a\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"release_member\\\",\\\"index\\\":1,\\\"reason\\\":\\\"The short member is aligned along the left edge and meets the front member in an L shape. The gripper remains at its center; releasing and retreating allows frame assembly to continue.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":11686,\"cached_input_tokens\":1920,\"cache_write_input_tokens\":0,\"output_tokens\":54,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:26:48.535124Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:26:48.538422Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:26:48.541153Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:26:48.543921Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:26:48.546637Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"release_member\",\"index\":1,\"reason\":\"The short member is aligned along the left edge and meets the front member in an L shape. The gripper remains at its center; releasing and retreating allows frame assembly to continue.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a158a2-85cb-7501-b6e8-21d2ea7dca5a",
+    "usage": {
+      "input_tokens": 11686,
+      "cached_input_tokens": 1920,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 54,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

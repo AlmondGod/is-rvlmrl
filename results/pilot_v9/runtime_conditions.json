@@ -1,0 +1,8 @@
+{
+  "idle_sleep_assertion_started_utc": "2026-10-20T08:51:20.745615+00:00",
+  "scope": "caffeinate -i -w37750: only while pilot driver exists; no display-wake or permanent power-settings change",
+  "first_active_case": "astra_23002",
+  "prior_sleep_not_established": true,
+  "observed_condition": "Local load and simulation wall/simulation ratio varied. Do not claim controlled hardware latency measurements.",
+  "physics_or_model_settings_changed": false
+}

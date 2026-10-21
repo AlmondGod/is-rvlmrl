@@ -1,0 +1,26 @@
+{
+  "request_sha256": "3722593a185c562bf5de947da56085a6599e892d1187e13c86e0295d8d4f5559",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 30.861292167101055,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a15870-ce2e-7c03-b65f-5aac6a308809\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"flip_structure\\\",\\\"index\\\":null,\\\"reason\\\":\\\"The plywood remains visibly flat and centered over the frame, with grippers clear. All eight nail triggers are recorded; flip the assembly next so its inverted condition can be visually inspected.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":13682,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":53,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:32:30.262715Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:32:30.267780Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:32:30.271649Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:32:30.276248Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:32:30.280066Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:32:31.368383Z  WARN sqlx::query: slow statement: execution time exceeded alert threshold summary=\"DELETE FROM logs WHERE \u2026\" db.statement=\"\\n\\nDELETE FROM logs WHERE ts < ?\\n\" rows_affected=14115 rows_returned=0 elapsed=1.120243291s elapsed_secs=1.120243291 slow_threshold=1s\n2026-10-20T08:32:35.254545Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n",
+  "text": "{\"skill\":\"flip_structure\",\"index\":null,\"reason\":\"The plywood remains visibly flat and centered over the frame, with grippers clear. All eight nail triggers are recorded; flip the assembly next so its inverted condition can be visually inspected.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a15870-ce2e-7c03-b65f-5aac6a308809",
+    "usage": {
+      "input_tokens": 13682,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 53,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

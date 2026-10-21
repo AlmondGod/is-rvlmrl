@@ -1,0 +1,16 @@
+{
+  "snapshot_date": "2026-10-21",
+  "expected_trials": 6,
+  "completed_records": 5,
+  "complete_cohort": false,
+  "incomplete_trials": [
+    {
+      "trial": "qwen_23003",
+      "status": "incomplete_no_result",
+      "evidence": "Driver progress selected this trial; output directories are empty; no saved observation, response, configuration, trace, or result. Whether physics started is unverified.",
+      "counted_as_observed_success": false,
+      "counted_as_observed_failure": false
+    }
+  ],
+  "note": "Report completed denominators 0/3 and 0/2; retain the unresolved planned case separately. Do not call this a completed paired comparison."
+}

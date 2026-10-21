@@ -1,0 +1,26 @@
+{
+  "request_sha256": "d7b5cb838ba527ca16d4a1692c3629b3f33f8d6e16b3a3721b959596603287b1",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 12.310400874819607,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a158ab-29ea-7e60-a108-2d37efd72dd9\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"position_panel\\\",\\\"index\\\":null,\\\"reason\\\":\\\"The plywood is now above the frame on the feeder, with a visible gap beneath its front edge and both grippers clear. Grasp and lower it into alignment before release and panel nailing.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":12895,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":56,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:36:14.831046Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:36:14.832979Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:36:14.834627Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:36:14.836293Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:36:14.837922Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"position_panel\",\"index\":null,\"reason\":\"The plywood is now above the frame on the feeder, with a visible gap beneath its front edge and both grippers clear. Grasp and lower it into alignment before release and panel nailing.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a158ab-29ea-7e60-a108-2d37efd72dd9",
+    "usage": {
+      "input_tokens": 12895,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 56,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

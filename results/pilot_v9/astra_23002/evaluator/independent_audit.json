@@ -1,0 +1,35 @@
+{
+  "passes": false,
+  "preflip_stable_s": 118.69999999999352,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0018353039711321555,
+  "airborne_relative_angle_peak_deg": 2.1101184822101153,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.00023441487637794502,
+  "last_flip": {
+    "panel_up_dot": -0.9999056424207736,
+    "position_errors_m": [
+      0.0008941934201184778,
+      0.0015306891331194501,
+      0.0004329015531138816,
+      0.0007823824295521628
+    ],
+    "angle_errors_rad": [
+      0.0025242661710582607,
+      0.00463122476725571,
+      0.0028579309787532857,
+      0.0031746885211884224
+    ],
+    "minimum_height_above_fixture_m": 0.563019666520148
+  },
+  "continuous_raw_time": true,
+  "reconstructed_pose_difference_m": 0.0,
+  "reconstructed_rotation_matrix_difference": 0.0,
+  "rows": 39029,
+  "force_and_substep_peaks_source": "recorded runtime instrumentation",
+  "geometry_and_contacts_source": "independent raw-state reconstruction",
+  "auditor_sha256": "a33b7f1b71274e310bb07e5c1ffc77bf18e7b7c597c4feb39f9d81da4858dc3f",
+  "frozen_manifest_sha256": "e3e7642677e25162b853f1a5d552f89810f5ab281aecf499c78d81508deba952",
+  "model_result": true
+}

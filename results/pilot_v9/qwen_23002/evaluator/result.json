@@ -1,0 +1,77 @@
+{
+  "passes": false,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 1.147972706304048e-05,
+  "last_flip": null,
+  "error": "RuntimeError('TimeoutError:timed out')",
+  "failure_class": "inference_infrastructure",
+  "finished": false,
+  "flipped": false,
+  "model": "Qwen/Qwen3.5-4B",
+  "model_route": "chat",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "infrastructure_only": false,
+  "verified_responses": 1,
+  "actual_astra": false,
+  "model_identity_evidence": "requested and returned API model IDs recorded",
+  "development_smoke": false,
+  "seed_evaluator_only": 23002,
+  "continuous": true,
+  "simulated_s": 120.10000000039143,
+  "wall_s": 339.989004583098,
+  "max_wall_lag_s": 219.3230288750492,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 83.34000000021591,
+      "kind": "control_tick",
+      "wall_s": 0.021470292005687952
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 120.0993486251682,
+      "request_sha256": null,
+      "error": "TimeoutError:timed out",
+      "returned_model": null,
+      "response_id": null,
+      "usage": null,
+      "applied_sim_s": 120.10000000039143
+    }
+  ],
+  "history": [],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 0,
+    "missed": 0,
+    "intact": 0,
+    "failed": 0,
+    "peak_utilization": 0.0,
+    "fracture_energy_J": 0,
+    "damping_work_J": 0.0,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": false
+}

@@ -1,0 +1,538 @@
+{
+  "observation_index": 16,
+  "robot": {
+    "time": 512.8999999913275,
+    "tcp": [
+      [
+        -0.9004785913332373,
+        0.64594430918468,
+        0.6501341402927855
+      ],
+      [
+        0.9007709094812482,
+        0.6446494828929347,
+        0.6478244440025827
+      ],
+      [
+        0.02775764932165853,
+        0.2162534317252771,
+        1.9474330343995632
+      ]
+    ],
+    "rotation": [
+      [
+        [
+          0.001450240803478109,
+          -0.0031497484760693584,
+          0.9999939879250023
+        ],
+        [
+          0.9999986269762691,
+          0.0008063422812784049,
+          -0.0014477077406190308
+        ],
+        [
+          -0.0008017775182384002,
+          0.999994714434363,
+          0.003150913541867806
+        ]
+      ],
+      [
+        [
+          0.0025279293105725242,
+          -0.0015319812569087876,
+          -0.9999956312938716
+        ],
+        [
+          -0.9999967656923856,
+          -0.0002834769089113953,
+          -0.002527497895055908
+        ],
+        [
+          -0.0002796035910819783,
+          0.9999987863363985,
+          -0.00153269291159705
+        ]
+      ],
+      [
+        [
+          -0.8154317423939815,
+          0.03374206576998166,
+          0.5778689700043506
+        ],
+        [
+          0.23407840975259386,
+          0.9322559306888406,
+          0.2758734814787017
+        ],
+        [
+          -0.5294132332913596,
+          0.36022264322645936,
+          -0.7680893670159291
+        ]
+      ]
+    ],
+    "joints": [
+      [
+        0.12225777721909226,
+        4.372491123875459,
+        -1.9701816003226733,
+        -2.405484706168258,
+        1.69450120220378,
+        -0.00119356742417164
+      ],
+      [
+        -0.1237532968668878,
+        -1.2303173999022572,
+        1.9715522336483133,
+        -0.7427798297791635,
+        -1.6970769780969324,
+        -0.0004741890490030605
+      ],
+      [
+        0.6412078838940234,
+        0.996201023119804,
+        1.2723068236303603,
+        -0.3275327745621286,
+        -2.1733376749695386,
+        -1.9437183340963036
+      ]
+    ],
+    "joint_velocity": [
+      [
+        5.479560952262392e-05,
+        -5.531106800714814e-05,
+        3.189165973987794e-06,
+        4.738312440179482e-05,
+        5.16800703400126e-05,
+        -5.158868323212925e-05
+      ],
+      [
+        0.006577093937856548,
+        -0.00769662942665378,
+        -0.0005168603993702324,
+        0.011213382381217997,
+        0.01154993989169316,
+        -0.001520386116415541
+      ],
+      [
+        7.401731383946676e-06,
+        -7.705315567610652e-06,
+        -4.339433131377797e-06,
+        7.128238169407758e-06,
+        6.782530565180117e-06,
+        6.974605663280095e-06
+      ]
+    ],
+    "gripper_command": [
+      0.0,
+      0.0
+    ],
+    "shuttle_x": 3.1097861439111114e-126,
+    "rack_slide0": 0.19999999999999848,
+    "rack_slide1": 0.19999999999999848
+  },
+  "phase": "done",
+  "last_failure": null,
+  "camera_calibration": {
+    "0": {
+      "K": [
+        [
+          523.8280805132503,
+          0,
+          639.5
+        ],
+        [
+          0,
+          523.8280805132503,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.35
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          -0.2
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          1.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "2": {
+      "K": [
+        [
+          922.0714209461597,
+          0,
+          639.5
+        ],
+        [
+          0,
+          922.0714209461597,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0000000000000002,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.578017340794212,
+          -0.8160244810918286,
+          0.12240367213877423
+        ],
+        [
+          0.0,
+          0.8160244810918286,
+          -0.578017340794212,
+          1.5572467181044063
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "3": {
+      "K": [
+        [
+          1158.8225099390854,
+          0,
+          639.5
+        ],
+        [
+          0,
+          1158.8225099390854,
+          479.5
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "world_to_camera": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.9284766908714662,
+          -0.37139067638858647,
+          0.05570860154828783
+        ],
+        [
+          0.0,
+          0.37139067638858647,
+          -0.9284766908714662,
+          2.562595666841247
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "blueprint": {
+    "centers_m": [
+      [
+        0.0,
+        -0.4382,
+        0.152
+      ],
+      [
+        -0.4382,
+        0.0,
+        0.152
+      ],
+      [
+        0.0,
+        0.4382,
+        0.152
+      ],
+      [
+        0.4382,
+        0.0,
+        0.152
+      ]
+    ],
+    "member_sizes_m": [
+      [
+        0.038,
+        0.9144,
+        0.064
+      ],
+      [
+        0.038,
+        0.8344,
+        0.064
+      ],
+      [
+        0.038,
+        0.9144,
+        0.064
+      ],
+      [
+        0.038,
+        0.8344,
+        0.064
+      ]
+    ],
+    "panel_size_m": [
+      0.9744,
+      0.9744,
+      0.012
+    ],
+    "panel_goal_m": [
+      0.0,
+      0.0,
+      0.19
+    ]
+  },
+  "tool_triggers": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 314.57999999601714,
+      "tcp": [
+        -0.43588147813263034,
+        -0.39425192484746474,
+        0.18592942714847266
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 1,
+      "time": 337.27999999548035,
+      "tcp": [
+        0.43760795780345435,
+        -0.3964019198993331,
+        0.18648059927359567
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 2,
+      "time": 361.7199999949024,
+      "tcp": [
+        0.4407966679195562,
+        0.3969511444760403,
+        0.1866620797101853
+      ],
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 3,
+      "time": 385.17999999434767,
+      "tcp": [
+        -0.43597064351159087,
+        0.3981385165462297,
+        0.18601603337273642
+      ],
+      "triggered": true
+    }
+  ],
+  "command_history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "The central assembly bed is empty, with four loose members visible on the side racks. The longer left-side member is available to position as the front frame member."
+      },
+      "issued_sim_s": 34.859999999984424,
+      "status": "completed",
+      "completed_sim_s": 66.60000000013598
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "The long front member appears straight across the front edge of the assembly bed, with the gripper still holding its center. Release it and retreat before positioning the remaining members."
+      },
+      "issued_sim_s": 93.74000000026557,
+      "status": "completed",
+      "completed_sim_s": 105.82000000032325
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "The released front member remains straight across the bed, while the short left-side member is still on its rack. Position that member along the left edge to continue forming the frame."
+      },
+      "issued_sim_s": 112.84000000035677,
+      "status": "completed",
+      "completed_sim_s": 141.5600000001085
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "The left member appears aligned along the bed and meets the front member in an L-shaped corner. The gripper still holds its middle; release and retreat so frame assembly can continue."
+      },
+      "issued_sim_s": 149.07999999993066,
+      "status": "completed",
+      "completed_sim_s": 163.77999999958305
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "The released front and left members visibly form an L on the bed, while two loose members remain on the right rack. Position the longer right-side member across the rear to extend the frame."
+      },
+      "issued_sim_s": 172.71999999937165,
+      "status": "completed",
+      "completed_sim_s": 198.19999999876913
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "The rear member appears aligned across the bed and meets the left member, forming three sides of the frame. The gripper still holds its center; release it and retreat before placing the remaining right member."
+      },
+      "issued_sim_s": 204.41999999862205,
+      "status": "completed",
+      "completed_sim_s": 216.23999999834254
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "The front, left and rear members visibly form three sides of the frame, with the right side open. The remaining short member is on the right rack; position it to close the frame."
+      },
+      "issued_sim_s": 222.3399999981983,
+      "status": "completed",
+      "completed_sim_s": 265.15999999718576
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "The right member visibly closes the rectangular frame and meets the front and rear members. Its center remains gripped; release it and retreat before parking the grippers."
+      },
+      "issued_sim_s": 271.1599999970439,
+      "status": "completed",
+      "completed_sim_s": 280.6199999968202
+    },
+    {
+      "command": {
+        "skill": "park_grippers",
+        "index": null,
+        "reason": "All four released members visibly form a flat rectangular frame with aligned corners. Park both grippers at verified clearances before beginning corner nail triggers."
+      },
+      "issued_sim_s": 287.15999999666553,
+      "status": "completed",
+      "completed_sim_s": 287.17999999666506
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 0,
+        "reason": "The images show four members lying flat in a closed rectangular frame, with the southwest corner visibly aligned. Both grippers are parked and no triggers are recorded, so begin with the southwest corner nail trigger."
+      },
+      "issued_sim_s": 297.9999999964092,
+      "status": "completed",
+      "completed_sim_s": 323.75999999580006
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 1,
+        "reason": "The fresh images show the frame remaining flat and rectangular, with the southeast corner visibly aligned. Only corner 0 has been triggered, so trigger corner 1 next."
+      },
+      "issued_sim_s": 331.35999999562034,
+      "status": "completed",
+      "completed_sim_s": 342.579999995355
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 2,
+        "reason": "The fresh views show a flat rectangular frame with the northeast corner visibly aligned. Corners 0 and 1 have been triggered; trigger corner 2 next."
+      },
+      "issued_sim_s": 350.1599999951758,
+      "status": "completed",
+      "completed_sim_s": 372.59999999464515
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 3,
+        "reason": "The fresh images show the frame remaining flat and rectangular, with the northwest corner visibly aligned. Corners 0\u20132 have recorded triggers; trigger the remaining northwest corner next."
+      },
+      "issued_sim_s": 379.23999999448813,
+      "status": "completed",
+      "completed_sim_s": 390.3799999942247
+    },
+    {
+      "command": {
+        "skill": "feed_panel",
+        "index": null,
+        "reason": "The fresh images show the frame still flat and rectangular, with plywood waiting on the right feeder. All four corner triggers are recorded, so feed the panel into the workspace next."
+      },
+      "issued_sim_s": 399.49999999400904,
+      "status": "completed",
+      "completed_sim_s": 451.31999999278366
+    },
+    {
+      "command": {
+        "skill": "position_panel",
+        "index": null,
+        "reason": "The plywood is visible above the frame on the feeder, with a gap beneath its front edge. All four corner triggers are recorded; grasp and lower the sheet onto the frame before release."
+      },
+      "issued_sim_s": 459.8599999925817,
+      "status": "completed",
+      "completed_sim_s": 495.2999999917437
+    },
+    {
+      "command": {
+        "skill": "release_panel",
+        "index": null,
+        "reason": "The plywood appears flat and centered over the frame, with its front edge resting on the lumber and both grippers still holding opposite sides. Release the sheet and retreat before panel nailing."
+      },
+      "issued_sim_s": 503.9799999915384,
+      "status": "completed",
+      "completed_sim_s": 512.8599999913284
+    }
+  ]
+}

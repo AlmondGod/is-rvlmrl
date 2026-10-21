@@ -1,0 +1,26 @@
+{
+  "request_sha256": "8134e27d95fd4e92263ce68a42c56c1a4a2e9a74b7d780c4e280bef4e1035c0e",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 8.162780292099342,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1588f-3b44-7371-a51c-7dedde5d6a73\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"release_member\\\",\\\"index\\\":2,\\\"reason\\\":\\\"The rear member lies straight across the bed and meets the left member, forming three aligned sides. Its center remains held by the gripper, so releasing it and retreating is appropriate.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":11863,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":54,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:05:44.269024Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:05:44.271310Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:05:44.273128Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:05:44.274947Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:05:44.276723Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"release_member\",\"index\":2,\"reason\":\"The rear member lies straight across the bed and meets the left member, forming three aligned sides. Its center remains held by the gripper, so releasing it and retreating is appropriate.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1588f-3b44-7371-a51c-7dedde5d6a73",
+    "usage": {
+      "input_tokens": 11863,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 54,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

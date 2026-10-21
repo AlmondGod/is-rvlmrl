@@ -1,0 +1,9 @@
+{
+ "scope":"Separate panel-placement station initialized from completed frame on raised support; station transfer is not simulated",
+ "development_seed":0,
+ "reserved_seeds":[9400,9401,9402],
+ "distribution":"Sheet initial XY independent +/-3mm; same saved frame poses, geometry, friction, lighting and cameras",
+ "budget":"One run per reserved seed, no retries or tuning; one half-timestep nominal comparison; actual Astra is a development trial",
+ "acceptance":{"xy_error_m":0.006,"height_error_m":0.003,"yaw_deg":1,"tilt_deg":1,"peak_penetration_m":0.0005,"warnings":0,"unique_abstract_nails":4,"released_stable_s":2,"unassisted_lift_s":0.5,"lift_clearance_above_rack_m":0.02,"minimum_grip_force_each_N":10,"max_rack_support_while_lifted_N":0.01,"panel_weight_force_balance_relative_error":0.05},
+ "not_validated":["Physical grip/slip or actuator calibration","Plywood bending","Nail driving or bond strength","Continuous frame-to-panel assembly","Arbitrary lighting/materials/starts","Real-world transfer","Hidden slip under total visual occlusion"]
+}

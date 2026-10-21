@@ -1,0 +1,163 @@
+{
+  "development_seed": 3,
+  "full_task_feasibility_reference": "physical_nails_flip83",
+  "compiled_model_matches_previous_success": {
+    "body_mass": true,
+    "body_inertia": true,
+    "body_pos": true,
+    "geom_size": true,
+    "geom_friction": true,
+    "geom_solref": true,
+    "geom_solimp": true,
+    "jnt_range": true,
+    "actuator_gainprm": true,
+    "actuator_biasprm": true,
+    "actuator_forcerange": true,
+    "pair_friction": true,
+    "pair_solref": true,
+    "pair_solimp": true,
+    "eq_type": true,
+    "eq_obj1id": true,
+    "eq_obj2id": true,
+    "qpos0": true,
+    "cam_pos": true,
+    "cam_quat": true,
+    "cam_fovy": true,
+    "mesh_vert": true,
+    "mesh_face": true
+  },
+  "dt_s": 0.0005,
+  "native_arm_count": 3,
+  "workpiece_masses_kg": [
+    1.333987953787595,
+    1.2172759763524845,
+    1.333987953787595,
+    1.2172759763524845,
+    6.836078592000001
+  ],
+  "actuator_force_limits": [
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -50.0,
+      50.0
+    ],
+    [
+      -400.0,
+      400.0
+    ],
+    [
+      -400.0,
+      400.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -150.0,
+      150.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -150.0,
+      150.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -330.0,
+      330.0
+    ],
+    [
+      -150.0,
+      150.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -56.0,
+      56.0
+    ],
+    [
+      -1000.0,
+      1000.0
+    ]
+  ],
+  "nail_parameters": {
+    "length_m": 0.075,
+    "stiffness_N_m": 12000.0,
+    "damping_N_s_m": 4.0,
+    "withdrawal_N": 45.0,
+    "lateral_N": 70.0,
+    "failure_displacement_m": 0.004,
+    "max_standoff_m": 0.012,
+    "max_gap_m": 0.006,
+    "min_embed_m": 0.015
+  },
+  "initial_camera_estimate_errors_m_evaluator_only": [
+    0.0007971490360260898,
+    0.00023636336060427307,
+    0.0014974156407019821,
+    0.0011038931195211904
+  ],
+  "idle_one_sim_second_wall_s": 0.4518855831120163,
+  "idle_peak_penetration_m": 1.1052113110522723e-05,
+  "idle_solver_warnings": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "physical_validation": false,
+  "scope": "Compiled geometry/dynamics equality and one-second idle smoke; not robustness or physical validation."
+}

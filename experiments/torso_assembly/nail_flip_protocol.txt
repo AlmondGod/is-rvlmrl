@@ -1,0 +1,104 @@
+Scope: finite-strength, load-bearing simulated fasteners and a two-gripper flip test.
+No physical hardware validation. No glue in this experiment.
+
+Insertion model: instantaneous, ray-gated deposition at a commanded gun visit.
+Requires the actual simulated ray to encounter the two intended materials,
+stand-off <=12 mm, gap <=6 mm, receiver embed >=15 mm, and no duplicate shot.
+Actual material state is read ONLY by the physics engine, just as contact
+solvers read it; no connection anchors or latent strength enter policy inputs.
+This is NOT resolved nail impact, driving resistance, crushing or a contact-triggered
+industrial nailer. The event should not be described as validated nail driving.
+
+Connection model: isotropic translational spring-damper at a common joint point,
+paired equal/opposite forces applied at the same world point. It permits rotation
+about the point (no calibrated nail bending/torsional stiffness). Finite mixed-mode
+force and displacement limits produce irreversible rupture. No weld/teleport.
+
+Provisional parameters: k=12000 N/m, damping=4 N s/m, withdrawal=45 N,
+lateral=70 N, displacement limit=4 mm. Reused from the earlier uncalibrated
+single-joint box surrogate; these are NOT specifications of our wood or nails.
+Length=75 mm selected for geometric reach across this frame, NOT calibrated
+penetration or strength. Effective receiver embed scales limits up to25 mm.
+Contact time=4 ms original; 2 ms tested separately as numerical sensitivity.
+Do not choose strength parameters merely to make the flip succeed.
+
+Acceptance defined before the continuous fastening+flip run:
+- Four boards plus sheet meet pre-flip assembly geometry criteria.
+- Physical grippers lift and turn the panel through180 degrees; no attachments.
+- Hold inverted5 seconds; panel normal dot world up <-0.98.
+- All4 member relative centers within5 mm and relative orientations within3 degrees
+  of their assembled relation to the panel; all8 fasteners remain intact.
+- All members unsupported by the fixture during the inverted hold.
+- Max contact penetration <=0.5 mm; finite states/no solver warnings.
+- Compare unfastened and weak-connection controls; they must not silently pass.
+- Repeat a passing configuration at half timestep before treating it as numerically
+  supported. A failed or interrupted trajectory is not a passed flip.
+
+Checkpoint flip diagnostics reconstruct connection anchors from earlier recorded
+shot configurations, then initialize the assembled state. Their controller uses
+initial RGB and encoders, but they are explicitly PRIVILEGED INITIALIZATION /
+DIAGNOSTIC evidence, not a continuous assembly or Astra-policy trial.
+The --physical-nails --flip runner enables forces during the entire new assembly.
+Astra must execute its own fresh trial when model access is available; no substitute
+script is labeled Astra.
+
+Required physical characterization: exact nail/shank/head geometry and embed,
+wood species/grain/moisture, joint gap, quasi-static withdrawal/lateral loading,
+bending/rotation response, and repeated failure loads/modes; grip pad pressure,
+friction and moment capacity on the actual thin plywood. Separate calibration and
+held-out specimens. Until measured, simulation failure is a model/design diagnostic,
+not proof that real nails or a real gripper would fail in the same way.
+
+2026-10-19 repair experiment (development, not held-out evaluation)
+----------------------------------------------------------------
+Freeze all NailParameters at the original values above. Negative controls alone
+use no connections or deliberately weak 1 N limits. Keep the original 0.5 mm
+penetration, 5 mm relative-position, 3 degree relative-angle and 5 s inverted-hold
+criteria. Add recorded-state reporting of unintended robot/workpiece contacts
+at 20 ms sampling; these must also be absent for a repaired flip to pass.
+
+Separate interventions:
+- Grasp the 76 mm frame+plywood stack at visually estimated side-member centers,
+  using the unchanged native gripper, instead of carrying it by 12 mm plywood.
+- Cut two 80 x 200 mm side access slots in the support footprint; retain end
+  ledges supporting every member. Ledges use the original plinth's friction
+  and contact compliance. This is a physical fixture design change.
+- Test the original 0.68 m shoulder-center spacing separately from a 1.10 m
+  spacing on the same fixed torso. The wider brackets are a hardware-layout
+  change, NOT an improvement demonstrated on the original hardware. Native UR
+  links, inertia, joint/actuator limits, gripper geometry and friction stay intact.
+  Bracket structural adequacy is not modeled or physically validated.
+- Use smooth lift/translation phases to clear torso brackets and feeder shelves
+  before rotation. Nominal heights are 0.40 and 0.75 m; lateral clearance moves
+  total 0.30 m. Airborne waypoint tolerances allow measured loaded-arm compliance
+  within the geometry clearance budget (12 mm translation, 15 mm lift height).
+  These do NOT relax the final 5 mm joint-retention or penetration criteria.
+- Rotate the two wrists together at <=0.12 rad/s, gated by encoder tracking;
+  retain the finite-force physical grasp throughout. No rigid attachment.
+
+Raw diagnostic observations are retained, including failed approaches, fixture
+collisions, arm-link collisions, waypoint timeouts, drops and nail ruptures.
+Offline rigid-payload sweep checks write workpiece poses only in a separate
+kinematic diagnostic world. They are NOT physics or policy success evidence.
+The actual flip controller reads RGB-derived initial geometry and encoders;
+true joint state and retention measurements remain evaluator-only. This remains
+a scripted feedback skill, not a new completed Astra episode or a visual slip
+observer. Runtime slip is not inferred from hidden object poses.
+
+A successful checkpoint flip is only a mechanics development result. Require
+an uninterrupted loose-parts assembly/fastening/flip run, an independent saved-
+state audit, smaller-timestep check, and negative controls before describing the
+repair as numerically supported. All trials on this same development layout
+remain development trials, not evidence of success rates on unseen layouts.
+
+Final numerical repair evidence
+-------------------------------
+Apply the 5 mm / 3 degree relative-retention limits throughout airborne motion,
+not only the inverted hold. This stricter audit was recorded before run83's flip.
+Runs24/25 fail this stricter transient angle check despite holding inverted.
+Run83 passes continuously from loose parts at 0.5 ms. Matched runs81/84 pass at
+0.5/0.25 ms; run82 fails penetration at 1 ms. Defaults now use 0.5 ms for the
+clearance-stack profile. This is task-specific refinement, not contact calibration.
+Panel transfer uses 18 mm carry clearance, a consistent grasp-time RGB height
+reference, and planned joint-space retreat rather than a Cartesian singular path.
+See outputs/torso_assembly/flip_repair_report.txt for results and limitations.

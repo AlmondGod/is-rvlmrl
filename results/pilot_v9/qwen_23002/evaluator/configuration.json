@@ -1,0 +1,35 @@
+{
+  "arguments": {
+    "bundle": "/Users/almondgod/Repositories/phyla/outputs/assembly_benchmark/frozen_v9",
+    "out": "/Users/almondgod/Repositories/phyla/outputs/assembly_benchmark/pilot_v9/qwen_23002",
+    "model": "qwen",
+    "served_model": "Qwen/Qwen3.5-4B",
+    "backend": "chat",
+    "base_url": "http://127.0.0.1:18772/v1",
+    "api_key_env": null,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "seed": 23002,
+    "development_smoke": false,
+    "harness_test": false,
+    "seconds": null
+  },
+  "freeze": {
+    "manifest_sha256": "e3e7642677e25162b853f1a5d552f89810f5ab281aecf499c78d81508deba952",
+    "python": "3.12.9",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "source_files_and_assets": 193,
+    "physical_validation": false,
+    "no_runpod": false
+  },
+  "model_id": "Qwen/Qwen3.5-4B",
+  "benchmark_scope": "Pilot comparison of supervisory skill selection and visual checking; NOT code-policy or learned motor control.",
+  "model_settings": {
+    "enable_thinking": true,
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "repetition_penalty": 1.0
+  }
+}

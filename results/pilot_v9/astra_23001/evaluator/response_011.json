@@ -1,0 +1,26 @@
+{
+  "request_sha256": "2996c1bbbe9aed384b63912a761b9caea8f28876ab9d254fbe6ab85118281d4f",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 7.550232332898304,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a15862-d5e7-7451-9217-44c7394170c6\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"nail_corner\\\",\\\"index\\\":2,\\\"reason\\\":\\\"The fresh views show a flat rectangular frame with the northeast corner visibly aligned. Corners 0 and 1 have been triggered; trigger corner 2 next.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":12485,\"cached_input_tokens\":0,\"cache_write_input_tokens\":0,\"output_tokens\":50,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:17:14.733166Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:17:14.735407Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:17:14.737793Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:17:14.740118Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:17:14.742035Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"nail_corner\",\"index\":2,\"reason\":\"The fresh views show a flat rectangular frame with the northeast corner visibly aligned. Corners 0 and 1 have been triggered; trigger corner 2 next.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a15862-d5e7-7451-9217-44c7394170c6",
+    "usage": {
+      "input_tokens": 12485,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 50,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

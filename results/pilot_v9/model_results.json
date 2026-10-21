@@ -1,0 +1,51 @@
+{
+  "scope": "Matched supervisory pilot; not code-policy/RL/motor-control evidence.",
+  "models": {
+    "Codex(gpt-6-astra)": {
+      "successes": 0,
+      "started_trials": 3,
+      "exact_95_percent_interval": [
+        0.0,
+        0.7075982261787134
+      ],
+      "seeds": [
+        23001,
+        23002,
+        23003
+      ],
+      "failure_classes": [
+        "acceptance_failure_after_finish",
+        "acceptance_failure_after_finish",
+        "numerical"
+      ],
+      "latency_wall_s_p50_p95": [
+        10.33472733385861,
+        31.25950003371106
+      ]
+    },
+    "Qwen/Qwen3.5-4B": {
+      "successes": 0,
+      "started_trials": 2,
+      "exact_95_percent_interval": [
+        0.0,
+        0.841886116991581
+      ],
+      "seeds": [
+        23001,
+        23002
+      ],
+      "failure_classes": [
+        "inference_infrastructure",
+        "inference_infrastructure"
+      ],
+      "latency_wall_s_p50_p95": [
+        120.1164889165666,
+        120.13191517882515
+      ]
+    }
+  },
+  "real_model_trials": 5,
+  "excluded_development_or_mock": [],
+  "no_model_results_yet": false,
+  "physical_validation": false
+}

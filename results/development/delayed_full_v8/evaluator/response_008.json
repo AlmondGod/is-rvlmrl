@@ -1,0 +1,18 @@
+{
+  "response": {
+    "model": "HARNESS_TEST_ONLY",
+    "id": "mock",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "message": {
+          "content": "{\"skill\": \"park_grippers\", \"index\": null, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+        }
+      }
+    ],
+    "usage": {}
+  },
+  "latency_wall_s": 6.006872333120555,
+  "request_sha256": "a70df14ac31cb2ccb94ea3e0f7cf3398f8e87d525850c0cd136e7d1d04cb30ee",
+  "text": "{\"skill\": \"park_grippers\", \"index\": null, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+}

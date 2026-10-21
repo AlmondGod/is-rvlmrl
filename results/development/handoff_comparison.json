@@ -1,0 +1,104 @@
+{
+  "delayed_frame_before": {
+    "handoffs": [
+      {
+        "member": 0,
+        "command_jump_mm": 1.9088546505339679,
+        "wait_seconds": 6.100000000029127,
+        "object_displacement_wait_mm": 1.6419768407941304,
+        "placement_xy_at_done_mm": 0.41907864280367546,
+        "placement_xy_before_release_mm": 1.2472175603915943
+      },
+      {
+        "member": 1,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.060000000028936,
+        "object_displacement_wait_mm": 0.08100605739541093,
+        "placement_xy_at_done_mm": 0.23858507681725205,
+        "placement_xy_before_release_mm": 0.28947714273984076
+      },
+      {
+        "member": 2,
+        "command_jump_mm": 0.8560922673353113,
+        "wait_seconds": 6.279999999851498,
+        "object_displacement_wait_mm": 0.7478902819948189,
+        "placement_xy_at_done_mm": 0.44914966121608857,
+        "placement_xy_before_release_mm": 1.1124921354587214
+      },
+      {
+        "member": 3,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.019999999857646,
+        "object_displacement_wait_mm": 0.2162669826709739,
+        "placement_xy_at_done_mm": 0.35618964009025755,
+        "placement_xy_before_release_mm": 0.5524516050458607
+      }
+    ],
+    "final_frame_geometry_ok": true,
+    "final_position_errors_mm": [
+      0.5151063843141159,
+      0.3973101280378491,
+      1.1907024241566264,
+      0.5862607092036772
+    ],
+    "final_yaw_errors_deg": [
+      0.02391562333947832,
+      0.0006417576120209182,
+      0.05371434108744277,
+      0.07085261732446152
+    ],
+    "peak_penetration_mm": 0.08939323155590634,
+    "stop": "intentional stop after four members; no full-task success claim"
+  },
+  "delayed_frame_after": {
+    "handoffs": [
+      {
+        "member": 0,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.100000000029127,
+        "object_displacement_wait_mm": 0.03567355526615715,
+        "placement_xy_at_done_mm": 0.590818813396661,
+        "placement_xy_before_release_mm": 0.6134424224610355
+      },
+      {
+        "member": 1,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.060000000028936,
+        "object_displacement_wait_mm": 0.07641978405372658,
+        "placement_xy_at_done_mm": 0.22696694578584828,
+        "placement_xy_before_release_mm": 0.26781339935606396
+      },
+      {
+        "member": 2,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.39999999984866,
+        "object_displacement_wait_mm": 0.17310579169890378,
+        "placement_xy_at_done_mm": 0.40266485217530135,
+        "placement_xy_before_release_mm": 0.5532128487939005
+      },
+      {
+        "member": 3,
+        "command_jump_mm": 0.0,
+        "wait_seconds": 6.0599999998567,
+        "object_displacement_wait_mm": 1.0718843841867627,
+        "placement_xy_at_done_mm": 0.10081629986984726,
+        "placement_xy_before_release_mm": 0.967923703299805
+      }
+    ],
+    "final_frame_geometry_ok": true,
+    "final_position_errors_mm": [
+      0.6347370148151947,
+      0.3948841704222913,
+      0.6782647766173162,
+      0.8113555661424254
+    ],
+    "final_yaw_errors_deg": [
+      0.18690513497257766,
+      0.0019037320771695006,
+      0.05544877733625301,
+      0.1440468659196985
+    ],
+    "peak_penetration_mm": 0.11223551083176689,
+    "stop": "intentional stop after four members; no full-task success claim"
+  }
+}

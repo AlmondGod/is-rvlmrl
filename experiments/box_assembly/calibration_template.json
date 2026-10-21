@@ -1,0 +1,89 @@
+{
+  "status": "no_hardware_measurements_received",
+  "box": {
+    "material_and_grade": null,
+    "joint_type": null,
+    "fastener_or_adhesive": {
+      "user_confirmed": [
+        "nails",
+        "wood glue"
+      ],
+      "specification": "fastening_spec.json",
+      "hardware_parameters_measured": false
+    },
+    "panel_dimensions_m_and_measurement_uncertainty": null,
+    "panel_masses_kg": null,
+    "edge_profile_and_joint_CAD": null,
+    "warp_measurements_m": null,
+    "moisture_content_and_environment": null
+  },
+  "workcell": {
+    "arm_model_and_mount_transform": null,
+    "fixture_CAD_and_clamping_force": null,
+    "hand_firmware_and_controller_settings": null,
+    "camera_intrinsics_extrinsics_distortion": null,
+    "measured_sensor_command_delays_s": null
+  },
+  "identification_experiments": [
+    {
+      "test": "weigh and measure every panel",
+      "fits": "mass, dimensions, clearance distribution",
+      "data": null
+    },
+    {
+      "test": "repeated incline and controlled sliding tests for each material pair",
+      "fits": "static onset and kinetic friction across load/direction/speed",
+      "data": null
+    },
+    {
+      "test": "instrumented normal loading and unloading",
+      "fits": "contact force-displacement and damping under relevant loads",
+      "data": null
+    },
+    {
+      "test": "finger free-space step response and blocked-motion force",
+      "fits": "gains, limits, delay, friction and compliance",
+      "data": null
+    },
+    {
+      "test": "arm/wrist response under known loads",
+      "fits": "tracking dynamics, saturation and latency",
+      "data": null
+    },
+    {
+      "test": "joint insertion/extraction with recorded force and displacement",
+      "fits": "fit sensitivity and whether a rigid contact model is adequate",
+      "data": null
+    },
+    {
+      "test": "actual fastener/adhesive operation and post-assembly load tests",
+      "fits": "completion criteria, joint stiffness and failure envelope",
+      "data": null
+    },
+    {
+      "test": "instrumented nail driving, withdrawal and lateral loading across edge distances",
+      "fits": "drive resistance, seating, joint compliance and splitting/failure limits",
+      "data": null
+    },
+    {
+      "test": "glued joint tests across bondline gaps, clamp conditions and cure ages",
+      "fits": "handling interval, cure-dependent stiffness/strength and failure limits",
+      "data": null
+    }
+  ],
+  "validation": {
+    "hold_out_loads_speeds_and_parts": true,
+    "compare_time_steps_s": [
+      0.001,
+      0.0005,
+      0.00025
+    ],
+    "force_pose_and_timing_acceptance_tolerances": null,
+    "rules": [
+      "Do not fit contact settings to maximize policy success",
+      "Freeze physics before evaluating controllers",
+      "Report unsupported fastening/material effects",
+      "A diagnostic assembled reset is not a robot assembly rollout"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "request_sha256": "8621db1e508ee283e50c044fb2dd3a3e0fca728ed7aa176530f9ed48c997b775",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 36.314238749910146,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a15884-777a-7c53-aa1e-273ebcb331b4\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"release_member\\\",\\\"index\\\":0,\\\"reason\\\":\\\"The long front member lies straight across the front of the bed, aligned with its intended position in all three views. The gripper still holds its center, so releasing it is appropriate.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":11508,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":54,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T08:53:58.969052Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:53:58.999888Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:53:59.015724Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:53:59.028174Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:53:59.083833Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T08:54:03.624824Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n2026-10-20T08:54:08.797038Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for zsh: Snapshot command timed out for zsh\n2026-10-20T08:54:26.443484Z  WARN codex_analytics::client: failed to send events request: error sending request for url (https://chatgpt.com/backend-api/codex/analytics-events/events)\n",
+  "text": "{\"skill\":\"release_member\",\"index\":0,\"reason\":\"The long front member lies straight across the front of the bed, aligned with its intended position in all three views. The gripper still holds its center, so releasing it is appropriate.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a15884-777a-7c53-aa1e-273ebcb331b4",
+    "usage": {
+      "input_tokens": 11508,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 54,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

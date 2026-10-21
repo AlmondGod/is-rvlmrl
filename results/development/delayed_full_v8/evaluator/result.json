@@ -1,0 +1,763 @@
+{
+  "passes": true,
+  "preflip_stable_s": 99.1999999999974,
+  "inverted_hold_s": 12.839999999999815,
+  "airborne_relative_position_peak_m": 0.0011999464269758825,
+  "airborne_relative_angle_peak_deg": 2.2146776685554292,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.00020795330152418185,
+  "last_flip": {
+    "panel_up_dot": -0.9995871586222076,
+    "position_errors_m": [
+      8.584668855927388e-05,
+      0.0008270608555626616,
+      8.798753972679323e-05,
+      0.0002913761453180909
+    ],
+    "angle_errors_rad": [
+      0.00016621370301218367,
+      0.0006226864696257478,
+      0.0015291699885002252,
+      0.002888366410283005
+    ],
+    "minimum_height_above_fixture_m": 0.5662634166724025
+  },
+  "error": null,
+  "failure_class": null,
+  "finished": true,
+  "flipped": true,
+  "model": null,
+  "model_route": "chat",
+  "model_revision": "scripted-delay6",
+  "infrastructure_only": true,
+  "verified_responses": 22,
+  "actual_astra": false,
+  "model_identity_evidence": "requested and returned API model IDs recorded",
+  "development_smoke": true,
+  "seed_evaluator_only": 3,
+  "continuous": true,
+  "simulated_s": 635.3199999884326,
+  "wall_s": 1005.5838327500969,
+  "max_wall_lag_s": 368.7035348340869,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 6.019999999999383,
+      "kind": "start_skill",
+      "wall_s": 0.11723020789213479
+    },
+    {
+      "time_s": 44.02000000002816,
+      "kind": "start_skill",
+      "wall_s": 1.8999911844730377e-05
+    },
+    {
+      "time_s": 62.220000000115064,
+      "kind": "start_skill",
+      "wall_s": 0.29842929099686444
+    },
+    {
+      "time_s": 97.42000000028314,
+      "kind": "start_skill",
+      "wall_s": 1.6541918739676476e-05
+    },
+    {
+      "time_s": 102.24000000030615,
+      "kind": "control_tick",
+      "wall_s": 0.02640941715799272
+    },
+    {
+      "time_s": 118.22000000038246,
+      "kind": "start_skill",
+      "wall_s": 0.03415512479841709
+    },
+    {
+      "time_s": 150.61999999989425,
+      "kind": "start_skill",
+      "wall_s": 8.050003089010715e-05
+    },
+    {
+      "time_s": 155.43999999978027,
+      "kind": "control_tick",
+      "wall_s": 0.02038087509572506
+    },
+    {
+      "time_s": 168.51999999947097,
+      "kind": "start_skill",
+      "wall_s": 0.03558762511238456
+    },
+    {
+      "time_s": 197.11999999879467,
+      "kind": "start_skill",
+      "wall_s": 1.3708136975765228e-05
+    },
+    {
+      "time_s": 212.61999999842814,
+      "kind": "start_skill",
+      "wall_s": 0.0008737088646739721
+    },
+    {
+      "time_s": 218.7199999982839,
+      "kind": "start_skill",
+      "wall_s": 0.026617875089868903
+    },
+    {
+      "time_s": 250.51999999753193,
+      "kind": "start_skill",
+      "wall_s": 0.011392666958272457
+    },
+    {
+      "time_s": 267.81999999712286,
+      "kind": "start_skill",
+      "wall_s": 0.07265941705554724
+    },
+    {
+      "time_s": 301.71999999632123,
+      "kind": "start_skill",
+      "wall_s": 0.011450125137344003
+    },
+    {
+      "time_s": 318.9199999959145,
+      "kind": "start_skill",
+      "wall_s": 9.68750100582838e-05
+    },
+    {
+      "time_s": 376.81999999454536,
+      "kind": "start_skill",
+      "wall_s": 0.1862495408859104
+    },
+    {
+      "time_s": 385.89999999433064,
+      "kind": "control_tick",
+      "wall_s": 0.05955725000239909
+    },
+    {
+      "time_s": 420.2199999935191,
+      "kind": "start_skill",
+      "wall_s": 1.1541182175278664e-05
+    },
+    {
+      "time_s": 435.2199999931644,
+      "kind": "start_skill",
+      "wall_s": 0.06454816716723144
+    },
+    {
+      "time_s": 456.41999999266307,
+      "kind": "start_skill",
+      "wall_s": 0.0327803750988096
+    },
+    {
+      "time_s": 481.51999999206953,
+      "kind": "start_skill",
+      "wall_s": 0.2770539589691907
+    },
+    {
+      "time_s": 506.3199999914831,
+      "kind": "start_skill",
+      "wall_s": 0.07653895788826048
+    },
+    {
+      "time_s": 531.4199999908896,
+      "kind": "start_skill",
+      "wall_s": 0.009361375123262405
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 235.21999999789372,
+      "tcp": [
+        -0.4379115003236918,
+        -0.39419929444352336,
+        0.18592617621064353
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 1,
+      "time": 256.4599999973915,
+      "tcp": [
+        0.43831698521820456,
+        -0.39593065921724974,
+        0.18651190492340722
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 2,
+      "time": 282.0399999967866,
+      "tcp": [
+        0.43680393193639827,
+        0.3969176591319251,
+        0.1866580851378384
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 3,
+      "time": 307.5999999961822,
+      "tcp": [
+        -0.43731548993336444,
+        0.39867485819496107,
+        0.18584059667731592
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 0,
+      "time": 443.01999999297993,
+      "tcp": [
+        -0.0019561796298710504,
+        -0.4354104035016312,
+        0.20209195015542392
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 1,
+      "time": 466.1799999924323,
+      "tcp": [
+        -0.4372258806806697,
+        0.0019490628760052268,
+        0.20234916266826236
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 2,
+      "time": 491.099999991843,
+      "tcp": [
+        0.0005958041159528144,
+        0.4402016667355248,
+        0.20333108417309537
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 3,
+      "time": 516.0999999912518,
+      "tcp": [
+        0.43710700079517967,
+        0.0012926846860019906,
+        0.2025361621425908
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    }
+  ],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 6.017147124977782,
+      "request_sha256": "c01730268f5e20b36e4bd49e1e8de1e9401edd0fadaeb52d08d327e68eca81f9",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 6.019999999999383
+    },
+    {
+      "call": 1,
+      "observation_sim_s": 37.99999999999942,
+      "latency_wall_s": 6.00359670794569,
+      "request_sha256": "27e50791c28213ed71674f342f0658f2af11a34098a17e15833038f9accfbed3",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 44.02000000002816
+    },
+    {
+      "call": 2,
+      "observation_sim_s": 56.20000000008632,
+      "latency_wall_s": 6.006068792194128,
+      "request_sha256": "a10780531199e472104d5ceab1cafc76a9828bbc1060c5da121e06e7491c3fb2",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 62.220000000115064
+    },
+    {
+      "call": 3,
+      "observation_sim_s": 91.4000000002544,
+      "latency_wall_s": 6.007136708125472,
+      "request_sha256": "7b0af88ec1ca3cddd537cb2298b0d1acebf115c66a35af8ac3f24f11285d2076",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 97.42000000028314
+    },
+    {
+      "call": 4,
+      "observation_sim_s": 112.20000000035371,
+      "latency_wall_s": 6.003013374982402,
+      "request_sha256": "4e739f5402de42f05707df95bff5093324d06fc4a1e48c8d1e60d03afcc1393b",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 118.22000000038246
+    },
+    {
+      "call": 5,
+      "observation_sim_s": 144.6000000000366,
+      "latency_wall_s": 6.008537832880393,
+      "request_sha256": "a98fd1231e3d8ac64d9d2a20c1be179be91e9fca3669db2fbc8a334d02b04c45",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 150.61999999989425
+    },
+    {
+      "call": 6,
+      "observation_sim_s": 162.49999999961332,
+      "latency_wall_s": 6.00436675013043,
+      "request_sha256": "e92b8322594bc1ec203bb9220a5786083dc7f122843cbdac01257ac1bc987857",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 168.51999999947097
+    },
+    {
+      "call": 7,
+      "observation_sim_s": 191.09999999893702,
+      "latency_wall_s": 6.006604915950447,
+      "request_sha256": "15cadc4b5d1bb4abe69eca5dbb86ce615ac11959c468f24ec764700bc11a4447",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 197.11999999879467
+    },
+    {
+      "call": 8,
+      "observation_sim_s": 206.5999999985705,
+      "latency_wall_s": 6.006872333120555,
+      "request_sha256": "a70df14ac31cb2ccb94ea3e0f7cf3398f8e87d525850c0cd136e7d1d04cb30ee",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 212.61999999842814
+    },
+    {
+      "call": 9,
+      "observation_sim_s": 212.69999999842625,
+      "latency_wall_s": 6.006844915915281,
+      "request_sha256": "961ebfadeb81a1668ee6e642c6d1d3f4227cdebdca790b536019d6508ef90f37",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 218.7199999982839
+    },
+    {
+      "call": 10,
+      "observation_sim_s": 244.49999999767428,
+      "latency_wall_s": 6.007564124884084,
+      "request_sha256": "291f2db978f26371fbb86757b88008b48d6a7651f9e494eca9bb94584532e585",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 250.51999999753193
+    },
+    {
+      "call": 11,
+      "observation_sim_s": 261.7999999972652,
+      "latency_wall_s": 6.00709925009869,
+      "request_sha256": "07bd0ba4c0841f0697f48e3b499580222bb30157fb80ebf03cc856de35839443",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 267.81999999712286
+    },
+    {
+      "call": 12,
+      "observation_sim_s": 295.6999999964636,
+      "latency_wall_s": 6.007287875050679,
+      "request_sha256": "296ee276dc5a53960ca9e7da90d8487d55915d2a98bab69e4ac17ad95784cf00",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 301.71999999632123
+    },
+    {
+      "call": 13,
+      "observation_sim_s": 312.89999999605686,
+      "latency_wall_s": 6.011625166982412,
+      "request_sha256": "b40d7d777f8ec8f447657610e2e1790146f0b815bd1998cf021a5c3ac2011a1e",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 318.9199999959145
+    },
+    {
+      "call": 14,
+      "observation_sim_s": 370.7999999946877,
+      "latency_wall_s": 6.012016374850646,
+      "request_sha256": "0d542889b81b62ebbdc3b8a4589622416350b2e77355ec8d350859a4d1226989",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 376.81999999454536
+    },
+    {
+      "call": 15,
+      "observation_sim_s": 414.19999999366144,
+      "latency_wall_s": 6.012731374939904,
+      "request_sha256": "5b81dada06b260d0efa5ec4aad7f8ebffaeb8232978b6ffeb72fc261e0eecbfb",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 420.2199999935191
+    },
+    {
+      "call": 16,
+      "observation_sim_s": 429.19999999330673,
+      "latency_wall_s": 6.011821833206341,
+      "request_sha256": "a6c5e97f2600de3f25fdaec8e406830b81e8ed4c62164d4e767147ebe94db833",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 435.2199999931644
+    },
+    {
+      "call": 17,
+      "observation_sim_s": 450.3999999928054,
+      "latency_wall_s": 6.012651833938435,
+      "request_sha256": "6249c921d886a4064df90acf93fe123f49f212bce33675130d92ec3f6e6380e8",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 456.41999999266307
+    },
+    {
+      "call": 18,
+      "observation_sim_s": 475.4999999922119,
+      "latency_wall_s": 6.012492625042796,
+      "request_sha256": "0c8b1bd104df11d78fb2536b1dbac2571ff4d779aff80ac0d80b0407ce3968b7",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 481.51999999206953
+    },
+    {
+      "call": 19,
+      "observation_sim_s": 500.29999999162544,
+      "latency_wall_s": 6.00817924994044,
+      "request_sha256": "023d416370f7884c57cbb8709e49d3ed5af1358e90b9ded97e7d1f058156e50e",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 506.3199999914831
+    },
+    {
+      "call": 20,
+      "observation_sim_s": 525.3999999910319,
+      "latency_wall_s": 6.012513041961938,
+      "request_sha256": "d6144371f722beef000908199910881a925cc0ec9966075cf4ff126ddc5612ab",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 531.4199999908896
+    },
+    {
+      "call": 21,
+      "observation_sim_s": 629.299999988575,
+      "latency_wall_s": 6.003625666024163,
+      "request_sha256": "285fcdfcb508fdd44dbb21f34090e00d082b1cb87b3ce7a693926c786aed3c41",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 635.3199999884326
+    }
+  ],
+  "history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 6.019999999999383,
+      "status": "completed",
+      "completed_sim_s": 37.89999999999894
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 44.02000000002816,
+      "status": "completed",
+      "completed_sim_s": 56.10000000008584
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 62.220000000115064,
+      "status": "completed",
+      "completed_sim_s": 91.34000000025411
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 97.42000000028314,
+      "status": "completed",
+      "completed_sim_s": 112.12000000035333
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 118.22000000038246,
+      "status": "completed",
+      "completed_sim_s": 144.50000000003897
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 150.61999999989425,
+      "status": "completed",
+      "completed_sim_s": 162.43999999961474
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 168.51999999947097,
+      "status": "completed",
+      "completed_sim_s": 190.9999999989394
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 197.11999999879467,
+      "status": "completed",
+      "completed_sim_s": 206.57999999857097
+    },
+    {
+      "command": {
+        "skill": "park_grippers",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 212.61999999842814,
+      "status": "completed",
+      "completed_sim_s": 212.63999999842767
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 218.7199999982839,
+      "status": "completed",
+      "completed_sim_s": 244.41999999767617
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 250.51999999753193,
+      "status": "completed",
+      "completed_sim_s": 261.7799999972657
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 267.81999999712286,
+      "status": "completed",
+      "completed_sim_s": 295.65999999646453
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 301.71999999632123,
+      "status": "completed",
+      "completed_sim_s": 312.7999999960592
+    },
+    {
+      "command": {
+        "skill": "feed_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 318.9199999959145,
+      "status": "completed",
+      "completed_sim_s": 370.73999999468913
+    },
+    {
+      "command": {
+        "skill": "position_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 376.81999999454536,
+      "status": "completed",
+      "completed_sim_s": 414.0999999936638
+    },
+    {
+      "command": {
+        "skill": "release_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 420.2199999935191,
+      "status": "completed",
+      "completed_sim_s": 429.1799999933072
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 435.2199999931644,
+      "status": "completed",
+      "completed_sim_s": 450.33999999280684
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 456.41999999266307,
+      "status": "completed",
+      "completed_sim_s": 475.47999999221236
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 481.51999999206953,
+      "status": "completed",
+      "completed_sim_s": 500.23999999162686
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 506.3199999914831,
+      "status": "completed",
+      "completed_sim_s": 525.3599999910329
+    },
+    {
+      "command": {
+        "skill": "flip_structure",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 531.4199999908896,
+      "status": "completed",
+      "completed_sim_s": 629.1999999885774
+    },
+    {
+      "command": {
+        "skill": "finish",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 635.3199999884326,
+      "status": "finished"
+    }
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 8,
+    "missed": 0,
+    "intact": 8,
+    "failed": 0,
+    "peak_utilization": 0.2546363644747964,
+    "fracture_energy_J": 0.0,
+    "damping_work_J": 8.229408121164358,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": false
+}

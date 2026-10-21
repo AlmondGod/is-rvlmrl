@@ -1,0 +1,507 @@
+{
+  "passes": false,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 8.925225662073824e-05,
+  "last_flip": null,
+  "error": "ValueError('Planning requires four visually observed member poses; no reset fallback')",
+  "failure_class": "skill_precondition_or_planning",
+  "finished": false,
+  "flipped": false,
+  "model": null,
+  "model_revision": "scripted-test",
+  "infrastructure_only": true,
+  "verified_responses": 15,
+  "actual_astra": false,
+  "development_smoke": true,
+  "seed_evaluator_only": 3,
+  "continuous": true,
+  "simulated_s": 286.71999999667594,
+  "wall_s": 444.10011133388616,
+  "max_wall_lag_s": 156.8468347089365,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 0.060000000000000046,
+      "kind": "start_skill",
+      "wall_s": 0.13682575011625886
+    },
+    {
+      "time_s": 31.91999999997096,
+      "kind": "start_skill",
+      "wall_s": 2.5541987270116806e-05
+    },
+    {
+      "time_s": 44.12000000002864,
+      "kind": "start_skill",
+      "wall_s": 0.3041662499308586
+    },
+    {
+      "time_s": 73.32000000016806,
+      "kind": "start_skill",
+      "wall_s": 2.5958986952900887e-05
+    },
+    {
+      "time_s": 78.14000000019108,
+      "kind": "control_tick",
+      "wall_s": 0.02638020901940763
+    },
+    {
+      "time_s": 88.12000000023873,
+      "kind": "start_skill",
+      "wall_s": 0.04528295900672674
+    },
+    {
+      "time_s": 114.52000000036479,
+      "kind": "start_skill",
+      "wall_s": 2.0834151655435562e-05
+    },
+    {
+      "time_s": 119.3400000003878,
+      "kind": "control_tick",
+      "wall_s": 0.026633915957063437
+    },
+    {
+      "time_s": 126.42000000042161,
+      "kind": "start_skill",
+      "wall_s": 0.03746845806017518
+    },
+    {
+      "time_s": 149.01999999993208,
+      "kind": "start_skill",
+      "wall_s": 1.5167053788900375e-05
+    },
+    {
+      "time_s": 158.51999999970744,
+      "kind": "start_skill",
+      "wall_s": 0.0008827501442283392
+    },
+    {
+      "time_s": 158.61999999970507,
+      "kind": "start_skill",
+      "wall_s": 0.027618749998509884
+    },
+    {
+      "time_s": 184.41999999909498,
+      "kind": "start_skill",
+      "wall_s": 0.011593500152230263
+    },
+    {
+      "time_s": 195.71999999882777,
+      "kind": "start_skill",
+      "wall_s": 0.06734816590324044
+    },
+    {
+      "time_s": 223.61999999816803,
+      "kind": "start_skill",
+      "wall_s": 0.012991874944418669
+    },
+    {
+      "time_s": 234.81999999790318,
+      "kind": "start_skill",
+      "wall_s": 7.791910320520401e-06
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 175.199999999313,
+      "tcp": [
+        -0.4358805467212612,
+        -0.39391607215041,
+        0.18592996175142287
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 1,
+      "time": 190.339999998955,
+      "tcp": [
+        0.43936100401532246,
+        -0.39616683028802596,
+        0.18652897960300302
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 2,
+      "time": 209.919999998492,
+      "tcp": [
+        0.43781669827532754,
+        0.3966796733828249,
+        0.18665726256318782
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 3,
+      "time": 229.49999999802898,
+      "tcp": [
+        -0.43516812974014113,
+        0.3989578013086773,
+        0.1857853964300969
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    }
+  ],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 0.025678375037387013,
+      "request_sha256": "8df5afdd646d0c8f37490e0f787a7afc1fde6f97b1f57e6444077ac951853bd5",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 0.060000000000000046
+    },
+    {
+      "call": 1,
+      "observation_sim_s": 31.899999999971005,
+      "latency_wall_s": 0.002364290878176689,
+      "request_sha256": "6b146481d7e195de051fd73c70af8bb5cf9e0ad170e7ee8f0613bfd1977aa78f",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 31.91999999997096
+    },
+    {
+      "call": 2,
+      "observation_sim_s": 44.100000000028544,
+      "latency_wall_s": 0.0018248329870402813,
+      "request_sha256": "de247737fe7fef0f518028d9b1b714007b7c454a4ebc538dd04b63c9a20e8c41",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 44.12000000002864
+    },
+    {
+      "call": 3,
+      "observation_sim_s": 73.30000000016797,
+      "latency_wall_s": 0.0020557499956339598,
+      "request_sha256": "3b022d1dbf202a9fac0c89430c145a40105a8003f3cfe16d78e3b1f1d4ffbb5e",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 73.32000000016806
+    },
+    {
+      "call": 4,
+      "observation_sim_s": 88.10000000023864,
+      "latency_wall_s": 0.0022412079852074385,
+      "request_sha256": "ad797fd9f893f2b287691150e142d8635df74c267f402e125b13e205ec2da99b",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 88.12000000023873
+    },
+    {
+      "call": 5,
+      "observation_sim_s": 114.5000000003647,
+      "latency_wall_s": 0.0020546249579638243,
+      "request_sha256": "40aa555338b6c7edb70a25e4251f5a3989ed53c4744b43d916c04b75c122668b",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 114.52000000036479
+    },
+    {
+      "call": 6,
+      "observation_sim_s": 126.40000000042151,
+      "latency_wall_s": 0.003690832993015647,
+      "request_sha256": "01f1f5b2f49c7a0d557bfc6bc533bd416f49d4e0fc087a130f90fc6ff49c3f58",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 126.42000000042161
+    },
+    {
+      "call": 7,
+      "observation_sim_s": 148.99999999993256,
+      "latency_wall_s": 0.0018437090329825878,
+      "request_sha256": "0ccec9c29c26be3c24f3f469b3adde281e9a8737522bc6f0cc2bcf7a6846d465",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 149.01999999993208
+    },
+    {
+      "call": 8,
+      "observation_sim_s": 158.4999999997079,
+      "latency_wall_s": 0.0013874999713152647,
+      "request_sha256": "dba7989646944b4f7d870cd87eeaa4b18eccfb88a420f73b50597842e706fd39",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 158.51999999970744
+    },
+    {
+      "call": 9,
+      "observation_sim_s": 158.59999999970555,
+      "latency_wall_s": 0.0017879160586744547,
+      "request_sha256": "2967c3020bfba3815ef92122ab799f5d42a016eb883b7608dfc4bc6f5779aaa4",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 158.61999999970507
+    },
+    {
+      "call": 10,
+      "observation_sim_s": 184.39999999909546,
+      "latency_wall_s": 0.001777291065081954,
+      "request_sha256": "7b3808dc464459ee897f64c3653cd35833e7590f962e47f7aecd4ad7988ccf1d",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 184.41999999909498
+    },
+    {
+      "call": 11,
+      "observation_sim_s": 195.69999999882825,
+      "latency_wall_s": 0.002209416823461652,
+      "request_sha256": "bdbcb6be4a3cac3ae34bd4d4e752a31fdb4cb30040ff16fc9f19227c84141773",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 195.71999999882777
+    },
+    {
+      "call": 12,
+      "observation_sim_s": 223.5999999981685,
+      "latency_wall_s": 0.0014820839278399944,
+      "request_sha256": "48e981a95601a5afff3740861644f087d1108180d7098e9f492e06bd685d6556",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 223.61999999816803
+    },
+    {
+      "call": 13,
+      "observation_sim_s": 234.79999999790365,
+      "latency_wall_s": 0.0021697920747101307,
+      "request_sha256": "f448f2ab1743eafd3859c0fe21e19fbc95fc42e8b89def9302e2ddb5d1888458",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 234.81999999790318
+    },
+    {
+      "call": 14,
+      "observation_sim_s": 286.6999999966764,
+      "latency_wall_s": 0.001957333879545331,
+      "request_sha256": "e4036ead5a06951a9570f0d75bccbad7d6bbdb9c63c6c6cd7932bc97126abe18",
+      "error": null,
+      "returned_model": "HARNESS_TEST_ONLY",
+      "response_id": "mock",
+      "usage": {},
+      "applied_sim_s": 286.71999999667594
+    }
+  ],
+  "history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 0.060000000000000046,
+      "status": "completed",
+      "completed_sim_s": 31.799999999971238
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 31.91999999997096,
+      "status": "completed",
+      "completed_sim_s": 44.02000000002816
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 44.12000000002864,
+      "status": "completed",
+      "completed_sim_s": 73.24000000016768
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 73.32000000016806,
+      "status": "completed",
+      "completed_sim_s": 88.02000000023826
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 88.12000000023873,
+      "status": "completed",
+      "completed_sim_s": 114.40000000036422
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 114.52000000036479,
+      "status": "completed",
+      "completed_sim_s": 126.34000000042123
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 126.42000000042161,
+      "status": "completed",
+      "completed_sim_s": 148.89999999993492
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 149.01999999993208,
+      "status": "completed",
+      "completed_sim_s": 158.47999999970838
+    },
+    {
+      "command": {
+        "skill": "park_grippers",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 158.51999999970744,
+      "status": "completed",
+      "completed_sim_s": 158.53999999970696
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 0,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 158.61999999970507,
+      "status": "completed",
+      "completed_sim_s": 184.37999999909593
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 1,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 184.41999999909498,
+      "status": "completed",
+      "completed_sim_s": 195.63999999882967
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 2,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 195.71999999882777,
+      "status": "completed",
+      "completed_sim_s": 223.5199999981704
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 3,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 223.61999999816803,
+      "status": "completed",
+      "completed_sim_s": 234.69999999790602
+    },
+    {
+      "command": {
+        "skill": "feed_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 234.81999999790318,
+      "status": "completed",
+      "completed_sim_s": 286.63999999667783
+    },
+    {
+      "command": {
+        "skill": "position_panel",
+        "index": null,
+        "reason": "SCRIPTED HARNESS TEST; not an image inference."
+      },
+      "issued_sim_s": 286.71999999667594,
+      "status": "started"
+    }
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 4,
+    "missed": 0,
+    "intact": 4,
+    "failed": 0,
+    "peak_utilization": 0.000744293899083463,
+    "fracture_energy_J": 0.0,
+    "damping_work_J": 2.8483209364041898e-08,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": true
+}

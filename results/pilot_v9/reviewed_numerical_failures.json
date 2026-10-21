@@ -1,0 +1,9 @@
+{
+  "astra_23003": {
+    "reviewed_utc": "2026-10-20T09:40:43.991011+00:00",
+    "disposition": "Retain as a frozen numerical-gate failure; do not retry, tune or retire this cohort. Continue the final paired Qwen case to complete the declared budget.",
+    "reason": "Finite states and no solver warnings. Recorded left-arm self-contact penetration0.542075mm exceeds0.5mm gate. Raw-state independent audit agrees; no corruption or false parser failure found. No evidence justifies changing the gate or attributing this solely to high-level model choice.",
+    "runtime_changed": false,
+    "result_changed": false
+  }
+}

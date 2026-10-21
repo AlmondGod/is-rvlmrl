@@ -1,0 +1,322 @@
+{
+  "passes": false,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.0007883890400095656,
+  "last_flip": null,
+  "error": "RuntimeError('numerical_gate')",
+  "failure_class": "numerical",
+  "finished": false,
+  "flipped": false,
+  "model": "Codex(gpt-6-astra)",
+  "model_route": "codex",
+  "model_revision": "codex-cli-0.162.0-alpha.17.2:gpt-6-astra-mutable-alias",
+  "infrastructure_only": false,
+  "verified_responses": 8,
+  "actual_astra": null,
+  "model_identity_evidence": "CLI configured; provider snapshot unverified",
+  "development_smoke": false,
+  "seed_evaluator_only": 21001,
+  "continuous": true,
+  "simulated_s": 191.87999999891858,
+  "wall_s": 243.71347258309834,
+  "max_wall_lag_s": 51.474973832955584,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 5.599999999999616,
+      "kind": "start_skill",
+      "wall_s": 0.09642558288760483
+    },
+    {
+      "time_s": 42.62000000002148,
+      "kind": "start_skill",
+      "wall_s": 2.6792054995894432e-05
+    },
+    {
+      "time_s": 59.76000000010332,
+      "kind": "start_skill",
+      "wall_s": 0.30915591586381197
+    },
+    {
+      "time_s": 93.90000000026633,
+      "kind": "start_skill",
+      "wall_s": 7.995800115168095e-05
+    },
+    {
+      "time_s": 98.72000000028935,
+      "kind": "control_tick",
+      "wall_s": 0.02440633298829198
+    },
+    {
+      "time_s": 114.26000000036355,
+      "kind": "start_skill",
+      "wall_s": 0.03206112491898239
+    },
+    {
+      "time_s": 145.80000000000823,
+      "kind": "start_skill",
+      "wall_s": 6.454205140471458e-05
+    },
+    {
+      "time_s": 163.17999999959724,
+      "kind": "start_skill",
+      "wall_s": 0.03798100003041327
+    },
+    {
+      "time_s": 191.55999999892614,
+      "kind": "start_skill",
+      "wall_s": 3.600004129111767e-05
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 5.585185292176902,
+      "request_sha256": "1c8a909f687275686e222c9b9a0ece2ef0574f5de929a9a7cabec082d655eba2",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15799-228a-7053-9552-3860408cb1f5",
+      "usage": {
+        "input_tokens": 11280,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 49,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 5.599999999999616
+    },
+    {
+      "call": 1,
+      "observation_sim_s": 37.49999999999703,
+      "latency_wall_s": 5.105543291894719,
+      "request_sha256": "40ce81728ea1f8fa3de16d4b47b4c51ac86d7d18d1142fc1de20d1c5d0c138ad",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15799-d865-7f02-af90-2ccf5ea81789",
+      "usage": {
+        "input_tokens": 11495,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 50,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 42.62000000002148
+    },
+    {
+      "call": 2,
+      "observation_sim_s": 54.800000000079635,
+      "latency_wall_s": 4.9401058331131935,
+      "request_sha256": "8100833c2ad3b8774cf59dc13e14d9b98a44c6a4c5f68739b39bbf4b1968f26e",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579a-3161-7211-9972-c0d391773460",
+      "usage": {
+        "input_tokens": 11584,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 55,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 59.76000000010332
+    },
+    {
+      "call": 3,
+      "observation_sim_s": 88.7000000002415,
+      "latency_wall_s": 5.195931167108938,
+      "request_sha256": "6574cb82ccbdd7ef2689d41ca7a87b584f6397bf041fa781f1d96e2242587e91",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579a-ce46-7433-9ac9-71c41a87b932",
+      "usage": {
+        "input_tokens": 11680,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 51,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 93.90000000026633
+    },
+    {
+      "call": 4,
+      "observation_sim_s": 108.700000000337,
+      "latency_wall_s": 5.552647290984169,
+      "request_sha256": "22fd2bd8740c5011a3dea8ca6c53f161a8503a3e332f051f04f05fbaf4e6a724",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579b-2e7a-7f20-a315-9c0c8ecd73a7",
+      "usage": {
+        "input_tokens": 11750,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 114.26000000036355
+    },
+    {
+      "call": 5,
+      "observation_sim_s": 140.100000000143,
+      "latency_wall_s": 5.692873209016398,
+      "request_sha256": "8c352ece43403e3618d2362acc204ddbbad0cccf3497e72cf9f10e25605d3b3e",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579b-c7d9-7070-af9d-185ed9e2ec80",
+      "usage": {
+        "input_tokens": 11826,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 145.80000000000823
+    },
+    {
+      "call": 6,
+      "observation_sim_s": 157.69999999972683,
+      "latency_wall_s": 5.465268624946475,
+      "request_sha256": "3301d7c1c9608fc1a42cc8312cfcb2be4586e65b0c19e14fde23e9ac23d50f13",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579c-24c4-78c3-8c1d-1a5f78852b4c",
+      "usage": {
+        "input_tokens": 11947,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 163.17999999959724
+    },
+    {
+      "call": 7,
+      "observation_sim_s": 185.99999999905762,
+      "latency_wall_s": 5.5533636668697,
+      "request_sha256": "6152fbf51c321e9462c182385397891807b1ecdef2921152e61d7f45e2021c64",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1579c-b54c-7263-a8d0-10e8e7197e5f",
+      "usage": {
+        "input_tokens": 12037,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 50,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 191.55999999892614
+    }
+  ],
+  "history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "The central assembly bed is empty and all four loose members remain on the side racks. Position the visibly longer left-side member at the front to begin the frame."
+      },
+      "issued_sim_s": 5.599999999999616,
+      "status": "completed",
+      "completed_sim_s": 37.39999999999655
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "The long member lies horizontally along the front edge of the assembly bed, with the gripper still at its center. Release it and retreat before placing the remaining members."
+      },
+      "issued_sim_s": 42.62000000002148,
+      "status": "completed",
+      "completed_sim_s": 54.70000000007916
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "The released long member lies across the front of the bed, while the remaining short left-side member is still on its rack. Position that member along the left edge to continue forming the frame."
+      },
+      "issued_sim_s": 59.76000000010332,
+      "status": "completed",
+      "completed_sim_s": 88.66000000024131
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "The left member appears flat and aligned perpendicular to the front member, forming an L, while the gripper still holds its center. Release it and retreat before continuing assembly."
+      },
+      "issued_sim_s": 93.90000000026633,
+      "status": "completed",
+      "completed_sim_s": 108.60000000033652
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "The released front and left members form an aligned L on the bed. Two loose members remain on the right rack; position the longer right-side member along the rear to continue the frame."
+      },
+      "issued_sim_s": 114.26000000036355,
+      "status": "completed",
+      "completed_sim_s": 140.00000000014538
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "The rear member lies flat across the bed, meeting the left member and parallel to the front member. The gripper remains at its center; release it and retreat before placing the remaining right member."
+      },
+      "issued_sim_s": 145.80000000000823,
+      "status": "completed",
+      "completed_sim_s": 157.5999999997292
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "The front, left and rear members form a flat U on the bed, with the right side open. The remaining short member is visible on the right rack; position it along the right edge to complete the frame."
+      },
+      "issued_sim_s": 163.17999999959724,
+      "status": "completed",
+      "completed_sim_s": 185.89999999906
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "The right member appears flat between the front and rear members, completing the rectangular outline. Its center remains held by the gripper; release it and retreat before fastening."
+      },
+      "issued_sim_s": 191.55999999892614,
+      "status": "started"
+    }
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 0,
+    "missed": 0,
+    "intact": 0,
+    "failed": 0,
+    "peak_utilization": 0.0,
+    "fracture_energy_J": 0,
+    "damping_work_J": 0.0,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": false
+}

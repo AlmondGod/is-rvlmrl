@@ -1,0 +1,8 @@
+{
+  "frozen_parameter_sha256": null,
+  "registration_reference": null,
+  "calibration_specimen_ids": [],
+  "calibration_stock_batches": [],
+  "models": {"cure_dependent": [], "constant_joint": []},
+  "status": "template_only_no_predictions"
+}

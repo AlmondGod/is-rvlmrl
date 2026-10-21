@@ -1,0 +1,51 @@
+{
+  "status": "single_joint_reduced_order_implemented_uncalibrated",
+  "confirmed": {
+    "parts": "separate wooden panels",
+    "fastening": [
+      "nails",
+      "wood glue"
+    ]
+  },
+  "proposed_sequence": [
+    "Apply measured glue coverage to mating faces",
+    "Position panels and clamp with the fixture",
+    "Drive nails using a specified tool with physical access to each joint",
+    "Maintain support for the selected adhesive's handling interval",
+    "Check handling stability, then cured joint performance under specified loads"
+  ],
+  "nails": {
+    "type_material_length_diameter": null,
+    "count_positions_directions_and_edge_distances": null,
+    "driving_tool_and_force_or_impact_profile": null,
+    "seating_depth_and_allowed_head_protrusion": null,
+    "measured_drive_force_vs_depth": null,
+    "measured_withdrawal_shear_and_bending_response": null
+  },
+  "glue": {
+    "product_and_wood_compatibility": null,
+    "application_tool_coverage_and_amount": null,
+    "allowable_bondline_gap": null,
+    "open_time_clamp_pressure_and_handling_time": null,
+    "cure_vs_time_temperature_and_humidity": null,
+    "measured_joint_stiffness_strength_and_failure": null
+  },
+  "fixture_and_tool_access": {
+    "nail_access_at_bottom_and_corners_verified": false,
+    "clamp_access_without_tool_interference_verified": false,
+    "reorientation_requirement": "undetermined"
+  },
+  "model_requirements": [
+    "Nail engagement must follow a modelled driving operation, not target-pose proximity",
+    "Glue bonds require modelled application and mating-face contact within calibrated gap limits",
+    "Represent finite joint stiffness and failure instead of unconditional rigid welds",
+    "Keep glue age separate from simulator integration time if accelerated curing is used, and report that approximation",
+    "Calibrate on physical joints and validate on held-out joints and loads"
+  ],
+  "physics_implemented": true,
+  "full_assembly_success_available": false,
+  "scope": "one front-left joint in optional FasteningBoxAssembly",
+  "coupled_dynamics_validated": false,
+  "physical_measurements_available": false,
+  "protocol": "FASTENING_PROTOCOL.md"
+}

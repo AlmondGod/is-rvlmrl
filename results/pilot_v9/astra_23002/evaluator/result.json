@@ -1,0 +1,910 @@
+{
+  "passes": false,
+  "preflip_stable_s": 118.69999999999352,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0018353039711321555,
+  "airborne_relative_angle_peak_deg": 2.1101184822101153,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.00023441487637794502,
+  "last_flip": {
+    "panel_up_dot": -0.9999056424207736,
+    "position_errors_m": [
+      0.0008941934201184778,
+      0.0015306891331194501,
+      0.0004329015531138816,
+      0.0007823824295521628
+    ],
+    "angle_errors_rad": [
+      0.0025242661710582607,
+      0.00463122476725571,
+      0.0028579309787532857,
+      0.0031746885211884224
+    ],
+    "minimum_height_above_fixture_m": 0.563019666520148
+  },
+  "error": null,
+  "failure_class": "acceptance_failure_after_finish",
+  "finished": true,
+  "flipped": true,
+  "model": "Codex(gpt-6-astra)",
+  "model_route": "codex",
+  "model_revision": "codex-cli-0.162.0-alpha.17.2:gpt-6-astra-mutable-alias",
+  "infrastructure_only": false,
+  "verified_responses": 22,
+  "actual_astra": null,
+  "model_identity_evidence": "CLI configured; provider snapshot unverified",
+  "development_smoke": false,
+  "seed_evaluator_only": 23002,
+  "continuous": true,
+  "simulated_s": 780.5799999849977,
+  "wall_s": 1963.490789375035,
+  "max_wall_lag_s": 1181.5704747079872,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 18.82000000000149,
+      "kind": "start_skill",
+      "wall_s": 0.2438022089190781
+    },
+    {
+      "time_s": 40.3000000000104,
+      "kind": "control_tick",
+      "wall_s": 0.02337025012820959
+    },
+    {
+      "time_s": 86.920000000233,
+      "kind": "start_skill",
+      "wall_s": 0.0001688329502940178
+    },
+    {
+      "time_s": 91.72000000025592,
+      "kind": "control_tick",
+      "wall_s": 0.061382625019177794
+    },
+    {
+      "time_s": 114.08000000036269,
+      "kind": "start_skill",
+      "wall_s": 0.8437399999238551
+    },
+    {
+      "time_s": 155.27999999978405,
+      "kind": "start_skill",
+      "wall_s": 9.945803321897984e-05
+    },
+    {
+      "time_s": 160.09999999967008,
+      "kind": "control_tick",
+      "wall_s": 0.05258883303031325
+    },
+    {
+      "time_s": 162.27999999961852,
+      "kind": "control_tick",
+      "wall_s": 0.04217512486502528
+    },
+    {
+      "time_s": 181.19999999917113,
+      "kind": "start_skill",
+      "wall_s": 0.03358737495727837
+    },
+    {
+      "time_s": 215.67999999835578,
+      "kind": "start_skill",
+      "wall_s": 6.204191595315933e-05
+    },
+    {
+      "time_s": 220.4999999982418,
+      "kind": "control_tick",
+      "wall_s": 0.058033542009070516
+    },
+    {
+      "time_s": 238.11999999782515,
+      "kind": "start_skill",
+      "wall_s": 0.037241125013679266
+    },
+    {
+      "time_s": 274.6999999969602,
+      "kind": "start_skill",
+      "wall_s": 0.000134333036839962
+    },
+    {
+      "time_s": 295.5599999964669,
+      "kind": "start_skill",
+      "wall_s": 0.0016331670340150595
+    },
+    {
+      "time_s": 305.71999999622665,
+      "kind": "start_skill",
+      "wall_s": 0.1006964580155909
+    },
+    {
+      "time_s": 339.47999999542833,
+      "kind": "start_skill",
+      "wall_s": 0.015074917115271091
+    },
+    {
+      "time_s": 360.41999999493316,
+      "kind": "start_skill",
+      "wall_s": 0.08702941704541445
+    },
+    {
+      "time_s": 397.13999999406485,
+      "kind": "start_skill",
+      "wall_s": 0.011669750092551112
+    },
+    {
+      "time_s": 422.8399999934571,
+      "kind": "start_skill",
+      "wall_s": 0.00010787509381771088
+    },
+    {
+      "time_s": 492.8199999918023,
+      "kind": "start_skill",
+      "wall_s": 0.20085191703401506
+    },
+    {
+      "time_s": 501.8999999915876,
+      "kind": "control_tick",
+      "wall_s": 0.06089970818720758
+    },
+    {
+      "time_s": 542.2599999906332,
+      "kind": "start_skill",
+      "wall_s": 1.6707926988601685e-05
+    },
+    {
+      "time_s": 560.1799999902095,
+      "kind": "start_skill",
+      "wall_s": 0.026319875149056315
+    },
+    {
+      "time_s": 589.1999999895232,
+      "kind": "start_skill",
+      "wall_s": 0.06715816678479314
+    },
+    {
+      "time_s": 615.8599999888928,
+      "kind": "start_skill",
+      "wall_s": 0.25440470804460347
+    },
+    {
+      "time_s": 643.3199999882435,
+      "kind": "start_skill",
+      "wall_s": 0.07089737500064075
+    },
+    {
+      "time_s": 674.1799999875137,
+      "kind": "start_skill",
+      "wall_s": 0.009574541822075844
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 322.2199999958365,
+      "tcp": [
+        -0.4379124959035627,
+        -0.39454719096339075,
+        0.18592554955647397
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 1,
+      "time": 345.41999999528787,
+      "tcp": [
+        0.437199521613167,
+        -0.3962450367875423,
+        0.1864871056961195
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 2,
+      "time": 374.6199999945974,
+      "tcp": [
+        0.43572497930273907,
+        0.39659925206388646,
+        0.18665971469041287
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "frame",
+      "index": 3,
+      "time": 403.05999999392486,
+      "tcp": [
+        -0.43733312807635927,
+        0.39831634142051564,
+        0.18584436156861947
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 0,
+      "time": 569.5599999899877,
+      "tcp": [
+        -0.0022454889162894787,
+        -0.43813156721433194,
+        0.19989789500331262
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 1,
+      "time": 598.4799999893038,
+      "tcp": [
+        -0.4372248447542246,
+        0.0016042984635175903,
+        0.2001800831101448
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 2,
+      "time": 625.5999999886625,
+      "tcp": [
+        0.0008393914947324371,
+        0.440017122586843,
+        0.2011634962013774
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    },
+    {
+      "kind": "panel",
+      "index": 3,
+      "time": 652.6199999880236,
+      "tcp": [
+        0.43603491096988267,
+        0.000976616493310019,
+        0.20037057526013197
+      ],
+      "abstract": false,
+      "physical_bond": null,
+      "triggered": true
+    }
+  ],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 18.810936000198126,
+      "request_sha256": "f881ded5bae56f967aaeaf5e8aef33509dd9c3a25bc5306e12ff1e847899501f",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15881-436b-71c0-b8ab-2f53d5411125",
+      "usage": {
+        "input_tokens": 11280,
+        "cached_input_tokens": 1920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 52,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 18.82000000000149
+    },
+    {
+      "call": 1,
+      "observation_sim_s": 50.60000000005958,
+      "latency_wall_s": 36.314238749910146,
+      "request_sha256": "8621db1e508ee283e50c044fb2dd3a3e0fca728ed7aa176530f9ed48c997b775",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15884-777a-7c53-aa1e-273ebcb331b4",
+      "usage": {
+        "input_tokens": 11508,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 86.920000000233
+    },
+    {
+      "call": 2,
+      "observation_sim_s": 99.10000000029116,
+      "latency_wall_s": 14.967145500006154,
+      "request_sha256": "74250e07fc7138fb0ca20791deb6f59437a99b2be01062b011c81681f5b9abdb",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15888-d8a2-7583-a457-041fef09e99e",
+      "usage": {
+        "input_tokens": 11596,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 114.08000000036269
+    },
+    {
+      "call": 3,
+      "observation_sim_s": 143.40000000006498,
+      "latency_wall_s": 11.866461833007634,
+      "request_sha256": "d62239d15292d623ed88db756789102ebc45ad228bc91d75dbff8b2d1cce7041",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1588c-57b7-7341-84f9-3872102f1ffe",
+      "usage": {
+        "input_tokens": 11691,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 55,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 155.27999999978405
+    },
+    {
+      "call": 4,
+      "observation_sim_s": 169.99999999943597,
+      "latency_wall_s": 11.198397333035246,
+      "request_sha256": "a22db84c9decfc108cae9d65f4b619e0be993cf459cebf9ddd4d1d1403c0ec63",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1588e-3448-7451-819f-944bea6756d9",
+      "usage": {
+        "input_tokens": 11776,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 181.19999999917113
+    },
+    {
+      "call": 5,
+      "observation_sim_s": 207.4999999985492,
+      "latency_wall_s": 8.162780292099342,
+      "request_sha256": "8134e27d95fd4e92263ce68a42c56c1a4a2e9a74b7d780c4e280bef4e1035c0e",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1588f-3b44-7371-a51c-7dedde5d6a73",
+      "usage": {
+        "input_tokens": 11863,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 215.67999999835578
+    },
+    {
+      "call": 6,
+      "observation_sim_s": 227.5999999980739,
+      "latency_wall_s": 10.51706395787187,
+      "request_sha256": "ac1a0f448422970c5eb0b133dd4e15b310588bab1a1c171188089e137d0072b7",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15890-0fb7-7c22-8a8f-27e0106018f2",
+      "usage": {
+        "input_tokens": 11955,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 51,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 238.11999999782515
+    },
+    {
+      "call": 7,
+      "observation_sim_s": 264.69999999719664,
+      "latency_wall_s": 9.996387333143502,
+      "request_sha256": "3ad26f8e93a4c6059b8419ec0ef5d059e47dd20176a4b0d4697b5b4cae12fc8f",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15891-912c-74f1-9f8e-fb9861ab6ce0",
+      "usage": {
+        "input_tokens": 12024,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 50,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 274.6999999969602
+    },
+    {
+      "call": 8,
+      "observation_sim_s": 284.1999999967355,
+      "latency_wall_s": 11.353934250073507,
+      "request_sha256": "2710358e1e48cdd4179e3ff7e177b14886b847292983dd9d34caa1771291f4df",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15892-3b32-77d0-961a-a572ddb0cd4f",
+      "usage": {
+        "input_tokens": 12134,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 46,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 295.5599999964669
+    },
+    {
+      "call": 9,
+      "observation_sim_s": 295.59999999646595,
+      "latency_wall_s": 10.106046583037823,
+      "request_sha256": "c59a464d2c8aecdaede489c0241c6074e6b88d832057db384fb13616c109354c",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15892-c18e-7982-897f-13c7b808f160",
+      "usage": {
+        "input_tokens": 12215,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 54,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 305.71999999622665
+    },
+    {
+      "call": 10,
+      "observation_sim_s": 331.49999999561703,
+      "latency_wall_s": 7.978955333121121,
+      "request_sha256": "b98eace7650a228ce77b26d51172b83517419a0e9356507f44d6b26d573705de",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15894-48fd-7243-b0d9-e0c69269868a",
+      "usage": {
+        "input_tokens": 12344,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 51,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 339.47999999542833
+    },
+    {
+      "call": 11,
+      "observation_sim_s": 350.79999999516065,
+      "latency_wall_s": 9.618868374964222,
+      "request_sha256": "fa3c25208f9ab1be31ce1908273af517119ba2f70cc3d8560794f14b35788bd5",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15894-eb93-7460-83b0-a807fc87a4af",
+      "usage": {
+        "input_tokens": 12493,
+        "cached_input_tokens": 1920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 57,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 360.41999999493316
+    },
+    {
+      "call": 12,
+      "observation_sim_s": 388.2999999942739,
+      "latency_wall_s": 8.824258750071749,
+      "request_sha256": "2caa77d49da22168e1b632542d7b47308a648c09dd547901a24062013cf8aac7",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15896-2d40-77b1-b628-ba4cd826a730",
+      "usage": {
+        "input_tokens": 12654,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 397.13999999406485
+    },
+    {
+      "call": 13,
+      "observation_sim_s": 408.29999999380095,
+      "latency_wall_s": 14.528605915838853,
+      "request_sha256": "1da4686fb54a96a8e49b5d9c66b857348967ca38470f788a2df8c0d1c2c74cbe",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15896-ce84-7192-affa-6cd121cec190",
+      "usage": {
+        "input_tokens": 12806,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 61,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 422.8399999934571
+    },
+    {
+      "call": 14,
+      "observation_sim_s": 474.6999999922308,
+      "latency_wall_s": 18.103540458949283,
+      "request_sha256": "8db4f52bdfd41bfe3f0e10f7d8abba1a551950522dc9349ba1964a1d5256e2ec",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15898-5159-70b1-847f-520f746fecb4",
+      "usage": {
+        "input_tokens": 12916,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 57,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 492.8199999918023
+    },
+    {
+      "call": 15,
+      "observation_sim_s": 530.0999999909208,
+      "latency_wall_s": 12.150300584034994,
+      "request_sha256": "11e14d3ade8eee17974da27cbce9128f12f82a619cce87e82a88f55e10bb5193",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15899-7e50-7502-a29e-1dc61f5bbccb",
+      "usage": {
+        "input_tokens": 12988,
+        "cached_input_tokens": 1920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 57,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 542.2599999906332
+    },
+    {
+      "call": 16,
+      "observation_sim_s": 551.2999999904195,
+      "latency_wall_s": 8.865799166960642,
+      "request_sha256": "37d92288e453f01baa1d8baaf9d7242a94e404c8e000d34c90fa551e7ab7bf85",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15899-f101-7ea1-8190-f0b003e7106f",
+      "usage": {
+        "input_tokens": 13096,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 53,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 560.1799999902095
+    },
+    {
+      "call": 17,
+      "observation_sim_s": 578.4999999897763,
+      "latency_wall_s": 10.690117582911626,
+      "request_sha256": "56fb48f5bf7e453167c3a28988b0181e948bd57af8c75174b92a50790396cf9e",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1589a-9761-7420-ac91-7b4086fadfe9",
+      "usage": {
+        "input_tokens": 13229,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 56,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 589.1999999895232
+    },
+    {
+      "call": 18,
+      "observation_sim_s": 607.3999999890929,
+      "latency_wall_s": 8.449198458110914,
+      "request_sha256": "653f4d4c6d8f2328b033095416cca5fd66d2b52af37638752f4b382fcd88b0b1",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1589b-46e5-7c50-9a29-7d8b20792025",
+      "usage": {
+        "input_tokens": 13408,
+        "cached_input_tokens": 1920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 60,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 615.8599999888928
+    },
+    {
+      "call": 19,
+      "observation_sim_s": 634.9999999884402,
+      "latency_wall_s": 8.304953082930297,
+      "request_sha256": "26a188155fafcded86e460b15d3cd8742f2468bae96cbc06c2dab2bc694b16ce",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1589b-d6c0-7312-9ae7-3e49c8ed7f7c",
+      "usage": {
+        "input_tokens": 13555,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 59,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 643.3199999882435
+    },
+    {
+      "call": 20,
+      "observation_sim_s": 661.4999999878136,
+      "latency_wall_s": 12.676177249988541,
+      "request_sha256": "3ec19c24f773223223986b668508dd853f6dbe91d0ce38afcb6774f5d506c70c",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1589c-648a-75c1-b2dc-603e5bbc82cc",
+      "usage": {
+        "input_tokens": 13735,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 64,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 674.1799999875137
+    },
+    {
+      "call": 21,
+      "observation_sim_s": 772.0999999851982,
+      "latency_wall_s": 8.471041125012562,
+      "request_sha256": "84cd339b68f7e28bc2bb0ecbcb0641a8f3f2818d495de3276fbac2507d1bdc92",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a1589e-e234-7070-8d78-5f9a933e154e",
+      "usage": {
+        "input_tokens": 13828,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 58,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 780.5799999849977
+    }
+  ],
+  "history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "The central assembly bed is empty, and four loose members are visible on the side racks. The longer left-side member is available to position at the front as member 0."
+      },
+      "issued_sim_s": 18.82000000000149,
+      "status": "completed",
+      "completed_sim_s": 50.5000000000591
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 0,
+        "reason": "The long front member lies straight across the front of the bed, aligned with its intended position in all three views. The gripper still holds its center, so releasing it is appropriate."
+      },
+      "issued_sim_s": 86.920000000233,
+      "status": "completed",
+      "completed_sim_s": 99.00000000029068
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 1,
+        "reason": "The released front member remains straight across the bed, while the short left-side member is still on its rack. Positioning member 1 along the empty left edge is the next frame assembly step."
+      },
+      "issued_sim_s": 114.08000000036269,
+      "status": "completed",
+      "completed_sim_s": 143.36000000006592
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 1,
+        "reason": "The left member lies straight along the bed\u2019s left edge and meets the front member in an aligned L-shaped corner. The gripper still holds its center, so release and retreat are appropriate."
+      },
+      "issued_sim_s": 155.27999999978405,
+      "status": "completed",
+      "completed_sim_s": 169.97999999943644
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 2,
+        "reason": "The released front and left members remain aligned in an L shape. Two loose members remain on the right rack; the longer one can now be positioned across the empty rear edge as member 2."
+      },
+      "issued_sim_s": 181.19999999917113,
+      "status": "completed",
+      "completed_sim_s": 207.39999999855158
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 2,
+        "reason": "The rear member lies straight across the bed and meets the left member, forming three aligned sides. Its center remains held by the gripper, so releasing it and retreating is appropriate."
+      },
+      "issued_sim_s": 215.67999999835578,
+      "status": "completed",
+      "completed_sim_s": 227.49999999807628
+    },
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 3,
+        "reason": "The front, left and rear members remain aligned in a three-sided frame. The remaining short member is visible on the right rack, ready to fill the open right edge."
+      },
+      "issued_sim_s": 238.11999999782515,
+      "status": "completed",
+      "completed_sim_s": 264.6799999971971
+    },
+    {
+      "command": {
+        "skill": "release_member",
+        "index": 3,
+        "reason": "The right member is aligned between the front and rear members, completing a flat rectangular outline. The gripper still holds its center, so release and retreat are appropriate."
+      },
+      "issued_sim_s": 274.6999999969602,
+      "status": "completed",
+      "completed_sim_s": 284.179999996736
+    },
+    {
+      "command": {
+        "skill": "park_grippers",
+        "index": null,
+        "reason": "All four released members visibly form a flat rectangular frame with aligned corners. Park both grippers at verified clearances before starting corner nail triggers."
+      },
+      "issued_sim_s": 295.5599999964669,
+      "status": "completed",
+      "completed_sim_s": 295.5799999964664
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 0,
+        "reason": "The released members visibly form a flat rectangular frame with aligned corners, and both grippers are parked clear. No corner triggers are recorded, so begin at corner 0 (SW)."
+      },
+      "issued_sim_s": 305.71999999622665,
+      "status": "completed",
+      "completed_sim_s": 331.4199999956189
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 1,
+        "reason": "The frame remains flat and rectangular with visibly aligned corners after the first trigger. Only corner 0 is recorded as triggered, so proceed to corner 1 (SE)."
+      },
+      "issued_sim_s": 339.47999999542833,
+      "status": "completed",
+      "completed_sim_s": 350.73999999516207
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 2,
+        "reason": "The frame remains visibly flat and rectangular with aligned corners. Corners 0 and 1 have recorded triggers, so proceed to corner 2 (NE); hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 360.41999999493316,
+      "status": "completed",
+      "completed_sim_s": 388.2199999942758
+    },
+    {
+      "command": {
+        "skill": "nail_corner",
+        "index": 3,
+        "reason": "The frame remains visibly flat and rectangular with aligned corners. Corners 0, 1 and 2 have recorded triggers, so trigger the remaining NW corner 3; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 397.13999999406485,
+      "status": "completed",
+      "completed_sim_s": 408.2599999938019
+    },
+    {
+      "command": {
+        "skill": "feed_panel",
+        "index": null,
+        "reason": "The frame remains visibly flat and rectangular with aligned corners, and the plywood is still on the right-side feeder. All four corner triggers are recorded, so feeding the panel is appropriate; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 422.8399999934571,
+      "status": "completed",
+      "completed_sim_s": 474.65999999223175
+    },
+    {
+      "command": {
+        "skill": "position_panel",
+        "index": null,
+        "reason": "The plywood is now above the frame on the feeder, with a visible gap beneath its front edge and both grippers clear. Positioning it will grasp and lower the sheet onto the frame before release."
+      },
+      "issued_sim_s": 492.8199999918023,
+      "status": "completed",
+      "completed_sim_s": 529.9999999909231
+    },
+    {
+      "command": {
+        "skill": "release_panel",
+        "index": null,
+        "reason": "The plywood appears flat and centered over the frame, with its front edge seated above the front member. Both grippers still hold opposite sheet edges, so release and retreat are appropriate before panel nail triggers."
+      },
+      "issued_sim_s": 542.2599999906332,
+      "status": "completed",
+      "completed_sim_s": 551.1999999904218
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 0,
+        "reason": "The released plywood appears flat and centered over the frame, and both grippers are clear. No panel triggers are recorded, so begin sheet-to-member fastening at index 0."
+      },
+      "issued_sim_s": 560.1799999902095,
+      "status": "completed",
+      "completed_sim_s": 578.4799999897767
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 1,
+        "reason": "The plywood remains visibly flat and centered over the frame with grippers clear. Only panel trigger 0 is recorded, so proceed to index 1; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 589.1999999895232,
+      "status": "completed",
+      "completed_sim_s": 607.2999999890952
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 2,
+        "reason": "The released plywood remains visibly flat and centered over the frame, with grippers clear. Panel triggers 0 and 1 are recorded, so proceed to index 2; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 615.8599999888928,
+      "status": "completed",
+      "completed_sim_s": 634.8999999884426
+    },
+    {
+      "command": {
+        "skill": "nail_panel",
+        "index": 3,
+        "reason": "The plywood remains visibly flat and centered over the frame, with grippers clear. Panel triggers 0\u20132 are recorded, so trigger the remaining index 3; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 643.3199999882435,
+      "status": "completed",
+      "completed_sim_s": 661.3999999878159
+    },
+    {
+      "command": {
+        "skill": "flip_structure",
+        "index": null,
+        "reason": "The released plywood remains visibly flat and centered over the frame, with grippers clear. All eight nail triggers are recorded, so flip the assembly to expose its underside for fresh visual inspection; trigger completion alone does not verify joint soundness."
+      },
+      "issued_sim_s": 674.1799999875137,
+      "status": "completed",
+      "completed_sim_s": 772.0199999852001
+    },
+    {
+      "command": {
+        "skill": "finish",
+        "index": null,
+        "reason": "Fresh post-flip views show all four members retaining a rectangular frame against the plywood, with aligned corners and no visible separation or displaced parts. The flip is visually complete; hidden joint soundness remains unverified."
+      },
+      "issued_sim_s": 780.5799999849977,
+      "status": "finished"
+    }
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 8,
+    "missed": 1,
+    "intact": 7,
+    "failed": 0,
+    "peak_utilization": 0.32772139530489036,
+    "fracture_energy_J": 0.0,
+    "damping_work_J": 1.7768675394128435,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": false
+}

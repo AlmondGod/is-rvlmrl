@@ -1,0 +1,18 @@
+{
+  "response": {
+    "model": "HARNESS_TEST_ONLY",
+    "id": "mock",
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "message": {
+          "content": "{\"skill\": \"release_member\", \"index\": 1, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+        }
+      }
+    ],
+    "usage": {}
+  },
+  "latency_wall_s": 6.007136708125472,
+  "request_sha256": "7b0af88ec1ca3cddd537cb2298b0d1acebf115c66a35af8ac3f24f11285d2076",
+  "text": "{\"skill\": \"release_member\", \"index\": 1, \"reason\": \"SCRIPTED HARNESS TEST; not an image inference.\"}"
+}

@@ -1,0 +1,26 @@
+{
+  "request_sha256": "3ec19c24f773223223986b668508dd853f6dbe91d0ce38afcb6774f5d506c70c",
+  "request_hash_scope": "shared system, public packet, named image bytes",
+  "backend": "codex_cli",
+  "cli_sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28",
+  "requested_model": "gpt-6-astra",
+  "model_identity_source": "CLI configuration; no independently returned model snapshot",
+  "generation_token_cap_enforced": false,
+  "postresponse_output_token_gate": 4096,
+  "latency_wall_s": 12.676177249988541,
+  "cli_exit_code": 0,
+  "stdout": "{\"type\":\"thread.started\",\"thread_id\":\"01a1589c-648a-75c1-b2dc-603e5bbc82cc\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_0\",\"type\":\"error\",\"message\":\"Under-development features enabled: skip_host_skill_discovery. Under-development features are incomplete and may behave unpredictably. To suppress this warning, set `suppress_unstable_features_warning = true` in /Users/almondgod/.codex/config.toml.\"}}\n{\"type\":\"turn.started\"}\n{\"type\":\"item.completed\",\"item\":{\"id\":\"item_1\",\"type\":\"agent_message\",\"text\":\"{\\\"skill\\\":\\\"flip_structure\\\",\\\"index\\\":null,\\\"reason\\\":\\\"The released plywood remains visibly flat and centered over the frame, with grippers clear. All eight nail triggers are recorded, so flip the assembly to expose its underside for fresh visual inspection; trigger completion alone does not verify joint soundness.\\\"}\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":13735,\"cached_input_tokens\":2944,\"cache_write_input_tokens\":0,\"output_tokens\":64,\"reasoning_output_tokens\":0}}\n",
+  "stderr": "Reading prompt from stdin...\n2026-10-20T09:20:06.799130Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:20:06.800855Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:20:06.802466Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:20:06.804302Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-20T09:20:06.806113Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n",
+  "text": "{\"skill\":\"flip_structure\",\"index\":null,\"reason\":\"The released plywood remains visibly flat and centered over the frame, with grippers clear. All eight nail triggers are recorded, so flip the assembly to expose its underside for fresh visual inspection; trigger completion alone does not verify joint soundness.\"}",
+  "response": {
+    "model": "codex-configured:gpt-6-astra",
+    "id": "01a1589c-648a-75c1-b2dc-603e5bbc82cc",
+    "usage": {
+      "input_tokens": 13735,
+      "cached_input_tokens": 2944,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 64,
+      "reasoning_output_tokens": 0
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "passes": false,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 5.166541179433474e-05,
+  "last_flip": null,
+  "error": "RuntimeError('codex_turn_failed')",
+  "failure_class": "inference_infrastructure",
+  "finished": false,
+  "flipped": false,
+  "model": "Codex(gpt-6-astra)",
+  "model_route": "codex",
+  "model_revision": "codex-cli-0.162.0-alpha.17.2:gpt-6-astra-mutable-alias",
+  "infrastructure_only": false,
+  "verified_responses": 2,
+  "actual_astra": null,
+  "model_identity_evidence": "CLI configured; provider snapshot unverified",
+  "development_smoke": false,
+  "seed_evaluator_only": 22001,
+  "continuous": true,
+  "simulated_s": 53.88000000007524,
+  "wall_s": 136.67948983283713,
+  "max_wall_lag_s": 82.45077808294445,
+  "synchronous_control_stalls": [
+    {
+      "time_s": 5.359999999999749,
+      "kind": "start_skill",
+      "wall_s": 0.1859915421810001
+    }
+  ],
+  "physics_paused_for_inference": false,
+  "real_time_deployment_validated": false,
+  "events": [],
+  "calls": [
+    {
+      "call": 0,
+      "observation_sim_s": 0.0,
+      "latency_wall_s": 5.346778041915968,
+      "request_sha256": "58035bca0cf6318676fdc81b425c3d842481fd08df404c81d865046a469d0d2f",
+      "error": null,
+      "returned_model": "codex-configured:gpt-6-astra",
+      "response_id": "01a15851-0a89-7243-8b9f-53e05c62cb37",
+      "usage": {
+        "input_tokens": 11285,
+        "cached_input_tokens": 2944,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 51,
+        "reasoning_output_tokens": 0
+      },
+      "applied_sim_s": 5.359999999999749
+    },
+    {
+      "call": 1,
+      "observation_sim_s": 36.79999999999369,
+      "latency_wall_s": 17.07044866704382,
+      "request_sha256": "ed2593e197c70934526810f1b7e43b01dbaf6b6541262310c5c5cca0b3c1ff9e",
+      "error": "codex_turn_failed",
+      "returned_model": null,
+      "response_id": null,
+      "usage": null,
+      "applied_sim_s": 53.88000000007524
+    }
+  ],
+  "history": [
+    {
+      "command": {
+        "skill": "position_member",
+        "index": 0,
+        "reason": "The central assembly bed is empty, and four loose members are visible on the side racks. The longer left-side member is available to position at the front of the frame."
+      },
+      "issued_sim_s": 5.359999999999749,
+      "status": "completed",
+      "completed_sim_s": 36.69999999999321
+    }
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 0,
+    "missed": 0,
+    "intact": 0,
+    "failed": 0,
+    "peak_utilization": 0.0,
+    "fracture_energy_J": 0,
+    "damping_work_J": 0.0,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "physical_validation": false,
+  "no_runpod": false
+}

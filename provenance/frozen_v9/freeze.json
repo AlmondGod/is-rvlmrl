@@ -1,0 +1,8 @@
+{
+  "manifest_sha256": "e3e7642677e25162b853f1a5d552f89810f5ab281aecf499c78d81508deba952",
+  "python": "3.12.9",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "source_files_and_assets": 193,
+  "physical_validation": false,
+  "no_runpod": false
+}
