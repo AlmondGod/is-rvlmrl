@@ -29,6 +29,15 @@ class RobotTests(unittest.TestCase):
         self.assertFalse(r['success'])
         self.assertLess(r['final']['wood'][2], .04)
 
+    def test_opening_fingers_releases_free_rail(self):
+        r = Robot()
+        r.lower(); r.close(); r.lift(10)
+        self.assertGreater(r.state()['wood'][2], .12)
+        r.closed = 0.
+        r.hold(2.)
+        self.assertLess(r.state()['wood'][2], .04)
+        self.assertLess(r.state()['grip_force'], 1.)
+
     def test_wrong_height_fails_even_when_grasped(self):
         r = task.execute(task.Layout((0, 0), (0, 0), 6), 'lower()\nclose()\nlift(12)')
         self.assertFalse(r['success'])
