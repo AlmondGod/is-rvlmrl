@@ -35,17 +35,27 @@ class OrderedTests(unittest.TestCase):
         code[4] = 'move(2, 1)'
         self.assertFalse(execute(self.layout, '\n'.join(code))['success'])
 
-    def test_runtime_errors_discount_valid_prefix_and_never_succeed(self):
+    def test_runtime_errors_preserve_prefix_but_never_succeed(self):
         prefix = '\n'.join(oracle(self.layout).splitlines()[:4])
         for tail, error in [('\nplace()', 'empty_place'), ('\npick()', 'already_delivered'),
                             ('\nmove(0, -1)', 'out_of_bounds')]:
             result = execute(self.layout, prefix+tail)
-            self.assertAlmostEqual(result['reward'], .405)
+            self.assertAlmostEqual(result['reward'], .45)
             self.assertFalse(result['success'])
             self.assertFalse(result['valid'])
             self.assertEqual(result['error'], error)
         result = execute(self.layout, 'move(-2, 0)\npick()\nmove(4, 1)\nplace()')
         self.assertEqual(result['error'], 'occupied_place')
+
+    def test_second_pickup_beats_early_termination_even_if_later_error(self):
+        calls = oracle(self.layout).splitlines()
+        early = execute(self.layout, '\n'.join(calls[:4]))
+        continuing = execute(self.layout, '\n'.join(calls[:6])+"\npick()")
+        self.assertFalse(continuing['success'])
+        self.assertGreater(continuing['reward'], early['reward'])
+        failed_after_goal = execute(self.layout, oracle(self.layout)+"\nplace()")
+        self.assertFalse(failed_after_goal['success'])
+        self.assertAlmostEqual(failed_after_goal['reward'], .9)
 
     def test_grammar_and_budget(self):
         for code in ['move(True, 0)', 'move(1+1, 0)', 'import os', 'move(0,0)\n'*13,

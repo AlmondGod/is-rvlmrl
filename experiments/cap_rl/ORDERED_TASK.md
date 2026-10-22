@@ -23,8 +23,8 @@ For each object, reward is:
 
 Completing both adds 0.10, for a total maximum of 1.0. Delivering just the first
 object earns 0.45. Approach and transport use Manhattan distance. The second
-approach's reference origin is the first target. A runtime error stops execution, discounts the reward for the correctly executed
-prefix by 10%, and always counts as failure. A syntax error has no executed prefix
+approach's reference origin is the first target. A runtime error stops execution and always counts as failure, but preserves credit
+for the correctly executed prefix. It never receives the 0.10 success bonus. A syntax error has no executed prefix
 and receives zero. Truncated programs receive zero. This denser feedback is
 needed because longer programs rarely finish without an error during exploration. This reward is separate from the
 unchanged one-object experiment.
@@ -44,11 +44,11 @@ Example invocation (the main run uses 160 updates):
 
 ```bash
 python -m experiments.cap_rl.train train --task ordered_two \
-  --out /opt/cap-rl/ordered03 --init-adapter /opt/cap-rl/run03/best_adapter \
+  --out /opt/cap-rl/ordered04 --init-adapter /opt/cap-rl/run03/best_adapter \
   --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a \
   --steps 160 --max-tokens 192 --eval-every 20 --lr 0.0001
-python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered03
-python -m experiments.cap_rl.audit /opt/cap-rl/ordered03
+python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered04
+python -m experiments.cap_rl.audit /opt/cap-rl/ordered04
 ```
 
 The test set is evaluated only after validation selection. Source snapshots,
@@ -64,16 +64,22 @@ credit. It reached only 1/64 validation success at update 40 and showed a strong
 bias to pick the first listed color (red), irrespective of requested order.
 It was stopped before test evaluation.
 
-`ordered03` restarts from the same original adapter and lists the observations as
-Delivery 1 and Delivery 2 in the requested order. Coordinates, split identities,
-reward, and success constraints are unchanged from ordered02. This makes the
-instruction clearer without providing movement offsets or solution programs.
-Its baseline and trained checkpoint use this same revised prompt.
+`ordered03` restarted from the same original adapter and listed observations as
+Delivery 1 and Delivery 2 in the requested order. It improved first-delivery
+accuracy but learned to stop after four calls: 61/64 validation traces had four
+calls at update 20, with zero complete successes. The 10% runtime-error discount
+made stopping early preferable to attempting a second delivery and failing.
+
+`ordered04` uses the same clear prompt but removes that discount, preserving
+credit for successful actions even if a later action fails. The unchanged strict
+success rule still requires a fully valid program completing both deliveries.
+No movement offsets or solution programs are supplied. Its baseline and trained
+checkpoint use identical prompts, rewards, and constraints.
 
 ## Try an episode
 
 ```bash
-python -m experiments.cap_rl.demo_ordered --run /opt/cap-rl/ordered03 \
+python -m experiments.cap_rl.demo_ordered --run /opt/cap-rl/ordered04 \
   --gripper 0 0 --red -2 0 --blue 2 1 --red-target 0 -2 --blue-target -1 2 \
   --first blue
 ```
@@ -81,5 +87,5 @@ python -m experiments.cap_rl.demo_ordered --run /opt/cap-rl/ordered03 \
 Build a self-contained replay fragment from all recorded test episodes:
 
 ```bash
-python -m analysis.cap_rl_replay /opt/cap-rl/ordered03 --out ordered-replay.html
+python -m analysis.cap_rl_replay /opt/cap-rl/ordered04 --out ordered-replay.html
 ```

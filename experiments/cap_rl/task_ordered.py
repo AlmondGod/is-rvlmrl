@@ -132,11 +132,10 @@ def execute(layout, text):
                              'transport': progress, 'delivered': color in delivered}
     reward = sum(.075*c['approach'] + .1*c['picked'] + .075*c['transport'] +
                  .2*c['delivered'] for c in components.values()) + .1*success
-    # Longer programs need credit for correctly executed prefixes. Errors never
-    # count as success, and lose 10% of accrued progress; syntax errors have no
-    # executed prefix and thus receive zero. Truncation is zeroed by the trainer.
-    if error is not None:
-        reward *= .9
+    # Preserve prefix credit after runtime errors: discounting it rewards stopping
+    # after the first delivery rather than attempting the second. Runtime errors
+    # still stop execution, invalidate the program, and forfeit the success bonus.
+    # Syntax errors have no executed prefix; truncation is zeroed by the trainer.
     return {'reward': reward, 'success': success, 'valid': error is None,
             'error': error, 'trace': trace}
 
