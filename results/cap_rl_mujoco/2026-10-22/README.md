@@ -168,6 +168,7 @@ are provided for that purpose.
 The release includes the starting and selected adapter, base model license,
 frozen source, data, logs, audits, and the MuJoCo-rendered video. Base model
 weights are fetched separately from the pinned Hugging Face revision.
+The [release manifest](release.json) records the archive size and SHA256 checksum.
 
 ```bash
 pip install -r experiments/cap_rl/requirements-mujoco.txt
