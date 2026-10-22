@@ -18,9 +18,13 @@ def audit(directory):
     report = json.loads((directory / "test_comparison.json").read_text())
     task = get_task(metadata.get("task", "pick_place"))
     task_path = Path(task.__file__)
-    task_hash = hashlib.sha256(task_path.read_bytes()).hexdigest()
-    if metadata["source_sha256"][task_path.name] != task_hash:
-        raise ValueError("Task source does not match the run")
+    dependencies = [task_path]
+    if metadata.get("task") == "ordered_two":
+        dependencies.append(task_path.with_name("task.py"))  # shared safe grammar
+    for dependency in dependencies:
+        task_hash = hashlib.sha256(dependency.read_bytes()).hexdigest()
+        if metadata["source_sha256"][dependency.name] != task_hash:
+            raise ValueError("Task source does not match the run")
     splits = task.datasets()
     for split, layouts in splits.items():
         if metadata["splits"][split] != [layout.key for layout in layouts]:

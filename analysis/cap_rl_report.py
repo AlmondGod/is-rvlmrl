@@ -13,6 +13,8 @@ def main():
     parser.add_argument("directory", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
+    metadata = json.loads((args.directory/"metadata.json").read_text())
+    ordered = metadata.get("task") == "ordered_two"
     report = json.loads((args.directory/"test_comparison.json").read_text())
     selection = json.loads((args.directory/"selection.json").read_text())
     history = [json.loads(line) for line in (args.directory/"training.jsonl").read_text().splitlines()]
@@ -36,7 +38,7 @@ def main():
     left.grid(axis="y", alpha=.16)
     left.legend(loc="upper left", frameon=False, fontsize=8)
     values = [report[k]["success_rate"]*100 for k in ("baseline", "trained")]
-    bars = right.bar(["Base model", "After RL"], values, color=["#9aa3ac", "#12664f"], width=.58)
+    bars = right.bar(["One-object RL", "Two-object RL"] if ordered else ["Base model", "After RL"], values, color=["#9aa3ac", "#12664f"], width=.58)
     for bar, key in zip(bars, ("baseline", "trained")):
         result = report[key]
         right.text(bar.get_x()+bar.get_width()/2, bar.get_height()+2,
@@ -46,7 +48,7 @@ def main():
     right.set_yticks([0,25,50,75,100])
     right.grid(axis="y", alpha=.16)
     right.set_axisbelow(True)
-    fig.suptitle("Code-as-policy RL: discrete pick-and-place", x=.07, ha="left", fontsize=16, fontweight="bold")
+    fig.suptitle("Code-as-policy RL: ordered two-object delivery" if ordered else "Code-as-policy RL: discrete pick-and-place", x=.07, ha="left", fontsize=16, fontweight="bold")
     lo, hi = report["paired_bootstrap_95_ci"]
     fig.text(.07,.88,"Qwen2.5-Coder-1.5B · one training seed · same prompts and greedy decoding before/after", fontsize=9, color="#4c5660")
     fig.text(.07,.03,f'Test gain: {report["delta_success_rate"]*100:.1f} percentage points (paired bootstrap 95% CI: {lo*100:.1f}–{hi*100:.1f}).\nSymbolic coordinate task; no claim of MuJoCo assembly performance or physical transfer.',fontsize=9,color="#4c5660")

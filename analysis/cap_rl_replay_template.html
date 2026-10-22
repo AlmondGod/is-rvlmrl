@@ -1,0 +1,155 @@
+<div id="cap-ordered-replay">
+  <h3>Two-object delivery · before and after additional RL</h3>
+  <div class="viz-controls">
+    <label class="form-label">Test episode<select class="form-select" id="cap-case" aria-label="Test episode"></select></label>
+  </div>
+  <div class="viz-row cap-legend text-small">
+    <span><b class="cap-ring"></b>Gripper</span><span><b class="cap-red"></b>Red · R</span><span><b class="cap-blue"></b>Blue · B</span><span><b class="cap-target"></b>Targets</span>
+  </div>
+  <div class="cap-pair">
+    <section>
+      <h3>One-object checkpoint</h3>
+      <div id="cap-before-result" class="text-small"></div>
+      <svg id="cap-before-board" class="cap-board" role="img" aria-label="Before training grid"></svg>
+      <div id="cap-before-state" class="text-small cap-state"></div>
+      <pre><code id="cap-before-code"></code></pre>
+    </section>
+    <section>
+      <h3>Two-object RL · update __BEST_STEP__</h3>
+      <div id="cap-after-result" class="text-small"></div>
+      <svg id="cap-after-board" class="cap-board" role="img" aria-label="After training grid"></svg>
+      <div id="cap-after-state" class="text-small cap-state"></div>
+      <pre><code id="cap-after-code"></code></pre>
+    </section>
+  </div>
+  <div class="viz-controls">
+    <button id="cap-play" class="btn btn-primary" type="button">Play episode</button>
+    <button id="cap-back" class="btn" type="button">Previous step</button>
+    <button id="cap-next" class="btn" type="button">Next step</button>
+  </div>
+  <label class="form-label" for="cap-step"><span id="cap-step-label" aria-live="polite">Initial state</span></label>
+  <input id="cap-step" class="form-range" type="range" min="0" max="4" value="0" step="1">
+  <div id="cap-case-id" class="text-small"></div>
+</div>
+<style>
+#cap-ordered-replay .cap-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin:12px 0; }
+#cap-ordered-replay .cap-board { width:100%; display:block; }
+#cap-ordered-replay .cap-legend { gap:18px; margin:12px 0; }
+#cap-ordered-replay .cap-legend span { display:inline-flex; align-items:center; gap:7px; }
+#cap-ordered-replay .cap-legend b { display:inline-block; width:16px; height:16px; box-sizing:border-box; }
+#cap-ordered-replay .cap-ring { border:3px solid var(--viz-series-1); border-radius:50%; }
+#cap-ordered-replay .cap-red { background:var(--red); }
+#cap-ordered-replay .cap-blue { background:var(--blue); border-radius:50%; }
+#cap-ordered-replay .cap-target { border:2px dashed var(--foreground); }
+#cap-ordered-replay pre { white-space:pre-wrap; overflow-wrap:anywhere; margin:8px 0; }
+#cap-ordered-replay code span { display:block; padding:2px 6px; }
+#cap-ordered-replay code span.cap-active { background:var(--accent); color:var(--accent-foreground); }
+#cap-ordered-replay .cap-state { min-height:42px; }
+#cap-ordered-replay .cap-board text { fill:var(--foreground); font-size:12px; }
+@media(max-width:600px) { #cap-ordered-replay .cap-pair { grid-template-columns:1fr; } }
+</style>
+<script type="application/json" id="cap-episode-data">__EPISODE_DATA__</script>
+<script>
+(() => {
+  const root = document.getElementById('cap-ordered-replay');
+  const data = JSON.parse(document.getElementById('cap-episode-data').textContent);
+  const get = id => root.querySelector('#cap-' + id);
+  const select = get('case'), slider = get('step'), play = get('play');
+  let selected = 0, step = 0, timer = null;
+  data.forEach((d,i) => {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = `${i+1} / 128 · ${d.before.success?'pass':'fail'} → ${d.after.success?'pass':'fail'}`;
+    select.append(option);
+  });
+  const duration = r => r.trace.length + (r.error ? 1 : 0);
+  const maxStep = () => Math.max(duration(data[selected].before),duration(data[selected].after));
+  const pretty = a => `(${a.join(', ')})`;
+  const call = t => t.call + '(' + t.args.join(', ') + ')';
+  function save() {
+    if (window.openai?.setWidgetState) window.openai.setWidgetState({
+      modelContent:{task:'ordered_two', test_episode:data[selected].id, test_index:selected+1, step},
+      privateContent:{selected,step}
+    }).catch(()=>{});
+  }
+  function stop() { if(timer) clearInterval(timer); timer = null; play.textContent='Play episode'; }
+  function svgNode(svg,tag,attrs,text) {
+    const el=document.createElementNS('http://www.w3.org/2000/svg',tag);
+    for(const [k,v] of Object.entries(attrs)) el.setAttribute(k,v);
+    if(text!==undefined) el.textContent=text;
+    svg.appendChild(el); return el;
+  }
+  function draw(side) {
+    const episode=data[selected], r=episode[side], svg=get(side+'-board');
+    const index=Math.min(step,r.trace.length), initial={gripper:episode.gripper,objects:{red:episode.red,blue:episode.blue},holding:null,delivered:[]};
+    const state=index ? r.trace[index-1] : initial;
+    const failed=Boolean(r.error) && step>r.trace.length;
+    const width=Math.max(220,svg.parentElement.clientWidth), cell=(width-56)/5, left=34, top=15, size=cell*5;
+    svg.setAttribute('viewBox',`0 0 ${width} ${size+60}`);
+    svg.replaceChildren();
+    svgNode(svg,'title',{},`${side==='before'?'Before':'After'} RL, step ${step}: gripper ${pretty(state.gripper)}, red ${pretty(state.objects.red)}, blue ${pretty(state.objects.blue)}, ${state.holding?'holding '+state.holding:'empty'}`);
+    const xy=p=>[left+(p[0]+2.5)*cell,top+(2.5-p[1])*cell];
+    for(let i=0;i<=5;i++) {
+      svgNode(svg,'line',{x1:left+i*cell,y1:top,x2:left+i*cell,y2:top+size,stroke:'var(--border)'});
+      svgNode(svg,'line',{x1:left,y1:top+i*cell,x2:left+size,y2:top+i*cell,stroke:'var(--border)'});
+    }
+    for(let i=-2;i<=2;i++) {
+      const [x,y]=xy([i,i]);
+      svgNode(svg,'text',{x,y:top+size+20,'text-anchor':'middle'},i);
+      svgNode(svg,'text',{x:left-12,y:y+4,'text-anchor':'middle'},i);
+    }
+    svgNode(svg,'text',{x:left+size+10,y:top+size+20,'text-anchor':'middle'},'x');
+    svgNode(svg,'text',{x:left-12,y:top-3,'text-anchor':'middle'},'y');
+    for(const color of ['red','blue']) {
+      const [tx,ty]=xy(episode[color+'_target']);
+      svgNode(svg,'rect',{x:tx-cell*.38,y:ty-cell*.38,width:cell*.76,height:cell*.76,fill:'none',stroke:'var(--'+color+')','stroke-width':2,'stroke-dasharray':'4 3'});
+      svgNode(svg,'text',{x:tx,y:ty-cell*.21,'text-anchor':'middle'},color==='red'?'R':'B');
+    }
+    const [gx,gy]=xy(state.gripper);
+    const path=[initial,...r.trace.slice(0,index)].map(t=>xy(t.gripper).join(',')).join(' ');
+    svgNode(svg,'polyline',{points:path,fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,opacity:.3});
+    for(const color of ['red','blue']) {
+      const [mx,my]=xy(state.objects[color]);
+      if(color==='red') svgNode(svg,'rect',{x:mx-cell*.22,y:my-cell*.13,width:cell*.44,height:cell*.26,fill:'var(--red)'});
+      else svgNode(svg,'circle',{cx:mx,cy:my,r:cell*.16,fill:'var(--blue)'});
+    }
+    svgNode(svg,'circle',{cx:gx,cy:gy,r:cell*.3,fill:'none',stroke:'var(--viz-series-1)','stroke-width':3});
+    get(side+'-result').textContent=`Recorded result: ${r.success?'PASS':'FAIL'} · reward ${Number(r.reward.toFixed(3))}`;
+    let action=step===0?'Initial state':index?call(r.trace[index-1]):'No executed calls';
+    if(failed) action=`Stopped: ${r.error.replaceAll('_',' ')}`;
+    else if(step>duration(r)) action='Program finished';
+    get(side+'-state').textContent=`${action} · ${state.holding?'holding '+state.holding:'gripper empty'}`;
+    const code=get(side+'-code'); code.replaceChildren();
+    const activeIndex=failed ? r.trace.length : step-1;
+    const activeLine=step>0 && step<=duration(r) ? r.callLines[activeIndex] : null;
+    r.lines.forEach((line,i)=>{const el=document.createElement('span');el.textContent=line||' ';if(i+1===activeLine)el.className='cap-active';code.appendChild(el);});
+  }
+  function render() {
+    const max=maxStep(); step=Math.max(0,Math.min(step,max)); slider.max=max;slider.value=step;select.value=selected;
+    get('step-label').textContent=step===0?`Initial state · 0 / ${max} calls`:`Call ${step} / ${max}`;
+    get('case-id').textContent=`Order: ${data[selected].first} first · saved test ID: ${data[selected].id}`;
+    get('back').disabled=step===0;get('next').disabled=step===max;
+    draw('before');draw('after');
+  }
+  function restore(state) {
+    const s=state?.privateContent;
+    if(state?.modelContent?.task==='ordered_two' && s && Number.isInteger(s.selected) && s.selected>=0 && s.selected<data.length) {
+      stop();selected=s.selected;step=Number.isInteger(s.step)?s.step:0;
+    }
+    render();
+  }
+  select.addEventListener('change',()=>{stop();selected=Number(select.value);step=0;render();save();});
+  slider.addEventListener('input',()=>{stop();step=Number(slider.value);render();save();});
+  get('back').addEventListener('click',()=>{stop();step--;render();save();});
+  get('next').addEventListener('click',()=>{stop();step++;render();save();});
+  play.addEventListener('click',()=>{
+    if(timer){stop();return;}
+    if(step>=maxStep())step=0;
+    render();play.textContent='Pause';
+    timer=setInterval(()=>{step++;render();if(step>=maxStep()){stop();save();}},1100);
+  });
+  window.addEventListener('openai:set_globals',e=>{if(e.detail?.globals?.widgetState)restore(e.detail.globals.widgetState);});
+  new ResizeObserver(()=>render()).observe(root);
+  restore(window.openai?.widgetState);
+})();
+</script>
