@@ -1,0 +1,87 @@
+<div id="mujoco-docking-replay">
+  <style>
+    #mujoco-docking-replay .mj-panels { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+    #mujoco-docking-replay .mj-plot { display:block; width:100%; }
+    #mujoco-docking-replay .mj-plot text { fill:var(--foreground); }
+    #mujoco-docking-replay pre { white-space:pre-wrap; overflow-wrap:anywhere; margin-top:12px; }
+    #mujoco-docking-replay .mj-code-line { display:block; min-height:1em; }
+    #mujoco-docking-replay .mj-active { background:var(--accent); color:var(--accent-foreground); }
+    #mujoco-docking-replay .mj-status { min-height:2.7em; }
+    #mujoco-docking-replay .mj-range { margin:12px 0; }
+    @media(max-width:580px) { #mujoco-docking-replay .mj-panels { grid-template-columns:1fr; } }
+  </style>
+  <h3>MuJoCo trajectories and generated programs</h3>
+  <div class="viz-controls">
+    <label class="form-label">Held-out episode <select class="form-select mj-case" aria-label="Held-out episode"></select></label>
+    <button class="btn btn-primary mj-play" type="button">Play</button>
+    <button class="btn mj-end" type="button">Show outcome</button>
+  </div>
+  <div class="mj-range">
+    <label class="form-label">Simulation time <span class="mj-time tabular-nums">0.00 s</span>
+      <input class="form-range mj-slider" type="range" min="0" max="3" step="0.025" value="0" aria-label="Simulation time">
+    </label>
+  </div>
+  <div class="mj-panels">
+    <section data-model="before"><h3>Before training</h3><svg class="mj-plot" role="img" aria-label="Before-training puck trajectory"></svg><div class="mj-status tabular-nums"></div><pre><code></code></pre></section>
+    <section data-model="after"><h3>After training</h3><svg class="mj-plot" role="img" aria-label="After-training puck trajectory"></svg><div class="mj-status tabular-nums"></div><pre><code></code></pre></section>
+  </div>
+  <div class="text-small text-muted mj-caption" aria-live="polite"></div>
+  <script type="application/json" class="mj-data">__MUJOCO_DATA__</script>
+  <script>
+  (() => {
+    const root=document.getElementById('mujoco-docking-replay');
+    const cases=JSON.parse(root.querySelector('.mj-data').textContent);
+    const picker=root.querySelector('.mj-case'), slider=root.querySelector('.mj-slider');
+    const play=root.querySelector('.mj-play'), endButton=root.querySelector('.mj-end');
+    let index=0, time=0, timer=null;
+    const panels=['before','after'].map(key=>({key,node:root.querySelector(`[data-model="${key}"]`)}));
+    const NS='http://www.w3.org/2000/svg';
+    function svgEl(tag,attrs,text) { const el=document.createElementNS(NS,tag); Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v)); if(text!==undefined)el.textContent=text; return el; }
+    function endTime() { return Math.max(...panels.map(p=>cases[index][p.key].frames.at(-1)[0])); }
+    function stop() { if(timer)clearInterval(timer); timer=null; play.textContent='Play'; }
+    function save() { window.openai?.setWidgetState({modelContent:{task:'mujoco_docking',episode_id:cases[index].id,index,time},privateContent:{}})?.catch(()=>{}); }
+    function drawPanel(panel) {
+      const item=cases[index], row=item[panel.key], frames=row.frames;
+      let fi=0; while(fi+1<frames.length && frames[fi+1][0]<=time+1e-8)fi++;
+      const f=frames[fi], done=time>=frames.at(-1)[0]-1e-8;
+      const svg=panel.node.querySelector('svg'), width=Math.max(240,panel.node.clientWidth), height=width;
+      svg.setAttribute('viewBox',`0 0 ${width} ${height}`); svg.setAttribute('height',height); svg.replaceChildren();
+      const margin=36,size=width-margin-16, x=v=>margin+(v+.5)*size, y=v=>16+(.5-v)*size;
+      svg.append(svgEl('title',{},`Puck at (${f[1].toFixed(3)}, ${f[2].toFixed(3)}) meters; ${f[5]} stations docked.`));
+      svg.append(svgEl('rect',{x:margin,y:16,width:size,height:size,fill:'none',stroke:'var(--border)'}));
+      [-.4,0,.4].forEach(v=>{
+        svg.append(svgEl('line',{x1:x(v),x2:x(v),y1:16,y2:16+size,stroke:'var(--border)','stroke-width':.5}));
+        svg.append(svgEl('line',{x1:margin,x2:margin+size,y1:y(v),y2:y(v),stroke:'var(--border)','stroke-width':.5}));
+        svg.append(svgEl('text',{x:x(v),y:height-4,'text-anchor':'middle'},v.toFixed(1)));
+        svg.append(svgEl('text',{x:margin-6,y:y(v)+4,'text-anchor':'end'},v.toFixed(1)));
+      });
+      svg.append(svgEl('text',{x:width-2,y:height-4,'text-anchor':'end'},'m'));
+      [item.first,item.second].forEach((t,j)=>{
+        const color=j===0?'var(--viz-series-2)':'var(--viz-series-3)';
+        const attrs={fill:'none',stroke:color,'stroke-width':2};
+        svg.append(j===0?svgEl('circle',{cx:x(t[0]),cy:y(t[1]),r:12,...attrs}):svgEl('rect',{x:x(t[0])-12,y:y(t[1])-12,width:24,height:24,...attrs}));
+        svg.append(svgEl('text',{x:x(t[0])+18,y:y(t[1])-12},String(j+1)));
+      });
+      svg.append(svgEl('polyline',{points:frames.slice(0,fi+1).map(a=>`${x(a[1])},${y(a[2])}`).join(' '),fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,opacity:.5}));
+      svg.append(svgEl('line',{x1:x(f[1]),y1:y(f[2]),x2:x(f[1]+f[3]*.1),y2:y(f[2]+f[4]*.1),stroke:'var(--viz-series-1)','stroke-width':3}));
+      svg.append(svgEl('circle',{cx:x(f[1]),cy:y(f[2]),r:7,fill:'var(--viz-series-1)'}));
+      const status=done?(row.success?'Success':`Failed: ${row.error||'incomplete'}`):'Running';
+      panel.node.querySelector('.mj-status').textContent=`${status} · docked ${f[5]}/2 · speed ${Math.hypot(f[3],f[4]).toFixed(3)} m/s${done?' · reward '+row.reward.toFixed(3):''}`;
+      const code=panel.node.querySelector('code'); code.replaceChildren();
+      const active=row.lines[f[6]];
+      row.code.split('\n').forEach((line,n)=>{const el=document.createElement('span');el.className='mj-code-line'+(n===active?' mj-active':'');el.textContent=line||' ';code.append(el);});
+    }
+    function draw() { slider.max=endTime(); slider.value=time; root.querySelector('.mj-time').textContent=time.toFixed(2)+' s'; panels.forEach(drawPanel); }
+    function select() { stop(); time=0; root.querySelector('.mj-caption').textContent=`Episode ${index+1}/${cases.length} · station 1: circle; station 2: square · line at puck: velocity · recorded physics, frozen on termination`; draw(); }
+    cases.forEach((item,i)=>{const option=document.createElement('option');option.value=i;option.textContent=`${i+1} · ${item.before.success?'pass':'fail'} → ${item.after.success?'pass':'fail'}`;picker.append(option);});
+    picker.addEventListener('change',()=>{index=Number(picker.value);select();save();});
+    slider.addEventListener('input',()=>{stop();time=Number(slider.value);draw();save();});
+    endButton.addEventListener('click',()=>{stop();time=endTime();draw();save();});
+    play.addEventListener('click',()=>{if(timer){stop();save();return;}if(time>=endTime())time=0;play.textContent='Pause';timer=setInterval(()=>{time=Math.min(endTime(),time+.05);draw();if(time>=endTime()){stop();save();}},100);});
+    function restore(state) { const s=state?.modelContent; if(s?.task!=='mujoco_docking')return; const found=cases.findIndex(c=>c.id===s.episode_id);if(found<0)return;index=found;picker.value=index;select();time=Math.max(0,Math.min(endTime(),Number(s.time)||0));draw(); }
+    select(); restore(window.openai?.widgetState);
+    window.addEventListener('openai:set_globals',e=>restore(e.detail?.globals?.widgetState));
+    new ResizeObserver(()=>panels.forEach(drawPanel)).observe(root);
+  })();
+  </script>
+</div>
