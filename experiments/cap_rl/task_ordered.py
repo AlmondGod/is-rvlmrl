@@ -43,9 +43,9 @@ def prompt(layout):
     second = 'blue' if layout.first == 'red' else 'red'
     return f"""Deliver BOTH objects to their matching targets and release them, in the required order.
 Gripper starts at {layout.gripper}.
-Red object is at {layout.red}; red target is {layout.red_target}.
-Blue object is at {layout.blue}; blue target is {layout.blue_target}.
-Required order: first deliver and release {layout.first} at its target, THEN pick up and deliver {second}.
+Delivery 1 (FIRST): {layout.first} object is at {getattr(layout, layout.first)}; its target is {getattr(layout, layout.first+'_target')}.
+Delivery 2 (SECOND): {second} object is at {getattr(layout, second)}; its target is {getattr(layout, second+'_target')}.
+Finish delivery 1, including release at its target, before picking up delivery 2.
 The board coordinates are integers from -2 to 2 on both axes.
 Available API:
 move(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.

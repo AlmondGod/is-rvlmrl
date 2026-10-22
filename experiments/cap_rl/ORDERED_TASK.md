@@ -44,11 +44,11 @@ Example invocation (the main run uses 160 updates):
 
 ```bash
 python -m experiments.cap_rl.train train --task ordered_two \
-  --out /opt/cap-rl/ordered02 --init-adapter /opt/cap-rl/run03/best_adapter \
+  --out /opt/cap-rl/ordered03 --init-adapter /opt/cap-rl/run03/best_adapter \
   --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a \
   --steps 160 --max-tokens 192 --eval-every 20 --lr 0.0001
-python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered02
-python -m experiments.cap_rl.audit /opt/cap-rl/ordered02
+python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered03
+python -m experiments.cap_rl.audit /opt/cap-rl/ordered03
 ```
 
 The test set is evaluated only after validation selection. Source snapshots,
@@ -59,5 +59,27 @@ all sampled programs, evaluation traces, and both adapters are saved for audit.
 The initial `ordered01` pilot used a zero reward for any invalid program. No
 sampled program earned positive reward in its completed updates, so it was
 stopped before any test evaluation. Its raw outputs and original source are
-retained. `ordered02` restarts from the original one-object adapter with the
-valid-prefix credit rule above; strict success and all task constraints are unchanged.
+retained. `ordered02` restarted from the original one-object adapter with valid-prefix
+credit. It reached only 1/64 validation success at update 40 and showed a strong
+bias to pick the first listed color (red), irrespective of requested order.
+It was stopped before test evaluation.
+
+`ordered03` restarts from the same original adapter and lists the observations as
+Delivery 1 and Delivery 2 in the requested order. Coordinates, split identities,
+reward, and success constraints are unchanged from ordered02. This makes the
+instruction clearer without providing movement offsets or solution programs.
+Its baseline and trained checkpoint use this same revised prompt.
+
+## Try an episode
+
+```bash
+python -m experiments.cap_rl.demo_ordered --run /opt/cap-rl/ordered03 \
+  --gripper 0 0 --red -2 0 --blue 2 1 --red-target 0 -2 --blue-target -1 2 \
+  --first blue
+```
+
+Build a self-contained replay fragment from all recorded test episodes:
+
+```bash
+python -m analysis.cap_rl_replay /opt/cap-rl/ordered03 --out ordered-replay.html
+```

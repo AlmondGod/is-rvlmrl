@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import random
 
 from .tasks import get_task
 
@@ -60,6 +61,12 @@ def audit(directory):
     delta = (wins-losses)/len(pairs)
     if abs(delta-report["delta_success_rate"]) > 1e-9:
         raise ValueError("Incorrect improvement")
+    if "paired_bootstrap_95_ci" in report:
+        deltas = [int(b["success"])-int(a["success"]) for a, b in pairs]
+        rng = random.Random(20261023)
+        boot = sorted(sum(rng.choices(deltas, k=len(deltas)))/len(deltas) for _ in range(10000))
+        if report["paired_bootstrap_95_ci"] != [boot[250], boot[9749]]:
+            raise ValueError("Incorrect paired bootstrap interval")
     return {"audit": "passed", "replayed_programs": 2*len(pairs),
             "paired_wins": wins, "paired_losses": losses,
             "delta_success_rate": delta,
