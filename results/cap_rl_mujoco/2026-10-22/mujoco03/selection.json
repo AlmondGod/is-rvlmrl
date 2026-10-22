@@ -1,0 +1,7 @@
+{
+  "best_step": 120,
+  "validation_success_rate": 0.796875,
+  "validation_mean_reward": 0.8945073669330714,
+  "selection_split": "validation",
+  "training_seconds": 949.1031665009941
+}

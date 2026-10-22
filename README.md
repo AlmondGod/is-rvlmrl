@@ -28,6 +28,14 @@ before/after programs are available in the linked result.
 This is one training seed on a symbolic coordinate task. It does **not** establish
 RL improvement on the camera-controlled MuJoCo frame assembly benchmark below.
 
+A separate [MuJoCo inertial docking experiment](results/cap_rl_mujoco/2026-10-22/README.md)
+now improves two-station success from **1/128 (0.8%) to 107/128 (83.6%)** by
+continuing the one-object adapter with physical execution rewards. Generated
+programs accelerate and brake a force-controlled planar puck. Actual MuJoCo
+videos, all before/after code, checkpoints, and replay audits are included.
+This small task uses known dynamics and a supplied controller scaffold; it is
+independent of the articulated frame-assembly benchmark.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

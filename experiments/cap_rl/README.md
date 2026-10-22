@@ -1,5 +1,9 @@
 # Small code-as-policy RL experiment
 
+Follow-ups: [ordered two-object task](ORDERED_TASK.md) and
+[MuJoCo inertial docking](MUJOCO_TASK.md). The MuJoCo run improves held-out
+success from 1/128 to 107/128; see its [results and physical episode replay](../../results/cap_rl_mujoco/2026-10-22/README.md).
+
 This experiment adapts the core **CaP-RL** procedure from
 [CaP-X](https://github.com/capgym/cap-x): sample executable programs on-policy,
 obtain environment rewards, and update the language model with GRPO. It is an

@@ -1,0 +1,6 @@
+{
+  "audit": "passed",
+  "source_files": 14,
+  "git_commit": "bb1b44f1686119d719e3e63c0981596c4d55da80",
+  "check": "All frozen source bytes equal the recorded Git commit"
+}
