@@ -158,6 +158,10 @@ def train(args):
                     for p in (out / "initial_adapter").iterdir() if p.is_file()} if args.init_adapter else None),
                 "splits": {s: [layout.key for layout in rows] for s, rows in splits.items()},
                 "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
+    if args.task == "mujoco_docking":
+        import mujoco
+        import numpy
+        metadata["physics_runtime"] = {"mujoco": mujoco.__version__, "numpy": numpy.__version__}
     dump(out / "metadata.json", metadata)
     (out / "source").mkdir()
     for source in Path(__file__).parent.glob("*.py"):
@@ -275,7 +279,7 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--revision")
-    parser.add_argument("--task", choices=["pick_place", "ordered_two"], default="pick_place")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking"], default="pick_place")
     parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=80)

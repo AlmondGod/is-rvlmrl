@@ -3,4 +3,7 @@ from . import task, task_ordered
 
 
 def get_task(name='pick_place'):
+    if name == 'mujoco_docking':
+        from . import task_mujoco
+        return task_mujoco
     return {'pick_place': task, 'ordered_two': task_ordered}[name]
