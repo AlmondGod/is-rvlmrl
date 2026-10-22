@@ -47,21 +47,36 @@ def audit_records(directory):
             raise ValueError(f'Split mismatch: {name}')
     byid = {x.key: x for layouts in splits.values() for x in layouts}
 
+    replay_cache = {}
+    unique_executions = cached_checks = 0
+
     def check(row):
+        nonlocal unique_executions, cached_checks
         layout = byid[row['layout_id']]
         if row['prompt'] != task.prompt(layout):
             raise ValueError('Prompt mismatch')
-        replay = task.execute(layout, row['completion'])
-        if row['truncated']:
-            replay.update(reward=0., success=False, valid=False, error='truncated')
-        replay = json.loads(json.dumps(replay))
+        # The robot simulator is deterministic and resets every episode. Reuse
+        # a replay only for identical layout, exact program, and truncation flag;
+        # every saved record still has all fields checked against that replay.
+        cache_key = (layout.key, row['completion'], row['truncated'])
+        if metadata.get('task') == 'robot_lift' and cache_key in replay_cache:
+            replay = replay_cache[cache_key]
+            cached_checks += 1
+        else:
+            replay = task.execute(layout, row['completion'])
+            if row['truncated']:
+                replay.update(reward=0., success=False, valid=False, error='truncated')
+            replay = json.loads(json.dumps(replay))
+            unique_executions += 1
+            if metadata.get('task') == 'robot_lift':
+                replay_cache[cache_key] = replay
         keys = ['success', 'valid', 'error', 'trace']
         if metadata.get('task') == 'robot_lift':
             keys += ['final', 'components', 'time']
         elif physics:
             keys += ['final_state', 'final_distance_m', 'final_speed_m_s', 'components']
         for key in keys:
-            if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-8 if physics else 0.):
+            if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-7 if metadata.get("task") == "robot_lift" else 1e-8 if physics else 0.):
                 raise ValueError(f'Replay mismatch: {row["layout_id"]}/{key}')
         if abs(replay['reward']-row['reward']) > 1e-9:
             raise ValueError('Reward mismatch')
@@ -108,6 +123,13 @@ def audit_records(directory):
             raise ValueError('Training reward aggregate mismatch')
         if sum(x['success'] for x in batch)/len(batch) != metric['success_rate']:
             raise ValueError('Training success aggregate mismatch')
+    if metadata.get('task') == 'robot_lift':
+        return {'audit': 'passed', 'training_steps_verified': len(metrics),
+                'training_records_verified': len(rows), 'validation_records_verified': validation_count,
+                'unique_programs_executed': unique_executions, 'cached_record_checks': cached_checks,
+                'source_hashes_verified': len(metadata['source_sha256']),
+                'robot_asset_hashes_verified': len(metadata['robot_assets_sha256']),
+                'trace_absolute_tolerance': 1e-7, 'reward_absolute_tolerance': 1e-9}
     return {'audit': 'passed', 'training_steps_verified': len(metrics),
             'training_programs_replayed': len(rows),
             'validation_programs_replayed': validation_count,

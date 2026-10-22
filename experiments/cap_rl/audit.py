@@ -70,7 +70,7 @@ def audit(directory):
             elif physics:
                 keys += ["final_state", "final_distance_m", "final_speed_m_s", "components"]
             for key in keys:
-                if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-8 if physics else 0.):
+                if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-7 if metadata.get("task") == "robot_lift" else 1e-8 if physics else 0.):
                     raise ValueError(f"Replay mismatch: {label}/{layout.key}/{key}")
             if abs(replay["reward"]-row["reward"]) > 1e-9:
                 raise ValueError("Reward mismatch")

@@ -1,0 +1,8 @@
+{
+  "audit": "passed",
+  "cross_platform_programs_verified": 128,
+  "trace_absolute_tolerance": 1e-07,
+  "reward_absolute_tolerance": 1e-09,
+  "seconds": 37.819212198257446,
+  "note": "acos near zero has ~2e-8 rad platform roundoff; task success thresholds unchanged."
+}
