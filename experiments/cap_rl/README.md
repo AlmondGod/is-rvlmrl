@@ -79,9 +79,40 @@ validation outputs, selected and final LoRA adapters, and checkpoint selection.
 Testing writes `test_comparison.json`. Large model weights belong in a release
 artifact or external storage, not the Git source tree.
 
+Replay every test program and verify the aggregate result without a GPU:
+
+```bash
+python -m experiments.cap_rl.audit outputs/cap_rl/new_run
+```
+
+Generate a program for a chosen layout using a saved run and compare with its
+base model (this is a demo, not an additional benchmark):
+
+```bash
+python -m experiments.cap_rl.demo --run outputs/cap_rl/new_run \
+  --gripper -2 0 --member 1 1 --target 0 -1
+```
+
+The demo downloads the pinned base model and loads `best_adapter/` from the run.
+The model remains specialized to this tiny API and coordinate range.
+
 ## Development record
 
 `run01` used a syntax-only 0.05 reward and was stopped after its first validation
 check (step 20): 0/64 successes. The model learned short, valid movements rather
 than completing pickup and placement. That reward was removed before the next
 run. No final test layouts were evaluated during this pilot.
+
+`run02` restarted the 0.5B base with the revised reward but found no nonzero rewards
+in its first 19 updates and was stopped. Both early pilots inherited Qwen's
+`repetition_penalty=1.05`, which does not match the raw policy probabilities in the
+loss. They are failed development attempts, not valid GRPO result claims.
+
+`run03` uses Qwen2.5-Coder-1.5B-Instruct and an explicit neutral generation
+configuration (repetition penalty 1.0, no sampling filters). Its first validation
+checkpoint at update 20 improved strict success from 0/64 to 12/64. This is a
+development observation, not the final test result.
+
+The completed 120-update run reached **60/64 validation successes**. The selected
+checkpoint then improved untouched-test success from **4/128 to 121/128**.
+See the [full result, exact reproduction command, and checkpoint download](../../results/cap_rl/2026-10-22/README.md).

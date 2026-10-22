@@ -1,0 +1,23 @@
+nohup: ignoring input
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"stage": "baseline_validation", "n": 64, "successes": 0, "success_rate": 0.0, "mean_reward": 0.0, "valid_rate": 0.0}
+{"step": 1, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 6.698124463990098}
+{"step": 2, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 13.09137765999185}
+{"step": 3, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 19.663958207995165}
+{"step": 4, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 26.12904369298485}
+{"step": 5, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 32.64452406897908}
+{"step": 6, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 39.070347842993215}
+{"step": 7, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 45.637773721973645}
+{"step": 8, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 52.35107965298812}
+{"step": 9, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 58.87147283699596}
+{"step": 10, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 64.12206551199779}
+{"step": 11, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 70.59285418697982}
+{"step": 12, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 77.10318018399994}
+{"step": 13, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 83.82230221497593}
+{"step": 14, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 90.41256816498935}
+{"step": 15, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 96.83687568598543}
+{"step": 16, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 103.32762980798725}
+{"step": 17, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 109.78830212497269}
+{"step": 18, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 116.41312059698976}
+{"step": 19, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0, "kl": 0.0, "grad_norm": 0.0, "elapsed_seconds": 122.97830638097366}

@@ -10,6 +10,18 @@ benchmark, measurement protocols, tests, and available evidence. **It is not a
 validated real-world assembly policy. No distillation or RL has been applied to
 this benchmark.**
 
+## Small code-as-policy RL experiment (2026-10-22)
+
+A separate [CaP-RL-style experiment](experiments/cap_rl/README.md) now trains
+Qwen2.5-Coder-1.5B to generate programs for a discrete pick-and-place task. On 128
+untouched coordinate layouts, strict success improved from **4/128 (3.1%) to
+121/128 (94.5%)** after 120 GRPO updates on one 24 GB GPU. All 256 before/after
+test programs passed an independent execution replay audit.
+
+[Results, learning curve, checkpoint, and reproduction instructions](results/cap_rl/2026-10-22/README.md).
+This is one training seed on a symbolic coordinate task. It does **not** establish
+RL improvement on the camera-controlled MuJoCo frame assembly benchmark below.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

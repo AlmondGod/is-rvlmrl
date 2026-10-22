@@ -1,0 +1,4 @@
+nohup: ignoring input
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"baseline": {"n": 128, "successes": 4, "success_rate": 0.03125, "mean_reward": 0.05103515625, "valid_rate": 0.078125}, "trained": {"n": 128, "successes": 121, "success_rate": 0.9453125, "mean_reward": 0.9670396205357142, "valid_rate": 0.9921875}, "paired_wins": 117, "paired_losses": 0, "delta_success_rate": 0.9140625, "paired_bootstrap_95_ci": [0.859375, 0.9609375]}
