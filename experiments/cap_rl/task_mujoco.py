@@ -74,19 +74,19 @@ def meters(point):
 
 
 def prompt(layout):
-    return f'''Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.
-Initial position: {meters(layout.start)} meters. Initial velocity: (0, 0) m/s.
-Station 1: {meters(layout.first)} meters.
-Station 2: {meters(layout.second)} meters.
-API:
-thrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.
-dock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.
-Physics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.
-Calibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.
-The puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.
-Use exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.
-For EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.
-Output only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.'''
+    return f"""Dock the puck at BOTH stations in order: station 1, then station 2.
+Puck starts at {layout.start}, at rest.
+Station 1 is at {layout.first}.
+Station 2 is at {layout.second}.
+Coordinates above are in units of 10 cm. The puck moves continuously in MuJoCo.
+Available API:
+thrust(fx, fy): apply force for 0.5 seconds. Both arguments are literal integers from -4 to 4. This accelerates the puck; it does NOT automatically stop.
+dock(): accept the next station only when the puck is within 1.5 cm of it AND moving slower than 2.5 cm/s. Docking does not move or stop the puck.
+Calibrated movement from rest: thrust(a, b) followed by thrust(-a, -b) moves by the RELATIVE offset (a, b) in the coordinate units above and stops. Therefore choose the first pulse from target minus current position, and the second pulse with both signs reversed.
+Use exactly SIX calls: thrust, thrust, dock, thrust, thrust, dock.
+For the second leg, current position is STATION 1, not the original start.
+No friction or automatic braking. Stay within [-4.8, 4.8] coordinate units throughout. Finish stopped at station 2; the simulator checks a final 0.5 second coast.
+Output only the six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or explanations."""
 
 
 def parse_program(text):

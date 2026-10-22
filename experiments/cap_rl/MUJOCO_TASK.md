@@ -20,15 +20,16 @@ vision task, or evidence of real-world transfer.
 - MuJoCo integrates each 5 ms timestep with RK4. There is no gravity, friction,
   damping, automatic position servo, or state reset between calls. The model
   receives exact initial coordinates, zero initial velocity, both target
-  coordinates, and the known force/duration calibration in its prompt.
+  coordinates, and the known displacement calibration in its prompt. Prompt
+  coordinates use 10 cm units; execution traces and reward calculations use SI.
 - A boundary breach at any timestep (|x| or |y| > 0.48 m) terminates execution.
   Walls outside that boundary are visible, but valid trajectories do not need
   collision handling. Final success also requires a passive 0.5 second coast
   ending within the final position and speed thresholds.
 
 `mj_step` determines all trajectory states and reward measurements. The prompt
-documents the analytic constant-force motion and the displacement of an
-equal/opposite pulse pair. After an unsuccessful initial pilot, it also supplies
+documents the displacement of an equal/opposite pulse pair. After unsuccessful
+initial pilots, it also supplies
 the six-call accelerate–brake–dock structure for both legs. This is a fixed
 controller scaffold, not a completed program for the supplied layout: the model
 must compute the four pairs of force arguments. The experiment tests using that
@@ -64,10 +65,12 @@ Seed 20261025 draws 704 unique ordered triples of distinct coordinates from a
 individual relative motions can recur across splits. This measures new layout
 combinations within one known dynamics family, not distribution shift.
 
-Training starts from Qwen2.5-Coder-1.5B-Instruct, without either symbolic-task
-adapter. The independent CaP-RL-style GRPO implementation uses on-policy sampled
+The curriculum run starts from Qwen2.5-Coder-1.5B-Instruct with the previously
+published one-object RL adapter (`run03/best_adapter`); that same adapter is its
+before-training comparator. Earlier pilots started from the raw base model and
+are retained separately. The independent CaP-RL-style GRPO implementation uses on-policy sampled
 programs, execution rewards, rank-16 LoRA, and KL to the immutable base model.
-No demonstration training, teacher outputs, or oracle programs are used.
+No demonstration training, teacher outputs, or oracle-generated training programs are used.
 The test-only `oracle` confirms feasibility; the trainer never calls it.
 Checkpoint selection uses validation success, then validation reward. Test
 evaluation happens once after selection, with identical greedy decoding for
@@ -85,7 +88,8 @@ export HF_HUB_ENABLE_HF_TRANSFER=0
 python -m unittest experiments.cap_rl.test_mujoco -v
 python -m experiments.cap_rl.train train --task mujoco_docking \
   --out /path/to/new_run --steps 120 --eval-every 20 --max-tokens 128 \
-  --lr 0.0001 --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a
+  --lr 0.0001 --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a \
+  --init-adapter /path/to/run03/best_adapter
 python -m experiments.cap_rl.train test --out /path/to/new_run
 python -m experiments.cap_rl.audit /path/to/new_run
 python -m analysis.cap_rl_audit_records /path/to/new_run
