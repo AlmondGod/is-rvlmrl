@@ -1,0 +1,6 @@
+mujoco>=3.2,<4
+numpy>=1.26
+transformers>=4.47,<5
+peft>=0.14,<1
+torch>=2.4
+accelerate>=1.0
