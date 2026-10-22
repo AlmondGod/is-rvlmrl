@@ -27,7 +27,10 @@ def summarize(directory):
             'outcomes': dict(Counter('success' if r['success'] else r['error'] or 'physical_criteria' for r in rows)),
             'max_success_penetration_m': max((r['final']['peak_penetration'] for r in rows if r['success']), default=None),
             'max_success_final_tilt_rad': max((r['final']['tilt'] for r in rows if r['success']), default=None)}
+    selected = [r for r in train if r['step'] <= selection['best_step']]
     return {'task': metadata['task'], 'training_programs': len(train),
+            'selected_checkpoint_training_programs': len(selected),
+            'selected_checkpoint_distinct_training_layouts': len({r['layout_id'] for r in selected}),
             'distinct_training_layouts': len({r['layout_id'] for r in train}),
             'successful_training_programs': sum(r['success'] for r in train),
             'selection': selection, 'validation': validation, 'test': phases,

@@ -59,3 +59,21 @@ python -m experiments.cap_rl.train train --task robot_lift --out /opt/cap-rl/rob
   --steps 80 --lr 0.0001 --max-tokens 96 --eval-every 20
 python -m experiments.cap_rl.train test --out /opt/cap-rl/robot01
 ```
+
+Audit every saved result and render a paired test episode:
+
+```sh
+python -m experiments.cap_rl.audit /opt/cap-rl/robot01
+python -m analysis.cap_rl_audit_records /opt/cap-rl/robot01
+python -m analysis.cap_rl_robot_video /opt/cap-rl/robot01 --index 0 --out robot-before-after
+```
+
+Headless physics can use `MUJOCO_GL=disable`; rendering requires a working OpenGL
+backend (macOS offscreen rendering was verified). The recording uses actual
+MuJoCo joint states at 10 Hz, with real-time playback and terminated episodes
+frozen. The audit allows 1e-7 absolute trace roundoff, because `acos` near zero
+tilts differs by about 2e-8 rad across CPU platforms; reward tolerance is 1e-9.
+These are replay comparison tolerances and do not change task success gates.
+Identical deterministic programs on the same layout can share one audit execution;
+every stored record is still checked, with unique executions and cache checks
+reported separately. Robot XML, meshes and license files are hashed too.
