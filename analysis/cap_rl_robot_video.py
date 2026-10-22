@@ -27,11 +27,18 @@ def font(size, mono=False):
     return ImageFont.load_default(size=size)
 
 
-def render(directory, destination, index=0):
+def render(directory, destination, index=0, validation_step=None):
     directory, destination = Path(directory), Path(destination)
-    report = json.loads((directory/'test_comparison.json').read_text())
-    layout = task.datasets()['test'][index]
-    rows = [report['before'][index], report['after'][index]]
+    if validation_step is None:
+        report = json.loads((directory/'test_comparison.json').read_text())
+        layout = task.datasets()['test'][index]
+        rows = [report['before'][index], report['after'][index]]
+    else:
+        layout = task.datasets()['validation'][index]
+        rows = [json.loads((directory/name).read_text())['rows'][index] for name in
+                ('validation_baseline.json', f'validation_{validation_step:04d}.json')]
+    if any(row['layout_id'] != layout.key for row in rows):
+        raise ValueError('Layout mismatch')
     replays = [task.execute(layout, row['completion'], record_frames=True) for row in rows]
     for row, replay in zip(rows, replays):
         if row['success'] != replay['success'] or abs(row['reward']-replay['reward']) > 1e-6:
@@ -42,7 +49,7 @@ def render(directory, destination, index=0):
     d = mujoco.MjData(m)
     camera = mujoco.MjvCamera()
     camera.lookat[:] = [.45, -.20, .20]
-    camera.distance = 1.7
+    camera.distance = 1.4
     camera.azimuth = 145
     camera.elevation = -25
     heading, body, codefont = font(24), font(16), font(17, True)
@@ -100,7 +107,7 @@ def render(directory, destination, index=0):
     # A static last-frame preview is unambiguous when a client cannot play video.
     Image.fromarray(images[-1]).save(destination.with_suffix('.png'))
     imageio.mimsave(str(destination.with_suffix('.gif')), images[::2], duration=200, loop=1)
-    evidence = {'test_index': index, 'layout_id': layout.key,
+    evidence = {'split': 'test' if validation_step is None else 'validation', 'index': index, 'layout_id': layout.key,
                 'layout': task.asdict(layout),
                 'before': rows[0], 'after': rows[1],
                 'render_note': 'Actual MuJoCo renders; real-time playback; terminated episodes freeze.'}
@@ -115,5 +122,6 @@ if __name__ == '__main__':
     parser.add_argument('directory')
     parser.add_argument('--out', required=True)
     parser.add_argument('--index', type=int, default=0)
+    parser.add_argument('--validation-step', type=int)
     args = parser.parse_args()
-    render(args.directory, args.out, args.index)
+    render(args.directory, args.out, args.index, args.validation_step)
