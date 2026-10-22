@@ -86,7 +86,7 @@ def execute(layout, text):
                         order[1]: distance(targets[order[0]], objects[order[1]])}
     best_approach = dict(approach_initial)
     picked, delivered = set(), set()
-    holding, trace = None, []
+    holding, trace, error = None, [], None
     try:
         for name, args in parse_program(text):
             active = next((color for color in order if color not in delivered), None)
@@ -121,9 +121,8 @@ def execute(layout, text):
                           'objects': dict(objects), 'holding': holding,
                           'delivered': sorted(delivered)})
     except (SyntaxError, ValueError, TypeError, RecursionError) as exc:
-        return {'reward': 0., 'success': False, 'valid': False,
-                'error': str(exc), 'trace': trace}
-    success = len(delivered) == 2 and holding is None and objects == targets
+        error = str(exc)
+    success = error is None and len(delivered) == 2 and holding is None and objects == targets
     components = {}
     for color in order:
         approach = 1. - best_approach[color] / approach_initial[color]
@@ -133,8 +132,13 @@ def execute(layout, text):
                              'transport': progress, 'delivered': color in delivered}
     reward = sum(.075*c['approach'] + .1*c['picked'] + .075*c['transport'] +
                  .2*c['delivered'] for c in components.values()) + .1*success
-    return {'reward': reward, 'success': success, 'valid': True,
-            'error': None, 'trace': trace}
+    # Longer programs need credit for correctly executed prefixes. Errors never
+    # count as success, and lose 10% of accrued progress; syntax errors have no
+    # executed prefix and thus receive zero. Truncation is zeroed by the trainer.
+    if error is not None:
+        reward *= .9
+    return {'reward': reward, 'success': success, 'valid': error is None,
+            'error': error, 'trace': trace}
 
 
 def oracle(layout):

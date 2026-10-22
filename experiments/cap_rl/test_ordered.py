@@ -25,7 +25,8 @@ class OrderedTests(unittest.TestCase):
     def test_order_is_enforced(self):
         result = execute(self.layout, 'move(2, 1)\npick()')
         self.assertEqual(result['error'], 'wrong_order')
-        self.assertEqual(result['reward'], 0.)
+        self.assertFalse(result['success'])
+        self.assertLess(result['reward'], .075)
 
     def test_state_carries_across_deliveries(self):
         # Fifth call must use first target as the origin, not the starting cell.
@@ -34,12 +35,14 @@ class OrderedTests(unittest.TestCase):
         code[4] = 'move(2, 1)'
         self.assertFalse(execute(self.layout, '\n'.join(code))['success'])
 
-    def test_runtime_errors_override_partial_reward(self):
+    def test_runtime_errors_discount_valid_prefix_and_never_succeed(self):
         prefix = '\n'.join(oracle(self.layout).splitlines()[:4])
         for tail, error in [('\nplace()', 'empty_place'), ('\npick()', 'already_delivered'),
                             ('\nmove(0, -1)', 'out_of_bounds')]:
             result = execute(self.layout, prefix+tail)
-            self.assertEqual(result['reward'], 0.)
+            self.assertAlmostEqual(result['reward'], .405)
+            self.assertFalse(result['success'])
+            self.assertFalse(result['valid'])
             self.assertEqual(result['error'], error)
         result = execute(self.layout, 'move(-2, 0)\npick()\nmove(4, 1)\nplace()')
         self.assertEqual(result['error'], 'occupied_place')

@@ -23,8 +23,10 @@ For each object, reward is:
 
 Completing both adds 0.10, for a total maximum of 1.0. Delivering just the first
 object earns 0.45. Approach and transport use Manhattan distance. The second
-approach's reference origin is the first target. Invalid or truncated programs
-receive zero, overriding partial credit. This reward is separate from the
+approach's reference origin is the first target. A runtime error stops execution, discounts the reward for the correctly executed
+prefix by 10%, and always counts as failure. A syntax error has no executed prefix
+and receives zero. Truncated programs receive zero. This denser feedback is
+needed because longer programs rarely finish without an error during exploration. This reward is separate from the
 unchanged one-object experiment.
 
 Seed 20261024 generates 704 unique layouts: 512 train, 64 validation, 128 test.
@@ -38,16 +40,24 @@ model. The KL reference remains the immutable pretrained base model. The initial
 adapter is copied into the run with hashes; final testing compares that exact
 copy with the validation-selected checkpoint, using identical greedy decoding.
 
-Example invocation (the initial run uses 160 updates):
+Example invocation (the main run uses 160 updates):
 
 ```bash
 python -m experiments.cap_rl.train train --task ordered_two \
-  --out /opt/cap-rl/ordered01 --init-adapter /opt/cap-rl/run03/best_adapter \
+  --out /opt/cap-rl/ordered02 --init-adapter /opt/cap-rl/run03/best_adapter \
   --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a \
   --steps 160 --max-tokens 192 --eval-every 20 --lr 0.0001
-python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered01
-python -m experiments.cap_rl.audit /opt/cap-rl/ordered01
+python -m experiments.cap_rl.train test --out /opt/cap-rl/ordered02
+python -m experiments.cap_rl.audit /opt/cap-rl/ordered02
 ```
 
 The test set is evaluated only after validation selection. Source snapshots,
 all sampled programs, evaluation traces, and both adapters are saved for audit.
+
+## Development pilot
+
+The initial `ordered01` pilot used a zero reward for any invalid program. No
+sampled program earned positive reward in its completed updates, so it was
+stopped before any test evaluation. Its raw outputs and original source are
+retained. `ordered02` restarts from the original one-object adapter with the
+valid-prefix credit rule above; strict success and all task constraints are unchanged.
