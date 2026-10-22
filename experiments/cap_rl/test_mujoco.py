@@ -1,6 +1,11 @@
 import unittest
+import hashlib
+import json
+from pathlib import Path
+import tempfile
 import numpy as np
 from . import task_mujoco as task
+from .audit import audit, equivalent
 
 
 class MuJoCoTaskTests(unittest.TestCase):
@@ -63,6 +68,38 @@ class MuJoCoTaskTests(unittest.TestCase):
         self.assertGreater(len(frames), 100)
         self.assertEqual(frames[-1], b['final_state'])
         self.assertTrue(any(np.linalg.norm(f['velocity']) > .1 for f in frames))
+
+    def test_numeric_comparison_keeps_flags_exact(self):
+        self.assertTrue(equivalent({'p': [.1, 0.], 'ok': True}, {'p': [.1+1e-10, 0.], 'ok': True}, 1e-8))
+        self.assertFalse(equivalent({'p': [.1], 'ok': True}, {'p': [.1], 'ok': False}, 1e-8))
+        self.assertFalse(equivalent([.1], [.2], 1e-8))
+
+    def test_audit_rejects_tampered_physical_state(self):
+        splits = task.datasets()
+        metadata = {'task': 'mujoco_docking',
+                    'physics_runtime': {'mujoco': task.mujoco.__version__},
+                    'splits': {k: [x.key for x in rows] for k, rows in splits.items()},
+                    'source_sha256': {'task_mujoco.py': hashlib.sha256(Path(task.__file__).read_bytes()).hexdigest()}}
+        report = {'paired_wins': 128, 'paired_losses': 0, 'delta_success_rate': 1.}
+        for label, key, solve in [('baseline', 'before', False), ('trained', 'after', True)]:
+            rows = []
+            for layout in splits['test']:
+                code = task.oracle(layout) if solve else 'thrust(0, 0)'
+                rows.append({'layout_id': layout.key, 'prompt': task.prompt(layout),
+                             'completion': code, 'truncated': False, **task.execute(layout, code)})
+            report[key] = rows
+            report[label] = {'n': len(rows), 'successes': 128 if solve else 0,
+                             'success_rate': float(solve), 'valid_rate': 1.,
+                             'mean_reward': sum(r['reward'] for r in rows)/len(rows)}
+        with tempfile.TemporaryDirectory() as directory:
+            p = Path(directory)
+            (p/'metadata.json').write_text(json.dumps(metadata))
+            (p/'test_comparison.json').write_text(json.dumps(report))
+            self.assertEqual(audit(p)['replayed_programs'], 256)
+            report['after'][0]['final_state']['velocity'][0] += .1
+            (p/'test_comparison.json').write_text(json.dumps(report))
+            with self.assertRaisesRegex(ValueError, 'final_state'):
+                audit(p)
 
 
 if __name__ == '__main__':
