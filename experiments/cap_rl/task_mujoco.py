@@ -84,7 +84,9 @@ dock(): check that the puck is within 0.015 m of the next station and its speed 
 Physics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.
 Calibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.
 The puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.
-Write a complete program with at most 10 calls to thrust and dock, using only literal integers. No imports, variables, loops, functions, prints, or other calls.'''
+Use exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.
+For EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.
+Output only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.'''
 
 
 def parse_program(text):

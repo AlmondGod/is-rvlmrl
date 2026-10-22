@@ -28,9 +28,13 @@ vision task, or evidence of real-world transfer.
 
 `mj_step` determines all trajectory states and reward measurements. The prompt
 documents the analytic constant-force motion and the displacement of an
-equal/opposite pulse pair. This is API/dynamics documentation, not an example
-program for the supplied layout. The experiment tests using that known
-calibration in generated programs; it does not test discovering unknown physics.
+equal/opposite pulse pair. After an unsuccessful initial pilot, it also supplies
+the six-call accelerate–brake–dock structure for both legs. This is a fixed
+controller scaffold, not a completed program for the supplied layout: the model
+must compute the four pairs of force arguments. The experiment tests using that
+known calibration and scaffold in generated programs; it does not test discovering
+the control strategy or unknown physics. The executor still permits up to ten
+calls, so alternate valid programs are accepted.
 
 ## Reward
 
