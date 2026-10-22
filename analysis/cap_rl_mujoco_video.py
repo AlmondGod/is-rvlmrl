@@ -1,5 +1,6 @@
 """Render saved before/after programs with MuJoCo, physical state and exact code."""
 import argparse
+import ast
 import bisect
 import json
 from pathlib import Path
@@ -51,7 +52,7 @@ def render(directory, destination, index=0):
     sample_times = list(np.arange(0, end+.025, .025)) + [end]*40
     with mujoco.Renderer(m, height=360, width=480) as renderer:
         for elapsed in sample_times:
-            canvas = Image.new('RGB', (960, 720), '#101820')
+            canvas = Image.new('RGB', (960, 768), '#101820')
             draw = ImageDraw.Draw(canvas)
             for panel, (row, replay) in enumerate(zip(rows, replays)):
                 offset = panel*480
@@ -75,16 +76,22 @@ def render(directory, destination, index=0):
                     lines = lines[1:]
                 if lines and lines[-1] == '```':
                     lines = lines[:-1]
-                call_line, active = -1, state['call_index']
+                try:
+                    task.parse_program(row['completion'])
+                    call_lines = [node.lineno-1 for node in ast.parse('\n'.join(lines)).body]
+                except (SyntaxError, ValueError, TypeError, RecursionError):
+                    call_lines = []
+                active = state['call_index']
+                active_line = call_lines[active] if 0 <= active < len(call_lines) else -1
                 for n, line in enumerate(lines[:10]):
-                    if line.strip() and not line.lstrip().startswith('#'):
-                        call_line += 1
                     y = 484+n*20
-                    if line.strip() and call_line == active:
+                    if n == active_line:
                         draw.rectangle((offset+12, y-1, offset+468, y+19), fill='#274454')
                     draw.text((offset+18, y), line[:45], font=codefont, fill='#f4f7fa')
                 if len(lines) > 10:
                     draw.text((offset+18, 684), '... full program in episode JSON', font=body, fill='#dce8ef')
+                draw.text((offset+18, 716), f'Station 1 (green): {task.meters(layout.first)} m', font=body, fill='#77dda2')
+                draw.text((offset+18, 739), f'Station 2 (amber): {task.meters(layout.second)} m', font=body, fill='#ffbb83')
             images.append(np.asarray(canvas))
     destination.parent.mkdir(parents=True, exist_ok=True)
     imageio.mimsave(str(destination.with_suffix('.mp4')), images, fps=20, codec='libx264', quality=8)

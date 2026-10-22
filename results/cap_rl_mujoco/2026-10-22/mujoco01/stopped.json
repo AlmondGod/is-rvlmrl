@@ -1,0 +1,5 @@
+{
+  "completed_steps": 31,
+  "reason": "No accepted docks in initial pilot; short thrust-then-dock collapse. Restart from base with explicit accelerate-brake-dock structure; unchanged dynamics/reward/splits.",
+  "test_evaluated": false
+}
