@@ -4,6 +4,7 @@ import ast
 import bisect
 import json
 from pathlib import Path
+import textwrap
 
 import imageio.v2 as imageio
 import mujoco
@@ -83,12 +84,13 @@ def render(directory, destination, index=0):
                     call_lines = []
                 active = state['call_index']
                 active_line = call_lines[active] if 0 <= active < len(call_lines) else -1
-                for n, line in enumerate(lines[:10]):
+                wrapped = [(n, chunk) for n, line in enumerate(lines) for chunk in (textwrap.wrap(line, width=44) or [''])]
+                for n, (source_line, line) in enumerate(wrapped[:10]):
                     y = 484+n*20
-                    if n == active_line:
+                    if source_line == active_line:
                         draw.rectangle((offset+12, y-1, offset+468, y+19), fill='#274454')
-                    draw.text((offset+18, y), line[:45], font=codefont, fill='#f4f7fa')
-                if len(lines) > 10:
+                    draw.text((offset+18, y), line, font=codefont, fill='#f4f7fa')
+                if len(wrapped) > 10:
                     draw.text((offset+18, 684), '... full program in episode JSON', font=body, fill='#dce8ef')
                 draw.text((offset+18, 716), f'Station 1 (green): {task.meters(layout.first)} m', font=body, fill='#77dda2')
                 draw.text((offset+18, 739), f'Station 2 (amber): {task.meters(layout.second)} m', font=body, fill='#ffbb83')

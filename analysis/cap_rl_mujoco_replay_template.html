@@ -4,7 +4,6 @@
     #mujoco-docking-replay .mj-plot { display:block; width:100%; }
     #mujoco-docking-replay .mj-plot text { fill:var(--foreground); }
     #mujoco-docking-replay pre { white-space:pre-wrap; overflow-wrap:anywhere; margin-top:12px; }
-    #mujoco-docking-replay .mj-code-line { display:block; min-height:1em; }
     #mujoco-docking-replay .mj-active { background:var(--accent); color:var(--accent-foreground); }
     #mujoco-docking-replay .mj-status { min-height:2.7em; }
     #mujoco-docking-replay .mj-range { margin:12px 0; }
@@ -68,8 +67,12 @@
       const status=done?(row.success?'Success':`Failed: ${row.error||'incomplete'}`):'Running';
       panel.node.querySelector('.mj-status').textContent=`${status} · docked ${f[5]}/2 · speed ${Math.hypot(f[3],f[4]).toFixed(3)} m/s${done?' · reward '+row.reward.toFixed(3):''}`;
       const code=panel.node.querySelector('code'); code.replaceChildren();
-      const active=row.lines[f[6]];
-      row.code.split('\n').forEach((line,n)=>{const el=document.createElement('span');el.className='mj-code-line'+(n===active?' mj-active':'');el.textContent=line||' ';code.append(el);});
+      const active=row.ranges[f[6]];
+      if(active) {
+        code.append(document.createTextNode(row.code.slice(0,active[0])));
+        const mark=document.createElement('span'); mark.className='mj-active';mark.textContent=row.code.slice(active[0],active[1]);code.append(mark);
+        code.append(document.createTextNode(row.code.slice(active[1])));
+      } else code.textContent=row.code;
     }
     function draw() { slider.max=endTime(); slider.value=time; root.querySelector('.mj-time').textContent=time.toFixed(2)+' s'; panels.forEach(drawPanel); }
     function select() { stop(); time=0; root.querySelector('.mj-caption').textContent=`Episode ${index+1}/${cases.length} · station 1: circle; station 2: square · line at puck: velocity · recorded physics, frozen on termination`; draw(); }

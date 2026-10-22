@@ -50,10 +50,16 @@ def build(directory, output, validation_step=None):
             try:
                 task.parse_program(source)
                 parsed = '\n'.join(source.splitlines()[1:-1]) if offset else source
-                lines = [node.lineno-1+offset for node in ast.parse(parsed).body]
+                source_lines = source.splitlines(keepends=True)
+                def char_offset(line, column):
+                    index = line-1+offset
+                    prefix = source_lines[index].encode()[:column].decode()
+                    return sum(len(s) for s in source_lines[:index])+len(prefix)
+                ranges = [[char_offset(node.lineno, node.col_offset),
+                           char_offset(node.end_lineno, node.end_col_offset)] for node in ast.parse(parsed).body]
             except (SyntaxError, ValueError, TypeError, RecursionError):
-                lines = []
-            case[label] = {'code': row['completion'], 'lines': lines, 'frames': compact,
+                ranges = []
+            case[label] = {'code': source, 'ranges': ranges, 'frames': compact,
                            'success': row['success'], 'error': row['error'], 'reward': row['reward']}
         cases.append(case)
     template = Path(__file__).with_name('cap_rl_mujoco_replay_template.html').read_text()
