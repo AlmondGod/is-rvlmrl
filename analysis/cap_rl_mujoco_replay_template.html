@@ -46,6 +46,8 @@
       const svg=panel.node.querySelector('svg'), width=Math.max(240,panel.node.clientWidth), height=width;
       svg.setAttribute('viewBox',`0 0 ${width} ${height}`); svg.setAttribute('height',height); svg.replaceChildren();
       const margin=36,size=width-margin-16, x=v=>margin+(v+.5)*size, y=v=>16+(.5-v)*size;
+      const clipId=`mj-dock-clip-${panel.key}`,defs=svgEl('defs',{}),clip=svgEl('clipPath',{id:clipId});
+      clip.append(svgEl('rect',{x:margin,y:16,width:size,height:size}));defs.append(clip);svg.append(defs);
       svg.append(svgEl('title',{},`Puck at (${f[1].toFixed(3)}, ${f[2].toFixed(3)}) meters; ${f[5]} stations docked.`));
       svg.append(svgEl('rect',{x:margin,y:16,width:size,height:size,fill:'none',stroke:'var(--border)'}));
       [-.4,0,.4].forEach(v=>{
@@ -61,8 +63,8 @@
         svg.append(j===0?svgEl('circle',{cx:x(t[0]),cy:y(t[1]),r:12,...attrs}):svgEl('rect',{x:x(t[0])-12,y:y(t[1])-12,width:24,height:24,...attrs}));
         svg.append(svgEl('text',{x:x(t[0])+18,y:y(t[1])-12},String(j+1)));
       });
-      svg.append(svgEl('polyline',{points:frames.slice(0,fi+1).map(a=>`${x(a[1])},${y(a[2])}`).join(' '),fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,opacity:.5}));
-      svg.append(svgEl('line',{x1:x(f[1]),y1:y(f[2]),x2:x(f[1]+f[3]*.1),y2:y(f[2]+f[4]*.1),stroke:'var(--viz-series-1)','stroke-width':3}));
+      svg.append(svgEl('polyline',{points:frames.slice(0,fi+1).map(a=>`${x(a[1])},${y(a[2])}`).join(' '),fill:'none',stroke:'var(--viz-series-1)','stroke-width':2,opacity:.5,'clip-path':`url(#${clipId})`}));
+      svg.append(svgEl('line',{x1:x(f[1]),y1:y(f[2]),x2:x(f[1]+f[3]*.1),y2:y(f[2]+f[4]*.1),stroke:'var(--viz-series-1)','stroke-width':3,'clip-path':`url(#${clipId})`}));
       svg.append(svgEl('circle',{cx:x(f[1]),cy:y(f[2]),r:7,fill:'var(--viz-series-1)'}));
       const status=done?(row.success?'Success':`Failed: ${row.error||'incomplete'}`):'Running';
       panel.node.querySelector('.mj-status').textContent=`${status} · docked ${f[5]}/2 · speed ${Math.hypot(f[3],f[4]).toFixed(3)} m/s${done?' · reward '+row.reward.toFixed(3):''}`;
