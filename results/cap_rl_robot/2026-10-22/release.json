@@ -1,0 +1,32 @@
+{
+  "tag": "cap-rl-robot-2026-10-22",
+  "url": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-robot-2026-10-22",
+  "assets": [
+    {
+      "name": "cap-rl-robot01.tar.gz",
+      "size_bytes": 74654743,
+      "sha256": "3354325752df516339f0a4e84541a48b4cffc04edbcfaccc57041139b73ec498",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-robot-2026-10-22/cap-rl-robot01.tar.gz"
+    },
+    {
+      "name": "robot-before-after.mp4",
+      "size_bytes": 497723,
+      "sha256": "fb3972dfb223e3dd8a7f5104a08217195c5ef977cc34943d380f0c7c9be86a34",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-robot-2026-10-22/robot-before-after.mp4"
+    },
+    {
+      "name": "robot-before-after.gif",
+      "size_bytes": 1194241,
+      "sha256": "aa9ad1be66a150e886f238ab93cd27a7cbda33c84da3379afe2c39a51a09cdaa",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-robot-2026-10-22/robot-before-after.gif"
+    },
+    {
+      "name": "cap-rl-robot-results.png",
+      "size_bytes": 151644,
+      "sha256": "b960577ce6bbbfc31cd9d618e6f66dc651f27096273e1e10ca9a59b9b77c0404",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-robot-2026-10-22/cap-rl-robot-results.png"
+    }
+  ],
+  "adapter_sha256": "20da54f256caef7a20dc1be3f4927948a3930e467dd275816267899009dcb97c",
+  "test_report_sha256": "a362fd41ffa0ae5c804b63bba427d3b2f55df84c1ea0cb8c35a653d857d6b720"
+}

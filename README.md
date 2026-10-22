@@ -36,6 +36,14 @@ videos, all before/after code, checkpoints, and replay audits are included.
 This small task uses known dynamics and a supplied controller scaffold; it is
 independent of the articulated frame-assembly benchmark.
 
+A new [articulated robot subtask](results/cap_rl_robot/2026-10-22/README.md)
+uses the native xArm7 and contact-driven fingers to grasp and lift one free
+wooden frame rail. Starting from the raw 1.5B model, held-out physical success
+improves from **55/128 (43.0%) to 122/128 (95.3%)**. It includes actual before/after
+videos, generated code, checkpoint and audits. The model receives exact coordinates
+and fixed motion skills; this isolates pickup and does not train the full visual
+assembly benchmark below.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

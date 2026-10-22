@@ -1,0 +1,252 @@
+{
+  "layout_id": "97c5ee97a7590946",
+  "prompt": "Use the xArm7 robot to grasp the CENTER of one wooden frame rail and lift it 10 cm above its starting height. Keep holding it steady.\nThe rail is 91.44 cm long, 3.8 cm wide, and 6.4 cm tall. Gravity and finger contact act in MuJoCo.\nAll XY coordinates below are centimeters relative to the workbench reference.\nGripper starts above XY (3, -3), open, at a safe height.\nRail CENTER is at XY (-3, 4).\nAPI:\nmove(dx, dy): move gripper sideways by RELATIVE displacement in cm. Literal integer arguments from -7 to 7. It does not descend or grasp.\nlower(): lower at the current XY to the calibrated grasp height. It does not move sideways or close fingers.\nclose(): close fingers and wait for physical contact. It does not move or lift the rail.\nlift(h): move upward by h cm, a literal integer from 1 to 14, and hold.\nUse FOUR calls in order: move, lower, close, lift. For move, subtract the starting gripper XY from the rail CENTER XY. For lift, use the requested lift amount.\nSuccess requires a central grasp, the requested physical rail height within 8 mm, a level rail, low speed, and sustained finger contact during the final half-second. No object snapping or attachment is provided.\nOutput only the four API calls, with literal integer arguments. No variables, imports, loops, functions, prints, or explanations.",
+  "before": {
+    "layout_id": "97c5ee97a7590946",
+    "prompt": "Use the xArm7 robot to grasp the CENTER of one wooden frame rail and lift it 10 cm above its starting height. Keep holding it steady.\nThe rail is 91.44 cm long, 3.8 cm wide, and 6.4 cm tall. Gravity and finger contact act in MuJoCo.\nAll XY coordinates below are centimeters relative to the workbench reference.\nGripper starts above XY (3, -3), open, at a safe height.\nRail CENTER is at XY (-3, 4).\nAPI:\nmove(dx, dy): move gripper sideways by RELATIVE displacement in cm. Literal integer arguments from -7 to 7. It does not descend or grasp.\nlower(): lower at the current XY to the calibrated grasp height. It does not move sideways or close fingers.\nclose(): close fingers and wait for physical contact. It does not move or lift the rail.\nlift(h): move upward by h cm, a literal integer from 1 to 14, and hold.\nUse FOUR calls in order: move, lower, close, lift. For move, subtract the starting gripper XY from the rail CENTER XY. For lift, use the requested lift amount.\nSuccess requires a central grasp, the requested physical rail height within 8 mm, a level rail, low speed, and sustained finger contact during the final half-second. No object snapping or attachment is provided.\nOutput only the four API calls, with literal integer arguments. No variables, imports, loops, functions, prints, or explanations.",
+    "completion": "```python\nmove(-3, 4)\nlower()\nclose()\nlift(10)\n```",
+    "success": false,
+    "reward": 0.06916347183312761,
+    "valid": false,
+    "error": "motion_timeout",
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          -3,
+          4
+        ],
+        "time": 1.0800000000000007,
+        "wood": [
+          0.3499999999999319,
+          -0.16999999999999998,
+          0.03195871022257791
+        ],
+        "tcp": [
+          0.3810773877652713,
+          -0.20143428466109806,
+          0.19999107152176954
+        ],
+        "wood_velocity": [
+          1.430956617530495e-18,
+          3.286204906910087e-17,
+          4.9306300522860173e-14,
+          -1.0182327306899765e-15,
+          5.869991329248981e-17,
+          4.147700298203547e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 9.079999999999702,
+        "wood": [
+          0.3470370599699179,
+          -0.17777685320313993,
+          0.03664424427109537
+        ],
+        "tcp": [
+          0.36095826073378706,
+          -0.2069612198240522,
+          0.042489644488618944
+        ],
+        "wood_velocity": [
+          0.0019705075327142905,
+          -0.0009952299240603623,
+          4.7677347067057905e-05,
+          0.0005496258409677385,
+          -0.08785200824397912,
+          0.0009548222133360283
+        ],
+        "grip_force": 97.88735063656729,
+        "peak_penetration": 0.0003534256689592466,
+        "tilt": 0.5304415516222687
+      }
+    ],
+    "final": {
+      "wood": [
+        0.3470370599699179,
+        -0.17777685320313993,
+        0.03664424427109537
+      ],
+      "tcp": [
+        0.36095826073378706,
+        -0.2069612198240522,
+        0.042489644488618944
+      ],
+      "wood_velocity": [
+        0.0019705075327142905,
+        -0.0009952299240603623,
+        4.7677347067057905e-05,
+        0.0005496258409677385,
+        -0.08785200824397912,
+        0.0009548222133360283
+      ],
+      "grip_force": 97.88735063656729,
+      "peak_penetration": 0.0003534256689592466,
+      "tilt": 0.5304415516222687
+    },
+    "components": {
+      "alignment": 0.06916347183312761,
+      "contact": 0.0,
+      "elevation": 0.0,
+      "success": 0.0
+    },
+    "time": 9.079999999999702,
+    "truncated": false
+  },
+  "after": {
+    "layout_id": "97c5ee97a7590946",
+    "prompt": "Use the xArm7 robot to grasp the CENTER of one wooden frame rail and lift it 10 cm above its starting height. Keep holding it steady.\nThe rail is 91.44 cm long, 3.8 cm wide, and 6.4 cm tall. Gravity and finger contact act in MuJoCo.\nAll XY coordinates below are centimeters relative to the workbench reference.\nGripper starts above XY (3, -3), open, at a safe height.\nRail CENTER is at XY (-3, 4).\nAPI:\nmove(dx, dy): move gripper sideways by RELATIVE displacement in cm. Literal integer arguments from -7 to 7. It does not descend or grasp.\nlower(): lower at the current XY to the calibrated grasp height. It does not move sideways or close fingers.\nclose(): close fingers and wait for physical contact. It does not move or lift the rail.\nlift(h): move upward by h cm, a literal integer from 1 to 14, and hold.\nUse FOUR calls in order: move, lower, close, lift. For move, subtract the starting gripper XY from the rail CENTER XY. For lift, use the requested lift amount.\nSuccess requires a central grasp, the requested physical rail height within 8 mm, a level rail, low speed, and sustained finger contact during the final half-second. No object snapping or attachment is provided.\nOutput only the four API calls, with literal integer arguments. No variables, imports, loops, functions, prints, or explanations.",
+    "completion": "```python\nmove(-6, 7)\nlower()\nclose()\nlift(10)\n```",
+    "success": true,
+    "reward": 0.9975735620700834,
+    "valid": true,
+    "error": null,
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          -6,
+          7
+        ],
+        "time": 1.9000000000000015,
+        "wood": [
+          0.3499999999999319,
+          -0.16999999999999998,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.35094254329642904,
+          -0.17139448463133264,
+          0.19990473347811796
+        ],
+        "wood_velocity": [
+          -1.9997703184629933e-18,
+          3.1883481741725945e-17,
+          1.3179024821086997e-15,
+          -1.0040842219057187e-15,
+          5.466298001443478e-18,
+          3.620357022736667e-33
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 5.859999999999577,
+        "wood": [
+          0.3499999999999319,
+          -0.16999999999999998,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.34981643109023025,
+          -0.16889882442594598,
+          0.015613582799532011
+        ],
+        "wood_velocity": [
+          -2.086389835663625e-18,
+          3.1861088456556916e-17,
+          1.3152398622318225e-15,
+          -1.004086778807387e-15,
+          -8.314942727147191e-17,
+          -1.5461242741352428e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "close",
+        "args": [],
+        "time": 7.859999999999356,
+        "wood": [
+          0.3499474336987101,
+          -0.17005993182150203,
+          0.03195433993337116
+        ],
+        "tcp": [
+          0.3498834579478316,
+          -0.1690178202192521,
+          0.01631763872588038
+        ],
+        "wood_velocity": [
+          -2.4129511956238154e-05,
+          -0.00010654543510309726,
+          6.584247797848856e-06,
+          -4.5986342383570305e-07,
+          0.0002755601037304613,
+          -0.0002686638743140124
+        ],
+        "grip_force": 133.16636081574632,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0003289335348390715
+      },
+      {
+        "call": "lift",
+        "args": [
+          10
+        ],
+        "time": 11.14000000000039,
+        "wood": [
+          0.3506185707227745,
+          -0.17080085670813047,
+          0.13218813409854802
+        ],
+        "tcp": [
+          0.3506519814812181,
+          -0.1698286906349136,
+          0.11699862301246605
+        ],
+        "wood_velocity": [
+          -0.0002441537598356893,
+          -0.00010116464677751307,
+          0.0001421980797583182,
+          0.0007232527317308458,
+          0.0007518707982149402,
+          0.0004127467764795916
+        ],
+        "grip_force": 143.94073992775662,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.005111071705112826
+      }
+    ],
+    "final": {
+      "wood": [
+        0.35051798752533087,
+        -0.1708319275092346,
+        0.13224093698105557
+      ],
+      "tcp": [
+        0.35054695221561133,
+        -0.16986178462740997,
+        0.1171028825957385
+      ],
+      "wood_velocity": [
+        -0.00016182338727235667,
+        -3.2073877535878784e-05,
+        8.124215828052572e-05,
+        0.0007266840158750539,
+        0.0007253838507240519,
+        0.00014941289319321953
+      ],
+      "grip_force": 144.43871997072546,
+      "peak_penetration": 5.209786176549672e-05,
+      "tilt": 0.0047204535224429625
+    },
+    "components": {
+      "alignment": 0.14757356207008346,
+      "contact": 0.2,
+      "elevation": 0.15,
+      "success": 0.5
+    },
+    "time": 11.640000000000557,
+    "truncated": false
+  }
+}

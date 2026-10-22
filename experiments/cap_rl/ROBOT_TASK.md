@@ -26,7 +26,7 @@ not learning perception, motor control, or discovering a grasp strategy.
 
 ## Reward and independent success
 
-Across completed API calls and the final hold, maintain these maxima:
+After each attempted API call (including a stopped runtime-error prefix) and during the final hold, maintain these maxima:
 
 * alignment: `max(0, 1 - XY_tcp_to_wood_center_distance / 0.06)`;
 * contact: finger-pad normal force >5 N AND central error ≤12 mm;
@@ -36,8 +36,7 @@ Reward is **0.15 alignment + 0.20 contact + 0.15 elevation + 0.50 success**.
 Strict success requires every 20 ms observation of the final 0.5 seconds to have:
 central error ≤12 mm, rail height within 8 mm of the requested height, tilt ≤0.10 rad,
 linear speed ≤0.02 m/s, angular speed ≤0.10 rad/s, and finger contact >5 N.
-Any physics warning or peak penetration ≥3 mm disqualifies success; penetration
-also zeros reward. Parser failures and truncated generations receive zero.
+Any physics warning or peak penetration ≥3 mm disqualifies success and zeros reward. Parser failures and truncated generations receive zero.
 Runtime errors preserve earned progress but cannot succeed. No sequence-only
 success: the actual rail must remain physically held at the specified height.
 
@@ -50,7 +49,7 @@ can recur across splits. The oracle is only a feasibility check, never training
 data. Select adapters on validation only, then run one paired greedy held-out test.
 Keep source hashes, robot asset hashes, sampled programs and execution traces.
 
-Run from the repository root with the MuJoCo training dependencies:
+Run from the repository root with `requirements-robot.txt` and a compatible CUDA PyTorch installed:
 
 ```sh
 python -m unittest experiments.cap_rl.test_robot

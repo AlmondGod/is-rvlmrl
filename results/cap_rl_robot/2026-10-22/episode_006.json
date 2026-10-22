@@ -1,0 +1,265 @@
+{
+  "split": "test",
+  "index": 5,
+  "layout_id": "81bf168890401b6f",
+  "layout": {
+    "start": [
+      -2,
+      1
+    ],
+    "center": [
+      0,
+      -1
+    ],
+    "lift_cm": 6
+  },
+  "before": {
+    "layout_id": "81bf168890401b6f",
+    "prompt": "Use the xArm7 robot to grasp the CENTER of one wooden frame rail and lift it 6 cm above its starting height. Keep holding it steady.\nThe rail is 91.44 cm long, 3.8 cm wide, and 6.4 cm tall. Gravity and finger contact act in MuJoCo.\nAll XY coordinates below are centimeters relative to the workbench reference.\nGripper starts above XY (-2, 1), open, at a safe height.\nRail CENTER is at XY (0, -1).\nAPI:\nmove(dx, dy): move gripper sideways by RELATIVE displacement in cm. Literal integer arguments from -7 to 7. It does not descend or grasp.\nlower(): lower at the current XY to the calibrated grasp height. It does not move sideways or close fingers.\nclose(): close fingers and wait for physical contact. It does not move or lift the rail.\nlift(h): move upward by h cm, a literal integer from 1 to 14, and hold.\nUse FOUR calls in order: move, lower, close, lift. For move, subtract the starting gripper XY from the rail CENTER XY. For lift, use the requested lift amount.\nSuccess requires a central grasp, the requested physical rail height within 8 mm, a level rail, low speed, and sustained finger contact during the final half-second. No object snapping or attachment is provided.\nOutput only the four API calls, with literal integer arguments. No variables, imports, loops, functions, prints, or explanations.",
+    "completion": "```python\nmove(-2, 1)\nlower()\nclose()\nlift(6)\n```",
+    "success": false,
+    "reward": 0.029215195603573118,
+    "valid": false,
+    "error": "motion_timeout",
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          -2,
+          1
+        ],
+        "time": 0.5600000000000004,
+        "wood": [
+          0.37999999999993195,
+          -0.22000000000000067,
+          0.031958709929168515
+        ],
+        "tcp": [
+          0.34144424168587884,
+          -0.19088490878390416,
+          0.20005951571474875
+        ],
+        "wood_velocity": [
+          -1.9943363486996894e-17,
+          2.4791934315624333e-17,
+          6.8368402315575945e-09,
+          -7.668990412845932e-16,
+          -6.093737496579934e-16,
+          4.7049765916539343e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176842493e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 8.559999999999528,
+        "wood": [
+          0.3665716699356796,
+          -0.22324964286180815,
+          0.03156114234068859
+        ],
+        "tcp": [
+          0.3198036166354331,
+          -0.19508327691625374,
+          0.056792021796816056
+        ],
+        "wood_velocity": [
+          -0.0003806695588816731,
+          -0.0008338010540973327,
+          7.733224056340364e-06,
+          6.79549930576299e-08,
+          0.002087118885511397,
+          1.7084057182669906e-05
+        ],
+        "grip_force": 134.3143902779347,
+        "peak_penetration": 0.00045587297508951387,
+        "tilt": 0.0007362625059280618
+      }
+    ],
+    "final": {
+      "wood": [
+        0.3665716699356796,
+        -0.22324964286180815,
+        0.03156114234068859
+      ],
+      "tcp": [
+        0.3198036166354331,
+        -0.19508327691625374,
+        0.056792021796816056
+      ],
+      "wood_velocity": [
+        -0.0003806695588816731,
+        -0.0008338010540973327,
+        7.733224056340364e-06,
+        6.79549930576299e-08,
+        0.002087118885511397,
+        1.7084057182669906e-05
+      ],
+      "grip_force": 134.3143902779347,
+      "peak_penetration": 0.00045587297508951387,
+      "tilt": 0.0007362625059280618
+    },
+    "components": {
+      "alignment": 0.029215195603573118,
+      "contact": 0.0,
+      "elevation": 0.0,
+      "success": 0.0
+    },
+    "time": 8.559999999999528,
+    "truncated": false
+  },
+  "after": {
+    "layout_id": "81bf168890401b6f",
+    "prompt": "Use the xArm7 robot to grasp the CENTER of one wooden frame rail and lift it 6 cm above its starting height. Keep holding it steady.\nThe rail is 91.44 cm long, 3.8 cm wide, and 6.4 cm tall. Gravity and finger contact act in MuJoCo.\nAll XY coordinates below are centimeters relative to the workbench reference.\nGripper starts above XY (-2, 1), open, at a safe height.\nRail CENTER is at XY (0, -1).\nAPI:\nmove(dx, dy): move gripper sideways by RELATIVE displacement in cm. Literal integer arguments from -7 to 7. It does not descend or grasp.\nlower(): lower at the current XY to the calibrated grasp height. It does not move sideways or close fingers.\nclose(): close fingers and wait for physical contact. It does not move or lift the rail.\nlift(h): move upward by h cm, a literal integer from 1 to 14, and hold.\nUse FOUR calls in order: move, lower, close, lift. For move, subtract the starting gripper XY from the rail CENTER XY. For lift, use the requested lift amount.\nSuccess requires a central grasp, the requested physical rail height within 8 mm, a level rail, low speed, and sustained finger contact during the final half-second. No object snapping or attachment is provided.\nOutput only the four API calls, with literal integer arguments. No variables, imports, loops, functions, prints, or explanations.",
+    "completion": "```python\nmove(2, -2)\nlower()\nclose()\nlift(6)\n```",
+    "success": true,
+    "reward": 0.9964005669274147,
+    "valid": true,
+    "error": null,
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          2,
+          -2
+        ],
+        "time": 0.6600000000000005,
+        "wood": [
+          0.37999999999993195,
+          -0.22000000000000067,
+          0.031958710192492204
+        ],
+        "tcp": [
+          0.37861893895463783,
+          -0.21865188343037736,
+          0.1999554413814179
+        ],
+        "wood_velocity": [
+          -8.198693271537544e-18,
+          3.254188028738246e-17,
+          7.010821861767289e-10,
+          -1.017945102881409e-15,
+          -2.0447892193639896e-16,
+          -2.5887025355084606e-33
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176842493e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 4.639999999999711,
+        "wood": [
+          0.37999999999993195,
+          -0.22000000000000067,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.3806040547190011,
+          -0.21905382843522608,
+          0.016073448659987916
+        ],
+        "wood_velocity": [
+          2.3549238198071686e-18,
+          3.2256338422846735e-17,
+          1.3151100997152338e-15,
+          -1.0037174633263223e-15,
+          1.309260327305166e-16,
+          -6.057292533322146e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176842493e-05,
+        "tilt": 0.0
+      },
+      {
+        "call": "close",
+        "args": [],
+        "time": 6.639999999999491,
+        "wood": [
+          0.3802755588807998,
+          -0.22010873952044105,
+          0.03194959552478506
+        ],
+        "tcp": [
+          0.38020240040659126,
+          -0.2192644917388509,
+          0.016913392600402477
+        ],
+        "wood_velocity": [
+          -2.9714041558700455e-05,
+          -0.00010246501627066014,
+          4.1140941371959335e-06,
+          -2.710806982612769e-07,
+          -0.0007266757841151919,
+          -0.00022979996627516574
+        ],
+        "grip_force": 132.05990696306853,
+        "peak_penetration": 6.393883861588456e-05,
+        "tilt": 0.0002443015708547831
+      },
+      {
+        "call": "lift",
+        "args": [
+          6
+        ],
+        "time": 9.839999999999955,
+        "wood": [
+          0.3808136537753239,
+          -0.2207967215160399,
+          0.09126762845044853
+        ],
+        "tcp": [
+          0.38083941830146417,
+          -0.22001541895310026,
+          0.0766780661769065
+        ],
+        "wood_velocity": [
+          -0.0002056681148810222,
+          -4.086591558175332e-05,
+          0.00015155071598632087,
+          0.0005591355939193715,
+          0.0007119537861430147,
+          0.00027340851593560305
+        ],
+        "grip_force": 143.6579551610091,
+        "peak_penetration": 6.393883861588456e-05,
+        "tilt": 0.004767980096662735
+      }
+    ],
+    "final": {
+      "wood": [
+        0.380720038999421,
+        -0.2208100470661249,
+        0.0913398589079594
+      ],
+      "tcp": [
+        0.38074190439609673,
+        -0.22003072160557505,
+        0.07680231273171806
+      ],
+      "wood_velocity": [
+        -0.00016770236255472955,
+        -1.6295743562585963e-05,
+        0.00013172141038905218,
+        0.0005317206931600635,
+        0.0006672762985163133,
+        0.00017495507203920798
+      ],
+      "grip_force": 144.24110786733613,
+      "peak_penetration": 6.393883861588456e-05,
+      "tilt": 0.0043635437001901724
+    },
+    "components": {
+      "alignment": 0.1480509196575163,
+      "contact": 0.2,
+      "elevation": 0.1483496472698985,
+      "success": 0.5
+    },
+    "time": 10.340000000000122,
+    "truncated": false
+  },
+  "render_note": "Actual MuJoCo renders; real-time playback; terminated episodes freeze."
+}

@@ -4,6 +4,7 @@ from collections import Counter
 import gzip
 import json
 from pathlib import Path
+from experiments.cap_rl import task_robot as task
 
 
 def summarize(directory):
@@ -21,9 +22,16 @@ def summarize(directory):
     validation += [{'step': int(p.stem.split('_')[1]), **json.loads(p.read_text())['metrics']}
                    for p in sorted(directory.glob('validation_[0-9]*.json'))]
     phases = {}
+    layouts = {l.key: l for l in task.datasets()['test']}
+    def canonical(row):
+        try:
+            return task.parse_program(row['completion']) == task.parse_program(task.oracle(layouts[row['layout_id']]))
+        except (ValueError, SyntaxError):
+            return False
     for phase, key in [('before', 'before'), ('after', 'after')]:
         rows = report[key]
         phases[phase] = {'successes': sum(r['success'] for r in rows), 'n': len(rows),
+            'canonical_four_call_program_matches': sum(canonical(r) for r in rows),
             'outcomes': dict(Counter('success' if r['success'] else r['error'] or 'physical_criteria' for r in rows)),
             'max_success_penetration_m': max((r['final']['peak_penetration'] for r in rows if r['success']), default=None),
             'max_success_final_tilt_rad': max((r['final']['tilt'] for r in rows if r['success']), default=None)}

@@ -137,3 +137,12 @@ programs against each run's frozen task source.
 
 The completed follow-up improves held-out success from **3/128 to 103/128**,
 with 100 paired wins and no losses. [Results and checkpoint](../../results/cap_rl_ordered/2026-10-22/README.md).
+
+## Articulated robot follow-up
+
+The [xArm7 frame-rail lift task](ROBOT_TASK.md) adds a real articulated arm and
+contact-driven grasp. Raw-base held-out physical success improves from
+**55/128 (43.0%) to 122/128 (95.3%)** after 80 GRPO updates.
+[Results, video, exact code, checkpoint and audits](../../results/cap_rl_robot/2026-10-22/README.md).
+This isolated pickup task uses privileged coordinates and supplied motor skills;
+it is separate from the full visual assembly benchmark.

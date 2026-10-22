@@ -35,10 +35,10 @@ def main():
     chosen = next((s,r) for s,r in validation if s == selection["best_step"])
     left.scatter([chosen[0]], [100*chosen[1]["success_rate"]], marker="*", s=180,
                   color="#dc8b23", zorder=4, label="Selected checkpoint")
-    left.set(xlabel="GRPO update", ylabel="Strict task success (%)", ylim=(0, 100),
+    left.set(xlabel="GRPO update", ylabel="Strict task success (%)", ylim=(0, 105 if robot else 100),
              title="Learning curve")
     left.grid(axis="y", alpha=.16)
-    left.legend(loc="upper left", frameon=False, fontsize=8)
+    left.legend(loc="lower right" if robot else "upper left", frameon=False, fontsize=8)
     values = [report[k]["success_rate"]*100 for k in ("baseline", "trained")]
     labels = (["One-object RL", "MuJoCo RL"] if physics and metadata.get("init_adapter") else
               ["One-object RL", "Two-object RL"] if ordered else ["Base model", "After RL"])
