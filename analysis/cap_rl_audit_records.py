@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 import sys
 
+from experiments.cap_rl.audit import equivalent
+
 
 def audit_records(directory):
     directory = Path(directory)
@@ -27,8 +29,12 @@ def audit_records(directory):
     module = importlib.util.module_from_spec(spec)
     sys.modules[namespace] = module
     spec.loader.exec_module(module)
-    task_name = 'task_ordered' if metadata.get('task') == 'ordered_two' else 'task'
+    task_name = {'ordered_two': 'task_ordered', 'mujoco_docking': 'task_mujoco',
+                 'pick_place': 'task'}[metadata.get('task', 'pick_place')]
     task = importlib.import_module('.'+task_name, namespace)
+    physics = metadata.get('task') == 'mujoco_docking'
+    if physics and task.mujoco.__version__ != metadata['physics_runtime']['mujoco']:
+        raise ValueError('MuJoCo runtime differs from training')
     splits = task.datasets()
     for name, layouts in splits.items():
         if [x.key for x in layouts] != metadata['splits'][name]:
@@ -43,8 +49,11 @@ def audit_records(directory):
         if row['truncated']:
             replay.update(reward=0., success=False, valid=False, error='truncated')
         replay = json.loads(json.dumps(replay))
-        for key in ['success', 'valid', 'error', 'trace']:
-            if replay[key] != row[key]:
+        keys = ['success', 'valid', 'error', 'trace']
+        if physics:
+            keys += ['final_state', 'final_distance_m', 'final_speed_m_s', 'components']
+        for key in keys:
+            if not equivalent(replay[key], row[key], 1e-8 if physics else 0.):
                 raise ValueError(f'Replay mismatch: {row["layout_id"]}/{key}')
         if abs(replay['reward']-row['reward']) > 1e-9:
             raise ValueError('Reward mismatch')

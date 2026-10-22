@@ -1,6 +1,7 @@
 """Replay saved test programs and independently verify the reported improvement.
 
-This audit needs only the Python standard library, not a GPU or model weights.
+Symbolic tasks need only the standard library. Physics tasks also need MuJoCo
+and NumPy, but no GPU or model weights.
 It verifies execution and accounting, not whether the claimed model emitted text.
 Model-generation provenance is provided by the checkpoint and saved source/config.
 """
@@ -13,11 +14,27 @@ import random
 from .tasks import get_task
 
 
+def equivalent(a, b, tolerance=0.):
+    """Preserve exact symbolic checks, allow tiny cross-platform physics roundoff."""
+    if isinstance(a, dict) and isinstance(b, dict):
+        return a.keys() == b.keys() and all(equivalent(a[k], b[k], tolerance) for k in a)
+    if isinstance(a, (tuple, list)) and isinstance(b, (tuple, list)):
+        return len(a) == len(b) and all(equivalent(x, y, tolerance) for x, y in zip(a, b))
+    if type(a) in (float, int) and type(b) in (float, int):
+        return abs(a-b) <= tolerance
+    return a == b
+
+
 def audit(directory):
     directory = Path(directory)
     metadata = json.loads((directory / "metadata.json").read_text())
     report = json.loads((directory / "test_comparison.json").read_text())
     task = get_task(metadata.get("task", "pick_place"))
+    physics = metadata.get("task") == "mujoco_docking"
+    if physics:
+        import mujoco
+        if mujoco.__version__ != metadata["physics_runtime"]["mujoco"]:
+            raise ValueError("MuJoCo runtime version differs from training")
     task_path = Path(task.__file__)
     dependencies = [task_path]
     if metadata.get("task") == "ordered_two":
@@ -42,8 +59,11 @@ def audit(directory):
                 replay.update(reward=0., success=False, valid=False, error="truncated")
             # Normalize tuples/lists through JSON before comparing full traces.
             replay = json.loads(json.dumps(replay))
-            for key in ("success", "valid", "error", "trace"):
-                if replay[key] != row[key]:
+            keys = ["success", "valid", "error", "trace"]
+            if physics:
+                keys += ["final_state", "final_distance_m", "final_speed_m_s", "components"]
+            for key in keys:
+                if not equivalent(replay[key], row[key], 1e-8 if physics else 0.):
                     raise ValueError(f"Replay mismatch: {label}/{layout.key}/{key}")
             if abs(replay["reward"]-row["reward"]) > 1e-9:
                 raise ValueError("Reward mismatch")
