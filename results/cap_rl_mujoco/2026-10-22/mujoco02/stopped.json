@@ -1,0 +1,5 @@
+{
+  "completed_steps": 43,
+  "reason": "No successful validation episodes through update 40 and no accepted docks; restart curriculum from prior one-object checkpoint with simpler calibrated coordinate instructions. Dynamics and rewards unchanged.",
+  "test_evaluated": false
+}

@@ -39,7 +39,9 @@ def main():
     left.grid(axis="y", alpha=.16)
     left.legend(loc="upper left", frameon=False, fontsize=8)
     values = [report[k]["success_rate"]*100 for k in ("baseline", "trained")]
-    bars = right.bar(["One-object RL", "Two-object RL"] if ordered else ["Base model", "After RL"], values, color=["#9aa3ac", "#12664f"], width=.58)
+    labels = (["One-object RL", "MuJoCo RL"] if physics and metadata.get("init_adapter") else
+              ["One-object RL", "Two-object RL"] if ordered else ["Base model", "After RL"])
+    bars = right.bar(labels, values, color=["#9aa3ac", "#12664f"], width=.58)
     for bar, key in zip(bars, ("baseline", "trained")):
         result = report[key]
         right.text(bar.get_x()+bar.get_width()/2, bar.get_height()+2,
