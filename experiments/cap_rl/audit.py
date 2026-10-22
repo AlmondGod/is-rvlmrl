@@ -9,17 +9,19 @@ import hashlib
 import json
 from pathlib import Path
 
-from .task import datasets, execute, prompt
+from .tasks import get_task
 
 
 def audit(directory):
     directory = Path(directory)
     metadata = json.loads((directory / "metadata.json").read_text())
     report = json.loads((directory / "test_comparison.json").read_text())
-    task_hash = hashlib.sha256(Path(__file__).with_name("task.py").read_bytes()).hexdigest()
-    if metadata["source_sha256"]["task.py"] != task_hash:
+    task = get_task(metadata.get("task", "pick_place"))
+    task_path = Path(task.__file__)
+    task_hash = hashlib.sha256(task_path.read_bytes()).hexdigest()
+    if metadata["source_sha256"][task_path.name] != task_hash:
         raise ValueError("Task source does not match the run")
-    splits = datasets()
+    splits = task.datasets()
     for split, layouts in splits.items():
         if metadata["splits"][split] != [layout.key for layout in layouts]:
             raise ValueError(f"Split mismatch: {split}")
@@ -28,9 +30,9 @@ def audit(directory):
         if [r["layout_id"] for r in rows] != metadata["splits"]["test"]:
             raise ValueError(f"Missing, reordered, or duplicate cases: {label}")
         for layout, row in zip(splits["test"], rows):
-            if row["prompt"] != prompt(layout):
+            if row["prompt"] != task.prompt(layout):
                 raise ValueError("Prompt mismatch")
-            replay = execute(layout, row["completion"])
+            replay = task.execute(layout, row["completion"])
             if row["truncated"]:
                 replay.update(reward=0., success=False, valid=False, error="truncated")
             # Normalize tuples/lists through JSON before comparing full traces.

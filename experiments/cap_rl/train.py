@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import shutil
 import subprocess
 import time
 
@@ -17,7 +18,9 @@ import torch
 from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
-from .task import SYSTEM, datasets, execute, prompt
+from .tasks import get_task
+
+task = get_task()
 
 
 MODEL = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
@@ -33,7 +36,7 @@ def append(path, rows):
             handle.write(json.dumps(row) + "\n")
 
 
-def load_model(name, revision=None, adapter=None):
+def load_model(name, revision=None, adapter=None, trainable=False):
     tokenizer = AutoTokenizer.from_pretrained(name, revision=revision, padding_side="left")
     tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
@@ -46,7 +49,7 @@ def load_model(name, revision=None, adapter=None):
         pad_token_id=tokenizer.pad_token_id, repetition_penalty=1., top_k=0,
         top_p=1., temperature=1., do_sample=False)
     if adapter:
-        model = PeftModel.from_pretrained(model, adapter)
+        model = PeftModel.from_pretrained(model, adapter, is_trainable=trainable)
     else:
         model = get_peft_model(model, LoraConfig(
             r=16, lora_alpha=32, lora_dropout=0., target_modules="all-linear",
@@ -56,7 +59,7 @@ def load_model(name, revision=None, adapter=None):
 
 def encode(tokenizer, layouts):
     texts = [tokenizer.apply_chat_template([
-        {"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt(layout)}
+        {"role": "system", "content": task.SYSTEM}, {"role": "user", "content": task.prompt(layout)}
     ], tokenize=False, add_generation_prompt=True) for layout in layouts]
     return tokenizer(texts, return_tensors="pt", padding=True).to("cuda")
 
@@ -78,7 +81,7 @@ def rollout(model, tokenizer, layouts, max_tokens, sample):
     mask = completion_mask(completions, tokenizer.eos_token_id)
     attention = torch.cat([inputs.attention_mask, mask.long()], dim=1)
     texts = tokenizer.batch_decode(completions, skip_special_tokens=True)
-    results = [execute(layout, text) for layout, text in zip(layouts, texts)]
+    results = [task.execute(layout, text) for layout, text in zip(layouts, texts)]
     # A cut-off program is not a completed policy even if its prefix happened to work.
     for i, result in enumerate(results):
         result["truncated"] = not bool(completions[i].eq(tokenizer.eos_token_id).any())
@@ -117,7 +120,7 @@ def policy_loss(logp, old, reference, mask, advantage, beta=.02, clip=.2):
 
 
 def rows_for(layouts, texts, results):
-    return [{"layout_id": layout.key, "prompt": prompt(layout), "completion": text, **result}
+    return [{"layout_id": layout.key, "prompt": task.prompt(layout), "completion": text, **result}
             for layout, text, result in zip(layouts, texts, results)]
 
 
@@ -137,16 +140,22 @@ def evaluate(model, tokenizer, layouts, max_tokens, batch_size=16):
 def train(args):
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=False)
+    global task
+    task = get_task(args.task)
     set_seed(args.seed)
     torch.set_num_threads(4)
-    model, tokenizer = load_model(args.model, args.revision)
-    splits = datasets()
+    if args.init_adapter:
+        shutil.copytree(args.init_adapter, out / "initial_adapter")
+    model, tokenizer = load_model(args.model, args.revision, args.init_adapter, trainable=True)
+    splits = task.datasets()
     source_files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in Path(__file__).parent.glob("*.py")}
     metadata = {**vars(args), "model_revision": model.config._commit_hash,
                 "gpu": torch.cuda.get_device_name(), "torch": torch.__version__,
                 "trainable_parameters": sum(p.numel() for p in model.parameters() if p.requires_grad),
                 "source_sha256": source_files,
+                "initial_adapter_sha256": ({p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in (out / "initial_adapter").iterdir() if p.is_file()} if args.init_adapter else None),
                 "splits": {s: [layout.key for layout in rows] for s, rows in splits.items()},
                 "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
     dump(out / "metadata.json", metadata)
@@ -222,17 +231,30 @@ def test(args):
     destination = out / "test_comparison.json"
     if destination.exists():
         raise FileExistsError("Test results already exist; do not tune on this test set.")
+    global task
+    task = get_task(metadata.get("task", "pick_place"))
     set_seed(metadata["seed"])
     torch.set_num_threads(4)
-    model, tokenizer = load_model(metadata["model"], metadata["model_revision"], str(out/"best_adapter"))
-    layouts = datasets()["test"]
-    task_hash = hashlib.sha256((Path(__file__).parent / "task.py").read_bytes()).hexdigest()
-    if task_hash != metadata["source_sha256"]["task.py"]:
+    layouts = task.datasets()["test"]
+    task_path = Path(task.__file__)
+    task_hash = hashlib.sha256(task_path.read_bytes()).hexdigest()
+    if task_hash != metadata["source_sha256"][task_path.name]:
         raise RuntimeError("Task changed since training; restore the recorded task source.")
     if [layout.key for layout in layouts] != metadata["splits"]["test"]:
         raise RuntimeError("Test split changed since training.")
-    with model.disable_adapter():
-        baseline, before = evaluate(model, tokenizer, layouts, metadata["max_tokens"])
+    initial_adapter = out / "initial_adapter"
+    if metadata.get("initial_adapter_sha256"):
+        for name, digest in metadata["initial_adapter_sha256"].items():
+            if hashlib.sha256((initial_adapter/name).read_bytes()).hexdigest() != digest:
+                raise RuntimeError("Initial adapter changed since training")
+    model, tokenizer = load_model(metadata["model"], metadata["model_revision"],
+                                  str(initial_adapter) if metadata.get("init_adapter") else None)
+    baseline, before = evaluate(model, tokenizer, layouts, metadata["max_tokens"])
+    del model
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    model, tokenizer = load_model(metadata["model"], metadata["model_revision"], str(out/"best_adapter"))
     trained, after = evaluate(model, tokenizer, layouts, metadata["max_tokens"])
     wins = sum(not a["success"] and b["success"] for a,b in zip(before, after))
     losses = sum(a["success"] and not b["success"] for a,b in zip(before, after))
@@ -253,6 +275,8 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--revision")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two"], default="pick_place")
+    parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=80)
     parser.add_argument("--group-size", type=int, default=8)

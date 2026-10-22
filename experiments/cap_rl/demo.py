@@ -20,6 +20,8 @@ def main():
     if len(set(points)) != 3 or any(abs(x)>2 for point in points for x in point):
         parser.error("Choose three distinct cells with each coordinate in [-2, 2].")
     metadata = json.loads((args.run / "metadata.json").read_text())
+    if metadata.get("task", "pick_place") != "pick_place":
+        parser.error("This coordinate demo supports only the single-object task.")
     torch.set_num_threads(4)
     model, tokenizer = load_model(metadata["model"], metadata["model_revision"],
                                   str(args.run / "best_adapter"))
