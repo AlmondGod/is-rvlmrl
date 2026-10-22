@@ -1,0 +1,5 @@
+{
+  "status": "stopped",
+  "reason": "Valid first-delivery termination (reward .45) was preferable to attempting the second delivery then failing (discounted prefix). Validation at update 20 had 61/64 four-call traces and 0/64 complete successes. Remove runtime discount to avoid favoring early termination. Test was not evaluated.",
+  "completed_updates": 45
+}

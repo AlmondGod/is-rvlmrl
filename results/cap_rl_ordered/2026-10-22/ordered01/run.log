@@ -1,0 +1,12 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"stage": "baseline_validation", "n": 64, "successes": 0, "success_rate": 0.0, "mean_reward": 0.0, "valid_rate": 0.0}
+{"step": 1, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.005089944374049082, "kl": 0.2450684942305088, "grad_norm": 0.07928323745727539, "elapsed_seconds": 11.423191617010161}
+{"step": 2, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.004246624041115865, "kl": 0.20896206982433796, "grad_norm": 0.05496973916888237, "elapsed_seconds": 24.29747575800866}
+{"step": 3, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.007297706644749269, "kl": 0.363460935652256, "grad_norm": 0.22832922637462616, "elapsed_seconds": 35.03441957698669}
+{"step": 4, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0029802207282045856, "kl": 0.14789739903062582, "grad_norm": 0.03519907221198082, "elapsed_seconds": 45.499600918992655}
+{"step": 5, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.003361109847901389, "kl": 0.15229715686291456, "grad_norm": 0.03334536775946617, "elapsed_seconds": 58.53968883099151}
+{"step": 6, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0027101555897388607, "kl": 0.13349877204746008, "grad_norm": 0.015547876246273518, "elapsed_seconds": 72.23452118498972}
+{"step": 7, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0030084317695582286, "kl": 0.14815626479685307, "grad_norm": 0.03862020745873451, "elapsed_seconds": 83.3013004050008}
+{"step": 8, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0024765081179793924, "kl": 0.10995534947142005, "grad_norm": 0.022320425137877464, "elapsed_seconds": 97.16716449998785}
+{"step": 9, "reward": 0.0, "success_rate": 0.0, "active_groups": 0, "loss": 0.0013482620852300897, "kl": 0.059022890869528055, "grad_norm": 0.01273288019001484, "elapsed_seconds": 110.63311737100594}

@@ -1,0 +1,4726 @@
+{
+  "metrics": {
+    "n": 64,
+    "successes": 0,
+    "success_rate": 0.0,
+    "mean_reward": 0.0,
+    "valid_rate": 0.0
+  },
+  "rows": [
+    {
+      "layout_id": "807bad28ea48492f",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -1).\nRed object is at (1, -2); red target is (1, 2).\nBlue object is at (2, -1); blue target is (-2, 2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, -1)\npick()\nmove(-1, 3)\nplace()\nmove(-1, 3)\npick()\nmove(-1, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            -1
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              2,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b201ff4399d09a13",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, -2).\nRed object is at (0, 1); red target is (-1, -1).\nBlue object is at (2, 0); blue target is (-2, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 3)\npick()\nmove(-2, -1)\nplace()\nmove(-4, 0)\npick()\nmove(4, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            3
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "875392d942bf40fc",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -1).\nRed object is at (-2, 2); red target is (-2, -2).\nBlue object is at (2, 0); blue target is (-1, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 3)\npick()\nmove(0, -2)\nplace()\nmove(3, -1)\npick()\nmove(-3, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            3
+          ],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            -2
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "40e60fccc387715a",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -2).\nRed object is at (0, 2); red target is (-2, 0).\nBlue object is at (-1, -2); blue target is (-2, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-0, 4)\npick()\nmove(-1, -2)\nplace()\nmove(-1, -1)\npick()\nmove(-1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            4
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "41e8a6aaedd5b7fe",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -2).\nRed object is at (-2, -1); red target is (1, -1).\nBlue object is at (2, -1); blue target is (-2, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 1)\npick()\nmove(3, 0)\nplace()\nmove(-4, 2)\npick()\nmove(-4, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            1
+          ],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              2,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              2,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            0
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              2,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              2,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "1a2202307bc14216",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 0).\nRed object is at (1, 1); red target is (1, 2).\nBlue object is at (0, 0); blue target is (2, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 1)\npick()\nmove(1, 1)\nplace()\nmove(2, 1)\npick()\nmove(2, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            1
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              0,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "3ac0f749b6cc2429",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (1, 1); red target is (-2, -1).\nBlue object is at (0, -2); blue target is (-1, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(-3, -2)\nplace()\nmove(-1, 3)\npick()\nmove(-1, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -3,
+            -2
+          ],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "6ff7130a56fc36aa",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (-2, 0); red target is (1, -1).\nBlue object is at (-1, 0); blue target is (2, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, -1)\npick()\nmove(3, -1)\nplace()\nmove(3, -2)\npick()\nmove(3, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            -1
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "759d8ecbc9682904",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -2).\nRed object is at (0, -2); red target is (0, 1).\nBlue object is at (2, -2); blue target is (-2, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(2, -1)\nplace()\nmove(-4, -0)\npick()\nmove(-2, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            0,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              -2
+            ],
+            "blue": [
+              2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "19af263f5e629203",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 2).\nRed object is at (-1, -1); red target is (-2, -2).\nBlue object is at (0, 1); blue target is (-2, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -3)\npick()\nmove(-1, -1)\nplace()\nmove(-2, -2)\npick()\nmove(2, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -3
+          ],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "11fad58b44e36a2c",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 2).\nRed object is at (-1, 0); red target is (2, 0).\nBlue object is at (-1, -1); blue target is (2, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -2)\npick()\nmove(3, 0)\nplace()\nmove(3, -1)\npick()\nmove(3, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -2
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            0
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "d70781ec6f159807",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 2).\nRed object is at (2, -1); red target is (-2, -1).\nBlue object is at (-1, -1); blue target is (0, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, -3)\npick()\nmove(-3, 0)\nplace()\nmove(1, -1)\npick()\nmove(1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "occupied_place",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            -3
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -3,
+            0
+          ],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "c5cd11220b39f9ef",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, -2).\nRed object is at (-2, -2); red target is (1, 0).\nBlue object is at (1, 1); blue target is (1, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(2, 3)\nplace()\nmove(2, -2)\npick()\nmove(2, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -2
+            ],
+            "blue": [
+              1,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "ad47d96cce4b1f9f",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -2).\nRed object is at (-1, 0); red target is (0, -1).\nBlue object is at (0, 2); blue target is (2, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 2)\npick()\nmove(1, -1)\nplace()\nmove(2, -3)\npick()\nmove(2, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            2
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            1,
+            -1
+          ],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "c22a50c903385003",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (-2, -1); red target is (0, 1).\nBlue object is at (1, -2); blue target is (1, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, -2)\npick()\nmove(3, 0)\nplace()\nmove(2, -1)\npick()\nmove(2, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            -2
+          ],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "1e14e23bf84b1729",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 0).\nRed object is at (-1, -2); red target is (1, 2).\nBlue object is at (-2, 2); blue target is (0, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-3, -2)\npick()\nmove(3, 1)\nplace()\nmove(2, -1)\npick()\nmove(2, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -3,
+            -2
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "391e1014fea9eda1",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 1).\nRed object is at (-2, 2); red target is (1, 2).\nBlue object is at (2, 1); blue target is (0, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(3, 0)\nplace()\nmove(-2, -1)\npick()\nmove(-2, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            0
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            2
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "88cfd5ec99ec5b02",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -1).\nRed object is at (1, 0); red target is (1, 1).\nBlue object is at (2, 1); blue target is (-1, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 1)\npick()\nmove(1, 0)\nplace()\nmove(-3, -2)\npick()\nmove(-1, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            1
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "objects": {
+            "red": [
+              1,
+              0
+            ],
+            "blue": [
+              2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "fae2e9eed1c3c1a0",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 1).\nRed object is at (-2, 0); red target is (-2, 1).\nBlue object is at (1, 2); blue target is (2, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -1)\npick()\nmove(0, 1)\nplace()\nmove(3, -3)\npick()\nmove(2, -4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -3
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "4ad6763f5e912a2a",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 2).\nRed object is at (-2, 2); red target is (1, -1).\nBlue object is at (-1, -2); blue target is (1, 2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(3, -3)\nplace()\nmove(2, 4)\npick()\nmove(2, 4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              2
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -3
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "df5770a353ecf85e",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 1).\nRed object is at (-1, 1); red target is (2, -1).\nBlue object is at (-2, 2); blue target is (2, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(3, -2)\nplace()\nmove(4, -4)\npick()\nmove(4, -4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -2
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0f93a2ef38b64247",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 2).\nRed object is at (-2, 0); red target is (-1, 0).\nBlue object is at (2, -2); blue target is (0, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -2)\npick()\nmove(4, -2)\nplace()\nmove(2, 3)\npick()\nmove(4, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -2
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "bd4a2b86c46a55b7",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, -1).\nRed object is at (2, -2); red target is (-1, 1).\nBlue object is at (0, 1); blue target is (2, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(4, -1)\npick()\nmove(-3, 3)\nplace()\nmove(2, -2)\npick()\nmove(2, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            4,
+            -1
+          ],
+          "gripper": [
+            2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -3,
+            3
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            -2
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "adac4835381aca5e",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -1).\nRed object is at (-1, -2); red target is (0, 0).\nBlue object is at (-2, -2); blue target is (-2, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, -1)\npick()\nmove(1, 2)\nplace()\nmove(-1, -2)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              -2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              -2,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            1,
+            2
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -2,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -2
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "555df12d1003219c",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 2).\nRed object is at (1, -1); red target is (0, 1).\nBlue object is at (2, 0); blue target is (-1, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -3)\npick()\nmove(-1, 1)\nplace()\nmove(1, -1)\npick()\nmove(-3, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -3
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            1
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            1,
+            -1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "412b82034dd0753f",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 0).\nRed object is at (0, 2); red target is (-1, 1).\nBlue object is at (1, -2); blue target is (-2, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 2)\npick()\nmove(-1, -1)\nplace()\nmove(-2, 3)\npick()\nmove(0, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            2
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "5e998be9d2da867e",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, -1).\nRed object is at (2, 0); red target is (1, 1).\nBlue object is at (-2, 0); blue target is (-1, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(3, 1)\npick()\nmove(-3, 1)\nplace()\nmove(-1, 1)\npick()\nmove(-1, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            3,
+            1
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -3,
+            1
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            1
+          ],
+          "gripper": [
+            -2,
+            2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "67a2ba8968e517b5",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (-2, 1); red target is (-1, -1).\nBlue object is at (1, -2); blue target is (0, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 0)\npick()\nmove(2, -3)\nplace()\nmove(3, 2)\npick()\nmove(2, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            0
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "e7cf3ed442248f9c",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -2).\nRed object is at (0, 1); red target is (2, 2).\nBlue object is at (-2, 1); blue target is (2, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 3)\npick()\nmove(2, 1)\nplace()\nmove(4, -2)\npick()\nmove(4, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            3
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              -2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              -2,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            1
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "ce6034d7985ed421",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 2).\nRed object is at (0, 0); red target is (1, -2).\nBlue object is at (2, 2); blue target is (-2, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, -2)\npick()\nmove(2, 2)\nplace()\nmove(-2, -3)\npick()\nmove(-1, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            -2
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "9610b1cb191be7f0",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -1).\nRed object is at (1, 1); red target is (-1, 1).\nBlue object is at (-2, 0); blue target is (-2, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 2)\npick()\nmove(-3, 1)\nplace()\nmove(-1, 1)\npick()\nmove(-1, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            2
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "10bb3a932f1e34e6",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, -1).\nRed object is at (2, 1); red target is (2, 0).\nBlue object is at (-2, 0); blue target is (1, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(4, 2)\npick()\nmove(4, 0)\nplace()\nmove(3, 0)\npick()\nmove(3, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            4,
+            2
+          ],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "54baf8910e97386b",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (2, 2); red target is (0, 2).\nBlue object is at (0, -1); blue target is (-2, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(-2, 0)\nplace()\nmove(-2, -1)\npick()\nmove(-2, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -2,
+            0
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8296568f6b37fe7c",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -2).\nRed object is at (-1, 0); red target is (1, -1).\nBlue object is at (0, -1); blue target is (1, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 2)\npick()\nmove(2, -1)\nplace()\nmove(1, 2)\npick()\nmove(1, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            2
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            -1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            1,
+            2
+          ],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "1058692904fc5ade",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 1).\nRed object is at (-2, -2); red target is (1, 1).\nBlue object is at (-2, 0); blue target is (1, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -3)\npick()\nmove(3, 1)\nplace()\nmove(3, -2)\npick()\nmove(3, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -3
+          ],
+          "gripper": [
+            -2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -2
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "a7ad6792fd9cfbde",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 1).\nRed object is at (-1, 1); red target is (2, -2).\nBlue object is at (1, -1); blue target is (0, 2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(3, -2)\nplace()\nmove(1, 3)\npick()\nmove(-1, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              1
+            ],
+            "blue": [
+              1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            3,
+            -2
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              1,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0fa4c1eb9935e87a",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -1).\nRed object is at (0, 0); red target is (1, -2).\nBlue object is at (-1, 1); blue target is (2, 2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(1, -2)\nplace()\nmove(3, 1)\npick()\nmove(3, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -1,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -1,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            1,
+            -2
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              -1,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              -1,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "dcfbc75c611a65fe",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 1).\nRed object is at (1, -2); red target is (1, 2).\nBlue object is at (1, 0); blue target is (2, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -3)\npick()\nmove(0, 2)\nplace()\nmove(1, 0)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "occupied_place",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -3
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            2
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "objects": {
+            "red": [
+              1,
+              0
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "3f1ec280b3402dd4",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 0).\nRed object is at (0, -1); red target is (-1, -2).\nBlue object is at (1, 2); blue target is (0, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-0, -1)\npick()\nmove(-1, -1)\nplace()\nmove(2, 1)\npick()\nmove(-1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -2
+            ],
+            "blue": [
+              1,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "fdb8edbd76a8ca0d",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 2).\nRed object is at (2, 0); red target is (0, 0).\nBlue object is at (0, -2); blue target is (2, -2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, -2)\npick()\nmove(-2, -2)\nplace()\nmove(2, -0)\npick()\nmove(2, -0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "occupied_place",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            -2
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -2
+          ],
+          "gripper": [
+            0,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              -2
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "90965b4eca58bea6",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -1).\nRed object is at (2, 2); red target is (2, -2).\nBlue object is at (-2, 2); blue target is (1, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 3)\npick()\nmove(0, -4)\nplace()\nmove(-3, 0)\npick()\nmove(3, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            3
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            -4
+          ],
+          "gripper": [
+            2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -3,
+            0
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8ba31a8e41b0d3b7",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 0).\nRed object is at (2, 1); red target is (1, 1).\nBlue object is at (2, 0); blue target is (0, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(3, 1)\npick()\nmove(-1, -1)\nplace()\nmove(-2, -1)\npick()\nmove(-0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            3,
+            1
+          ],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "e7d962637f0df686",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 1).\nRed object is at (2, 2); red target is (1, 1).\nBlue object is at (1, -2); blue target is (-1, -1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 1)\npick()\nmove(-1, -1)\nplace()\nmove(-2, -3)\npick()\nmove(0, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            1
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "05accf885bb97e64",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, 2).\nRed object is at (-2, 1); red target is (0, 0).\nBlue object is at (2, -2); blue target is (0, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -1)\npick()\nmove(2, -1)\nplace()\nmove(2, 3)\npick()\nmove(4, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "4c331edb302788d7",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-1, -2).\nRed object is at (0, -2); red target is (0, 2).\nBlue object is at (-2, 0); blue target is (-1, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(2, 2)\nplace()\nmove(-1, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            0,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              -2
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              -2
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            2
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              0
+            ],
+            "blue": [
+              -2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "df77a427eaac33db",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 0).\nRed object is at (1, 2); red target is (-2, 2).\nBlue object is at (-1, -2); blue target is (-1, 2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 2)\npick()\nmove(-2, 0)\nplace()\nmove(0, 4)\npick()\nmove(0, 4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            2
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "efac6fcc4b601c94",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 0).\nRed object is at (2, -2); red target is (1, 0).\nBlue object is at (0, 2); blue target is (2, 1).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(4, -2)\npick()\nmove(-2, 2)\nplace()\nmove(2, -1)\npick()\nmove(2, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            4,
+            -2
+          ],
+          "gripper": [
+            2,
+            -2
+          ],
+          "objects": {
+            "red": [
+              2,
+              -2
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "1a592dd7377c64e2",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 2).\nRed object is at (-1, -1); red target is (-2, 1).\nBlue object is at (-1, 0); blue target is (-1, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, -3)\npick()\nmove(0, 1)\nplace()\nmove(0, -2)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -3
+          ],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0857d511de07b9f1",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -1).\nRed object is at (1, -2); red target is (0, -1).\nBlue object is at (0, 1); blue target is (-1, 0).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -1)\npick()\nmove(-1, 1)\nplace()\nmove(-1, -1)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              1,
+              -2
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            1
+          ],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            0,
+            -1
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "objects": {
+            "red": [
+              0,
+              -1
+            ],
+            "blue": [
+              0,
+              1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "2704432f07243898",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (-2, 1); red target is (-2, -2).\nBlue object is at (1, 0); blue target is (1, 2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 0)\npick()\nmove(0, -1)\nplace()\nmove(2, 2)\npick()\nmove(2, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            0
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              1
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            2
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "64110dc89a5e999a",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 2).\nRed object is at (0, 1); red target is (2, 1).\nBlue object is at (0, -2); blue target is (-1, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -1)\npick()\nmove(2, 0)\nplace()\nmove(-1, -1)\npick()\nmove(-1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            -1
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              0,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "d8368e7b8ad378cf",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -2).\nRed object is at (2, 1); red target is (-1, 0).\nBlue object is at (-1, -2); blue target is (1, 2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 3)\npick()\nmove(-3, -1)\nplace()\nmove(2, 4)\npick()\nmove(2, 4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            3
+          ],
+          "gripper": [
+            2,
+            1
+          ],
+          "objects": {
+            "red": [
+              2,
+              1
+            ],
+            "blue": [
+              -1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "3161af80dc05941c",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 1).\nRed object is at (2, 2); red target is (1, 0).\nBlue object is at (1, -2); blue target is (-2, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(4, 1)\npick()\nmove(-1, -2)\nplace()\nmove(-2, 2)\npick()\nmove(-1, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            4,
+            1
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              1,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b8f4abb2a895f68f",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 1).\nRed object is at (0, 0); red target is (0, -1).\nBlue object is at (-1, 0); blue target is (1, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, -1)\npick()\nmove(1, 0)\nplace()\nmove(2, 0)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "11ca2a09c68cf4d8",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, -1).\nRed object is at (1, 2); red target is (1, 0).\nBlue object is at (0, 2); blue target is (0, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 3)\npick()\nmove(-1, -2)\nplace()\nmove(1, -2)\npick()\nmove(-1, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            3
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              0,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "4b995c5f66516f52",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 0).\nRed object is at (1, 2); red target is (1, -2).\nBlue object is at (0, -1); blue target is (-2, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(3, 2)\npick()\nmove(-1, -1)\nplace()\nmove(-2, -1)\npick()\nmove(-1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            3,
+            2
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "objects": {
+            "red": [
+              1,
+              2
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "41e7622ba3bf65f5",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 2).\nRed object is at (0, 1); red target is (-2, -1).\nBlue object is at (1, 0); blue target is (0, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-0, -1)\npick()\nmove(1, 1)\nplace()\nmove(2, -1)\npick()\nmove(1, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "objects": {
+            "red": [
+              0,
+              1
+            ],
+            "blue": [
+              1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "43296fed24636352",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -1).\nRed object is at (-2, -1); red target is (0, -2).\nBlue object is at (-1, 0); blue target is (2, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 0)\npick()\nmove(3, -1)\nplace()\nmove(3, -1)\npick()\nmove(3, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            0
+          ],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -2,
+              -1
+            ],
+            "blue": [
+              -1,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "c67056307f8b6dd6",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (-2, 0).\nRed object is at (2, -1); red target is (-1, -2).\nBlue object is at (2, 0); blue target is (-1, 2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(4, -1)\npick()\nmove(-3, 1)\nplace()\nmove(-3, 2)\npick()\nmove(-4, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            4,
+            -1
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "objects": {
+            "red": [
+              2,
+              -1
+            ],
+            "blue": [
+              2,
+              0
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "de01870488357888",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, 0).\nRed object is at (-2, 0); red target is (2, 2).\nBlue object is at (-2, -1); blue target is (1, -1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-4, 0)\npick()\nmove(4, 2)\nplace()\nmove(3, -1)\npick()\nmove(3, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -4,
+            0
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              -2,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -2,
+            0
+          ],
+          "objects": {
+            "red": [
+              -2,
+              0
+            ],
+            "blue": [
+              -2,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            4,
+            2
+          ],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            2,
+            2
+          ],
+          "objects": {
+            "red": [
+              2,
+              2
+            ],
+            "blue": [
+              -2,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0e2f7aceac44dc51",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, -2).\nRed object is at (1, -1); red target is (2, -1).\nBlue object is at (-1, -1); blue target is (-2, -2).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 1)\npick()\nmove(-2, -1)\nplace()\nmove(-1, -1)\npick()\nmove(-2, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -1,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "f28444bf76e85e6a",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 0).\nRed object is at (-1, -1); red target is (1, -1).\nBlue object is at (-2, 2); blue target is (-1, 2).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, -1)\npick()\nmove(2, 0)\nplace()\nmove(-1, 1)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              -1,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            -1
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        },
+        {
+          "call": "move",
+          "args": [
+            -1,
+            1
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              1,
+              -1
+            ],
+            "blue": [
+              -2,
+              2
+            ]
+          },
+          "holding": null,
+          "delivered": [
+            "red"
+          ]
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "49c8a76d6d8bf655",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (2, -1).\nRed object is at (0, 0); red target is (0, 2).\nBlue object is at (2, -2); blue target is (-1, 0).\nRequired order: first deliver and release blue at its target, THEN pick up and deliver red.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 1)\npick()\nmove(2, -2)\nplace()\nmove(-3, 2)\npick()\nmove(-1, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "wrong_order",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            1
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "objects": {
+            "red": [
+              0,
+              0
+            ],
+            "blue": [
+              2,
+              -2
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "445256a2c21eb8cb",
+      "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (1, 2).\nRed object is at (1, 1); red target is (-2, 0).\nBlue object is at (0, -1); blue target is (-2, 1).\nRequired order: first deliver and release red at its target, THEN pick up and deliver blue.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -1)\npick()\nmove(-2, -1)\nplace()\nmove(-2, 2)\npick()\nmove(-2, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            1
+          ],
+          "objects": {
+            "red": [
+              1,
+              1
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "move",
+          "args": [
+            -2,
+            -1
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": "red",
+          "delivered": []
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            -1,
+            0
+          ],
+          "objects": {
+            "red": [
+              -1,
+              0
+            ],
+            "blue": [
+              0,
+              -1
+            ]
+          },
+          "holding": null,
+          "delivered": []
+        }
+      ],
+      "truncated": false
+    }
+  ]
+}

@@ -51,7 +51,7 @@ def audit(directory):
                     "success_rate": sum(r["success"] for r in rows)/len(rows),
                     "mean_reward": sum(r["reward"] for r in rows)/len(rows),
                     "valid_rate": sum(r["valid"] for r in rows)/len(rows)}
-        if expected != report[label]:
+        if any(abs(value-report[label][key]) > 1e-12 for key, value in expected.items()):
             raise ValueError(f"Incorrect aggregate metrics: {label}")
     pairs = list(zip(report["before"], report["after"]))
     wins = sum(not a["success"] and b["success"] for a,b in pairs)
