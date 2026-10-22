@@ -16,6 +16,7 @@ def main():
     metadata = json.loads((args.directory/"metadata.json").read_text())
     ordered = metadata.get("task") == "ordered_two"
     physics = metadata.get("task") == "mujoco_docking"
+    robot = metadata.get("task") == "robot_lift"
     report = json.loads((args.directory/"test_comparison.json").read_text())
     selection = json.loads((args.directory/"selection.json").read_text())
     history = [json.loads(line) for line in (args.directory/"training.jsonl").read_text().splitlines()]
@@ -51,12 +52,12 @@ def main():
     right.set_yticks([0,25,50,75,100])
     right.grid(axis="y", alpha=.16)
     right.set_axisbelow(True)
-    title = ("MuJoCo: two-station inertial docking" if physics else
+    title = ("xArm7: grasp and lift a frame rail" if robot else "MuJoCo: two-station inertial docking" if physics else
              "ordered two-object delivery" if ordered else "discrete pick-and-place")
     fig.suptitle("Code-as-policy RL: " + title, x=.07, ha="left", fontsize=16, fontweight="bold")
     lo, hi = report["paired_bootstrap_95_ci"]
     fig.text(.07,.88,"Qwen2.5-Coder-1.5B · one training seed · same prompts and greedy decoding before/after", fontsize=9, color="#4c5660")
-    limitation = ('MuJoCo force-controlled planar slider; known dynamics, one seed, no robotic assembly or real-world transfer claim.' if physics else
+    limitation = ('Articulated arm and contact grasp; privileged coordinates and fixed motor skills; one seed, simulation only.' if robot else 'MuJoCo force-controlled planar slider; known dynamics, one seed, no robotic assembly or real-world transfer claim.' if physics else
                   'Symbolic coordinate task; no claim of MuJoCo assembly performance or physical transfer.')
     fig.text(.07,.03,f'Test gain: {report["delta_success_rate"]*100:.1f} percentage points (paired bootstrap 95% CI: {lo*100:.1f}–{hi*100:.1f}).\n{limitation}',fontsize=9,color="#4c5660")
     fig.subplots_adjust(left=.07, right=.97, bottom=.23, top=.77, wspace=.30)

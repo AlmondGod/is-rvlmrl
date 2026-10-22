@@ -30,11 +30,17 @@ def audit_records(directory):
     sys.modules[namespace] = module
     spec.loader.exec_module(module)
     task_name = {'ordered_two': 'task_ordered', 'mujoco_docking': 'task_mujoco',
-                 'pick_place': 'task'}[metadata.get('task', 'pick_place')]
+                 'robot_lift': 'task_robot', 'pick_place': 'task'}[metadata.get('task', 'pick_place')]
     task = importlib.import_module('.'+task_name, namespace)
-    physics = metadata.get('task') == 'mujoco_docking'
-    if physics and task.mujoco.__version__ != metadata['physics_runtime']['mujoco']:
-        raise ValueError('MuJoCo runtime differs from training')
+    physics = metadata.get('task') in ('mujoco_docking', 'robot_lift')
+    if physics:
+        import mujoco
+        if mujoco.__version__ != metadata['physics_runtime']['mujoco']:
+            raise ValueError('MuJoCo runtime differs from training')
+    if metadata.get('task') == 'robot_lift':
+        robot = importlib.import_module('.robot_lift', namespace)
+        if robot.asset_hashes() != metadata['robot_assets_sha256']:
+            raise ValueError('Robot assets differ from training')
     splits = task.datasets()
     for name, layouts in splits.items():
         if [x.key for x in layouts] != metadata['splits'][name]:
@@ -50,10 +56,12 @@ def audit_records(directory):
             replay.update(reward=0., success=False, valid=False, error='truncated')
         replay = json.loads(json.dumps(replay))
         keys = ['success', 'valid', 'error', 'trace']
-        if physics:
+        if metadata.get('task') == 'robot_lift':
+            keys += ['final', 'components', 'time']
+        elif physics:
             keys += ['final_state', 'final_distance_m', 'final_speed_m_s', 'components']
         for key in keys:
-            if not equivalent(replay[key], row[key], 1e-8 if physics else 0.):
+            if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-8 if physics else 0.):
                 raise ValueError(f'Replay mismatch: {row["layout_id"]}/{key}')
         if abs(replay['reward']-row['reward']) > 1e-9:
             raise ValueError('Reward mismatch')

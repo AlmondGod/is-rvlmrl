@@ -30,7 +30,7 @@ def audit(directory):
     metadata = json.loads((directory / "metadata.json").read_text())
     report = json.loads((directory / "test_comparison.json").read_text())
     task = get_task(metadata.get("task", "pick_place"))
-    physics = metadata.get("task") == "mujoco_docking"
+    physics = metadata.get("task") in ("mujoco_docking", "robot_lift")
     if physics:
         import mujoco
         if mujoco.__version__ != metadata["physics_runtime"]["mujoco"]:
@@ -39,6 +39,11 @@ def audit(directory):
     dependencies = [task_path]
     if metadata.get("task") == "ordered_two":
         dependencies.append(task_path.with_name("task.py"))  # shared safe grammar
+    if metadata.get("task") == "robot_lift":
+        from .robot_lift import asset_hashes
+        if asset_hashes() != metadata["robot_assets_sha256"]:
+            raise ValueError("Robot assets differ from training")
+        dependencies.append(task_path.with_name("robot_lift.py"))
     for dependency in dependencies:
         task_hash = hashlib.sha256(dependency.read_bytes()).hexdigest()
         if metadata["source_sha256"][dependency.name] != task_hash:
@@ -60,10 +65,12 @@ def audit(directory):
             # Normalize tuples/lists through JSON before comparing full traces.
             replay = json.loads(json.dumps(replay))
             keys = ["success", "valid", "error", "trace"]
-            if physics:
+            if metadata.get("task") == "robot_lift":
+                keys += ["final", "components", "time"]
+            elif physics:
                 keys += ["final_state", "final_distance_m", "final_speed_m_s", "components"]
             for key in keys:
-                if not equivalent(replay[key], row[key], 1e-8 if physics else 0.):
+                if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-8 if physics else 0.):
                     raise ValueError(f"Replay mismatch: {label}/{layout.key}/{key}")
             if abs(replay["reward"]-row["reward"]) > 1e-9:
                 raise ValueError("Reward mismatch")
