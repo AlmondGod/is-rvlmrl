@@ -1,0 +1,133 @@
+{
+  "audit": {
+    "audit": "passed",
+    "replayed_programs": 256,
+    "paired_wins": 100,
+    "paired_losses": 0,
+    "delta_success_rate": 0.78125,
+    "test_report_sha256": "c05cd2962e4996815f588db9d0afeb40142eee35eda19d746a769718295e3a8a"
+  },
+  "selection": {
+    "best_step": 80,
+    "validation_success_rate": 0.734375,
+    "validation_mean_reward": 0.8616099330357143,
+    "selection_split": "validation",
+    "training_seconds": 1331.927200370992
+  },
+  "by_order": {
+    "before": {
+      "red": {
+        "n": 59,
+        "successes": 1
+      },
+      "blue": {
+        "n": 69,
+        "successes": 2
+      }
+    },
+    "after": {
+      "red": {
+        "n": 59,
+        "successes": 51
+      },
+      "blue": {
+        "n": 69,
+        "successes": 52
+      }
+    }
+  },
+  "errors": {
+    "before": {
+      "invalid_pick": 57,
+      "occupied_place": 12,
+      "out_of_bounds": 53,
+      "incomplete_delivery": 2,
+      "wrong_order": 1,
+      "success": 3
+    },
+    "after": {
+      "success": 103,
+      "invalid_pick": 9,
+      "out_of_bounds": 13,
+      "incomplete_delivery": 3
+    }
+  },
+  "validation": [
+    {
+      "step": 0,
+      "n": 64,
+      "successes": 0,
+      "success_rate": 0.0,
+      "mean_reward": 0.2925362723214286,
+      "valid_rate": 0.0
+    },
+    {
+      "step": 20,
+      "n": 64,
+      "successes": 19,
+      "success_rate": 0.296875,
+      "mean_reward": 0.5957561383928571,
+      "valid_rate": 0.3125
+    },
+    {
+      "step": 40,
+      "n": 64,
+      "successes": 30,
+      "success_rate": 0.46875,
+      "mean_reward": 0.6862946428571428,
+      "valid_rate": 0.5
+    },
+    {
+      "step": 60,
+      "n": 64,
+      "successes": 40,
+      "success_rate": 0.625,
+      "mean_reward": 0.8121316964285714,
+      "valid_rate": 0.703125
+    },
+    {
+      "step": 80,
+      "n": 64,
+      "successes": 47,
+      "success_rate": 0.734375,
+      "mean_reward": 0.8616099330357143,
+      "valid_rate": 0.8125
+    },
+    {
+      "step": 100,
+      "n": 64,
+      "successes": 44,
+      "success_rate": 0.6875,
+      "mean_reward": 0.8538253348214285,
+      "valid_rate": 0.828125
+    },
+    {
+      "step": 120,
+      "n": 64,
+      "successes": 27,
+      "success_rate": 0.421875,
+      "mean_reward": 0.6067327008928571,
+      "valid_rate": 0.46875
+    },
+    {
+      "step": 140,
+      "n": 64,
+      "successes": 33,
+      "success_rate": 0.515625,
+      "mean_reward": 0.65150390625,
+      "valid_rate": 0.546875
+    },
+    {
+      "step": 160,
+      "n": 64,
+      "successes": 38,
+      "success_rate": 0.59375,
+      "mean_reward": 0.7422767857142857,
+      "valid_rate": 0.734375
+    }
+  ],
+  "training_programs": 2560,
+  "training_layouts_seen": 224,
+  "training_successful_programs": 1439,
+  "initial_adapter_sha256": "805f0ea9439bc43d9bac935cb1728ba4d89c52b794b5586f51449c29b777a83e"
+}

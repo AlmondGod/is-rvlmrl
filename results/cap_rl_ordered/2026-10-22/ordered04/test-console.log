@@ -1,0 +1,3 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"baseline": {"n": 128, "successes": 3, "success_rate": 0.0234375, "mean_reward": 0.3231068638392857, "valid_rate": 0.0390625}, "trained": {"n": 128, "successes": 103, "success_rate": 0.8046875, "mean_reward": 0.9060965401785714, "valid_rate": 0.828125}, "paired_wins": 100, "paired_losses": 0, "delta_success_rate": 0.78125, "paired_bootstrap_95_ci": [0.7109375, 0.8515625]}

@@ -19,6 +19,12 @@ untouched coordinate layouts, strict success improved from **4/128 (3.1%) to
 test programs passed an independent execution replay audit.
 
 [Results, learning curve, checkpoint, and reproduction instructions](results/cap_rl/2026-10-22/README.md).
+A [harder two-object follow-up](results/cap_rl_ordered/2026-10-22/README.md)
+continues from that adapter and improves ordered delivery success from
+**3/128 (2.3%) to 103/128 (80.5%)**. Its typical program has eight calls and must
+track the gripper's position between deliveries. Both checkpoints and all
+before/after programs are available in the linked result.
+
 This is one training seed on a symbolic coordinate task. It does **not** establish
 RL improvement on the camera-controlled MuJoCo frame assembly benchmark below.
 

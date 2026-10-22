@@ -130,3 +130,6 @@ The follow-up has its own task module, reward, split seed, raw development runs,
 and replay viewer. See `analysis/cap_rl_replay.py` for the viewer and
 `analysis/cap_rl_audit_records.py` to replay saved training and validation
 programs against each run's frozen task source.
+
+The completed follow-up improves held-out success from **3/128 to 103/128**,
+with 100 paired wins and no losses. [Results and checkpoint](../../results/cap_rl_ordered/2026-10-22/README.md).
