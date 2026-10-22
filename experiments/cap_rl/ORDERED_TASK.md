@@ -23,11 +23,12 @@ For each object, reward is:
 
 Completing both adds 0.10, for a total maximum of 1.0. Delivering just the first
 object earns 0.45. Approach and transport use Manhattan distance. The second
-approach's reference origin is the first target. A runtime error stops execution and always counts as failure, but preserves credit
-for the correctly executed prefix. It never receives the 0.10 success bonus. A syntax error has no executed prefix
-and receives zero. Truncated programs receive zero. This denser feedback is
-needed because longer programs rarely finish without an error during exploration. This reward is separate from the
-unchanged one-object experiment.
+approach's reference origin is the first target. A runtime error stops execution
+and always counts as failure, but preserves credit for the correctly executed
+prefix. It never receives the 0.10 success bonus. A syntax error has no executed
+prefix and receives zero. Truncated programs receive zero. This denser feedback
+is needed because longer programs rarely finish without an error during
+exploration. This reward is separate from the unchanged one-object experiment.
 
 Seed 20261024 generates 704 unique layouts: 512 train, 64 validation, 128 test.
 Both requested orders occur in every split. These are unseen configurations

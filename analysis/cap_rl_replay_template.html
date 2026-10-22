@@ -121,7 +121,7 @@
     get(side+'-state').textContent=`${action} · ${state.holding?'holding '+state.holding:'gripper empty'}`;
     const code=get(side+'-code'); code.replaceChildren();
     const activeIndex=failed ? r.trace.length : step-1;
-    const activeLine=step>0 && step<=duration(r) ? r.callLines[activeIndex] : null;
+    const activeLine=step>0 && (failed || step<=duration(r)) ? r.callLines[activeIndex] : null;
     r.lines.forEach((line,i)=>{const el=document.createElement('span');el.textContent=line||' ';if(i+1===activeLine)el.className='cap-active';code.appendChild(el);});
   }
   function render() {

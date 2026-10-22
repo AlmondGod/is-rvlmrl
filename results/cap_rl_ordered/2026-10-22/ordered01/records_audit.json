@@ -1,5 +1,6 @@
 {
   "audit": "passed",
+  "training_steps_verified": 9,
   "training_programs_replayed": 144,
   "validation_programs_replayed": 64,
   "source_hashes_verified": 11

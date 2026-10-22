@@ -116,3 +116,17 @@ development observation, not the final test result.
 The completed 120-update run reached **60/64 validation successes**. The selected
 checkpoint then improved untouched-test success from **4/128 to 121/128**.
 See the [full result, exact reproduction command, and checkpoint download](../../results/cap_rl/2026-10-22/README.md).
+
+
+## Harder follow-up: two objects
+
+[Ordered two-object delivery](ORDERED_TASK.md) doubles the typical program from
+four calls to eight and requires carrying the gripper's position across two
+deliveries. It continues RL from the selected one-object adapter on new, disjoint
+full layouts. The baseline for this follow-up is the one-object adapter on the
+new task, using exactly the same prompts as the final trained checkpoint.
+
+The follow-up has its own task module, reward, split seed, raw development runs,
+and replay viewer. See `analysis/cap_rl_replay.py` for the viewer and
+`analysis/cap_rl_audit_records.py` to replay saved training and validation
+programs against each run's frozen task source.

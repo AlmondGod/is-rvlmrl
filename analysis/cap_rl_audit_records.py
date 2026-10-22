@@ -4,6 +4,7 @@ Source snapshots are trusted experiment source, never model-generated programs.
 This verifies execution and accounting, not that model weights emitted the text.
 """
 import argparse
+from collections import defaultdict
 import gzip
 import hashlib
 import importlib
@@ -75,7 +76,23 @@ def audit_records(directory):
         if row['layout_id'] not in train_ids:
             raise ValueError('Non-training layout in rollouts')
         check(row)
-    return {'audit': 'passed', 'training_programs_replayed': len(rows),
+    by_step = defaultdict(list)
+    for row in rows:
+        by_step[row['step']].append(row)
+    metrics = [json.loads(line) for line in (directory/'training.jsonl').read_text().splitlines()]
+    if sorted(by_step) != [row['step'] for row in metrics]:
+        raise ValueError('Training step coverage mismatch')
+    expected_count = metadata['group_size'] * metadata['prompts_per_step']
+    for metric in metrics:
+        batch = by_step[metric['step']]
+        if len(batch) != expected_count:
+            raise ValueError('Incomplete rollout group')
+        if abs(sum(x['reward'] for x in batch)/len(batch)-metric['reward']) > 1e-6:
+            raise ValueError('Training reward aggregate mismatch')
+        if sum(x['success'] for x in batch)/len(batch) != metric['success_rate']:
+            raise ValueError('Training success aggregate mismatch')
+    return {'audit': 'passed', 'training_steps_verified': len(metrics),
+            'training_programs_replayed': len(rows),
             'validation_programs_replayed': validation_count,
             'source_hashes_verified': len(metadata['source_sha256'])}
 
