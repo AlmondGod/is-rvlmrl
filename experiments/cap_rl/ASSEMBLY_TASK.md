@@ -146,3 +146,40 @@ Each update publishes an adapter snapshot with file hashes by atomically renamin
 a completed temporary directory. These are adapter-only checkpoints, not full
 optimizer/RNG resumption state. Validation still selects the final policy;
 merely saving an update does not make it eligible for held-out evaluation.
+
+## Strict-success optimizer experiment (before any held-out evaluation)
+
+The corrected-profile dense run was retired after eight updates: updates 5–8
+had zero successes and zero within-group reward variance, and update-8 greedy
+validation scored 0/4. Incomplete programs could receive positive relative
+advantage when they were the best failures in a group. All records and saved
+adapters are retained; no held-out test was used to choose this change.
+
+The next run restarts the same raw model and uses `reward = float(success)` for
+GRPO. `dense_reward` retains the original measured diagnostic value. The external
+`analysis/train_assembly_strict.py` adapter changes only optimizer rows; it does
+not change physical result files, cache certificates, prompts, motor skills or
+strict acceptance. Its exact source and SHA256 are saved with run metadata and
+must match during test. Frozen task/trainer source remains commit `b833a18`.
+
+This candidate uses 16 updates, learning rate 3e-5, validation every two updates,
+and per-update snapshots. All other settings and split seeds remain as above.
+Validation selects by strict success; diagnostic dense reward is not a
+tiebreaker in this run because its optimization reward is binary. Baseline and
+trained evaluation both use the same wrapper and frozen profiles.
+
+```bash
+# Run the wrapper from outside the frozen source checkout. Use a new output
+# directory; cache reuse requires matching physical provenance and parsed calls.
+export PYTHONPATH=/absolute/path/to/frozen-b833a18-checkout
+python /absolute/path/to/train_assembly_strict.py train --task assembly_full \
+  --model Qwen/Qwen3.5-4B \
+  --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
+  --out /absolute/path/to/new/strict-run --steps 16 --prompts-per-step 2 \
+  --group-size 4 --microbatch 1 --physics-workers 4 --max-tokens 512 \
+  --eval-every 2 --lr 0.00003 --support-profile contact_and_nails \
+  --controller-profile southwest_approach --checkpoint-every 1
+# Only after completed training and validation improvement:
+python /absolute/path/to/train_assembly_strict.py test \
+  --out /absolute/path/to/strict-run
+```
