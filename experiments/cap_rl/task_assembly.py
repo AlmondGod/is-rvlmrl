@@ -9,6 +9,19 @@ from .assembly import parse_program, provenance, run
 
 SYSTEM = 'Write only the requested Python API program. Do not explain it.'
 EXPECTED_PROVENANCE = None
+_FAILURES = {}
+
+
+def terminal_failure_prefix(result, calls):
+    """Only a measured terminal runtime failure makes later code irrelevant."""
+    history = result.get('history', [])
+    if (not str(result.get('error', '')).startswith(('RuntimeError:', 'ValueError:')) or
+            not history or history[-1]['status'] != 'failed'):
+        return None
+    prefix = [(h['skill'], h['index']) for h in history]
+    if prefix != calls[:len(prefix)]:
+        raise RuntimeError('Measured history differs from parsed program')
+    return prefix
 
 
 @dataclass(frozen=True)
@@ -54,14 +67,22 @@ def execute(layout, text):
         calls = parse_program(text)
     except (SyntaxError, ValueError) as exc:
         return dict(reward=0., success=False, valid=False, error=str(exc), physics_started=False)
-    # Exact-program memoization only. No predicted rewards, prefix surrogate,
-    # reset-state injection, or transfer between different simulator versions.
+    # No predicted rewards, reset-state injection, or version transfer. A
+    # previously measured terminal failure can also be reused when all calls
+    # through that failure are identical: no later instruction can execute.
     manifest = provenance()
     if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
         raise RuntimeError('Assembly dependencies changed during this training/evaluation run')
     identity = dict(seed=layout.seed, calls=calls, provenance=manifest)
     key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     root = Path(os.environ.get('CAP_RL_ASSEMBLY_CACHE', 'artifacts/assembly_rollouts')).resolve()
+    context = hashlib.sha256(json.dumps(dict(seed=layout.seed, provenance=manifest,
+                                           cache_root=str(root)), sort_keys=True).encode()).hexdigest()
+    requested_key = key
+    for prefix, measured_key in _FAILURES.get(context, []):
+        if calls[:len(prefix)] == prefix:
+            key = measured_key
+            break
     out = root / key
     certificate = out / 'certificate.json'
     reused = certificate.exists()
@@ -73,13 +94,19 @@ def execute(layout, text):
         if cert['identity_sha256'] != key:
             raise RuntimeError('Cached assembly identity mismatch')
         result = json.loads((out / 'result.json').read_text())
+        if key != requested_key and terminal_failure_prefix(result, calls) is None:
+            raise RuntimeError('Failure-prefix cache lacks a measured terminal failure')
     else:
         # Existing incomplete runs are errors, never silently retried/relabelled.
         result = run(layout.seed, text, out)
         cert = dict(identity_sha256=key, files={p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in out.iterdir() if p.is_file()})
         certificate.write_text(json.dumps(cert, indent=2))
+    prefix = terminal_failure_prefix(result, calls)
+    if prefix is not None and not any(p == prefix for p, _ in _FAILURES.get(context, [])):
+        _FAILURES.setdefault(context, []).append((prefix, key))
     summary = {k: v for k, v in result.items() if k not in ('history', 'final_state', 'last_flip')}
     summary.update(evidence=str(out), evidence_id=key, cache_hit=reused,
+                   cache_reuse='terminal_failure_prefix' if key != requested_key else 'exact_program',
                    result_sha256=cert['files']['result.json'])
     return summary

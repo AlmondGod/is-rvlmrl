@@ -88,6 +88,18 @@ class AssemblyTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'dependencies changed'):
                 task.execute(task.Layout(41001), 'finish()')
 
+    def test_failure_reuse_requires_identical_executed_prefix(self):
+        from .task_assembly import terminal_failure_prefix
+        result = dict(error='ValueError:Arm already carries a member', history=[
+            dict(skill='position_member', index=0, status='completed'),
+            dict(skill='position_member', index=1, status='failed')])
+        calls = [('position_member', 0), ('position_member', 1), ('finish', None)]
+        self.assertEqual(terminal_failure_prefix(result, calls), calls[:2])
+        with self.assertRaises(RuntimeError):
+            terminal_failure_prefix(result, [('position_member', 2)] + calls[1:])
+        for error in ('missing_finish', 'interrupted', 'simulation_deadline', None):
+            self.assertIsNone(terminal_failure_prefix(dict(result, error=error), calls))
+
     def test_audit_rejects_changed_success_state_and_force(self):
         from .audit_assembly import compare
         value = dict(success=False, final_state=[.1], history=[{'force': 3.}], wall_s=1.)

@@ -74,9 +74,12 @@ not a reliability claim. Full-scene simulation is substantially more expensive
 than the earlier single-rail experiment; GPU time and simulation time must be
 reported separately.
 
-Exact identical programs may reuse previously measured results only for the
+Identical programs may reuse previously measured results only for the
 same seed, complete source/asset hashes, runtime versions and platform. Cache
 certificates hash the saved program, result, provenance, XML and state recording.
+Programs sharing every call through a previously measured terminal runtime
+failure can also reuse that failure: the differing later calls cannot execute.
+This does not estimate a continuation or restore an intermediate simulator state.
 No reward model or simplified symbolic simulator replaces physical execution.
 Partial/interrupted caches are not retried silently.
 
