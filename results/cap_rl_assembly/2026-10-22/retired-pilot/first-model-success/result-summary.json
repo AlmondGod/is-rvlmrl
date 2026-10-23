@@ -1,0 +1,62 @@
+{
+  "passes": true,
+  "preflip_stable_s": 45.68000000000154,
+  "inverted_hold_s": 12.739999999999817,
+  "airborne_relative_position_peak_m": 0.0013467517740367988,
+  "airborne_relative_angle_peak_deg": 2.371652154845097,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.00019802993252158652,
+  "success": true,
+  "valid": true,
+  "error": null,
+  "seed": 41002,
+  "reward": 1.0,
+  "verified_released_members": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 8,
+    "missed": 0,
+    "intact": 8,
+    "failed": 0,
+    "peak_utilization": 0.2863955558648092,
+    "fracture_energy_J": 0.0,
+    "damping_work_J": 3.5812890930556125,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "finished": true,
+  "flipped": true,
+  "simulated_s": 640.4999999883102,
+  "wall_s": 2595.1690959699918,
+  "physics_started": true,
+  "physics_paused_for_inference": false,
+  "generated_before_simulation": true,
+  "physical_validation": false,
+  "full_visual_language_policy": false,
+  "scope": "Actual model sample from exploratory RL update 4, training layout 41002, original controller and original strict evaluator. Not a held-out or greedy-checkpoint result.",
+  "raw_evidence_sha256": {
+    "provenance.json": "aa6b3494fe5c86fffc54dd7afeade397f13a59826016f8f26d38e1cc6ab21da0",
+    "result.json": "08e35458a3b82164244beb015ba16b11d2040777a2b74ce43d15e3fbccb7c6b1",
+    "states.npz": "d84a2fd8ab6b1fbe5ebaa9f32a8d8db9fd43de55859f419d80ce04733014ebee",
+    "certificate.json": "c9cf6b12e01a067eeaa5a5927c474ff082aee9cc94b67007c4ac5e9a826035ca",
+    "program.py": "4e8768922172e7d89cee75b5c072418de31c7d0dea363a4a182c5e9b5eb28363",
+    "scene.xml": "fa3739e3415a9cedfd1a525c30dee965570ff8d184a71ce9dc0088374e5f8876"
+  }
+}
