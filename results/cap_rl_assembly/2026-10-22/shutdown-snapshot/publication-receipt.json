@@ -1,0 +1,62 @@
+{
+  "verified_at_utc": "2026-10-23T11:09:51.359638+00:00",
+  "release_url": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-2026-10-23",
+  "release_published": true,
+  "asset_sha256_matches": 8,
+  "assets": [
+    {
+      "name": "assembly-exploration-evidence.tar.gz",
+      "bytes": 336962839,
+      "digest": "sha256:717368c478d3f9763f9f8ac853ab91025f624359030e14dc7416d2d08cfcd167",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly-exploration-evidence.tar.gz"
+    },
+    {
+      "name": "assembly-release-manifest.json",
+      "bytes": 2041,
+      "digest": "sha256:13704178831a06ba1f0fa8b08b578157e258ae878fdd8199fdb4dcc8d7e7c645",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly-release-manifest.json"
+    },
+    {
+      "name": "assembly03-step-0001-backup.tar.gz",
+      "bytes": 85194688,
+      "digest": "sha256:aec01763c3c859db2fc4c2fbba58d461ccf145dad3c5ab85111867d6bff38872",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly03-step-0001-backup.tar.gz"
+    },
+    {
+      "name": "assembly03-step-0008-backup.tar.gz",
+      "bytes": 120479822,
+      "digest": "sha256:bdd33cdc5360ba6cfd3ead690c71408b19b83518582428c7a9b032a8a6d57525",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly03-step-0008-backup.tar.gz"
+    },
+    {
+      "name": "assembly04-all-checkpoints.tar",
+      "bytes": 779581440,
+      "digest": "sha256:958d858a3355a3d9076ace4c460f80f965843658cd49483b128ce444bf4159e4",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly04-all-checkpoints.tar"
+    },
+    {
+      "name": "assembly04-shutdown-evidence.tar.gz",
+      "bytes": 45277502,
+      "digest": "sha256:0f1463398e1e5dbb022a7982de6ef854e193eb0649fbf4be79d15d1494bdbbfc",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly04-shutdown-evidence.tar.gz"
+    },
+    {
+      "name": "assembly04-step-0002-backup.tar.gz",
+      "bytes": 117872528,
+      "digest": "sha256:513798e146ab367f4a8e8c9e7b748f74ea4549b14498be5d03ab4c777d76249a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/assembly04-step-0002-backup.tar.gz"
+    },
+    {
+      "name": "three-arm-heldout-before-after.mp4",
+      "bytes": 944993,
+      "digest": "sha256:1ab1ee8e442742c93d6d486c8d5687ad6c63a501f86730798aaa5b6d4fb1d7f6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/three-arm-heldout-before-after.mp4"
+    },
+    {
+      "name": "three-arm-heldout-failure.mp4",
+      "bytes": 946651,
+      "digest": "sha256:63f28dc63300f361ccb23000c3362f0b57069a17fe37ad2e0d080bee3f071d7a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-2026-10-23/three-arm-heldout-failure.mp4"
+    }
+  ]
+}
