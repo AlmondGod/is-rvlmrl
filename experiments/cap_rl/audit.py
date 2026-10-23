@@ -6,6 +6,8 @@ It verifies execution and accounting, not whether the claimed model emitted text
 Model-generation provenance is provided by the checkpoint and saved source/config.
 """
 import argparse
+from concurrent.futures import ProcessPoolExecutor
+import multiprocessing
 import hashlib
 import json
 from pathlib import Path
@@ -25,7 +27,21 @@ def equivalent(a, b, tolerance=0.):
     return a == b
 
 
-def audit(directory):
+def init_test_worker(task_name):
+    global worker_task, worker_layouts
+    worker_task = get_task(task_name)
+    worker_layouts = {x.key: x for x in worker_task.datasets()['test']}
+
+
+def test_replay_worker(item):
+    label, index, layout_id, completion, truncated = item
+    replay = worker_task.execute(worker_layouts[layout_id], completion)
+    if truncated:
+        replay.update(reward=0., success=False, valid=False, error='truncated')
+    return (label, index), json.loads(json.dumps(replay))
+
+
+def audit(directory, workers=1):
     directory = Path(directory)
     metadata = json.loads((directory / "metadata.json").read_text())
     report = json.loads((directory / "test_comparison.json").read_text())
@@ -52,14 +68,30 @@ def audit(directory):
     for split, layouts in splits.items():
         if metadata["splits"][split] != [layout.key for layout in layouts]:
             raise ValueError(f"Split mismatch: {split}")
+    precomputed = {}
+    if workers < 1:
+        raise ValueError('workers must be positive')
+    if workers > 1:
+        items = []
+        for label, rows_key in (("baseline", "before"), ("trained", "after")):
+            rows = report[rows_key]
+            if [r['layout_id'] for r in rows] != metadata['splits']['test']:
+                raise ValueError(f'Missing, reordered, or duplicate cases: {label}')
+            items.extend((label, i, row['layout_id'], row['completion'], row['truncated'])
+                         for i, row in enumerate(rows))
+        with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'),
+                                 initializer=init_test_worker,
+                                 initargs=(metadata.get('task', 'pick_place'),)) as pool:
+            precomputed = dict(pool.map(test_replay_worker, items, chunksize=1))
     for label, rows_key in (("baseline", "before"), ("trained", "after")):
         rows = report[rows_key]
         if [r["layout_id"] for r in rows] != metadata["splits"]["test"]:
             raise ValueError(f"Missing, reordered, or duplicate cases: {label}")
-        for layout, row in zip(splits["test"], rows):
+        for index, (layout, row) in enumerate(zip(splits["test"], rows)):
             if row["prompt"] != task.prompt(layout):
                 raise ValueError("Prompt mismatch")
-            replay = task.execute(layout, row["completion"])
+            replay = (precomputed[(label, index)] if precomputed else
+                      task.execute(layout, row["completion"]))
             if row["truncated"]:
                 replay.update(reward=0., success=False, valid=False, error="truncated")
             # Normalize tuples/lists through JSON before comparing full traces.
@@ -105,4 +137,6 @@ def audit(directory):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory")
-    print(json.dumps(audit(parser.parse_args().directory), indent=2))
+    parser.add_argument("--workers", type=int, default=1)
+    args = parser.parse_args()
+    print(json.dumps(audit(args.directory, args.workers), indent=2))

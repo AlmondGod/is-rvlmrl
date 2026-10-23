@@ -34,6 +34,7 @@ class AuditTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             self.fixture(directory)
             self.assertEqual(audit(directory)["replayed_programs"], 256)
+            self.assertEqual(audit(directory, workers=2), audit(directory))
 
     def test_replays_ordered_programs(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -57,6 +58,8 @@ class AuditTests(unittest.TestCase):
             Path(directory, "test_comparison.json").write_text(json.dumps(report))
             with self.assertRaises(ValueError):
                 audit(directory)
+            with self.assertRaises(ValueError):
+                audit(directory, workers=2)
 
     def test_rejects_duplicate_cases(self):
         with tempfile.TemporaryDirectory() as directory:
