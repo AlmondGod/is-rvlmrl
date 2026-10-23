@@ -177,6 +177,7 @@ def train(args):
     if args.task == 'assembly_full':
         from .assembly import provenance, ROOT
         manifest = provenance()
+        task.EXPECTED_PROVENANCE = manifest
         dump(out / 'assembly_provenance.json', manifest)
         for name in manifest['sha256']:
             target = out / 'assembly_source' / name
@@ -269,6 +270,7 @@ def test(args):
         from .assembly import provenance
         if provenance() != json.loads((out / 'assembly_provenance.json').read_text()):
             raise RuntimeError('Full assembly source, assets or runtime changed since training')
+        task.EXPECTED_PROVENANCE = provenance()
     if metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered"):
         from .robot_lift import asset_hashes
         if asset_hashes() != metadata["robot_assets_sha256"]:

@@ -8,6 +8,7 @@ from pathlib import Path
 from .assembly import parse_program, provenance, run
 
 SYSTEM = 'Write only the requested Python API program. Do not explain it.'
+EXPECTED_PROVENANCE = None
 
 
 @dataclass(frozen=True)
@@ -56,6 +57,8 @@ def execute(layout, text):
     # Exact-program memoization only. No predicted rewards, prefix surrogate,
     # reset-state injection, or transfer between different simulator versions.
     manifest = provenance()
+    if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
+        raise RuntimeError('Assembly dependencies changed during this training/evaluation run')
     identity = dict(seed=layout.seed, calls=calls, provenance=manifest)
     key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     root = Path(os.environ.get('CAP_RL_ASSEMBLY_CACHE', 'artifacts/assembly_rollouts')).resolve()
