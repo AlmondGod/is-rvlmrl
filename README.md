@@ -44,6 +44,14 @@ videos, generated code, checkpoint and audits. The model receives exact coordina
 and fixed motion skills; this isolates pickup and does not train the full visual
 assembly benchmark below.
 
+A [Qwen3.5-4B rail-placement follow-up](results/cap_rl_frame/2026-10-22/README.md)
+adds carrying to a new target, release and withdrawal. Held-out physical success
+improves from **21/128 (16.4%) to 128/128 (100%)** after 80 GRPO updates
+(**1.12 A40 training GPU-hours**). Every reported success also passes an added
+pickup-first verification. The report discloses a frozen-reward ordering loophole,
+84 training rollouts rejected by the stricter check, and the learned extra lift.
+A corrected reward mode is included for future runs; frame01 was not retrained on it.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

@@ -13,6 +13,7 @@ def main():
     parser.add_argument("directory", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--comparison", default="test_comparison.json")
+    parser.add_argument("--training-metrics", default="training.jsonl")
     args = parser.parse_args()
     metadata = json.loads((args.directory/"metadata.json").read_text())
     ordered = metadata.get("task") == "ordered_two"
@@ -21,7 +22,7 @@ def main():
     robot = metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered")
     report = json.loads((args.directory/args.comparison).read_text())
     selection = json.loads((args.directory/"selection.json").read_text())
-    history = [json.loads(line) for line in (args.directory/"training.jsonl").read_text().splitlines()]
+    history = [json.loads(line) for line in (args.directory/args.training_metrics).read_text().splitlines()]
     validation = [(0, json.loads((args.directory/"validation_baseline.json").read_text())["metrics"])]
     for path in sorted(args.directory.glob("validation_[0-9]*.json")):
         validation.append((int(path.stem.split("_")[1]), json.loads(path.read_text())["metrics"]))
@@ -31,7 +32,7 @@ def main():
     steps = [row["step"] for row in history]
     moving = [100*sum(row["success_rate"] for row in history[max(0,i-9):i+1])/min(i+1,10)
               for i in range(len(history))]
-    left.plot(steps, moving, color="#8ba9bb", linewidth=1.5, label="Training samples (10-update mean)")
+    left.plot(steps, moving, color="#8ba9bb", linewidth=1.5, label="Training samples (10-update mean; pickup-first)" if placement and args.training_metrics != "training.jsonl" else "Training samples (10-update mean)")
     left.plot([s for s,_ in validation], [100*r["success_rate"] for _,r in validation],
               "o-", color="#12664f", linewidth=2.5, label="Greedy validation · 64 layouts")
     chosen = next((s,r) for s,r in validation if s == selection["best_step"])
@@ -50,7 +51,7 @@ def main():
         right.text(bar.get_x()+bar.get_width()/2, bar.get_height()+2,
                    f'{result["success_rate"]:.1%}\n{result["successes"]}/{result["n"]}',
                    ha="center", va="bottom", fontsize=11)
-    right.set(ylim=(0, 112), ylabel="Strict task success (%)", title="Untouched test layouts")
+    right.set(ylim=(0, 125 if placement else 112), ylabel="Strict task success (%)", title="Untouched test layouts")
     right.set_yticks([0,25,50,75,100])
     right.grid(axis="y", alpha=.16)
     right.set_axisbelow(True)

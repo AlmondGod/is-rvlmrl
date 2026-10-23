@@ -146,3 +146,15 @@ contact-driven grasp. Raw-base held-out physical success improves from
 [Results, video, exact code, checkpoint and audits](../../results/cap_rl_robot/2026-10-22/README.md).
 This isolated pickup task uses privileged coordinates and supplied motor skills;
 it is separate from the full visual assembly benchmark.
+
+
+## Qwen3.5-4B rail placement
+
+The [frame-rail placement follow-up](../../results/cap_rl_frame/2026-10-22/README.md)
+uses Qwen3.5-4B in non-thinking mode and adds transfer, lowering, release and
+withdrawal. After 80 updates and 1.12 A40 training GPU-hours, held-out success
+improves from 21/128 to 128/128, including a separate pickup-first check.
+The original reward admits an ordering loophole; the report preserves that
+training evidence and documents the stricter evaluation. For future training,
+use `--task frame_place_ordered`; `frame_place` remains the historical mode.
+[Task, original and corrected reward](FRAME_TASK.md).

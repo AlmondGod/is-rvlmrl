@@ -1,0 +1,527 @@
+{
+  "split": "test",
+  "index": 6,
+  "layout_id": "ced268494c7a10bd",
+  "layout": {
+    "start": [
+      3,
+      -1
+    ],
+    "center": [
+      -4,
+      2
+    ],
+    "target": [
+      1,
+      0
+    ],
+    "lift_cm": 6
+  },
+  "before": {
+    "layout_id": "ced268494c7a10bd",
+    "prompt": "Place one wooden rail at its frame assembly target using the xArm7 robot.\nThe free rail is 91.44 cm long, 3.8 cm wide, 6.4 cm tall. Gravity and physical finger contact act in MuJoCo; there is no object attachment.\nAll XY coordinates are centimeters relative to the workbench reference.\nOpen gripper starts above XY (3, -1). Rail CENTER starts at XY (-4, 2).\nTarget rail CENTER is XY (1, 0). Keep its initial orientation. Required lift clearance is 6 cm.\nAPI (only literal integer arguments):\nmove(dx, dy): shift gripper by RELATIVE XY displacement in cm, each from -8 to 8; keeps current height.\nlower(): descend at current XY to the calibrated grasp/placement height; does not open fingers.\nclose(): close fingers and wait for contact.\nlift(h): rise by h cm, from 1 to 14, and hold.\nopen(): open fingers and wait; does not move the arm.\nretreat(): withdraw vertically to safe height and wait.\nPlan the pickup, lift, transfer, lowering, release, and retreat. The rail must reach the requested clearance while grasped before arriving above its target. Then it must rest on the bench within 8 mm of the target, level, correctly oriented, stationary, with fingers open, no finger contact, and the gripper withdrawn.\nOutput only API calls. No variables, calculations in arguments, imports, loops, functions, prints, or explanations. Maximum ten calls.",
+    "completion": "move(7, 3)\nlower()\nclose()\nlift(6)\nmove(5, -2)\nlower()\nopen()\nretreat()",
+    "success": false,
+    "reward": 0.0,
+    "valid": false,
+    "error": "workspace_bounds",
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          7,
+          3
+        ],
+        "time": 1.5800000000000012,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.47856802295917705,
+          -0.1911693526136425,
+          0.19975242739311577
+        ],
+        "wood_velocity": [
+          2.2786342478490203e-18,
+          3.169339760656714e-17,
+          1.3179024821087005e-15,
+          -9.945990972283664e-16,
+          8.907826375758182e-17,
+          7.051909031563064e-33
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720735396693057e-27,
+        "gripper_command": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 5.599999999999605,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.4806105157073036,
+          -0.18843363951873832,
+          0.017141783126217974
+        ],
+        "wood_velocity": [
+          -2.1349565200843866e-18,
+          3.182430394684324e-17,
+          1.317902482108689e-15,
+          -9.708170781501732e-16,
+          -8.230838146948453e-17,
+          3.862516303518093e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720724914346396e-27,
+        "gripper_command": 0.0
+      },
+      {
+        "call": "close",
+        "args": [],
+        "time": 7.599999999999385,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.4805894201208776,
+          -0.18891600687790108,
+          0.017248301030660745
+        ],
+        "wood_velocity": [
+          -1.97458209388411e-18,
+          3.2550159102990223e-17,
+          1.3099146224780854e-15,
+          -9.89747856415882e-16,
+          -1.0761457621799884e-16,
+          5.093527902421563e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720726301820545e-27,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "lift",
+        "args": [
+          6
+        ],
+        "time": 9.899999999999975,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.4803451461768157,
+          -0.18989981644093903,
+          0.07838130610660043
+        ],
+        "wood_velocity": [
+          4.854777693805754e-19,
+          3.125995547170542e-17,
+          1.3312155814930062e-15,
+          -9.708815163740032e-16,
+          -6.010052513041345e-17,
+          -5.635105512990336e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720723426063132e-27,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "move",
+        "args": [
+          5,
+          -2
+        ],
+        "time": 9.899999999999975,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.4803451461768157,
+          -0.18989981644093903,
+          0.07838130610660043
+        ],
+        "wood_velocity": [
+          4.854777693805754e-19,
+          3.125995547170542e-17,
+          1.3312155814930062e-15,
+          -9.708815163740032e-16,
+          -6.010052513041345e-17,
+          -5.635105512990336e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720723426063132e-27,
+        "gripper_command": 180.0
+      }
+    ],
+    "final": {
+      "wood": [
+        0.33999999999993197,
+        -0.19,
+        0.031958710222579956
+      ],
+      "tcp": [
+        0.4803451461768157,
+        -0.18989981644093903,
+        0.07838130610660043
+      ],
+      "wood_velocity": [
+        4.854777693805754e-19,
+        3.125995547170542e-17,
+        1.3312155814930062e-15,
+        -9.708815163740032e-16,
+        -6.010052513041345e-17,
+        -5.635105512990336e-32
+      ],
+      "grip_force": 0.0,
+      "peak_penetration": 5.209786176549672e-05,
+      "tilt": 0.0,
+      "yaw": 4.720723426063132e-27,
+      "gripper_command": 180.0
+    },
+    "components": {
+      "alignment": 0.0,
+      "contact": 0.0,
+      "elevation": 0.0,
+      "transport": 0.0,
+      "placement": 0.0,
+      "success": 0.0
+    },
+    "lifted": false,
+    "arrived": false,
+    "time": 9.899999999999975,
+    "truncated": false
+  },
+  "after": {
+    "layout_id": "ced268494c7a10bd",
+    "prompt": "Place one wooden rail at its frame assembly target using the xArm7 robot.\nThe free rail is 91.44 cm long, 3.8 cm wide, 6.4 cm tall. Gravity and physical finger contact act in MuJoCo; there is no object attachment.\nAll XY coordinates are centimeters relative to the workbench reference.\nOpen gripper starts above XY (3, -1). Rail CENTER starts at XY (-4, 2).\nTarget rail CENTER is XY (1, 0). Keep its initial orientation. Required lift clearance is 6 cm.\nAPI (only literal integer arguments):\nmove(dx, dy): shift gripper by RELATIVE XY displacement in cm, each from -8 to 8; keeps current height.\nlower(): descend at current XY to the calibrated grasp/placement height; does not open fingers.\nclose(): close fingers and wait for contact.\nlift(h): rise by h cm, from 1 to 14, and hold.\nopen(): open fingers and wait; does not move the arm.\nretreat(): withdraw vertically to safe height and wait.\nPlan the pickup, lift, transfer, lowering, release, and retreat. The rail must reach the requested clearance while grasped before arriving above its target. Then it must rest on the bench within 8 mm of the target, level, correctly oriented, stationary, with fingers open, no finger contact, and the gripper withdrawn.\nOutput only API calls. No variables, calculations in arguments, imports, loops, functions, prints, or explanations. Maximum ten calls.",
+    "completion": "move(-7, 3)\nlower()\nclose()\nlift(14)\nmove(5, -2)\nlift(14)\nlower()\nopen()\nretreat()",
+    "success": true,
+    "reward": 0.9965007679168858,
+    "valid": true,
+    "error": null,
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          -7,
+          3
+        ],
+        "time": 1.5800000000000012,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.34146664924455383,
+          -0.19108629423463222,
+          0.19990414778004847
+        ],
+        "wood_velocity": [
+          2.2786342478490203e-18,
+          3.169339760656714e-17,
+          1.3179024821087005e-15,
+          -9.945990972283664e-16,
+          8.907826375758182e-17,
+          7.051909031563064e-33
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720735396693057e-27,
+        "gripper_command": 0.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 5.539999999999612,
+        "wood": [
+          0.33999999999993197,
+          -0.19,
+          0.031958710222579956
+        ],
+        "tcp": [
+          0.33965500647291247,
+          -0.1891961668931266,
+          0.015587702406974241
+        ],
+        "wood_velocity": [
+          -2.031117715628172e-18,
+          3.076680264421713e-17,
+          1.328552961616152e-15,
+          -9.661844109672025e-16,
+          -8.41065933839448e-17,
+          -3.2233399480805783e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 5.209786176549672e-05,
+        "tilt": 0.0,
+        "yaw": 4.720725133279936e-27,
+        "gripper_command": 0.0
+      },
+      {
+        "call": "close",
+        "args": [],
+        "time": 7.539999999999392,
+        "wood": [
+          0.33983995668285677,
+          -0.1900487479144273,
+          0.03195462763597366
+        ],
+        "tcp": [
+          0.3397716940130805,
+          -0.18932495155656426,
+          0.016324802279312545
+        ],
+        "wood_velocity": [
+          -3.147712899866456e-05,
+          -9.530377721735412e-05,
+          4.069689478729738e-06,
+          -2.112707739483165e-07,
+          0.00035037457779564903,
+          -0.00025534763135263516
+        ],
+        "grip_force": 133.0636859045306,
+        "peak_penetration": 5.6099644688254596e-05,
+        "tilt": 0.0004058801342792525,
+        "yaw": -0.00029311595132945953,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "lift",
+        "args": [
+          14
+        ],
+        "time": 11.480000000000503,
+        "wood": [
+          0.34057599967904484,
+          -0.1906587648665519,
+          0.17290905765187026
+        ],
+        "tcp": [
+          0.34060594765933755,
+          -0.18997929961135768,
+          0.1578002369704965
+        ],
+        "wood_velocity": [
+          -0.000255653045363995,
+          -8.325322434050784e-05,
+          4.3839927941084844e-05,
+          0.0005301339947873141,
+          0.0007260365477768654,
+          0.0004408045413004775
+        ],
+        "grip_force": 144.5535236658766,
+        "peak_penetration": 5.6099644688254596e-05,
+        "tilt": 0.0050001651930398055,
+        "yaw": 3.956930244449589e-05,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "move",
+        "args": [
+          5,
+          -2
+        ],
+        "time": 12.620000000000884,
+        "wood": [
+          0.38863553831462844,
+          -0.20966582804062664,
+          0.17300947950501608
+        ],
+        "tcp": [
+          0.38864318095915107,
+          -0.20900677128820244,
+          0.1580155034436539
+        ],
+        "wood_velocity": [
+          0.024197860163557648,
+          -0.009962468972999133,
+          0.00032434337335063464,
+          -0.00042526941121298736,
+          0.002323055902547695,
+          0.0002348809909104291
+        ],
+        "grip_force": 145.13226197480327,
+        "peak_penetration": 5.6099644688254596e-05,
+        "tilt": 0.0030160762759618895,
+        "yaw": -0.0013587969602533057,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "lift",
+        "args": [
+          14
+        ],
+        "time": 16.480000000001745,
+        "wood": [
+          0.39135983017899306,
+          -0.21074802599324546,
+          0.3142687823167718
+        ],
+        "tcp": [
+          0.39137658525902236,
+          -0.21007416613434515,
+          0.29965645806010266
+        ],
+        "wood_velocity": [
+          -0.00036966439208530456,
+          -9.247504922244108e-06,
+          -0.00012830356482689695,
+          0.00036790038952236456,
+          0.000730809344513703,
+          0.0004921064800839162
+        ],
+        "grip_force": 145.5442195629406,
+        "peak_penetration": 5.6099644688254596e-05,
+        "tilt": 0.0035740621645550873,
+        "yaw": -0.001243635463599962,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "lower",
+        "args": [],
+        "time": 22.399999999998464,
+        "wood": [
+          0.3903188422024629,
+          -0.2100294504026186,
+          0.03193441933165973
+        ],
+        "tcp": [
+          0.3901663922298625,
+          -0.20920815774503695,
+          0.017879461221982834
+        ],
+        "wood_velocity": [
+          -0.0007683039715032975,
+          8.338236345239547e-05,
+          -2.9313734755324226e-05,
+          8.46029471302171e-05,
+          -0.005822238140429352,
+          -0.0001976559577195468
+        ],
+        "grip_force": 149.85614668050226,
+        "peak_penetration": 0.00011654376112200243,
+        "tilt": 0.00041541492057903126,
+        "yaw": -0.0022207462838434782,
+        "gripper_command": 180.0
+      },
+      {
+        "call": "open",
+        "args": [],
+        "time": 24.399999999997355,
+        "wood": [
+          0.3901768540450943,
+          -0.21000653576357264,
+          0.03195871022257996
+        ],
+        "tcp": [
+          0.3896305210956729,
+          -0.20944022843750787,
+          0.017575574997501953
+        ],
+        "wood_velocity": [
+          9.813635908024322e-19,
+          3.2417213486358126e-17,
+          8.523803700858759e-16,
+          -1.0209812305551814e-15,
+          5.3013768464360304e-17,
+          -4.9456073042766877e-33
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 0.00011654376112200243,
+        "tilt": 0.0,
+        "yaw": -0.0022668213467094828,
+        "gripper_command": 0.0
+      },
+      {
+        "call": "retreat",
+        "args": [],
+        "time": 29.059999999994773,
+        "wood": [
+          0.3901768540450943,
+          -0.21000653576357264,
+          0.03195871022257996
+        ],
+        "tcp": [
+          0.3903967797165383,
+          -0.21021759035683593,
+          0.20238860944561488
+        ],
+        "wood_velocity": [
+          -1.104175877551606e-18,
+          3.15059692769797e-17,
+          1.137280696910514e-15,
+          -9.944915232999168e-16,
+          -7.065846261184817e-17,
+          5.47608191985859e-32
+        ],
+        "grip_force": 0.0,
+        "peak_penetration": 0.00011654376112200243,
+        "tilt": 0.0,
+        "yaw": -0.0022668213467094828,
+        "gripper_command": 0.0
+      }
+    ],
+    "final": {
+      "wood": [
+        0.3901768540450943,
+        -0.21000653576357264,
+        0.03195871022257996
+      ],
+      "tcp": [
+        0.3903025394473295,
+        -0.21022690511904296,
+        0.20220060927267847
+      ],
+      "wood_velocity": [
+        -5.734395713378831e-19,
+        3.1944613817381216e-17,
+        1.2224845329702197e-15,
+        -9.980516554852418e-16,
+        -5.2403706634593403e-17,
+        -3.376493212398578e-33
+      ],
+      "grip_force": 0.0,
+      "peak_penetration": 0.00011654376112200243,
+      "tilt": 0.0,
+      "yaw": -0.0022668213467094828,
+      "gripper_command": 0.0
+    },
+    "components": {
+      "alignment": 0.0995771805180122,
+      "contact": 0.15,
+      "elevation": 0.15,
+      "transport": 0.1473660243256757,
+      "placement": 0.09955756307319799,
+      "success": 0.35
+    },
+    "lifted": true,
+    "arrived": true,
+    "time": 29.559999999994496,
+    "truncated": false
+  },
+  "render_note": "Actual MuJoCo renders; real-time playback; terminated episodes freeze. Cyan outline is a rendering-only target marker."
+}

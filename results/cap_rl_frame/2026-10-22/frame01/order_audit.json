@@ -1,0 +1,459 @@
+{
+  "criterion_commit": "ccd11bea59a25e1285eaf880badec405411f844b",
+  "verification_module_sha256": "0127f146485286d9a84a092ee811be1f28780c95224502ecfd4b79eda9f144aa",
+  "timing": "Defined after training, before inspecting held-out results; no subsequent model updates or checkpoint reselection.",
+  "training_original_successes": 918,
+  "training_order_exclusions": [
+    {
+      "step": 4,
+      "layout_id": "ad2ad6f9301de3c1",
+      "completion": "move(2,-2)\nlower()\nclose()\nlift(5)\nmove(-5,3)\nlift(6)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 5,
+      "layout_id": "722b2cd6bcc55c43",
+      "completion": "move(-1,-2)\nlower()\nclose()\nlift(5)\nmove(4,4)\nlift(11)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 6,
+      "layout_id": "5aff116226b76c98",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(10)\nmove(1, 5)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 26,
+      "layout_id": "3c9953e5ef49a263",
+      "completion": "move(1, -2)\nlower()\nclose()\nlift(7)\nmove(-1, -3)\nlift(10)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 27,
+      "layout_id": "146ddce1bba367be",
+      "completion": "move(0, 2)\nlower()\nclose()\nlift(8)\nmove(-4, -4)\nlift(12)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 27,
+      "layout_id": "146ddce1bba367be",
+      "completion": "move(0, 2)\nlower()\nclose()\nlift(7)\nmove(-4, -4)\nlift(13)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 28,
+      "layout_id": "f6683e9ad4294686",
+      "completion": "move(1, 7)\nlower()\nclose()\nlift(5)\nmove(-6, -3)\nlift(11)\nlower()\nopen()\nlift(12)\nretreat()"
+    },
+    {
+      "step": 28,
+      "layout_id": "f6683e9ad4294686",
+      "completion": "move(1, 7)\nlower()\nclose()\nlift(3)\nmove(-6, -3)\nlift(8)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 28,
+      "layout_id": "f6683e9ad4294686",
+      "completion": "move(1, 7)\nlower()\nclose()\nlift(4)\nmove(-6, -3)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 28,
+      "layout_id": "d2e0f5c25d4da8cf",
+      "completion": "move(-5, -1)\nlower()\nclose()\nlift(5)\nmove(5, -1)\nlift(12)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 28,
+      "layout_id": "d2e0f5c25d4da8cf",
+      "completion": "move(-5, -1)\nlower()\nclose()\nlift(3)\nmove(5, -1)\nlift(12)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "18148b8af300c9a8",
+      "completion": "move(-2, 0)\nlower()\nclose()\nlift(5)\nmove(-2, 3)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "18148b8af300c9a8",
+      "completion": "move(-2, 0)\nlower()\nclose()\nlift(1)\nmove(-2, 3)\nlift(7)\nlower()\nopen()\nlift(10)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "4d5cf1cc953a3799",
+      "completion": "move(-1, 5)\nlower()\nclose()\nlift(3)\nmove(-3, -3)\nlift(13)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "4d5cf1cc953a3799",
+      "completion": "move(-1, 5)\nlower()\nclose()\nlift(5)\nmove(-3, -3)\nlift(10)\nlower()\nopen()\nlift(12)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "4d5cf1cc953a3799",
+      "completion": "move(-1, 5)\nlower()\nclose()\nlift(5)\nmove(-3, -3)\nlift(9)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 29,
+      "layout_id": "4d5cf1cc953a3799",
+      "completion": "move(-1, 5)\nlower()\nclose()\nlift(5)\nmove(-3, -3)\nlift(12)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 30,
+      "layout_id": "6ce5dba252809506",
+      "completion": "move(4, 3)\nlower()\nclose()\nlift(5)\nmove(-5, -3)\nlift(6)\nlower()\nopen()\nlift(10)\nretreat()"
+    },
+    {
+      "step": 30,
+      "layout_id": "6ce5dba252809506",
+      "completion": "move(4, 3)\nlower()\nclose()\nlift(3)\nmove(-5, -3)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 30,
+      "layout_id": "6ce5dba252809506",
+      "completion": "move(4, 3)\nlower()\nclose()\nlift(5)\nmove(-5, -3)\nlift(11)\nlower()\nopen()\nlift(7)\nretreat()"
+    },
+    {
+      "step": 30,
+      "layout_id": "6ce5dba252809506",
+      "completion": "move(4, 3)\nlower()\nclose()\nlift(5)\nmove(-5, -3)\nlift(7)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 30,
+      "layout_id": "475050c5dd7cd13c",
+      "completion": "move(-1, 1)\nlower()\nclose()\nlift(4)\nmove(3, 2)\nlift(9)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(3)\nmove(-2, 6)\nlift(11)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(7)\nmove(-2, 6)\nlift(11)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(7)\nmove(-2, 6)\nlift(10)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(7)\nmove(-2, 6)\nlift(12)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(7)\nmove(-2, 6)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 31,
+      "layout_id": "82f6e04e7ad7272d",
+      "completion": "move(2, -2)\nlower()\nclose()\nlift(7)\nmove(-2, 6)\nlift(11)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(3)\nmove(-4, 0)\nlift(9)\nlower()\nopen()\nlift(13)"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(7)\nmove(-4, 0)\nlift(11)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(7)\nmove(-4, 0)\nlift(10)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(5)\nmove(-4, 0)\nlift(9)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(7)\nmove(-4, 0)\nlift(12)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 31,
+      "layout_id": "9712b25b1fa8b1a8",
+      "completion": "move(6, -4)\nlower()\nclose()\nlift(3)\nmove(-4, 0)\nlift(8)\nlower()\nopen()\nlift(12)\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "993a0fc121091a97",
+      "completion": "move(1, 1)\nlower()\nclose()\nlift(9)\nmove(-3, 1)\nlift(12)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "993a0fc121091a97",
+      "completion": "move(1, 1)\nlower()\nclose()\nlift(7)\nmove(-3, 1)\nlift(13)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "993a0fc121091a97",
+      "completion": "move(1, 1)\nlower()\nclose()\nlift(7)\nmove(-3, 1)\nlift(11)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "993a0fc121091a97",
+      "completion": "move(1, 1)\nlower()\nclose()\nlift(7)\nmove(-3, 1)\nlift(11)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "993a0fc121091a97",
+      "completion": "move(1, 1)\nlower()\nclose()\nlift(7)\nmove(-3, 1)\nlift(11)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 32,
+      "layout_id": "5d78c79114ca196e",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, -6)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 32,
+      "layout_id": "5d78c79114ca196e",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, -6)\nlift(11)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "81b92f76823b07bf",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, 4)\nlift(11)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "81b92f76823b07bf",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, 4)\nlift(11)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "81b92f76823b07bf",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, 4)\nlift(11)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "81b92f76823b07bf",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, 4)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "81b92f76823b07bf",
+      "completion": "move(-4, 1)\nlower()\nclose()\nlift(7)\nmove(2, 4)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(1)\nmove(1, -5)\nlift(14)\nlower()\nopen()\nlift(7)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(7)\nmove(1, -5)\nlift(10)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(7)\nmove(1, -5)\nlift(8)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(7)\nmove(1, -5)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(4)\nmove(1, -5)\nlift(10)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 33,
+      "layout_id": "bbc0377be02a1534",
+      "completion": "move(2, -1)\nlower()\nclose()\nlift(7)\nmove(1, -5)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 34,
+      "layout_id": "43caafa1971b0e84",
+      "completion": "move(3, -4)\nlower()\nclose()\nlift(5)\nmove(0, 5)\nlift(9)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(11)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(12)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(13)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(10)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(7)\nmove(2, 6)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(8)\nmove(2, 6)\nlift(12)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 34,
+      "layout_id": "21d0a131c251f192",
+      "completion": "move(-1, -4)\nlower()\nclose()\nlift(9)\nmove(2, 6)\nlift(13)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 35,
+      "layout_id": "1cea494eb38a411f",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(5)\nmove(-1, 6)\nlift(10)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 35,
+      "layout_id": "6e05b649170bd94e",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(9)\nmove(-2, 3)\nlift(13)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 35,
+      "layout_id": "6e05b649170bd94e",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(7)\nmove(-2, 3)\nlift(11)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 35,
+      "layout_id": "6e05b649170bd94e",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(7)\nmove(-2, 3)\nlift(13)\nlower()\nopen()\nretreat()"
+    },
+    {
+      "step": 35,
+      "layout_id": "6e05b649170bd94e",
+      "completion": "move(2, -5)\nlower()\nclose()\nlift(7)\nmove(-2, 3)\nlift(11)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 36,
+      "layout_id": "031d12506f7e8799",
+      "completion": "move(-2, -4)\nlower()\nclose()\nlift(7)\nmove(-3, 6)\nlift(10)\nlower()\nopen()\nlift(11)\nretreat()"
+    },
+    {
+      "step": 36,
+      "layout_id": "031d12506f7e8799",
+      "completion": "move(-2, -4)\nlower()\nclose()\nlift(7)\nmove(-3, 6)\nlift(10)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 37,
+      "layout_id": "6dbfc24c3b7daed5",
+      "completion": "move(-2, -3)\nlower()\nclose()\nlift(7)\nmove(0, 4)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 37,
+      "layout_id": "6dbfc24c3b7daed5",
+      "completion": "move(-2, -3)\nlower()\nclose()\nlift(7)\nmove(0, 4)\nlift(11)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 37,
+      "layout_id": "6dbfc24c3b7daed5",
+      "completion": "move(-2, -3)\nlower()\nclose()\nlift(9)\nmove(0, 4)\nlift(13)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 37,
+      "layout_id": "6dbfc24c3b7daed5",
+      "completion": "move(-2, -3)\nlower()\nclose()\nlift(7)\nmove(0, 4)\nlift(10)\nlower()\nopen()\nlift(12)\nretreat()"
+    },
+    {
+      "step": 38,
+      "layout_id": "dc4cf5447ab2aff7",
+      "completion": "move(3, 2)\nlower()\nclose()\nlift(7)\nmove(-1, -6)\nlift(12)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 38,
+      "layout_id": "dc4cf5447ab2aff7",
+      "completion": "move(3, 2)\nlower()\nclose()\nlift(8)\nmove(-1, -6)\nlift(13)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 38,
+      "layout_id": "dc4cf5447ab2aff7",
+      "completion": "move(3, 2)\nlower()\nclose()\nlift(9)\nmove(-1, -6)\nlift(12)\nlower()\nopen()\nlift(13)\nretreat()"
+    },
+    {
+      "step": 38,
+      "layout_id": "0694a152566830a6",
+      "completion": "move(-5, 6)\nlower()\nclose()\nlift(4)\nmove(1, -4)\nlift(11)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 38,
+      "layout_id": "0694a152566830a6",
+      "completion": "move(-5, 6)\nlower()\nclose()\nlift(8)\nmove(1, -4)\nlift(12)\nlower()\nopen()\nlift(13)"
+    },
+    {
+      "step": 38,
+      "layout_id": "0694a152566830a6",
+      "completion": "move(-5, 5)\nlower()\nclose()\nlift(8)\nmove(1, -4)\nlift(13)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 38,
+      "layout_id": "0694a152566830a6",
+      "completion": "move(-5, 6)\nlower()\nclose()\nlift(7)\nmove(1, -4)\nlift(10)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 38,
+      "layout_id": "0694a152566830a6",
+      "completion": "move(-5, 6)\nlower()\nclose()\nlift(9)\nmove(1, -4)\nlift(13)\nlower()\nopen()\nlift(14)\nretreat()"
+    },
+    {
+      "step": 39,
+      "layout_id": "01c3bc0d8f97c993",
+      "completion": "move(-5, -4)\nlower()\nclose()\nlift(7)\nmove(5, 4)\nlift(12)\nlower()\nopen()\nlift(14)"
+    },
+    {
+      "step": 39,
+      "layout_id": "01c3bc0d8f97c993",
+      "completion": "move(-5,-4)\nlower()\nclose()\nlift(9)\nmove(5,4)\nlift(13)\nlower()\nopen()\nlift(10)\nretreat()"
+    },
+    {
+      "step": 39,
+      "layout_id": "6f34549ed748116f",
+      "completion": "move(-4, 2)\nlower()\nclose()\nlift(7)\nmove(5, -1)\nlift(11)\nlower()\nopen()\nlift(13)"
+    },
+    {
+      "step": 59,
+      "layout_id": "b8d3c9b1f6807121",
+      "completion": "move(3, 5)\nlower()\nclose()\nlift(4)\nmove(0, -3)\nlift(14)\nlower()\nopen()\nlift(14)"
+    }
+  ],
+  "validation": {
+    "validation_0020.json": {
+      "original_successes": 57,
+      "excluded_indices_one_based": []
+    },
+    "validation_0040.json": {
+      "original_successes": 59,
+      "excluded_indices_one_based": []
+    },
+    "validation_0060.json": {
+      "original_successes": 56,
+      "excluded_indices_one_based": []
+    },
+    "validation_0080.json": {
+      "original_successes": 63,
+      "excluded_indices_one_based": []
+    },
+    "validation_baseline.json": {
+      "original_successes": 12,
+      "excluded_indices_one_based": []
+    }
+  },
+  "test": {
+    "criterion": "Raised and centrally grasped within 12 mm of original rail center; a later call boundary must be raised and grasped within 8 mm of target, with every intervening nonzero XY move starting and ending raised/grasped. Original final-placement criteria must also pass.",
+    "defined": "After training, before inspecting held-out results",
+    "excluded_original_success_indices_one_based": {
+      "before": [],
+      "after": []
+    },
+    "original_training_rewards_preserved": true
+  }
+}
