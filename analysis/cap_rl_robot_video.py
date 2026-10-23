@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from experiments.cap_rl.audit import audit, equivalent
-from experiments.cap_rl import task_robot as task
+from experiments.cap_rl.tasks import get_task
 from experiments.cap_rl.robot_lift import model, Robot
 
 
@@ -29,6 +29,9 @@ def font(size, mono=False):
 
 def render(directory, destination, index=0, validation_step=None):
     directory, destination = Path(directory), Path(destination)
+    metadata = json.loads((directory/"metadata.json").read_text())
+    task = get_task(metadata.get("task", "robot_lift"))
+    placement = metadata.get("task") == "frame_place"
     if validation_step is None:
         report = json.loads((directory/'test_comparison.json').read_text())
         layout = task.datasets()['test'][index]
@@ -72,13 +75,17 @@ def render(directory, destination, index=0, validation_step=None):
                 renderer.update_scene(d, camera=camera)
                 canvas.paste(Image.fromarray(renderer.render()), (offset, 65))
                 ended = elapsed >= times[panel][-1]-1e-8
-                status = ('SUCCESS' if row['success'] else 'FAIL: '+str(row['error'] or 'lift criteria')) if ended else 'running'
+                status = ('SUCCESS' if row['success'] else 'FAIL: '+str(row['error'] or ('placement criteria' if placement else 'lift criteria'))) if ended else 'running'
                 color = '#77dda2' if ended and row['success'] else '#ffbb83' if ended else '#dce8ef'
                 draw.text((offset+18, 10), 'Before training' if panel == 0 else 'After training', font=heading, fill='#f4f7fa')
                 draw.text((offset+18, 41), status, font=body, fill=color)
                 draw.text((offset+18, 429), f"t={state['time']:.1f}s  rail lift={(state['wood'][2]-.032)*100:.1f} cm", font=body, fill='#dce8ef')
                 p = state['wood']
-                draw.text((offset+18, 452), f"finger contact={state['grip_force']:.1f} N", font=body, fill='#dce8ef')
+                detail = f"finger contact={state['grip_force']:.1f} N"
+                if placement:
+                    target = task.ORIGIN + np.array(layout.target)*.01
+                    detail += f"; target error={np.linalg.norm(np.array(p[:2])-target)*1000:.1f} mm"
+                draw.text((offset+18, 452), detail, font=body, fill='#dce8ef')
                 lines = row['completion'].strip().splitlines()
                 if lines and lines[0].startswith('```'):
                     lines = lines[1:]
@@ -100,7 +107,9 @@ def render(directory, destination, index=0, validation_step=None):
                 if len(wrapped) > 10:
                     draw.text((offset+18, 684), '... full program in episode JSON', font=body, fill='#dce8ef')
                 draw.text((offset+18, 716), f'Gripper start: {layout.start} cm', font=body, fill='#77dda2')
-                draw.text((offset+18, 739), f'Rail center: {layout.center} cm; lift {layout.lift_cm} cm', font=body, fill='#ffbb83')
+                footer = (f'Rail {layout.center} → {layout.target}; lift {layout.lift_cm} cm' if placement else
+                          f'Rail center: {layout.center} cm; lift {layout.lift_cm} cm')
+                draw.text((offset+18, 739), footer, font=body, fill='#ffbb83')
             images.append(np.asarray(canvas))
     destination.parent.mkdir(parents=True, exist_ok=True)
     imageio.mimsave(str(destination.with_suffix('.mp4')), images, fps=10, codec='libx264', quality=8)
