@@ -183,3 +183,22 @@ python /absolute/path/to/train_assembly_strict.py train --task assembly_full \
 python /absolute/path/to/train_assembly_strict.py test \
   --out /absolute/path/to/strict-run
 ```
+
+### Validation-ceiling stop, declared before test use
+
+Updates 2 and 4 both attain the maximum possible selection tuple `(1, 1)`:
+4/4 strict validation successes and mean binary reward 1. The trainer keeps
+the earliest checkpoint on ties. Consequently no future update can replace
+update 2 under the existing selection rule. A policy recorded at
+2026-10-23 09:54 UTC stops after the in-progress update 6 and its scheduled
+validation, rather than spending the rest of the 16-update budget.
+
+The original budget remains unchanged in metadata. A separate stopping receipt
+records completed updates, hashes every training/validation file and archives
+the finalizer source. The finalizer checks the exact update boundary and
+selected-weight hash before stopping only the owned training process group.
+The pre-test auditor requires a true maximum score and earliest-best selection;
+it rejects altered records and records the unused remainder of the budget.
+No test result contributes to this decision. Training-loop timing ends at the
+last completed optimizer metric; terminal validation and stopping overhead
+remain included in the separately reported end-to-end allocation time.

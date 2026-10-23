@@ -36,7 +36,7 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def audit(directory):
+def audit(directory, pretest=False):
     directory = Path(directory)
     metadata = read(directory/'metadata.json')
     require(metadata['task'] == 'assembly_full', 'Wrong task')
@@ -123,11 +123,31 @@ def audit(directory):
         records.append(row)
 
     training = [json.loads(s) for s in (directory/'training.jsonl').read_text().splitlines()]
+    completed_steps = metadata['steps']
+    early_stop = None
+    if (directory/'validation_ceiling_stop.json').exists():
+        early_stop = read(directory/'validation_ceiling_stop.json')
+        require(reward_mode == 'strict_success', 'Ceiling stop requires binary success reward')
+        require(early_stop['format'] == 'cap_rl_validation_ceiling_stop_v1' and
+                early_stop['upper_bound'] == [1.,1.] and
+                early_stop['test_evaluated'] is False, 'Invalid ceiling stopping rule')
+        require(sha(directory/'selection_source/stop_assembly04_at_validation_ceiling.py') ==
+                early_stop['source_sha256'], 'Selection finalizer source changed')
+        completed_steps = early_stop['completed_updates']
+        require(early_stop['planned_updates'] == metadata['steps'] and
+                0 < completed_steps < metadata['steps'] and
+                completed_steps % metadata['eval_every'] == 0, 'Invalid early-stop boundary')
+        required = {'metadata.json','training.jsonl','rollouts.jsonl','validation_ceiling_policy.json',
+                    'validation_baseline.json'}
+        required.update(f'validation_{s:04d}.json' for s in range(metadata['eval_every'],completed_steps+1,metadata['eval_every']))
+        require(set(early_stop['files_sha256']) == required, 'Incomplete stopping evidence')
+        for name,digest in early_stop['files_sha256'].items():
+            require(sha(directory/name) == digest, 'Stopping evidence changed: '+name)
     samples = [json.loads(s) for s in (directory/'rollouts.jsonl').read_text().splitlines()]
     by_step = defaultdict(list)
     for row in samples:
         check(row,'train');by_step[row['step']].append(row)
-    require([r['step'] for r in training]==list(range(1,metadata['steps']+1)), 'Incomplete updates')
+    require([r['step'] for r in training]==list(range(1,completed_steps+1)), 'Incomplete updates')
     require(sorted(by_step)==[r['step'] for r in training], 'Training row coverage mismatch')
     rng = random.Random(metadata['seed'])
     for update in training:
@@ -140,7 +160,7 @@ def audit(directory):
                 summary['success_rate']==update['success_rate'], 'Training aggregate mismatch')
     validation = [(0,read(directory/'validation_baseline.json'))]
     validation += [(int(p.stem.split('_')[-1]),read(p)) for p in sorted(directory.glob('validation_[0-9]*.json'))]
-    expected_steps = [0]+[s for s in range(1,metadata['steps']+1) if s%metadata['eval_every']==0 or s==metadata['steps']]
+    expected_steps = [0]+[s for s in range(1,completed_steps+1) if s%metadata['eval_every']==0 or s==completed_steps]
     require([s for s,_ in validation]==expected_steps, 'Validation schedule mismatch')
     best, best_step = None, None
     for step, report in validation:
@@ -150,6 +170,9 @@ def audit(directory):
         candidate = report['metrics']['success_rate'],report['metrics']['mean_reward']
         if best is None or candidate>best:best,best_step=candidate,step
     selection = read(directory/'selection.json')
+    if early_stop:
+        require(best == (1.,1.) and early_stop['selected_step'] == best_step,
+                'Early stop lacks the maximum validation score')
     require(selection['best_step']==best_step and selection['selection_split']=='validation', 'Checkpoint selection mismatch')
     require((selection['validation_success_rate'],selection['validation_mean_reward'])==best, 'Selected score mismatch')
     if best_step:
@@ -159,6 +182,13 @@ def audit(directory):
             require(sha(checkpoint/name)==digest, 'Checkpoint changed')
         require(sha(checkpoint/'adapter_model.safetensors')==sha(directory/'best_adapter/adapter_model.safetensors'),
                 'Selected adapter differs from selected update')
+    if pretest:
+        require(not (directory/'test_comparison.json').exists(), 'Test already evaluated')
+        return dict(passes=True,scope='Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.',
+                    optimizer_updates=len(training),planned_optimizer_updates=metadata['steps'],
+                    selected_step=best_step,validation_score=list(best),
+                    stopped_at_validation_ceiling=bool(early_stop),
+                    unique_certified_trajectories=len(checked))
     test = read(directory/'test_comparison.json')
     for key,label in [('before','baseline'),('after','trained')]:
         rows = test[key]
@@ -175,7 +205,9 @@ def audit(directory):
         return [float(beta.ppf(.025,k,n-k+1)) if k else 0.,
                 float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]
     return dict(passes=True, scope='All records, hashes, reward accounting, split isolation and validation-only selection. Independent physics replay and model regeneration are separate checks.',
-        optimizer_updates=len(training),training_samples=len(samples),validation_records=sum(len(v['rows']) for _,v in validation),
+        optimizer_updates=len(training),planned_optimizer_updates=metadata['steps'],
+        stopped_at_validation_ceiling=bool(early_stop),
+        training_samples=len(samples),validation_records=sum(len(v['rows']) for _,v in validation),
         test_records=2*n,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
         selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
         baseline=test['baseline'],trained=test['trained'],
@@ -186,4 +218,5 @@ def audit(directory):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',required=True);p.add_argument('--out',required=True)
-    a=p.parse_args();result=audit(a.run);Path(a.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
+    p.add_argument('--pretest',action='store_true')
+    a=p.parse_args();result=audit(a.run,pretest=a.pretest);Path(a.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)

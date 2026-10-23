@@ -61,14 +61,14 @@ class RecordsAuditTests(unittest.TestCase):
             paired_wins=2,paired_losses=0,delta_success_rate=1.))
         return layouts,manifest
 
-    def run_fixture(self, mutate=None):
+    def run_fixture(self, mutate=None, pretest=False):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);layouts,manifest=self.fixture(root)
             if mutate:mutate(root)
             with patch.object(audit.task,'provenance',return_value=manifest),\
                  patch.object(audit.task,'datasets',return_value=layouts),\
                  patch.object(audit.task,'prompt',return_value='fixture prompt'):
-                return audit.audit(root)
+                return audit.audit(root,pretest=pretest)
 
     def test_valid_accounting(self):
         r=self.run_fixture();self.assertTrue(r['passes']);self.assertEqual(r['test_records'],4)
@@ -104,6 +104,49 @@ class RecordsAuditTests(unittest.TestCase):
     def test_strict_optimizer_keeps_dense_evidence_separate(self):
         result=self.run_fixture(self.enable_strict)
         self.assertEqual(result['optimization_reward'],'strict_success')
+
+    def enable_ceiling_stop(self,root):
+        self.enable_strict(root)
+        p=root/'metadata.json';metadata=audit.read(p);metadata['steps']=3
+        p.write_text(json.dumps(metadata))
+        (root/'validation_ceiling_policy.json').write_text(json.dumps({'upper_bound':[1.,1.]}))
+        names=['metadata.json','training.jsonl','rollouts.jsonl','validation_ceiling_policy.json',
+               'validation_baseline.json','validation_0001.json']
+        source=root/'selection_source/stop_assembly04_at_validation_ceiling.py'
+        source.parent.mkdir();source.write_text('synthetic selection fixture')
+        record=dict(format='cap_rl_validation_ceiling_stop_v1',upper_bound=[1.,1.],test_evaluated=False,
+                    completed_updates=1,planned_updates=3,selected_step=1,
+                    source_sha256=audit.sha(source),files_sha256={name:audit.sha(root/name) for name in names})
+        (root/'validation_ceiling_stop.json').write_text(json.dumps(record))
+
+    def test_ceiling_stop_preserves_planned_budget(self):
+        result=self.run_fixture(self.enable_ceiling_stop)
+        self.assertEqual(result['optimizer_updates'],1)
+        self.assertEqual(result['planned_optimizer_updates'],3)
+        self.assertTrue(result['stopped_at_validation_ceiling'])
+
+    def test_pretest_selection_audit_requires_unused_test(self):
+        def mutate(root):
+            self.enable_ceiling_stop(root)
+            (root/'test_comparison.json').unlink()
+        result=self.run_fixture(mutate,pretest=True)
+        self.assertTrue(result['passes']);self.assertEqual(result['selected_step'],1)
+        with self.assertRaises(ValueError):self.run_fixture(self.enable_ceiling_stop,pretest=True)
+
+    def test_invalid_ceiling_receipts_rejected(self):
+        for key,value in [('upper_bound',[.9,.9]),('test_evaluated',True),
+                          ('completed_updates',2),('selected_step',0),('files_sha256',{})]:
+            def mutate(root):
+                self.enable_ceiling_stop(root)
+                p=root/'validation_ceiling_stop.json';record=audit.read(p);record[key]=value
+                p.write_text(json.dumps(record))
+            with self.subTest(key=key),self.assertRaises(ValueError):self.run_fixture(mutate)
+
+    def test_ceiling_stop_changed_records_rejected(self):
+        def mutate(root):
+            self.enable_ceiling_stop(root)
+            p=root/'training.jsonl';p.write_text(p.read_text()+'\n')
+        with self.assertRaises(ValueError):self.run_fixture(mutate)
 
     def test_strict_optimizer_source_and_dense_reward_are_verified(self):
         for target in ('source','reward'):

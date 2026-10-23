@@ -39,7 +39,10 @@ def main():
         task=metadata['task'], gpu=metadata['gpu'], optimizer_updates=len(training),
         sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,
-        compute_scope='One GPU allocated during training including CPU physics and periodic validation; excludes setup, baseline validation, final test and audits.',
+        compute_scope=selection.get('training_seconds_scope',
+            'One GPU allocated during training including CPU physics and periodic validation; excludes setup, baseline validation, final test and audits.'),
+        planned_optimizer_updates=metadata['steps'],
+        stopped_at_validation_ceiling=(run/'validation_ceiling_stop.json').exists(),
         selected_step=selection['best_step'], validation=selection,
         selected_checkpoint_elapsed_seconds=next(
             (r['elapsed_seconds'] for r in training if r['step']==selection['best_step']), 0.),

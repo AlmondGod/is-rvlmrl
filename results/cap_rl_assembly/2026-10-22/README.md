@@ -264,5 +264,10 @@ The strict-success restart's greedy validation improves from 0/4 to **4/4 at
 update 2**, repeated at update 4. The retained original contact-only evaluator
 classifies those same trained validation trajectories as 3/4. Both measurements
 are preserved; no held-out score is claimed. The selected adapter matches the
-atomic update-2 checkpoint hash and has been backed up locally. Training is
-still completing the declared budget before the untouched test evaluation.
+atomic update-2 checkpoint hash and has been backed up locally. A validation-ceiling stopping rule was then declared before any test use: the
+maximum tuple (1, 1) and earliest-best tie rule prove later updates cannot
+replace checkpoint 2. The run will stop after the in-progress update 6 and its
+scheduled validation. The original 16-update budget remains in metadata, with
+a separate hashed stopping receipt. A pre-test audit must pass before the
+untouched held-out evaluation begins. Exact source for this finalizer and the
+updated verification driver is preserved in `strict-success-run`.

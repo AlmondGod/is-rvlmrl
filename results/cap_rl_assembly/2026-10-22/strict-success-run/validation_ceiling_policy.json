@@ -1,0 +1,16 @@
+{
+  "format": "cap_rl_validation_ceiling_policy_v1",
+  "created_utc": "2026-10-23T09:54:00.232885+00:00",
+  "target_update": 6,
+  "upper_bound": [
+    1.0,
+    1.0
+  ],
+  "observed_maximum_steps": [
+    2,
+    4
+  ],
+  "reason": "Strict binary reward bounds both selection coordinates by one. Earliest-best tie handling means no future checkpoint can replace the existing first maximum. Finish the current update and scheduled validation, then test the already fixed selected model.",
+  "planned_updates": 16,
+  "uses_test_outcomes": false
+}
