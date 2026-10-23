@@ -13,7 +13,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', required=True)
     p.add_argument('--out', required=True)
-    p.add_argument('--retired-pilot', help='Optional separate exploratory pilot; never added to final-run updates')
+    p.add_argument('--retired-pilot', action='append', default=[],
+                   help='Separate exploratory pilot; repeat for multiple runs. Never added to final-run updates.')
     args = p.parse_args()
     run, out = Path(args.run), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -54,14 +55,16 @@ def main():
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))
         for label,key in [('before','before'),('after','after')]}
-    if args.retired_pilot:
-        retired = read(Path(args.retired_pilot)/'retired.json')
-        summary['retired_exploratory_pilot'] = dict(
+    summary['retired_exploratory_pilots'] = []
+    for pilot in args.retired_pilot:
+        retired = read(Path(pilot)/'retired.json')
+        summary['retired_exploratory_pilots'].append(dict(
+            run=Path(pilot).name,
             optimizer_updates=retired['completed_updates'],
             training_loop_gpu_hours=retired['last_metric']['elapsed_seconds']/3600,
             process_gpu_hours=retired['trainer_elapsed_seconds']/3600,
             weights_used_to_initialize_final_run=False,
-            reason=retired['reason'])
+            reason=retired['reason']))
     (out/'summary.json').write_text(json.dumps(summary, indent=2))
 
     import matplotlib

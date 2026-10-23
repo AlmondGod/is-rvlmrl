@@ -1,7 +1,7 @@
 # Qwen3.5-4B full three-arm assembly pilot
 
 Status: the physical training integration is implemented and the pilot is in
-progress. **No trained-model full-task success or held-out improvement is
+progress. **Sampled training successes exist; no held-out improvement is
 claimed yet.** The historical live visual-language benchmark remains unchanged.
 
 The task starts with four loose frame members and a loose plywood sheet. Three
@@ -235,3 +235,27 @@ not a rewrite of cached physical results. Nine focused accounting/adapter tests
 pass, including preserved physics results, source integrity and high-progress
 failures receiving zero learning reward. The candidate is not yet running;
 held-out layouts remain unused while the dense-reward experiment continues.
+
+## Dense-reward retirement and strict-success restart
+
+The corrected-environment dense-reward pilot completed eight updates, then
+met a recorded futility rule: updates 5–8 had no successes and no within-group
+reward variance; greedy validation at update 8 scored 0/4. The optimizer had
+reinforced incomplete two-member programs as the best failures within a group.
+Its 64 samples, validation, retirement decision and retained checkpoint hashes
+are preserved in `retired-dense-pilot`. Training-loop time was 1.265 GPU-hours;
+process time including setup and final validation was 1.433 GPU-hours.
+
+The next candidate restarts raw Qwen3.5-4B with a 1/0 strict-success optimization
+reward, learning rate 3e-5, 16 updates and validation every two updates. The
+physical dense reward remains a diagnostic. Exact external optimizer-wrapper
+source is archived and hashed in run metadata. Frozen simulator/controller
+source b833a18, prompts, splits and all success thresholds are unchanged.
+No demonstrations or repaired programs enter training. Matching certified
+physical records can be reused because their physical provenance is unchanged.
+
+`strict-success-run` preserves the launcher, backup driver and gated finisher.
+The finisher evaluates the untouched eight test layouts only after the full
+budget and validation improvement, then audits records, regenerates every test
+completion, and freshly replays every distinct test trajectory. Results remain
+pending; eight test layouts constitute a small simulation pilot.
