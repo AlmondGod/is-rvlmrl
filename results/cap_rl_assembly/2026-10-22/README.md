@@ -271,3 +271,18 @@ scheduled validation. The original 16-update budget remains in metadata, with
 a separate hashed stopping receipt. A pre-test audit must pass before the
 untouched held-out evaluation begins. Exact source for this finalizer and the
 updated verification driver is preserved in `strict-success-run`.
+
+The strict-success run completed **6 updates / 48 sampled programs** and
+stopped at the recorded boundary on 2026-10-23 at 10:11:38 UTC. Update 6
+validation remains 4/4, so checkpoint 2 is still selected. The pre-test audit
+passed, checking all training and validation records, 23 distinct certified
+trajectories, frozen source, the stopping receipt and selected weights before
+any held-out outcome was used. The untouched test evaluation is now running.
+
+Training-loop time through update 6 is **2,776.62 seconds / 0.771 GPU-hours**;
+trainer process time including setup, baseline and terminal validation is
+**2,814.98 seconds / 0.782 GPU-hours**. These are allocation times including CPU
+physics waits. Final evaluation and independent replay are additional costs.
+The selected update-2 checkpoint was reached at 155.46 training-loop seconds,
+but reuses explicitly certified physical evidence computed earlier; this is
+not the total cost of discovering or verifying the policy.
