@@ -19,8 +19,18 @@ from .task_frame import (SYSTEM, Layout, Robot, asdict, datasets, prompt, parse_
 def ordered_carry(layout, trace):
     source = [float(o)+v*.01 for o,v in zip(ORIGIN, layout.center)]
     target = [float(o)+v*.01 for o,v in zip(ORIGIN, layout.target)]
+    def raised_grasp(state):
+        return (math.dist(state['tcp'][:2], state['wood'][:2]) <= .012
+                and state['grip_force'] > 5
+                and state['wood'][2]-HEIGHT/2 >= layout.lift_cm*.01-.008)
+
     pickup_index = arrival_index = None
     for i, state in enumerate(trace):
+        # A ceremonial lift followed by lowering and sliding is not a carry.
+        # Every intervening nonzero XY move must start and end raised/grasped.
+        if (pickup_index is not None and state['call'] == 'move' and any(state['args'])
+                and (i == 0 or not raised_grasp(trace[i-1]) or not raised_grasp(state))):
+            pickup_index = None
         central = math.dist(state['tcp'][:2], state['wood'][:2]) <= .012
         raised = state['wood'][2]-HEIGHT/2 >= layout.lift_cm*.01-.008
         grasped = central and state['grip_force'] > 5
@@ -99,7 +109,7 @@ def verify_report(directory):
                   paired_losses=sum(a['success'] and not b['success'] for a,b in pairs),
                   delta_success_rate=sum(deltas)/len(deltas),
                   paired_bootstrap_95_ci=[boot[250],boot[9749]],
-                  verification={'criterion':'Raised and centrally grasped within 12 mm of original rail center; a later call boundary must be raised and grasped within 8 mm of target. Original final-placement criteria must also pass.',
+                  verification={'criterion':'Raised and centrally grasped within 12 mm of original rail center; a later call boundary must be raised and grasped within 8 mm of target, with every intervening nonzero XY move starting and ending raised/grasped. Original final-placement criteria must also pass.',
                                 'defined':'After training, before inspecting held-out results',
                                 'excluded_original_success_indices_one_based':excluded,
                                 'original_training_rewards_preserved':True})

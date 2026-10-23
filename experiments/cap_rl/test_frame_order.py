@@ -14,6 +14,16 @@ class OrderedCarryTests(unittest.TestCase):
         self.assertFalse(corrected['success'])
         self.assertLess(corrected['reward'], .5)
 
+    def test_lift_then_lower_and_slide_is_rejected(self):
+        l=t.datasets()['train'][0]
+        calls=t.oracle(l).splitlines()
+        calls.insert(4,'lower()')
+        calls.insert(6,f'lift({l.lift_cm})')
+        r=t.execute(l,'\n'.join(calls))
+        self.assertTrue(r['success'])
+        self.assertFalse(ordered_carry(l,r['trace'])['passed'])
+        self.assertFalse(execute(l,'\n'.join(calls))['success'])
+
     def test_real_pick_carry_place_passes(self):
         l=t.datasets()['train'][0]
         r=t.execute(l,t.oracle(l))
