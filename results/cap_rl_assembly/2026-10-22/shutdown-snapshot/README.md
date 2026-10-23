@@ -32,8 +32,14 @@ The final training loop took 0.771 GPU-hours (process wall time 0.782 hours) on 
 
 ## Preservation and verification limits
 
-All 12 completed held-out trajectory certificates were checked against downloaded file hashes. The selected adapter, complete training records, source provenance, official base-model checksum check, and pre-test audit are preserved. The base weights are recoverable from the pinned public model revision; the 9.32 GB base weights are not included in backups. Large checkpoint and trajectory archives are release assets, not Git blobs.
+All 12 completed held-out trajectory certificates were checked against downloaded file hashes. All six final-run adapter checkpoints have been downloaded and checked against their checkpoint certificates. The selected adapter, complete training records, source provenance, official base-model checksum check, and pre-test audit are preserved. The base weights are recoverable from the pinned public model revision; the 9.32 GB base weights are not included in backups. Large checkpoint and trajectory archives are release assets, not Git blobs.
 
 Independent regeneration of the 16 test programs, fresh replay of all test trajectories, the final record audit, and the full eight-layout trained test result were unfinished at this snapshot. No acceptance thresholds were changed after seeing held-out results. Remaining cases require evaluation from the saved checkpoint; training need not restart.
 
 [Download checkpoint and evidence archives](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-2026-10-23).
+
+## Recovering the saved run
+
+The release's `assembly04-shutdown-evidence.tar.gz` contains the `assembly04/` run metadata/configuration and the completed physical records under `heldout-evidence/`. The `assembly04-all-checkpoints.tar` contains matching weights under `assembly04/checkpoints/step-0001` through `step-0006`. Restore the selected step-0002 adapter weights into `assembly04/best_adapter/`; its tokenizer and configuration are already in the shutdown evidence archive. The standalone selected-checkpoint backup provides a second copy of those weights.
+
+Restore the frozen simulator/trainer checkout at commit `b833a18` and its recorded runtime; use the exact recorded `assembly04/optimization_source/train_assembly_strict.py` wrapper. Restore completed cache entries to the configured physical cache directory. The held-out continuation entry point is the wrapper's `test --out <restored assembly04 directory>` mode. It regenerates both policies' programs and uses valid matching physical cache entries. Preserve the original test splits, checkpoint selection, rewards and thresholds. Provenance checks intentionally reject mismatching source or runtime. The remaining post-test audits are the record audit, exact program regeneration, and fresh physical test replay. Adapter files do not contain optimizer or RNG state, so they support evaluation and a fresh-optimizer warm start, not an exact training continuation.
