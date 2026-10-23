@@ -1,6 +1,7 @@
 """Summarize completed physical assembly RL, separating samples from executions."""
 import argparse
 from collections import Counter
+from datetime import datetime
 import json
 from pathlib import Path
 
@@ -15,6 +16,7 @@ def main():
     p.add_argument('--out', required=True)
     p.add_argument('--retired-pilot', action='append', default=[],
                    help='Separate exploratory pilot; repeat for multiple runs. Never added to final-run updates.')
+    p.add_argument('--verification-status', help='Completed supervisor status for end-to-end allocation time')
     args = p.parse_args()
     run, out = Path(args.run), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -55,6 +57,22 @@ def main():
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))
         for label,key in [('before','before'),('after','after')]}
+    if args.verification_status:
+        status = read(Path(args.verification_status))
+        if status['state'] != 'complete':
+            raise ValueError('Verification is not complete')
+        start = read(run/'process_start.json')
+        seconds = (datetime.fromisoformat(status['utc'])-
+                   datetime.fromisoformat(start['started_utc'])).total_seconds()
+        if seconds < 0:
+            raise ValueError('Invalid process/verification timestamps')
+        summary['end_to_end_allocated_gpu_hours'] = seconds/3600
+        summary['end_to_end_timing_scope'] = (
+            'One continuously allocated GPU from trainer process start through completed '
+            'test, record audit, model regeneration and independent physical replay. '
+            'Includes CPU simulation waits; excludes earlier setup, exploration and '
+            'prefetched physical evidence produced before this run.')
+        summary['verification_stages'] = status['completed_stages']
     summary['retired_exploratory_pilots'] = []
     for pilot in args.retired_pilot:
         retired = read(Path(pilot)/'retired.json')
