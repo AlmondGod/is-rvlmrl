@@ -1,0 +1,47 @@
+"""Regenerate both held-out greedy programs from the frozen base/selected weights.
+
+Does not invoke physics, optimize weights, or select checkpoints.
+"""
+import argparse
+import gc
+import hashlib
+import json
+from pathlib import Path
+
+import torch
+from transformers import set_seed
+from experiments.cap_rl import train
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--run',required=True);p.add_argument('--out',required=True)
+    args=p.parse_args();root=Path(args.run)
+    metadata=json.loads((root/'metadata.json').read_text())
+    report=json.loads((root/'test_comparison.json').read_text())
+    train.task=train.get_task('assembly_full')
+    train.task.configure(metadata['support_profile'],metadata['controller_profile'])
+    assert train.task.provenance()==json.loads((root/'assembly_provenance.json').read_text())
+    assert not metadata.get('init_adapter'), 'This verification is for raw-base initialization'
+    layouts=train.task.datasets()['test']
+    set_seed(metadata['seed']);torch.set_num_threads(4)
+    hashes={}
+    for label,adapter in [('before',None),('after',str(root/'best_adapter'))]:
+        model,tokenizer=train.load_model(metadata['model'],metadata['model_revision'],adapter)
+        inputs=train.encode(tokenizer,layouts)
+        with torch.no_grad():
+            generated=model.generate(**inputs,max_new_tokens=metadata['max_tokens'],do_sample=False,
+                pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id)
+        completions=generated[:,inputs.input_ids.shape[1]:]
+        texts=tokenizer.batch_decode(completions,skip_special_tokens=True)
+        assert len(texts)==len(report[label])==len(layouts)
+        for i,(text,row,layout) in enumerate(zip(texts,report[label],layouts)):
+            assert row['layout_id']==layout.key and row['prompt']==train.task.prompt(layout)
+            assert text==row['completion'], (label,layout.key,'generated program differs')
+            assert row['truncated']==(not bool(completions[i].eq(tokenizer.eos_token_id).any()))
+        hashes[label]=[hashlib.sha256(t.encode()).hexdigest() for t in texts]
+        del model,generated,completions,inputs;gc.collect();torch.cuda.empty_cache()
+    result=dict(passes=True,programs_regenerated=2*len(layouts),greedy=True,model_revision=metadata['model_revision'],
+        selected_adapter_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'best_adapter').iterdir() if p.is_file()},
+        program_sha256=hashes,scope='Exact regeneration from raw model and validation-selected adapter. No optimization or physics execution.')
+    Path(args.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
+if __name__=='__main__':main()

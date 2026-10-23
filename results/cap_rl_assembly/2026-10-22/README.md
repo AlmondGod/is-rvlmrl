@@ -191,3 +191,26 @@ as a shadow measurement, and saves each optimizer update. The new integration
 is under verification, not yet a completed training result. Initial local
 verification passed 74 runnable tests; the GRPO test module requires PyTorch and
 will run on the GPU host (the local physics-only environment lacks PyTorch).
+
+### Corrected experiment launched
+
+The fixed profiles passed 78 GPU-host tests. A full local integration replay
+matches all 6,270 recorded states of the isolated controller candidate exactly
+and preserves every original acceptance field. The three training-layout GPU
+verification episodes (41001, 41004, 41008) all pass both corrected and original
+shadow acceptance. The independent-process cache contention test passes and
+matches sequential physical execution within 1e-7. Evidence and exact launchers
+are under `corrected-preflight`.
+
+Fresh raw-model training (`assembly03`, frozen implementation commit `b833a18`)
+started on 2026-10-23 at 07:57 UTC with the declared 32-update configuration.
+Baseline greedy validation is 0/4, reward zero. Corrected-profile evidence is
+separate from the retired pilot. An auxiliary job evaluates the already sampled
+canonical program on the remaining five training layouts; rewards can be reused
+only when the learner independently samples exactly that program/layout under
+the same frozen profile. No test layouts are included.
+
+Verification tools now cover saved-record integrity and score/selection
+accounting, independent regeneration from model weights, and fresh physical
+replays of every distinct held-out episode. These tools are prepared; final
+held-out improvement has **not yet been measured**.

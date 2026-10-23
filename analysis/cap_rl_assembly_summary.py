@@ -13,6 +13,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', required=True)
     p.add_argument('--out', required=True)
+    p.add_argument('--retired-pilot', help='Optional separate exploratory pilot; never added to final-run updates')
     args = p.parse_args()
     run, out = Path(args.run), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -29,6 +30,8 @@ def main():
     failures = lambda rows: dict(Counter(r.get('error') or 'strict_acceptance_failure'
                                         for r in rows if not r['success']))
     summary = dict(model=metadata['model'], model_revision=metadata['model_revision'],
+        support_profile=metadata.get('support_profile','contact_only'),
+        controller_profile=metadata.get('controller_profile','original'),
         task=metadata['task'], gpu=metadata['gpu'], optimizer_updates=len(training),
         sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,
@@ -46,6 +49,18 @@ def main():
         active_group_updates=sum(r['active_groups']>0 for r in training),
         full_visual_language_policy=False, learned_motor_controller=False,
         task_prompt_identical_across_layouts=True, physical_validation=False)
+    summary['contact_only_shadow'] = {
+        label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
+                                                  for r in test[key]))
+        for label,key in [('before','before'),('after','after')]}
+    if args.retired_pilot:
+        retired = read(Path(args.retired_pilot)/'retired.json')
+        summary['retired_exploratory_pilot'] = dict(
+            optimizer_updates=retired['completed_updates'],
+            training_loop_gpu_hours=retired['last_metric']['elapsed_seconds']/3600,
+            process_gpu_hours=retired['trainer_elapsed_seconds']/3600,
+            weights_used_to_initialize_final_run=False,
+            reason=retired['reason'])
     (out/'summary.json').write_text(json.dumps(summary, indent=2))
 
     import matplotlib

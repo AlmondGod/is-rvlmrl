@@ -1,0 +1,11 @@
+{
+  "passes": true,
+  "states_shape": [
+    6270,
+    155
+  ],
+  "maximum_state_difference": 0.0,
+  "original_acceptance_exactly_preserved": true,
+  "success": true,
+  "contact_only_success": true
+}
