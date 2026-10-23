@@ -1,0 +1,20 @@
+{
+  "variant": "legacy-no-op",
+  "seed": 41001,
+  "success": false,
+  "reward": 0.51875,
+  "error": null,
+  "wall_s": 843.6145801669918,
+  "simulated_s": 634.1999999884591,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "peak_penetration_m": 0.00023370891518964825,
+  "airborne_relative_position_peak_m": 0.0019783203261794766,
+  "airborne_relative_angle_peak_deg": 1.9473251268065588,
+  "intact_fasteners": 7,
+  "missed_fasteners": 1,
+  "failed_fasteners": 0,
+  "raw_result_sha256": "d0f902e8161b4a7ce1f8135ac97219e3baed4f1c24b9c00ec5b24dc37b073c7f",
+  "states_sha256": "b15ea1615e5e6261b8d6d65658a0e0afcc8d779eb35db4c2f026ac5520d88102",
+  "classification": "No active-controller change; excluded from angle-effect evidence; states exactly match original reference."
+}

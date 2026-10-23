@@ -1,0 +1,15 @@
+{
+  "scope": "Separate scripted controller development on training layout41001, not active frozen RL. Change only the physical tool approach direction; placement, camera, physics and all nail acceptance limits unchanged.",
+  "old_direction": [
+    0,
+    0.8,
+    -0.6
+  ],
+  "new_direction": [
+    0,
+    0.9,
+    -0.4358898943540673
+  ],
+  "original_source_sha256": "37d23a59a95059d5964ffe2c847d40cfc526ed1255a11a5a0888bf3927582a40",
+  "modified_source_sha256": "e482dc58fa29e2adf81ea96ec3c1d4ea0ff4d5e6906140d99547474825c77437"
+}

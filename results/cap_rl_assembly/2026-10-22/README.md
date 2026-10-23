@@ -143,3 +143,21 @@ full-task result is claimed yet, and no test layout has been used.
 The first diagnostic sampled after buffer clearing and therefore recorded zero
 rather than the actual internal force; it is retained with that limitation. The
 corrected measurement occurs immediately after the original force calculation.
+
+## Nail-approach development (separate from RL)
+
+On training layout 41001, the first-corner-only approach adjustment passes the
+**original** full acceptance checks: 8/8 intact nails, 12.82 s inverted hold,
+88.36 s pre-flip stability, 0.230 mm peak penetration, 1.194 mm airborne relative
+displacement and 2.364 degrees relative angle. It took 626.90 simulated seconds
+and 837.72 wall seconds locally. This is a scripted controller result, not model
+inference or an RL gain, and it does not use the support-measurement correction.
+
+The development history is preserved in `development/nail-approach-trials`:
+changing an unused legacy helper had no effect; the active all-corner 0.90
+horizontal direction formed the first three connections but timed out at corner
+3; the smaller all-corner 0.85 direction exceeded the unchanged 0.5 mm penetration
+limit. The candidate uses 0.90 only at corner 0, retaining the original nominal
+0.80 direction at other corners. Exact source patches and raw-evidence hashes
+are retained. A paired original/candidate run on training layout 41006 is in
+progress; the candidate has not been integrated into the active frozen RL run.

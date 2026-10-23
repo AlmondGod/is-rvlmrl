@@ -1,0 +1,16 @@
+{
+  "scope": "Separate scripted training-layout development after .90 direction corrected first corner but timed out on corner3. Same .85 approach for all corners, no change to placement, timeout, physics or acceptance. Not active RL.",
+  "file": "experiments/torso_assembly/tool_skills.py",
+  "old_direction": [
+    0,
+    0.8,
+    -0.6
+  ],
+  "new_direction": [
+    0,
+    0.85,
+    -0.526782687642637
+  ],
+  "original_source_sha256": "151afbac19919c4140626287d67226ac175a5898cc31b5e3b632e2d255f1187c",
+  "modified_source_sha256": "a7a868e4936b8cfb0b6b41477f9346923054b80b4ac2cfc6d928a03b5590ce01"
+}
