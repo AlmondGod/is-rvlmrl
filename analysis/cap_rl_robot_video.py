@@ -133,7 +133,8 @@ def render(directory, destination, index=0, validation_step=None):
     evidence = {'split': 'test' if validation_step is None else 'validation', 'index': index, 'layout_id': layout.key,
                 'layout': task.asdict(layout),
                 'before': rows[0], 'after': rows[1],
-                'render_note': 'Actual MuJoCo renders; real-time playback; terminated episodes freeze.'}
+                'render_note': 'Actual MuJoCo renders; real-time playback; terminated episodes freeze.'
+                               + (' Cyan outline is a rendering-only target marker.' if placement else '')}
     destination.with_suffix('.json').write_text(json.dumps(evidence, indent=2)+'\n')
     print(json.dumps({'index': index, 'layout_id': layout.key,
                       'before_success': rows[0]['success'], 'after_success': rows[1]['success'],

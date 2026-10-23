@@ -23556,5 +23556,11 @@
         "gripper_command": 0.0
       }
     }
-  ]
+  ],
+  "runtime": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "mujoco": "3.3.7",
+    "numpy": "2.5.4"
+  },
+  "purpose": "Pre-training feasibility on the training split only; oracle programs never supplied to the model or optimizer."
 }
