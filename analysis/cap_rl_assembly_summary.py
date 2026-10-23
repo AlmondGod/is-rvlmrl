@@ -41,6 +41,8 @@ def main():
         allocated_training_gpu_hours=selection['training_seconds']/3600,
         compute_scope='One GPU allocated during training including CPU physics and periodic validation; excludes setup, baseline validation, final test and audits.',
         selected_step=selection['best_step'], validation=selection,
+        selected_checkpoint_elapsed_seconds=next(
+            (r['elapsed_seconds'] for r in training if r['step']==selection['best_step']), 0.),
         baseline=test['baseline'], trained=test['trained'], paired_wins=test['paired_wins'],
         paired_losses=test['paired_losses'], delta_success_rate=test['delta_success_rate'],
         paired_bootstrap_95_ci=test['paired_bootstrap_95_ci'],
