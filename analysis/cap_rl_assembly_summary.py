@@ -62,6 +62,14 @@ def main():
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))
         for label,key in [('before','before'),('after','after')]}
+    audit = read(run/'record_audit.json') if (run/'record_audit.json').exists() else None
+    if audit:
+        for name in ('paired_exact_two_sided_p','baseline_success_exact_95_ci','trained_success_exact_95_ci'):
+            summary[name] = audit[name]
+        summary['uncertainty_note'] = (
+            'Exact success-rate intervals describe this small layout sample. '
+            'The retained empirical paired bootstrap interval can collapse at all wins '
+            'and should not be interpreted as certainty about broader reliability.')
     if args.verification_status:
         status = read(Path(args.verification_status))
         if status['state'] != 'complete':
@@ -104,8 +112,19 @@ def main():
     values = [test['baseline'], test['trained']]
     axes[1].bar(['Before RL', 'After RL'], [100*x['success_rate'] for x in values],
                 color=['#b1b9c4', '#087e8b'], width=.6)
+    intervals = ([audit['baseline_success_exact_95_ci'], audit['trained_success_exact_95_ci']]
+                 if audit else None)
+    if intervals:
+        rates = [100*x['success_rate'] for x in values]
+        axes[1].errorbar([0,1], rates,
+            yerr=[[v-100*c[0] for v,c in zip(rates,intervals)],
+                  [100*c[1]-v for v,c in zip(rates,intervals)]],
+            fmt='o', color='#253343', markersize=4, capsize=5,
+            label='Exact 95% success-rate interval')
+        axes[1].legend(loc='upper left', fontsize=8)
     for i, item in enumerate(values):
-        axes[1].text(i, 100*item['success_rate']+3,
+        label_height = 100*(intervals[i][1] if intervals else item['success_rate'])+3
+        axes[1].text(i, label_height,
                      f"{item['successes']}/{item['n']} ({100*item['success_rate']:.1f}%)", ha='center')
     axes[1].set(ylim=(0, 120), ylabel='Strict physical success (%)', title='Paired held-out layouts')
     for ax in axes:
