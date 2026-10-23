@@ -33,7 +33,9 @@ def main():
     parser.add_argument('--video', action='store_true')
     args = parser.parse_args()
     evidence = Path(args.evidence)
-    if json.loads((evidence / 'provenance.json').read_text()) != provenance():
+    recorded_provenance = json.loads((evidence / 'provenance.json').read_text())
+    profiles = recorded_provenance.get('profiles', {})
+    if recorded_provenance != provenance(**profiles):
         raise RuntimeError('Replay must use the recorded source, assets and runtime')
     certificate = json.loads((evidence / 'certificate.json').read_text())
     for name, sha in certificate['files'].items():
@@ -41,7 +43,7 @@ def main():
             raise RuntimeError('Evidence changed: ' + name)
     expected = json.loads((evidence / 'result.json').read_text())
     actual = run(expected['seed'], (evidence / 'program.py').read_text(), args.out,
-                 video=args.video, progress=True)
+                 video=args.video, progress=True, **profiles)
     compare(expected, actual)
     old = np.load(evidence / 'states.npz')
     new = np.load(Path(args.out) / 'states.npz')

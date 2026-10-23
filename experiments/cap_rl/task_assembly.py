@@ -1,17 +1,33 @@
 """Offline full-program CaP-RL adapter for the three-arm physical benchmark."""
+from contextlib import contextmanager
 from dataclasses import dataclass
+import fcntl
 import hashlib
 import json
 import os
 from pathlib import Path
 
-from .assembly import parse_program, provenance, run
+from .assembly import parse_program, provenance as _provenance, profile_options, run
 
 SYSTEM = 'Write only the requested Python API program. Do not explain it.'
 EXPECTED_PROVENANCE = None
 _FAILURES = {}
 PHYSICS_WORKERS = 1
 _POOL = None
+SUPPORT_PROFILE = 'contact_only'
+CONTROLLER_PROFILE = 'original'
+
+
+def configure(support_profile='contact_only', controller_profile='original'):
+    global SUPPORT_PROFILE, CONTROLLER_PROFILE
+    profile_options(support_profile, controller_profile)
+    if _POOL is not None and (support_profile, controller_profile) != (SUPPORT_PROFILE, CONTROLLER_PROFILE):
+        raise RuntimeError('Cannot change assembly profiles with active physics workers')
+    SUPPORT_PROFILE, CONTROLLER_PROFILE = support_profile, controller_profile
+
+
+def provenance():
+    return _provenance(support_profile=SUPPORT_PROFILE, controller_profile=CONTROLLER_PROFILE)
 
 
 def terminal_failure_prefix(result, calls):
@@ -64,6 +80,20 @@ All four members must form a released frame before corner nailing. The sheet mus
 Output only API calls, at most 32. No loops, variables, imports, functions, calculations, prints, or explanations.'''
 
 
+@contextmanager
+def execution_lock(root, key):
+    """One physical execution per identity, even across independent processes."""
+    locks = root / '.locks'
+    locks.mkdir(parents=True, exist_ok=True)
+    # Keep lock files: deleting one can let a newcomer lock a different inode.
+    with (locks / (key + '.lock')).open('a') as handle:
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+
+
 def execute(layout, text):
     try:
         calls = parse_program(text)
@@ -87,23 +117,31 @@ def execute(layout, text):
             break
     out = root / key
     certificate = out / 'certificate.json'
-    reused = certificate.exists()
-    if reused:
-        cert = json.loads(certificate.read_text())
-        for name, sha in cert['files'].items():
-            if hashlib.sha256((out / name).read_bytes()).hexdigest() != sha:
-                raise RuntimeError('Cached assembly evidence changed: ' + name)
-        if cert['identity_sha256'] != key:
-            raise RuntimeError('Cached assembly identity mismatch')
-        result = json.loads((out / 'result.json').read_text())
-        if key != requested_key and terminal_failure_prefix(result, calls) is None:
-            raise RuntimeError('Failure-prefix cache lacks a measured terminal failure')
-    else:
-        # Existing incomplete runs are errors, never silently retried/relabelled.
-        result = run(layout.seed, text, out)
-        cert = dict(identity_sha256=key, files={p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                    for p in out.iterdir() if p.is_file()})
-        certificate.write_text(json.dumps(cert, indent=2))
+    with execution_lock(root, key):
+        if provenance() != manifest:
+            raise RuntimeError('Assembly dependencies changed while waiting for physics')
+        reused = certificate.exists()
+        if reused:
+            cert = json.loads(certificate.read_text())
+            for name, sha in cert['files'].items():
+                if hashlib.sha256((out / name).read_bytes()).hexdigest() != sha:
+                    raise RuntimeError('Cached assembly evidence changed: ' + name)
+            if cert['identity_sha256'] != key:
+                raise RuntimeError('Cached assembly identity mismatch')
+            result = json.loads((out / 'result.json').read_text())
+            if key != requested_key and terminal_failure_prefix(result, calls) is None:
+                raise RuntimeError('Failure-prefix cache lacks a measured terminal failure')
+        else:
+            # Existing incomplete runs are errors, never silently retried/relabelled.
+            result = run(layout.seed, text, out,
+                         support_profile=SUPPORT_PROFILE, controller_profile=CONTROLLER_PROFILE)
+            if result.get('error') == 'interrupted':
+                raise RuntimeError('Interrupted physics is not a measured training reward')
+            if provenance() != manifest:
+                raise RuntimeError('Assembly dependencies changed during physical execution')
+            cert = dict(identity_sha256=key, files={p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                        for p in out.iterdir() if p.is_file()})
+            certificate.write_text(json.dumps(cert, indent=2))
     prefix = terminal_failure_prefix(result, calls)
     if prefix is not None and not any(p == prefix for p, _ in _FAILURES.get(context, [])):
         _FAILURES.setdefault(context, []).append((prefix, key))
@@ -114,8 +152,9 @@ def execute(layout, text):
     return summary
 
 
-def _worker_init(expected):
+def _worker_init(expected, support_profile, controller_profile):
     global EXPECTED_PROVENANCE
+    configure(support_profile, controller_profile)
     EXPECTED_PROVENANCE = expected
 
 
@@ -129,7 +168,7 @@ def execute_batch(layouts, texts):
     if _POOL is None:
         _POOL = ProcessPoolExecutor(PHYSICS_WORKERS,
             mp_context=multiprocessing.get_context('spawn'),
-            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE,))
+            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE, SUPPORT_PROFILE, CONTROLLER_PROFILE))
     manifest = provenance()
     if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
         raise RuntimeError('Assembly dependencies changed during this training/evaluation run')

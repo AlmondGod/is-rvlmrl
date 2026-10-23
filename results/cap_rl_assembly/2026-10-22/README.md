@@ -135,10 +135,13 @@ force before the simulator clears its scratch buffer, and a separate evaluator
 includes its signed vertical component in the same 5% support-balance check.
 The original benchmark/default evaluator and active RL run remain unchanged.
 Eight focused local tests pass, including downward preload, missing support,
-external support, bad geometry, and preservation of the full-task gates. A
-separate full GPU replay of training layout 41004 is in progress to check that
-this observer leaves every physical state unchanged. No corrected-profile
-full-task result is claimed yet, and no test layout has been used.
+external support, bad geometry, and preservation of the full-task gates. The
+separate GPU replay of training layout 41004 has now completed: all 6,419 saved
+physical states match exactly (maximum difference zero). The original score is
+0.70/fail; the corrected score is 1.00/pass with 13.86 seconds pre-flip stability
+and a 12.80-second inverted hold. Contact support is 51.75864 N and internal nail
+support is 15.30331 N, balancing the 67.06193 N panel weight. This classification
+change is a measurement correction, not an RL gain. No test layout has been used.
 
 The first diagnostic sampled after buffer clearing and therefore recorded zero
 rather than the actual internal force; it is retained with that limitation. The
@@ -159,5 +162,32 @@ horizontal direction formed the first three connections but timed out at corner
 3; the smaller all-corner 0.85 direction exceeded the unchanged 0.5 mm penetration
 limit. The candidate uses 0.90 only at corner 0, retaining the original nominal
 0.80 direction at other corners. Exact source patches and raw-evidence hashes
-are retained. A paired original/candidate run on training layout 41006 is in
-progress; the candidate has not been integrated into the active frozen RL run.
+are retained. Paired local runs on training layouts 41006 and 41008 also completed. Layout
+41006 passes with both controllers; 41008 changes from 7/8 fasteners/fail to
+8/8/pass. Across these three training-only pairs, original scripted success is
+1/3 and candidate scripted success is 3/3. The candidate is not part of the
+original frozen RL pilot. These development cases do not estimate held-out
+performance or a learned model improvement.
+
+## Restart decision and integration status
+
+The original contact-only pilot was retired after five completed updates
+(2.574 training-loop hours; 2.639 process hours including model setup/baseline).
+Mean sampled reward progressed from 0.15469 to 0.37266. Updates 4 and 5 each
+contain one successful sample out of eight on training layout 41002: the model
+placed members in order 0,3,1,2 and completed all eight fasteners and a 12.74-second
+inverted hold under the original checks. Update 5 reused the same measured
+program/layout evidence. This is a sampled training success, not a held-out
+accuracy or a controlled before/after improvement.
+
+Retirement was requested after batch 4, but the cache made batch 5 finish before
+the watcher was armed; all five complete batches are retained. The pilot's
+learned weights were not checkpointed before the scheduled update-8 validation.
+The next experiment restarts from raw Qwen3.5-4B, with no weight continuity.
+
+The corrected experiment uses explicit fixed evaluator/controller profiles for
+both baseline and trained evaluation, retains the original acceptance result
+as a shadow measurement, and saves each optimizer update. The new integration
+is under verification, not yet a completed training result. Initial local
+verification passed 74 runnable tests; the GRPO test module requires PyTorch and
+will run on the GPU host (the local physics-only environment lacks PyTorch).

@@ -148,6 +148,7 @@ def train(args):
     task = get_task(args.task)
     if args.task == 'assembly_full':
         task.PHYSICS_WORKERS = args.physics_workers
+        task.configure(args.support_profile, args.controller_profile)
     set_seed(args.seed)
     torch.set_num_threads(4)
     if args.init_adapter:
@@ -178,8 +179,8 @@ def train(args):
         metadata["robot_assets_sha256"] = asset_hashes()
     dump(out / "metadata.json", metadata)
     if args.task == 'assembly_full':
-        from .assembly import provenance, ROOT
-        manifest = provenance()
+        from .assembly import ROOT
+        manifest = task.provenance()
         task.EXPECTED_PROVENANCE = manifest
         dump(out / 'assembly_provenance.json', manifest)
         for name in manifest['sha256']:
@@ -238,6 +239,9 @@ def train(args):
         append(out / "training.jsonl", [metric])
         append(out / "rollouts.jsonl", [{"step": step, **r} for r in rows_for(layouts,texts,results)])
         print(json.dumps(metric), flush=True)
+        if args.checkpoint_every and (step % args.checkpoint_every == 0 or step == args.steps):
+            from .checkpoints import save_step_adapter
+            save_step_adapter(model, out, metric)
         if step % args.eval_every == 0 or step == args.steps:
             summary, rows = evaluate(model, tokenizer, splits["validation"], args.max_tokens)
             dump(out / f"validation_{step:04d}.json", {"metrics": summary, "rows": rows})
@@ -262,6 +266,8 @@ def test(args):
     task = get_task(metadata.get("task", "pick_place"))
     if metadata.get('task') == 'assembly_full':
         task.PHYSICS_WORKERS = metadata.get('physics_workers', 1)
+        task.configure(metadata.get('support_profile', 'contact_only'),
+                       metadata.get('controller_profile', 'original'))
     set_seed(metadata["seed"])
     torch.set_num_threads(4)
     layouts = task.datasets()["test"]
@@ -272,10 +278,9 @@ def test(args):
     if [layout.key for layout in layouts] != metadata["splits"]["test"]:
         raise RuntimeError("Test split changed since training.")
     if metadata.get('task') == 'assembly_full':
-        from .assembly import provenance
-        if provenance() != json.loads((out / 'assembly_provenance.json').read_text()):
+        if task.provenance() != json.loads((out / 'assembly_provenance.json').read_text()):
             raise RuntimeError('Full assembly source, assets or runtime changed since training')
-        task.EXPECTED_PROVENANCE = provenance()
+        task.EXPECTED_PROVENANCE = task.provenance()
     if metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered"):
         from .robot_lift import asset_hashes
         if asset_hashes() != metadata["robot_assets_sha256"]:
@@ -328,12 +333,16 @@ def main():
     parser.add_argument("--prompts-per-step", type=int, default=2)
     parser.add_argument("--microbatch", type=int, default=2)
     parser.add_argument("--physics-workers", type=int, default=1, help="Independent full-assembly simulation workers")
+    parser.add_argument('--support-profile', choices=('contact_only', 'contact_and_nails'), default='contact_only')
+    parser.add_argument('--controller-profile', choices=('original', 'southwest_approach'), default='original')
     parser.add_argument("--max-tokens", type=int, default=96)
     parser.add_argument("--eval-every", type=int, default=20)
+    parser.add_argument('--checkpoint-every', type=int, default=0,
+                        help='Save a complete adapter snapshot every N updates; 0 disables. Does not save optimizer/RNG state.')
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--beta", type=float, default=.02)
     args = parser.parse_args()
-    if args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch, args.physics_workers,
+    if args.checkpoint_every < 0 or args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch, args.physics_workers,
                                   args.max_tokens, args.eval_every) < 1:
         parser.error("positive sizes and group_size >= 2 required")
     train(args) if args.mode == "train" else test(args)

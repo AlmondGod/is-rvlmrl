@@ -110,3 +110,39 @@ experiments.cap_rl.assembly --program PROGRAM.py --seed SEED --out NEW_DIRECTORY
 --video`. Development smoke runs can set `--seconds`; scored runs use 1200.
 The script in `assembly_benchmark.mock_server` is an infrastructure-only
 feasibility reference. Never label it model-generated or use it as an RL target.
+
+## Corrected-support experiment (declared before held-out evaluation)
+
+The contact-only exploratory pilot found a measurement defect: finite panel-to-
+frame nails carry part of the panel weight, but the original support predicate
+counts only collision forces. An independent GPU replay matches all 6,419 saved
+physical states exactly while contact plus measured internal nail support
+balances the panel weight. This correction is not a learned improvement.
+
+The next experiment restarts **raw Qwen3.5-4B**, with the same model revision,
+splits, prompt and 32-update configuration above. It does not initialize from the
+retired contact-only pilot. Use `--support-profile contact_and_nails
+--controller-profile southwest_approach --checkpoint-every 1` for BOTH baseline
+and trained evaluations. These profiles are included in the evidence identity;
+old-profile results cannot supply new-profile rewards. The corrected evaluator
+also records `contact_only_acceptance` on every trajectory, preserving the old
+classification for comparison. All numerical, geometry, eight-fastener and
+inverted-hold thresholds remain unchanged.
+
+The fixed controller profile changes only the southwest corner approach
+horizontal component from 0.80 to 0.90 (with the corresponding normalized
+vertical component). It was selected using scripted training-layout trials,
+never test outcomes. Every model and layout uses the same controller. The
+original controller and contact-only evaluator remain the defaults. Factory
+injection preserves the original default direction expression exactly.
+
+Independent processes requesting the same cache identity take a per-identity
+file lock, so speculative evaluation and a learner can share one measured
+execution. Dependencies are checked again after waiting and after physics.
+Interrupted results remain evidence but are never certified as training rewards.
+Incomplete evidence still requires explicit investigation, not an automatic retry.
+
+Each update publishes an adapter snapshot with file hashes by atomically renaming
+a completed temporary directory. These are adapter-only checkpoints, not full
+optimizer/RNG resumption state. Validation still selects the final policy;
+merely saving an update does not make it eligible for held-out evaluation.

@@ -59,7 +59,7 @@ class AssemblyTests(unittest.TestCase):
 
     def test_cached_physics_is_bound_to_seed_and_rejects_tampering(self):
         from . import task_assembly as task
-        def measured(seed, text, out):
+        def measured(seed, text, out, **profiles):
             out.mkdir(parents=True)
             value = dict(reward=.1, success=False, valid=True, seed=seed)
             (out / 'result.json').write_text(json.dumps(value))
@@ -87,6 +87,82 @@ class AssemblyTests(unittest.TestCase):
              patch.object(task, 'EXPECTED_PROVENANCE', {'source': 'old'}):
             with self.assertRaisesRegex(RuntimeError, 'dependencies changed'):
                 task.execute(task.Layout(41001), 'finish()')
+
+    def test_concurrent_requests_share_one_execution(self):
+        from concurrent.futures import ThreadPoolExecutor
+        from threading import Event
+        from . import task_assembly as task
+        entered, release = Event(), Event()
+        def measured(seed, text, out, **profiles):
+            out.mkdir(parents=True)
+            entered.set()
+            if not release.wait(5):
+                raise RuntimeError('Test did not release measured execution')
+            result = dict(reward=.1, success=False, valid=True)
+            (out/'result.json').write_text(json.dumps(result))
+            return result
+        with tempfile.TemporaryDirectory() as root, \
+             patch.dict('os.environ', CAP_RL_ASSEMBLY_CACHE=root), \
+             patch.object(task, 'provenance', return_value={'test': 'concurrency'}), \
+             patch.object(task, 'EXPECTED_PROVENANCE', None), \
+             patch.object(task, 'run', side_effect=measured) as runner, \
+             ThreadPoolExecutor(2) as pool:
+            first = pool.submit(task.execute, task.Layout(41001), 'finish()')
+            self.assertTrue(entered.wait(5))
+            second = pool.submit(task.execute, task.Layout(41001), 'finish()')
+            release.set()
+            a, b = first.result(timeout=10), second.result(timeout=10)
+            self.assertEqual(runner.call_count, 1)
+            self.assertEqual(a['evidence_id'], b['evidence_id'])
+            self.assertEqual({a['cache_hit'], b['cache_hit']}, {False, True})
+
+    def test_interruption_and_mid_execution_mutation_are_not_certified(self):
+        from . import task_assembly as task
+        for interrupted in (True, False):
+            manifest = {'source': 'original'}
+            def measured(seed, text, out, **profiles):
+                out.mkdir(parents=True)
+                result = dict(reward=.1, success=False, valid=True,
+                              error='interrupted' if interrupted else None)
+                (out/'result.json').write_text(json.dumps(result))
+                manifest['source'] = 'changed'
+                return result
+            with self.subTest(interrupted=interrupted), tempfile.TemporaryDirectory() as root, \
+                 patch.dict('os.environ', CAP_RL_ASSEMBLY_CACHE=root), \
+                 patch.object(task, 'provenance', side_effect=lambda: dict(manifest)), \
+                 patch.object(task, 'EXPECTED_PROVENANCE', None), \
+                 patch.object(task, 'run', side_effect=measured):
+                with self.assertRaisesRegex(RuntimeError, 'Interrupted|dependencies changed'):
+                    task.execute(task.Layout(41001), 'finish()')
+                self.assertEqual(len(list(Path(root).glob('*/result.json'))), 1)
+                self.assertEqual(list(Path(root).glob('*/certificate.json')), [])
+
+    def test_profile_changes_cannot_reuse_another_profiles_reward(self):
+        from . import task_assembly as task
+        def measured(seed, text, out, **profiles):
+            out.mkdir(parents=True)
+            value = dict(reward=.1, success=False, valid=True, seed=seed)
+            (out/'result.json').write_text(json.dumps(value))
+            return value
+        previous = task.SUPPORT_PROFILE, task.CONTROLLER_PROFILE
+        try:
+            with tempfile.TemporaryDirectory() as root, \
+                 patch.dict('os.environ', CAP_RL_ASSEMBLY_CACHE=root), \
+                 patch.object(task, '_POOL', None), \
+                 patch.object(task, '_provenance', side_effect=lambda **profiles: profiles), \
+                 patch.object(task, 'EXPECTED_PROVENANCE', None), \
+                 patch.object(task, 'run', side_effect=measured) as runner:
+                task.configure()
+                original = task.execute(task.Layout(41001), 'finish()')
+                task.configure('contact_and_nails', 'southwest_approach')
+                revised = task.execute(task.Layout(41001), 'finish()')
+                self.assertNotEqual(original['evidence_id'], revised['evidence_id'])
+                self.assertEqual(runner.call_count, 2)
+                self.assertTrue(task.execute(task.Layout(41001), 'finish()')['cache_hit'])
+                with patch.object(task, '_POOL', object()), self.assertRaises(RuntimeError):
+                    task.configure()
+        finally:
+            task.configure(*previous)
 
     def test_failure_reuse_requires_identical_executed_prefix(self):
         from .task_assembly import terminal_failure_prefix

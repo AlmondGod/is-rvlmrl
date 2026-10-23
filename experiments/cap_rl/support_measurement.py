@@ -49,8 +49,10 @@ class SupportEvaluation(Evaluation):
     def __init__(self, criteria):
         super().__init__(criteria)
         self.preflip_support = None
+        self.contact_only_evaluation = Evaluation(criteria)
 
     def update(self, env, metrics):
+        self.contact_only_evaluation.update(env, metrics)
         super().update(env, supported_metrics(metrics, env.nails.panel_support_z_N))
 
     def begin_flip(self, env):
@@ -58,10 +60,13 @@ class SupportEvaluation(Evaluation):
         self.preflip_support = dict(contact_N=metrics['forces']['frame'],
             nail_vertical_N=env.nails.panel_support_z_N,
             weight_N=metrics['panel_mass_kg'] * 9.81)
+        self.contact_only_evaluation.begin_flip(env)
         super().begin_flip(env)
 
     def result(self, env, finished, flipped, error):
         result = super().result(env, finished, flipped, error)
+        original = self.contact_only_evaluation.result(env, finished, flipped, error)
         result.update(support_measurement='frame_contact_plus_signed_internal_nail_force',
-                      preflip_support_forces=self.preflip_support)
+                      preflip_support_forces=self.preflip_support,
+                      contact_only_acceptance={k:v for k,v in original.items() if k != 'last_flip'})
         return result

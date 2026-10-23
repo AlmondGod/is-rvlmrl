@@ -1,0 +1,60 @@
+{
+  "passes": true,
+  "preflip_stable_s": 88.35999999999956,
+  "inverted_hold_s": 12.819999999999816,
+  "airborne_relative_position_peak_m": 0.0015870711991556295,
+  "airborne_relative_angle_peak_deg": 2.8148809443537965,
+  "unexpected_robot_contacts": [],
+  "nonfinite_or_warning": false,
+  "peak_penetration_m": 0.00026223230291482706,
+  "success": true,
+  "valid": true,
+  "error": null,
+  "seed": 41006,
+  "reward": 1.0,
+  "verified_released_members": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "fasteners": {
+    "enabled": true,
+    "failure_events": [],
+    "inserted": 8,
+    "missed": 0,
+    "intact": 8,
+    "failed": 0,
+    "peak_utilization": 0.30245496651541065,
+    "fracture_energy_J": 0.0,
+    "damping_work_J": 13.784627191725368,
+    "parameters": {
+      "length_m": 0.075,
+      "stiffness_N_m": 12000.0,
+      "damping_N_s_m": 4.0,
+      "withdrawal_N": 45.0,
+      "lateral_N": 70.0,
+      "failure_displacement_m": 0.004,
+      "max_standoff_m": 0.012,
+      "max_gap_m": 0.006,
+      "min_embed_m": 0.015
+    },
+    "physical_validation": false
+  },
+  "finished": true,
+  "flipped": true,
+  "simulated_s": 635.2999999884331,
+  "wall_s": 926.133673958946,
+  "physics_started": true,
+  "physics_paused_for_inference": false,
+  "generated_before_simulation": true,
+  "physical_validation": false,
+  "full_visual_language_policy": false,
+  "evidence_sha256": {
+    "provenance.json": "bbf52793c286a03bfe680c41bc6aaa14e4204ed7306b8a3e5142f2cfb24476d9",
+    "result.json": "b25ae725f6a67d0b883e6429fba50440024f37b55218e4ca279f5a0f1fde155d",
+    "states.npz": "c93301225d917bf587df7e5a2e842e5a1f70e07010fa8a4d4e03a0a43f97f2d5",
+    "program.py": "a92cc98c7b0ae2236b169c1de7e7f1403e4c53c4d09f5f3c479d74ccbe0a711d",
+    "scene.xml": "1f88dbb7a44e707ea0d06c51b9acebd5c04a9cfc2c12ec16e0654511815979aa"
+  }
+}

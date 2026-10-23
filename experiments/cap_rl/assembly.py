@@ -19,6 +19,14 @@ ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL = ROOT / 'experiments/assembly_benchmark/protocol.json'
 SETTLE_SECONDS = 6.0
 MAX_CALLS = 32
+SUPPORT_PROFILES = ('contact_only', 'contact_and_nails')
+CONTROLLER_PROFILES = ('original', 'southwest_approach')
+
+
+def profile_options(support_profile='contact_only', controller_profile='original'):
+    if support_profile not in SUPPORT_PROFILES or controller_profile not in CONTROLLER_PROFILES:
+        raise ValueError('Unknown full-assembly evaluation/controller profile')
+    return dict(support_profile=support_profile, controller_profile=controller_profile)
 
 
 def parse_program(text):
@@ -56,7 +64,7 @@ def parse_program(text):
     return calls
 
 
-def provenance():
+def provenance(*, support_profile='contact_only', controller_profile='original'):
     """Hash every dependency, including skills, physics, assets and this adapter."""
     from experiments.assembly_benchmark.freeze import ASSETS, PACKAGES
     paths = []
@@ -65,6 +73,7 @@ def provenance():
         paths.extend(p for p in directory.rglob('*') if p.is_file() and
                      '__pycache__' not in p.parts and p.suffix not in ('.pyc', '.pyo'))
     return {
+        'profiles': profile_options(support_profile, controller_profile),
         'sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in sorted(set(paths))},
         'versions': {p: importlib.metadata.version(p) for p in
@@ -82,7 +91,8 @@ def score(released_members, intact_nails, preflip_stable, inverted_hold, success
             .20 * bool(success))
 
 
-def run(seed, text, out, *, video=False, seconds=1200., progress=False):
+def run(seed, text, out, *, video=False, seconds=1200., progress=False,
+        support_profile='contact_only', controller_profile='original'):
     """One continuous simulation. No reset, restore, repair, or oracle control."""
     import imageio.v2 as imageio
     import mujoco
@@ -95,10 +105,11 @@ def run(seed, text, out, *, video=False, seconds=1200., progress=False):
     from experiments.torso_assembly.frame_vision import MultiVision, probe_anchor
     from experiments.wall_panel.perception import Vision as PanelVision
 
+    profiles = profile_options(support_profile, controller_profile)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
     (out / 'program.py').write_text(text)
-    (out / 'provenance.json').write_text(json.dumps(provenance(), indent=2))
+    (out / 'provenance.json').write_text(json.dumps(provenance(**profiles), indent=2))
     try:
         calls = parse_program(text)
     except (ValueError, SyntaxError) as exc:
@@ -113,10 +124,19 @@ def run(seed, text, out, *, video=False, seconds=1200., progress=False):
               shoulder_half_span=config['shoulder_half_span'])
     env.flip_enabled = True
     env.flip_options = dict(grasp='stack', smooth=True, clearance=True)
-    executor = Executor(env)
+    evaluator_class = Evaluation
+    if support_profile == 'contact_and_nails':
+        from .support_measurement import SupportEvaluation, install_observer
+        install_observer(env)
+        evaluator_class = SupportEvaluation
+    tool_factory = None
+    if controller_profile == 'southwest_approach':
+        from .profiled_tools import SouthwestApproachTool
+        tool_factory = SouthwestApproachTool
+    executor = Executor(env, tool_factory=tool_factory)
     fv, pv = MultiVision(), PanelVision()
     renderer = mujoco.Renderer(env.m, config['image_height'], config['image_width'])
-    evaluation = Evaluation(protocol['acceptance'])
+    evaluation = evaluator_class(protocol['acceptance'])
     writer = imageio.get_writer(out / 'episode.mp4', fps=10, codec='libx264', quality=7) if video else None
     (out / 'scene.xml').write_text(env.xml)
     history, samples, released = [], [], set()
@@ -201,7 +221,7 @@ def run(seed, text, out, *, video=False, seconds=1200., progress=False):
     result = evaluation.result(env, finished, executor.flipped, error)
     unsafe = (env.peak > protocol['acceptance']['max_penetration_m'] or
               evaluation.nonfinite_or_warning or bool(evaluation.unexpected))
-    result.update(success=result['passes'], valid=True, error=error, seed=seed,
+    result.update(success=result['passes'], valid=True, error=error, seed=seed, assembly_profiles=profiles,
                   reward=score(released, env.nails.metrics()['intact'], evaluation.preflip_stable,
                                evaluation.hold, result['passes'], unsafe),
                   verified_released_members=sorted(released), history=history,
@@ -221,10 +241,13 @@ def main():
     parser.add_argument('--seed', type=int, required=True)
     parser.add_argument('--out', required=True)
     parser.add_argument('--video', action='store_true')
+    parser.add_argument('--support-profile', choices=SUPPORT_PROFILES, default='contact_only')
+    parser.add_argument('--controller-profile', choices=CONTROLLER_PROFILES, default='original')
     parser.add_argument('--seconds', type=float, default=1200., help='Development timeout; full evaluation uses 1200.')
     args = parser.parse_args()
     result = run(args.seed, Path(args.program).read_text(), args.out,
-                 video=args.video, seconds=args.seconds, progress=True)
+                 video=args.video, seconds=args.seconds, progress=True,
+                 support_profile=args.support_profile, controller_profile=args.controller_profile)
     print(json.dumps({k: v for k, v in result.items() if k not in ('history', 'final_state', 'last_flip')}, indent=2))
 
 

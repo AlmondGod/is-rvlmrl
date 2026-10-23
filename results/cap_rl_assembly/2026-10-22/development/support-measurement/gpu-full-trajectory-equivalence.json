@@ -1,0 +1,36 @@
+{
+  "scope": "Same scripted/model-sampled call sequence and training layout. The correction observes existing nail loads; all physics/controller source and acceptance thresholds are unchanged. This is an evaluator comparison, not an RL gain.",
+  "seed": 41004,
+  "original": {
+    "success": false,
+    "reward": 0.7000000000000001,
+    "preflip_stable_s": 0.0,
+    "inverted_hold_s": 12.799999999999816,
+    "wall_s": 2078.112149122986
+  },
+  "corrected": {
+    "success": true,
+    "reward": 1.0,
+    "preflip_stable_s": 13.859999999999793,
+    "inverted_hold_s": 12.799999999999816,
+    "wall_s": 2150.3567364339833,
+    "preflip_support_forces": {
+      "contact_N": 51.758644607647014,
+      "nail_vertical_N": 15.30330593711289,
+      "weight_N": 67.06193098752001
+    },
+    "peak_penetration_m": 0.0003415737814588059
+  },
+  "shape_a": [
+    6419,
+    155
+  ],
+  "shape_b": [
+    6419,
+    155
+  ],
+  "maximum_state_difference": 0.0,
+  "all_states_match_1e_7": true,
+  "source_a": "/opt/cap-assembly/assembly02-speculative-evidence-v2/b423c55a24ace199ae6f58a64b34a931929d5520c9bd175da5903d73aaf630b8",
+  "source_b": "/opt/cap-assembly/support-v2-train41004"
+}

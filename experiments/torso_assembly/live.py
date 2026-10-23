@@ -28,7 +28,8 @@ def packet(index,robot,phase,command_id,failure,rgb,cameras,events,completed):
              completed_commands=completed)
 
 class Executor:
- def __init__(self,e):
+ def __init__(self,e,tool_factory=Tool):
+  self.tool_factory=tool_factory
   self.e=e;self.planner=Planner(e);self.frame=FrameSkills(e.robot(),self.planner)
   self.panel=None;self.tool=None;self.flip=None;self.flipped=False;self.held=HeldSheet();self.phase='idle';self.failure=None
   self.queue=[];self.kind=None;self.timer=0.;self.events=[];self.placed=set();self.released=set()
@@ -72,7 +73,7 @@ class Executor:
   self.kind,self.i=self.queue.pop(0);i=self.i;self.timer=0.;started=time.monotonic()
   if self.kind in ('position','release'):
    self.frame.start({'skill':self.kind,'piece':i},est,r);self.frame.lift_height=.25
-  elif self.kind.endswith('nail'):self.tool=Tool(r,self.planner,'frame' if self.kind=='frame_nail' else 'panel',i,est,sheet)
+  elif self.kind.endswith('nail'):self.tool=self.tool_factory(r,self.planner,'frame' if self.kind=='frame_nail' else 'panel',i,est,sheet)
   elif self.kind=='panel_prepare':
    if sheet is None:raise ValueError('No sheet RGB estimate')
    target=np.array(sheet['center'])+OFFSETS[i];target[2]=sheet['center'][2];target[0]+=(-.12 if i==0 else .12)
