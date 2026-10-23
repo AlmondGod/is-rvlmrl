@@ -28,6 +28,16 @@ reconstructed against the recorded hashes for preservation.
 
 ![Scripted full-task feasibility; not model-generated](development/scripted-feasibility.png)
 
+The same scripted reference **fails training layout 41001** on the GPU host:
+it finishes the motion but retains only **7/8 fasteners**. The first corner
+connection is missed. A post-hoc ray test at recorded states near that trigger
+finds a **6.280 mm material gap along the nail ray**, exceeding the unchanged
+6 mm insertion limit. This diagnostic does not feed state or answers to the
+model. The failed full run is preserved in `development/train41001`; it took
+626.90 simulated seconds and 1,970.40 wall seconds. The single successful
+development layout therefore does not establish controller reliability across
+randomized layouts, and valid program sequencing alone may not solve every case.
+
 Qwen3.5-4B's initial greedy program picks all four members before releasing any.
 The second call tries to pick up another member with an occupied gripper. The
 physical executor rejects it with `Arm already carries a member`. The GPU smoke
