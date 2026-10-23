@@ -67,9 +67,9 @@ def panel(episode, seconds, title):
         code = f"{call['skill']}({call['index'] if call['index'] is not None else ''})"
         draw.text((14, 570), code, font=font, fill='white')
     if done:
-        detail = (f"{result['fasteners']['intact']}/8 intact nails; hold {result['inverted_hold_s']:.1f}s"
-                  if result['success'] else str(result['error'] or
-                    f"Strict acceptance failed; {result['fasteners']['intact']}/8 intact nails"))
+        detail = (str(result['error']) if result['error'] else
+                  f"{result['fasteners']['intact']}/8 nails; hold {result['inverted_hold_s']:.1f}s; "
+                  f"relative angle {result['airborne_relative_angle_peak_deg']:.3f} deg")
         draw.text((14, 604), detail[:72], font=small, fill=color)
     return canvas
 
