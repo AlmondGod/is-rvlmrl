@@ -32,6 +32,7 @@ def main():
     summary = dict(model=metadata['model'], model_revision=metadata['model_revision'],
         support_profile=metadata.get('support_profile','contact_only'),
         controller_profile=metadata.get('controller_profile','original'),
+        optimization_reward=metadata.get('optimization_reward','environment'),
         task=metadata['task'], gpu=metadata['gpu'], optimizer_updates=len(training),
         sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,

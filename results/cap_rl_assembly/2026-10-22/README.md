@@ -214,3 +214,24 @@ Verification tools now cover saved-record integrity and score/selection
 accounting, independent regeneration from model weights, and fresh physical
 replays of every distinct held-out episode. These tools are prepared; final
 held-out improvement has **not yet been measured**.
+
+### Optimizer reward fallback prepared (not yet active)
+
+The corrected dense-reward run completes its first three updates with sampled
+strict success rates 2/8, 3/8 and 3/8. Updates 4–6 then sample only incomplete
+two-member programs (reward 0.15, strict success zero, no within-group reward
+variance). In update 3, the two-member programs outrank other failures scoring
+0.075 in their group, so group-relative optimization can reinforce them despite
+full successes in the other layout's group. This is training evidence, not a
+held-out finding or a claim that later validation must fail.
+
+`analysis/train_assembly_strict.py` prepares a success-only optimizer alternative:
+its learning reward is 1 only for measured strict physical success, otherwise 0.
+It keeps the original dense reward in `dense_reward` for auditing. The frozen
+physical environment, its certificate identities and every acceptance threshold
+remain unchanged. The optimizer adapter's exact source and hash are archived
+in any run that uses it. This is an explicit training-reward transformation,
+not a rewrite of cached physical results. Nine focused accounting/adapter tests
+pass, including preserved physics results, source integrity and high-progress
+failures receiving zero learning reward. The candidate is not yet running;
+held-out layouts remain unused while the dense-reward experiment continues.

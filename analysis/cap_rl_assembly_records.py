@@ -40,6 +40,11 @@ def audit(directory):
     directory = Path(directory)
     metadata = read(directory/'metadata.json')
     require(metadata['task'] == 'assembly_full', 'Wrong task')
+    reward_mode = metadata.get('optimization_reward','environment')
+    require(reward_mode in ('environment','strict_success'), 'Unknown optimizer reward')
+    if reward_mode == 'strict_success':
+        require(sha(directory/'optimization_source/train_assembly_strict.py') ==
+                metadata['optimization_adapter_sha256'], 'Optimizer reward adapter changed')
     task.configure(metadata['support_profile'], metadata['controller_profile'])
     manifest = read(directory/'assembly_provenance.json')
     require(manifest == task.provenance(), 'Runtime/source/profile mismatch')
@@ -65,6 +70,8 @@ def audit(directory):
             except (SyntaxError, ValueError):
                 require(not row['success'] and not row['valid'] and row['reward'] == 0,
                         'Invalid program received credit')
+                if reward_mode == 'strict_success':
+                    require(row['dense_reward'] == 0., 'Invalid program has dense credit')
                 records.append(row)
                 return
             raise ValueError('Valid program lacks physical evidence')
@@ -109,6 +116,8 @@ def audit(directory):
         expected = {k:v for k,v in raw.items() if k not in ('history','final_state','last_flip')}
         if row['truncated']:
             expected.update(reward=0.,success=False,valid=False,error='truncated')
+        if reward_mode == 'strict_success':
+            expected.update(dense_reward=expected['reward'],reward=float(expected['success']))
         for k,v in expected.items():
             compare(v,row[k],k)
         records.append(row)
@@ -168,7 +177,8 @@ def audit(directory):
     return dict(passes=True, scope='All records, hashes, reward accounting, split isolation and validation-only selection. Independent physics replay and model regeneration are separate checks.',
         optimizer_updates=len(training),training_samples=len(samples),validation_records=sum(len(v['rows']) for _,v in validation),
         test_records=2*n,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
-        selected_step=best_step,profiles=manifest['profiles'],baseline=test['baseline'],trained=test['trained'],
+        selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
+        baseline=test['baseline'],trained=test['trained'],
         paired_wins=wins,paired_losses=losses,paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
         baseline_success_exact_95_ci=interval(test['baseline']['successes']),trained_success_exact_95_ci=interval(test['trained']['successes']),
         limitation='Eight randomized layouts are a small simulator pilot; these intervals do not establish real-world reliability.')

@@ -73,6 +73,49 @@ class RecordsAuditTests(unittest.TestCase):
     def test_valid_accounting(self):
         r=self.run_fixture();self.assertTrue(r['passes']);self.assertEqual(r['test_records'],4)
 
+    def enable_strict(self,root):
+        source=Path(__file__).with_name('train_assembly_strict.py').read_bytes()
+        directory=root/'optimization_source';directory.mkdir()
+        (directory/'train_assembly_strict.py').write_bytes(source)
+        p=root/'metadata.json';metadata=audit.read(p)
+        metadata.update(optimization_reward='strict_success',
+                        optimization_adapter_sha256=hashlib.sha256(source).hexdigest())
+        p.write_text(json.dumps(metadata))
+        rows=[json.loads(s) for s in (root/'rollouts.jsonl').read_text().splitlines()]
+        # A synthetic high-progress failure: all hardware remains assembled,
+        # but the unchanged relative-angle gate fails. It must earn zero for RL.
+        row=rows[0];evidence=Path(row['evidence']);raw=audit.read(evidence/'result.json')
+        raw.update(reward=.8,verified_released_members=list(range(4)),fasteners={'intact':8},
+                   preflip_stable_s=3.,inverted_hold_s=5.,flipped=True,airborne_relative_angle_peak_deg=3.1)
+        (evidence/'result.json').write_text(json.dumps(raw))
+        cert=audit.read(evidence/'certificate.json');cert['files']['result.json']=audit.sha(evidence/'result.json')
+        (evidence/'certificate.json').write_text(json.dumps(cert))
+        row.update(raw,result_sha256=cert['files']['result.json'])
+        def convert(values):
+            for value in values:value.update(dense_reward=value['reward'],reward=float(value['success']))
+        convert(rows)
+        (root/'rollouts.jsonl').write_text('\n'.join(json.dumps(r) for r in rows))
+        for name in ('validation_baseline.json','validation_0001.json','test_comparison.json'):
+            p=root/name;report=audit.read(p)
+            for key in ('rows','before','after'):
+                if key in report:convert(report[key])
+            p.write_text(json.dumps(report))
+
+    def test_strict_optimizer_keeps_dense_evidence_separate(self):
+        result=self.run_fixture(self.enable_strict)
+        self.assertEqual(result['optimization_reward'],'strict_success')
+
+    def test_strict_optimizer_source_and_dense_reward_are_verified(self):
+        for target in ('source','reward'):
+            def mutate(root):
+                self.enable_strict(root)
+                if target=='source':(root/'optimization_source/train_assembly_strict.py').write_text('changed')
+                else:
+                    p=root/'rollouts.jsonl';rows=[json.loads(s) for s in p.read_text().splitlines()]
+                    rows[0]['dense_reward']=.7;p.write_text('\n'.join(json.dumps(r) for r in rows))
+            with self.subTest(target=target),self.assertRaises((ValueError,AssertionError)):
+                self.run_fixture(mutate)
+
     def test_tampered_test_rows_rejected(self):
         for key,value in [('reward',0.),('completion','stop()'),('prompt','leaked prompt'),
                           ('layout_id','assembly-full-v1-41001'),('result_sha256','wrong')]:
