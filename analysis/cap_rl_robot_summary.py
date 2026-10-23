@@ -4,13 +4,14 @@ from collections import Counter
 import gzip
 import json
 from pathlib import Path
-from experiments.cap_rl import task_robot as task
+from experiments.cap_rl.tasks import get_task
 
 
 def summarize(directory):
     directory = Path(directory)
     report = json.loads((directory/'test_comparison.json').read_text())
     metadata = json.loads((directory/'metadata.json').read_text())
+    task = get_task(metadata['task'])
     selection = json.loads((directory/'selection.json').read_text())
     path = directory/'rollouts.jsonl'
     opener = open
@@ -31,7 +32,7 @@ def summarize(directory):
     for phase, key in [('before', 'before'), ('after', 'after')]:
         rows = report[key]
         phases[phase] = {'successes': sum(r['success'] for r in rows), 'n': len(rows),
-            'canonical_four_call_program_matches': sum(canonical(r) for r in rows),
+            ('canonical_eight_call_program_matches' if metadata['task'] == 'frame_place' else 'canonical_four_call_program_matches'): sum(canonical(r) for r in rows),
             'outcomes': dict(Counter('success' if r['success'] else r['error'] or 'physical_criteria' for r in rows)),
             'max_success_penetration_m': max((r['final']['peak_penetration'] for r in rows if r['success']), default=None),
             'max_success_final_tilt_rad': max((r['final']['tilt'] for r in rows if r['success']), default=None)}

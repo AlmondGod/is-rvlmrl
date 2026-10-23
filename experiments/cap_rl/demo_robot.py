@@ -10,7 +10,7 @@ import torch
 from transformers import set_seed
 
 from . import train
-from . import task_robot as task
+from .tasks import get_task
 from .robot_lift import asset_hashes
 
 
@@ -19,16 +19,22 @@ def main():
     parser.add_argument('directory', type=Path)
     parser.add_argument('--start', type=int, nargs=2, default=(3, -3))
     parser.add_argument('--center', type=int, nargs=2, default=(-3, 4))
+    parser.add_argument('--target', type=int, nargs=2, default=(2, 1))
     parser.add_argument('--lift', type=int, choices=[6, 8, 10, 12], default=10)
     parser.add_argument('--out', type=Path)
     args = parser.parse_args()
-    layout = task.Layout(tuple(args.start), tuple(args.center), args.lift)
+    metadata = json.loads((args.directory/'metadata.json').read_text())
+    task_name = metadata.get('task')
+    if task_name not in ('robot_lift', 'frame_place'):
+        parser.error('This checkpoint is not a supported robot run.')
+    task = get_task(task_name)
+    layout = (task.Layout(tuple(args.start), tuple(args.center), tuple(args.target), args.lift)
+              if task_name == 'frame_place' else task.Layout(tuple(args.start), tuple(args.center), args.lift))
+    if task_name == 'frame_place' and any(abs(x)>4 for x in args.target):
+        parser.error('Use target coordinates in [-4,4] cm.')
     if any(abs(x)>3 for x in layout.start) or any(abs(x)>4 for x in layout.center):
         parser.error('Use start coordinates in [-3,3] and center coordinates in [-4,4] cm.')
-    metadata = json.loads((args.directory/'metadata.json').read_text())
-    if metadata.get('task') != 'robot_lift':
-        parser.error('This checkpoint is not a robot lift run.')
-    for name in ('task_robot.py', 'robot_lift.py'):
+    for name in (Path(task.__file__).name, 'robot_lift.py'):
         if hashlib.sha256(Path(task.__file__).with_name(name).read_bytes()).hexdigest() != metadata['source_sha256'][name]:
             raise ValueError('Task or robot controller differs from training')
     if asset_hashes() != metadata['robot_assets_sha256']:
