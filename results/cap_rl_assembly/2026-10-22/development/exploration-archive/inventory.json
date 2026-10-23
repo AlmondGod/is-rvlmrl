@@ -1,0 +1,1064 @@
+{
+  "scope": "Physical execution records across explicit roots; includes scripted diagnostics if supplied. This is not the number of on-policy samples. Historical training/validation/development only; held-out test seeds excluded. Explicitly retains incomplete and intentionally tampered diagnostic artifacts.",
+  "deduplication": "Exact result-file SHA256, including measured wall_s; collapses published cache copies, not separate deterministic replays.",
+  "completed_physical_executions": 84,
+  "copied_records": 15,
+  "incomplete_records": [
+    {
+      "directory": "/opt/cap-assembly/assembly01-evidence/4bf9b248f79705f8824c6e0112d0a1fe9dc2ee338167c6d1e2828d3f6f2d3651",
+      "scene_saved": true
+    },
+    {
+      "directory": "/opt/cap-assembly/assembly02-evidence/59198ffef52f07f1b6501f3eb5ac5a076c5118b93a48a085c8d6d1b3dfc3f827",
+      "scene_saved": true
+    },
+    {
+      "directory": "/opt/cap-assembly/assembly02-speculative-evidence/743d4ec011670edc3acf0612018c4ea406f9c5550c872cbf2f391c3af8288321",
+      "scene_saved": true
+    },
+    {
+      "directory": "/opt/cap-assembly/assembly02-speculative-evidence/88d8f1d55d998bf23176472f7b6fc2515fb36e24f7b517cfc92bd992346f71ec",
+      "scene_saved": true
+    },
+    {
+      "directory": "/opt/cap-assembly/assembly02-speculative-evidence/b423c55a24ace199ae6f58a64b34a931929d5520c9bd175da5903d73aaf630b8",
+      "scene_saved": true
+    },
+    {
+      "directory": "/opt/cap-assembly/assembly02-speculative-evidence/dd48ec7a73fbbbaf83ee741eefa524770d45005ea5d7da2dc8c6f1ed96f1d005",
+      "scene_saved": true
+    }
+  ],
+  "nonphysical_records": [],
+  "platforms": {
+    "Linux-6.8.0-147-generic-x86_64-with-glibc2.39": 84
+  },
+  "summed_execution_wall_seconds": 79226.61261604389,
+  "timing_warning": "Execution durations overlap under parallelism; their sum is NOT allocated GPU hours or billed time.",
+  "executions": [
+    {
+      "result_sha256": "60eb6f43bcb473075b880b708e45192ef0a312e7773d60f3fd12076e133ca95d",
+      "seed": 42001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 142.63607608299935,
+      "simulated_s": 43.20000000002425,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly01-evidence/15e6e398791748c0bab91f8a5465853382e896b8155bc93b107a2271b00c0375"
+      ]
+    },
+    {
+      "result_sha256": "9527fbb71c075a7779515f1df872d464aa5803394c94f261932fbdbc4071f91c",
+      "seed": 42002,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 144.24331902398262,
+      "simulated_s": 43.4000000000252,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly01-evidence/6f205dc2c423b88d5dce27e14069748f417e1c873ee485edc24d1b8b6e50fe31"
+      ]
+    },
+    {
+      "result_sha256": "b6d3445d54d31b47139f6d80f51768bb9ef26f5a461e9307cdb54287cad03523",
+      "seed": 42003,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 145.15897086798213,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly01-evidence/7f7fffe97681aa0faccc439f7c8d14c1a91efc9491add3ec3e35e04eab23257e"
+      ]
+    },
+    {
+      "result_sha256": "0258e92b4c142efe70d233187942c06a50cfb31da82efac1e302a87fd4084514",
+      "seed": 41005,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 200.38488229800714,
+      "simulated_s": 61.900000000113536,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/0126673bedfa878be4dedda374f08a1f6b482c6fc23ca9e4e22cd05a3145e7c4"
+      ]
+    },
+    {
+      "result_sha256": "c919056eb3bb13c91cbca2b2343cf7f36f370d42504cf110e79ba9179f5c9f93",
+      "seed": 41001,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1345.6494262900087,
+      "simulated_s": 424.8999999934084,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/02b3527d6e933e96c89e5df8e044440043f3f3be6b1f61da6253b4d02f184287",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/02b3527d6e933e96c89e5df8e044440043f3f3be6b1f61da6253b4d02f184287"
+      ]
+    },
+    {
+      "result_sha256": "79b98e6e0aa680b72453b8c971793cb388679e95cad8526907bfce2be5dd6dc7",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 139.31114306300879,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/07b70056f4ea4914e3d2f8ea0d2c44e8cb2cfc5c5ceb762581fe6e6c5e34ecc0"
+      ]
+    },
+    {
+      "result_sha256": "c57e375eab601c5b6ae16e3b6ecb1085e6630040b9587d605e2c946b92e8bd2e",
+      "seed": 41002,
+      "success": false,
+      "error": "RuntimeError:numerical_gate",
+      "wall_s": 1656.052609254024,
+      "simulated_s": 410.3999999937513,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/2056f804642b4aea913487dae31f1326f0520ab042ebaa83489bc4e1c0428336"
+      ]
+    },
+    {
+      "result_sha256": "52677d636f4206235f340be87e7b7f4ecfe9e3b371f4d5cf9f8c08651f1d75b7",
+      "seed": 41003,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1339.4347265120014,
+      "simulated_s": 430.2999999932807,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/2473d4a9b477ffc903150d2ee3769248432464c9a10551ada69a5f31a658d378",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/2473d4a9b477ffc903150d2ee3769248432464c9a10551ada69a5f31a658d378"
+      ]
+    },
+    {
+      "result_sha256": "369a8d026b8ae37d34b163643afea67ee889a8538c292b3e4e5add6c998afcd5",
+      "seed": 42004,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 137.13736626296304,
+      "simulated_s": 43.20000000002425,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/26d655e55f00ef9ecafd60c9d1a2b08ac313026b8b1d5d4dd04db630b83f7078"
+      ]
+    },
+    {
+      "result_sha256": "5d69608bc4fac0e9258a1c0df797a8779239e7fc9d41b2ad110f111866820229",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 138.99450457299827,
+      "simulated_s": 43.700000000026634,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/4e552bf4dbb89ab2434cf4f89f2a21cbbe1f42e881b65a6e682c21915e21b43e"
+      ]
+    },
+    {
+      "result_sha256": "3695a132a788341d3f715d46ce6463866fa707e6f80d43883549f343a2e31b06",
+      "seed": 42003,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 138.98345897195395,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/5422bfe73e42aa18b767d8521db54485cca17d42c8f988b1a16b9dc7ea0035da"
+      ]
+    },
+    {
+      "result_sha256": "6243ce80109b32fbcff6e8e5d7f162b28e17a59907c8ac534075fd23a517e5c1",
+      "seed": 41005,
+      "success": false,
+      "error": null,
+      "wall_s": 2410.9141116670216,
+      "simulated_s": 627.099999988627,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/5fff825414c42d46434e0e160c59b3196aa9e5c7ab216cabb4b1d49831f1c12e"
+      ]
+    },
+    {
+      "result_sha256": "85e6b07e14b06e079d8b00859927d84da2d1f8df8f0839563b80194ee3263dd0",
+      "seed": 41005,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1338.806345805002,
+      "simulated_s": 425.29999999339896,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/6ce3148d0b5f7c667f7ffe8147a21eb000938823b801e9473397521a6b7a1c9d",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/6ce3148d0b5f7c667f7ffe8147a21eb000938823b801e9473397521a6b7a1c9d"
+      ]
+    },
+    {
+      "result_sha256": "3f727264225bf46696d6e2e3569df03a1b376723592b28ae5cf14455574b7bb8",
+      "seed": 41006,
+      "success": false,
+      "error": null,
+      "wall_s": 2001.4520841710037,
+      "simulated_s": 636.9999999883929,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/743d4ec011670edc3acf0612018c4ea406f9c5550c872cbf2f391c3af8288321",
+        "/opt/cap-assembly/assembly02-speculative-evidence-v2/743d4ec011670edc3acf0612018c4ea406f9c5550c872cbf2f391c3af8288321"
+      ]
+    },
+    {
+      "result_sha256": "7237003496a82516b3183fcc54326bd014902a6d0e87a0ffe2bc67bd745c0359",
+      "seed": 41003,
+      "success": false,
+      "error": null,
+      "wall_s": 1970.3992082299665,
+      "simulated_s": 631.499999988523,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/81e003f160b43a3ee7f02e1c52f8d0b0974555611f73e6e817fc53fbc13d711d",
+        "/opt/cap-assembly/assembly02-speculative-evidence-v2/81e003f160b43a3ee7f02e1c52f8d0b0974555611f73e6e817fc53fbc13d711d"
+      ]
+    },
+    {
+      "result_sha256": "f00b77f3e9ab2c8c64478249ebdfc7be35b1a9060889ebeb3bda876217c1af24",
+      "seed": 41008,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1367.9063208519947,
+      "simulated_s": 433.3999999932074,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/83ab29f8576b05aa27c8c8b0a9811c196676888e5f8642fe31a2f3d23e440cf7",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/83ab29f8576b05aa27c8c8b0a9811c196676888e5f8642fe31a2f3d23e440cf7"
+      ]
+    },
+    {
+      "result_sha256": "209e12b78d9eca5cf45ccf8c377dfaf2e62c20c3277185b4273a65d9a8ea1ebd",
+      "seed": 41008,
+      "success": false,
+      "error": null,
+      "wall_s": 1957.302654248022,
+      "simulated_s": 634.0999999884615,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/88d8f1d55d998bf23176472f7b6fc2515fb36e24f7b517cfc92bd992346f71ec",
+        "/opt/cap-assembly/assembly02-speculative-evidence-v2/88d8f1d55d998bf23176472f7b6fc2515fb36e24f7b517cfc92bd992346f71ec"
+      ]
+    },
+    {
+      "result_sha256": "91d9b1ae8dda713ea86eca7ab5bd236e94e7d2a840d2b2a657c0772bc348cf64",
+      "seed": 42002,
+      "success": false,
+      "error": null,
+      "wall_s": 2040.3259510379867,
+      "simulated_s": 651.8999999880406,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/8c07c10bc1f2a4c1ee73f0fd47210bdd64713b7a57b40d25fa11bee9fd309304",
+        "/opt/cap-assembly/assembly02-validation-prefetch-evidence/8c07c10bc1f2a4c1ee73f0fd47210bdd64713b7a57b40d25fa11bee9fd309304"
+      ]
+    },
+    {
+      "result_sha256": "a8cc1df92c346fc6c2add9fe91d3f97c596022abaa115d5896e95dd53384d4ba",
+      "seed": 42001,
+      "success": false,
+      "error": null,
+      "wall_s": 2050.494870207971,
+      "simulated_s": 634.0999999884615,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/8d1d9575619288f8cbcb977c29f82bfacfc3828b75789bfd24e8a486da1c84ec",
+        "/opt/cap-assembly/assembly02-validation-prefetch-evidence/8d1d9575619288f8cbcb977c29f82bfacfc3828b75789bfd24e8a486da1c84ec"
+      ]
+    },
+    {
+      "result_sha256": "1296e22f5455cbd30dcb5c450cc92649dbabf0d767cdb145e89df3a96a5588de",
+      "seed": 42001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 135.9896684900159,
+      "simulated_s": 43.20000000002425,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/902175f93e5bfe29d9d6a835470c477358a6c25d55300b8a3575ffe46606ae89"
+      ]
+    },
+    {
+      "result_sha256": "f1a885b43afd2890a8a88995e132150a30c2a388de58387737b4e67227f49cf6",
+      "seed": 42003,
+      "success": false,
+      "error": null,
+      "wall_s": 1981.5583220210392,
+      "simulated_s": 630.1999999885537,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/9784283e889fa6e6db9a84d8894bf412a6318ead37fcdbbb1dea67a7ae72dc70",
+        "/opt/cap-assembly/assembly02-validation-prefetch-evidence/9784283e889fa6e6db9a84d8894bf412a6318ead37fcdbbb1dea67a7ae72dc70"
+      ]
+    },
+    {
+      "result_sha256": "2247a682108d3a3169181a71c7ab1655811cad218f56c401d28132dedcec71f6",
+      "seed": 42004,
+      "success": false,
+      "error": null,
+      "wall_s": 1968.2316739580128,
+      "simulated_s": 631.2999999885277,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/9833ffe70c24303011fed79cd44bea600b1b1c59cb071a6b0b3c0e8af6f177f4",
+        "/opt/cap-assembly/assembly02-validation-prefetch-evidence/9833ffe70c24303011fed79cd44bea600b1b1c59cb071a6b0b3c0e8af6f177f4"
+      ]
+    },
+    {
+      "result_sha256": "641fbfc1e8269d1728e0a0c30bdbfadd528dd4b8a1ec8f787345ab68b3716d3c",
+      "seed": 41004,
+      "success": false,
+      "error": "ValueError:park_grippers_before_nailing",
+      "wall_s": 351.819752135023,
+      "simulated_s": 104.20000000031551,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/9f0d1b2c5134f34928bb66720e1e048911437db78915188b1313e5e109679c71"
+      ]
+    },
+    {
+      "result_sha256": "45b916f6b505e0a005139b546bd38eb1be58d5b5a823817bd67c6764a1d0cc1c",
+      "seed": 41007,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1413.7695318589685,
+      "simulated_s": 434.89999999317195,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/9f3a5f473cb98487a96f482f35abbe48bc1a6c233f1a5af224a6c52acc37c58c",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/9f3a5f473cb98487a96f482f35abbe48bc1a6c233f1a5af224a6c52acc37c58c"
+      ]
+    },
+    {
+      "result_sha256": "427ac210e85741b961755e577a763a02de5b333e0b346dbaeb6f3f8ff5189da8",
+      "seed": 41001,
+      "success": false,
+      "error": null,
+      "wall_s": 2452.9199056050275,
+      "simulated_s": 626.8999999886317,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/adbf38fe52a55b976202a7bfddf31af8ee20a0dcfc1abf8c4a8a7378f3d4e7b8"
+      ]
+    },
+    {
+      "result_sha256": "6e8124a6c1f94f750b34b0b92f4e321f5609b0927330cd7e69a35f5afa117dc3",
+      "seed": 41004,
+      "success": false,
+      "error": null,
+      "wall_s": 2078.112149122986,
+      "simulated_s": 641.7999999882794,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/b423c55a24ace199ae6f58a64b34a931929d5520c9bd175da5903d73aaf630b8",
+        "/opt/cap-assembly/assembly02-speculative-evidence-v2/b423c55a24ace199ae6f58a64b34a931929d5520c9bd175da5903d73aaf630b8"
+      ]
+    },
+    {
+      "result_sha256": "08e35458a3b82164244beb015ba16b11d2040777a2b74ce43d15e3fbccb7c6b1",
+      "seed": 41002,
+      "success": true,
+      "error": null,
+      "wall_s": 2595.1690959699918,
+      "simulated_s": 640.4999999883102,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/b7be7cce618c306828966d1314d33ddb38c26be4c6f75e1bfcf52f3e5f2eaec5"
+      ]
+    },
+    {
+      "result_sha256": "b5eab4d3b23e7f9ca409b3fc3ee6e9bedd85aff1e9a45e66f1bab2b529052767",
+      "seed": 41002,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1708.8697223849595,
+      "simulated_s": 433.3999999932074,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/c76594ac418a564bfc6f0f8136077a19d299c06dde5c79db78c3f350cbefb592"
+      ]
+    },
+    {
+      "result_sha256": "61e4fe7378cc56643b56c1e8f07891066f72e9c71533d653923215581b0a84d8",
+      "seed": 42002,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 137.11821309599327,
+      "simulated_s": 43.4000000000252,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/d8c61a041eff1d31cbee8eb98c88a80380b75e8cd9ecdc353b7c00be0a4cd085"
+      ]
+    },
+    {
+      "result_sha256": "15ef59112efc86eafc3d5661da74bdb7aeadcc59ab4af20cb776b04880d8b63b",
+      "seed": 41007,
+      "success": false,
+      "error": null,
+      "wall_s": 2063.7855879520066,
+      "simulated_s": 636.9999999883929,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/dd48ec7a73fbbbaf83ee741eefa524770d45005ea5d7da2dc8c6f1ed96f1d005",
+        "/opt/cap-assembly/assembly02-speculative-evidence-v2/dd48ec7a73fbbbaf83ee741eefa524770d45005ea5d7da2dc8c6f1ed96f1d005"
+      ]
+    },
+    {
+      "result_sha256": "4b0f21d6aefcbec7d2e8232b3884432f84b10da7947974f4e4125389d412fc5f",
+      "seed": 41006,
+      "success": false,
+      "error": "RuntimeError:numerical_gate",
+      "wall_s": 565.0365958670154,
+      "simulated_s": 138.94000000017044,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/e45727fab16201042f14e6429f564deab40d7310efc8e1d9041dbe25eb15f887"
+      ]
+    },
+    {
+      "result_sha256": "e7df9cc6dddbf6ed2ee57aae621874d87a2c8360dc08d09860053f932f42aeac",
+      "seed": 41006,
+      "success": false,
+      "error": "RuntimeError:No collision-free nailer roll: ['Invalid start', 'Invalid start', 'Invalid start', 'Invalid start']",
+      "wall_s": 1419.2123027830385,
+      "simulated_s": 440.6999999930348,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly02-evidence/e9ad30fcc44a78aaf2d1819e93bbb9a2af92e87890cacb09de5599200ad7a35c",
+        "/opt/cap-assembly/assembly02-permutation-prefetch-evidence/e9ad30fcc44a78aaf2d1819e93bbb9a2af92e87890cacb09de5599200ad7a35c"
+      ]
+    },
+    {
+      "result_sha256": "37b7ed07a36279c42aa17d00184b4d180eb6508c58b45c4c808aade6ec5e9f12",
+      "seed": 41001,
+      "success": true,
+      "error": null,
+      "wall_s": 2089.204894347,
+      "simulated_s": 626.8999999886317,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/0badf8f8edaa2534fde4997e779d9f74880ab08502846b24d8c398459287bb75"
+      ]
+    },
+    {
+      "result_sha256": "54ba8028e8fc299db25d1346003afbabf49eeb3081dd4d17188e36c136ff6212",
+      "seed": 41007,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 408.38853267702507,
+      "simulated_s": 117.40000000037854,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/12661c34dd550c4281cb5a5b6ecd74e5cdf18ab8ade77dcc7a8231cd5dc67fea"
+      ]
+    },
+    {
+      "result_sha256": "89b2a61cac77affbb876b3b6b31bea7789a584671c46dfdee83fc161f9924120",
+      "seed": 42003,
+      "success": true,
+      "error": null,
+      "wall_s": 2146.717966117023,
+      "simulated_s": 628.5999999885915,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/185e6c661507b2b7544f826e2614f53f697b3a89b88b64f139bcecc0b59dc671"
+      ]
+    },
+    {
+      "result_sha256": "da08fbbfc81f17d087e1e3204daf37f16c7b719eb79915de21650ffe9687218c",
+      "seed": 42003,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 415.1872503340128,
+      "simulated_s": 118.20000000038236,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/1e24cd8a30f5c976d634ee56cb5ac4b52e8c00f0eb308edf1ba1f2500c62dc3e"
+      ]
+    },
+    {
+      "result_sha256": "3b4d2ff5217bfa2041f0dfe07f03d5d70e94f6af4cdc2d0b78ab7c2636dbbf35",
+      "seed": 41007,
+      "success": false,
+      "error": null,
+      "wall_s": 1996.418185246992,
+      "simulated_s": 631.499999988523,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/22324f9011c7d638215dd2fa3fec40f0a7a2f2538424df6dfecfacaeb9775d06"
+      ]
+    },
+    {
+      "result_sha256": "225c53e78adde99ac8b4aadef2b37c6e3d8fa49bf340731089ab85f86c6defe1",
+      "seed": 42003,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 144.31421825801954,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/248140276e44afdb1206da3c17ccf91d1ef2550317a61771259a6f98ac2e0c4c"
+      ]
+    },
+    {
+      "result_sha256": "7fbf929c4fc2fbde50d57c1b034516d60402aae31146565473dc07db76b8c406",
+      "seed": 41006,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 404.2741550580249,
+      "simulated_s": 117.40000000037854,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/2511950958272667cf7dc3ff8ac4fa500e90a8699061731fc7af9f019fb355db"
+      ]
+    },
+    {
+      "result_sha256": "aa1db4522baffb25a7353339d43d7b616e5a5fb63edeaaf8463f2bf9f2bd5db2",
+      "seed": 41004,
+      "success": false,
+      "error": "ValueError:park_grippers_before_nailing",
+      "wall_s": 256.64992997498484,
+      "simulated_s": 61.900000000113536,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/27950a79d7b7bb1118b8a6c33d7033ea31274b83866d3b54eace9efc6ed299a3"
+      ]
+    },
+    {
+      "result_sha256": "37c2476d62ec540ae574c763a6e0d424dcdde2c589ae8713ea0a626c4267137c",
+      "seed": 42004,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 140.65541009203298,
+      "simulated_s": 43.20000000002425,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/2969e50efa36917f0aecd8a01bf135ed2c8bd15c1538b0882eaa483f0705f46a"
+      ]
+    },
+    {
+      "result_sha256": "779200985b9b0022767d5c6eabf16deefdff0fe416cc6dc4f9191b1d7bddedcf",
+      "seed": 41005,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 110.21874071698403,
+      "simulated_s": 43.80000000002711,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/3315f269e818f58da37a43406cca891763d5246a865840d194e4e251516e5d8a"
+      ]
+    },
+    {
+      "result_sha256": "2abb5c8cd179408ae0c748e3d862f08bcf7e08d6f85289b88b88c624686f07a9",
+      "seed": 41008,
+      "success": true,
+      "error": null,
+      "wall_s": 2084.9617282130057,
+      "simulated_s": 628.8999999885845,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/339d8c62a481d0e0bdafcb1b84f6af353f08c3b056a0251ac534b06a5f8ddd36"
+      ]
+    },
+    {
+      "result_sha256": "cad4fc536387d176d05a64542a56ab16196a5ff4ce8c3e320a66d69b8a802855",
+      "seed": 42001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 140.09751284698723,
+      "simulated_s": 43.20000000002425,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/4b5e3a496b1ed5e4d5766c0530cf9ec7ae46b18f3a91fa8161c25ee0d3bd7795"
+      ]
+    },
+    {
+      "result_sha256": "77491d78f1466b823b7f98b2bb8a4e8f0f8bad1b2285886af29fcc72e16a919f",
+      "seed": 41007,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 409.430742935976,
+      "simulated_s": 117.40000000037854,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/5a6e3ad710d7f26f9c7f36b095dfc3cb3d8a4489a1a94fe67d5ea8b126660e84"
+      ]
+    },
+    {
+      "result_sha256": "34b28605ddf4c20422d788a28ecfbdcb8d3fa1dea680301aab30a1eb5a27f161",
+      "seed": 41001,
+      "success": true,
+      "error": null,
+      "wall_s": 2070.9545706309727,
+      "simulated_s": 621.4999999887594,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/5c0d16edab574b3bf35ed41a16d4d3290e23706fa1df63159649547b05d5a27b"
+      ]
+    },
+    {
+      "result_sha256": "27ebb307a951d8632fc6b93c2018a2289bcc5ba0200b0c1ef611d624d90ccbef",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 467.2687060869648,
+      "simulated_s": 117.50000000037902,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/5fc92d9f3c2b9680bbcb2d12c998ec290eeedb7b8de0788493b18f97c1e4d549"
+      ]
+    },
+    {
+      "result_sha256": "fee587b5c27003de794f522339797dd5eeb7024af153ce75b5b1bb52c77b76a3",
+      "seed": 41005,
+      "success": true,
+      "error": null,
+      "wall_s": 2035.8613891979912,
+      "simulated_s": 625.4999999886649,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/60a6a19e878e8c6ef3ba53a7361acb304e103c1156d4799256ed566b62c304e9"
+      ]
+    },
+    {
+      "result_sha256": "1eb181961d52f1e0ca888cda3cc37913634613faf5f86ff7ef44b6e71df00314",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member already positioned",
+      "wall_s": 249.49633727502078,
+      "simulated_s": 61.80000000011306,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/669167630b3e2da4606df785c22ff5292a4d66ed92d461ec47de360e48aefe79"
+      ]
+    },
+    {
+      "result_sha256": "3ab869ec495e26b336ba3632935ae1913c4d9af6ea139ee23097b7237be56484",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 140.5146122010192,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/6978527f93dffad1abfc3b5d8ce88bebe28b71d9c0d21ec8e26727035b949916"
+      ]
+    },
+    {
+      "result_sha256": "a4b35d34a206cee55ebcfc2cef35b7cab0b198bf8292cfdfd0ae47735b370a2d",
+      "seed": 42001,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 409.372784244013,
+      "simulated_s": 117.50000000037902,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/6ec8a9e7e13aecf4f89e8a3fe85b258ccca5ad0e7fc7ffbe80fab6024e1a16e4"
+      ]
+    },
+    {
+      "result_sha256": "d661b00873f886d4a45f5874cffd7e061aa9d8e381f4f443b18008920a701fb4",
+      "seed": 41004,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 110.55886029300746,
+      "simulated_s": 43.80000000002711,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/71a62d0494ad73c6b2d4e9d32dec4baa5faad8664a90086ad03e01ef30796379"
+      ]
+    },
+    {
+      "result_sha256": "b66b7af22640d5909e325c4f04d32e2bfac265693274c4350b0662e5ba1d39c2",
+      "seed": 42002,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 141.5300890149665,
+      "simulated_s": 43.4000000000252,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/7bfc54320958a367800448365077e91f3eeb2ef5306164577e90c44cba071ae0"
+      ]
+    },
+    {
+      "result_sha256": "2a78992e697d5f356fcce6847fe3ab87a0355c29eea26cd844a3dad9069fa161",
+      "seed": 41006,
+      "success": false,
+      "error": "ValueError:Sheet must be fed once before placement",
+      "wall_s": 12.822159676987212,
+      "simulated_s": 5.999999999999394,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/9627f3abb98e412c0f9a89ecbd5f5779e9c673a10c373e06362fcda738cccc2f"
+      ]
+    },
+    {
+      "result_sha256": "538eeff722254930083e3c813c06c0cb5c1b12120c0c3aa4eaf4c9e3236dc0b8",
+      "seed": 41002,
+      "success": false,
+      "error": null,
+      "wall_s": 2093.184894328995,
+      "simulated_s": 633.0999999884851,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/9818cffb3beae859995f477c983b0c15c0db8604e1783200d2673f33149896ec"
+      ]
+    },
+    {
+      "result_sha256": "7c5d40616f939a64158dabdef724bdfef5749f6b5a96f1b7ed813cdb309247a2",
+      "seed": 41006,
+      "success": true,
+      "error": null,
+      "wall_s": 2149.028833950986,
+      "simulated_s": 633.7999999884686,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/a6b090e9a0558bff3d5c01fec5214f4db8be112be140bd7495f1c24a0b25cc89"
+      ]
+    },
+    {
+      "result_sha256": "c83adbe0d93d48424eab03405f9875706eab63f71ab52a33248f6e3fe83a9886",
+      "seed": 42004,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 408.8041942549753,
+      "simulated_s": 116.90000000037615,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/aa41bd8a744617f7ced4b149658c411670fa4845574345303a0e50e644b21672"
+      ]
+    },
+    {
+      "result_sha256": "0d11187f18e6e87a946a26101af7768a1c210b4bebf11a1defd8972147e55054",
+      "seed": 42001,
+      "success": true,
+      "error": null,
+      "wall_s": 2095.173219808028,
+      "simulated_s": 625.199999988672,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/b1b07887da82d55db75b79031219d4b9e35e26ba291165f6d749b7278b534f33"
+      ]
+    },
+    {
+      "result_sha256": "942af03d93ebaa5df34831cac399c17172aa862bb55326f8a3755a398554f694",
+      "seed": 41005,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 403.6518806659733,
+      "simulated_s": 118.20000000038236,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/b76127811d9c4c844534f76bbaf5e0c509424276f11b86a7bf64ed27ff59a6d5"
+      ]
+    },
+    {
+      "result_sha256": "583d2253ca93aa2752f014a908a8affc393a696934e8ba3a0dbec857140612c8",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member is not awaiting release",
+      "wall_s": 255.51461230200948,
+      "simulated_s": 61.80000000011306,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/c2f642d368df3a477536fbf6935ac5927e31e980745350ed55e04c865293499b"
+      ]
+    },
+    {
+      "result_sha256": "0662389c8187a043ad4e0afb55c72c964ca62565dde6049dbccdad128d9c023b",
+      "seed": 42002,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 411.73503189196344,
+      "simulated_s": 117.20000000037759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/c75c7b1f685bd0d60a20c1954b4e68696288fd5d1ff5c08682625045f0fa15e2"
+      ]
+    },
+    {
+      "result_sha256": "d91a524a3b733b9eb182e73cb92319074be79dc9e5812a97ed9c24711f71d2d3",
+      "seed": 42004,
+      "success": true,
+      "error": null,
+      "wall_s": 2148.2955446910346,
+      "simulated_s": 630.8999999885372,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/c8bd02659e26b5eef4507e0e1acd6b86120dbae28bde78386f185d3add515462"
+      ]
+    },
+    {
+      "result_sha256": "fbbeaf76e57b5612c44d13380ba19b54ad05ca188ee18c71d498a179ad6bc57e",
+      "seed": 41004,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 413.5114944780362,
+      "simulated_s": 117.80000000038045,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/cb051c672b2ecbae96c0fc00662455e610197e6ac51b3462fb5512879a77fdd6"
+      ]
+    },
+    {
+      "result_sha256": "6d42f824a3a97e4b0e77dec41c553c1966a79edef7caa57a0620a3e6378f5de1",
+      "seed": 41003,
+      "success": true,
+      "error": null,
+      "wall_s": 2047.8839332900243,
+      "simulated_s": 622.0999999887453,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/cdec37c2d0709d2decd1908055fac59f04fbd350ef192aceaaa1c11a67cabe23"
+      ]
+    },
+    {
+      "result_sha256": "bae0e3c5c289efc94902c611e24a0797ddc2d5cf773501fb37d5af57ad5fa543",
+      "seed": 41008,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 411.7329695590306,
+      "simulated_s": 116.90000000037615,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/d099ebb9a17b9751a549946e3cdd9aaf524ebdaaedd1319261a3b7c413f367b5"
+      ]
+    },
+    {
+      "result_sha256": "400bee12e21eaab91451c5073f675bc7ce4d34a3054f3c57bb7da52bd71e3202",
+      "seed": 41005,
+      "success": false,
+      "error": "ValueError:park_grippers_before_nailing",
+      "wall_s": 162.81862469902262,
+      "simulated_s": 61.900000000113536,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/d10c3d17446caf5ccd54c4f67683dd428d802fe8cfcf0e1b92997518f5d7f98f"
+      ]
+    },
+    {
+      "result_sha256": "48f99838aadb346d4db6c84d1b1979b88b33f9d2aa7200b9109a2c77785b470c",
+      "seed": 41004,
+      "success": true,
+      "error": null,
+      "wall_s": 2103.9424163980293,
+      "simulated_s": 632.599999988497,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/d5444db88723ab93268783e46fb3ef0878894da77c6c0b6ecfd732e4940c5695"
+      ]
+    },
+    {
+      "result_sha256": "1c8c96d48bfbc6adfdbe682b5e6c4a84ef9628a5939a8edebca32b18036a3d94",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:park_grippers_before_nailing",
+      "wall_s": 162.98523972998373,
+      "simulated_s": 61.80000000011306,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/d5d02a74270db4f0aa54ac2b3188328dbfb00c5c85f11b2ea4a09479e19ad822"
+      ]
+    },
+    {
+      "result_sha256": "03b08c94e45011bc26d21bb279e4bd558bb5aa511f9349f12843dbc37514991e",
+      "seed": 41007,
+      "success": false,
+      "error": "ValueError:Sheet must be fed once before placement",
+      "wall_s": 169.03554440499283,
+      "simulated_s": 61.600000000112104,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/e008f611f1e8286c44e3e0ca303d50be75d203e4cb1ab6113dc508e52b2c4a2f"
+      ]
+    },
+    {
+      "result_sha256": "fdb4c2994d049ae11e62ae4d1a0e4b39965bc8b99739573644c4e9390fe1127e",
+      "seed": 41005,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 400.7399894770351,
+      "simulated_s": 118.20000000038236,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/e90a67013351bf09c49d54fe8087142e61789d7a201e17488128dfe480885008"
+      ]
+    },
+    {
+      "result_sha256": "dda6abb7270ed5c6ec5368906849c002536eb626a26d745ff8209ab25727cfe1",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 139.1662534219795,
+      "simulated_s": 43.700000000026634,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/ea1743ab42cd7081062cba6310320b0a80fc8fd1e4f394042b40cab7853bf01e"
+      ]
+    },
+    {
+      "result_sha256": "799b726421963afa439ca903886166ec6171d6da8303c1e1cc0d67a2a9c86ad8",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:park_requires_four_released_members",
+      "wall_s": 408.1712333050091,
+      "simulated_s": 118.0000000003814,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/f36980584b03ffec313360baec961b67c54014805374bc017b607e104f9b3b16"
+      ]
+    },
+    {
+      "result_sha256": "cbb84e9b5c88a12b27df41dd7fb2441bcb5883f327c57233bef48551e28b0347",
+      "seed": 42002,
+      "success": true,
+      "error": null,
+      "wall_s": 2187.886912582966,
+      "simulated_s": 643.0999999882487,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/assembly03-evidence/fe69f6935304d1741886138123d820854ee6c730f192f3cd8e247a098d8dac09"
+      ]
+    },
+    {
+      "result_sha256": "5e369d2b33915d29170aeea6db83ef2108d80465ba81ad2a32f7edc040bbec1d",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 108.81411240401212,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/corrected-parallel-check/contended/b5411bf4e15904a8f60b437016c8faae26868ec5bcf7458098e614542cd93dbd"
+      ]
+    },
+    {
+      "result_sha256": "9610bdec62a5b9c2b46bb7e44aaa1059ee991dd59cd2561be9d18438064f3779",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 112.3577965789591,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/corrected-parallel-check/parallel/b5411bf4e15904a8f60b437016c8faae26868ec5bcf7458098e614542cd93dbd"
+      ]
+    },
+    {
+      "result_sha256": "a7e4e0fe5e3752d010e31413be6b649a98b86a840861fd7bf7dfbf33107c38d1",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member is not awaiting release",
+      "wall_s": 14.831142248003744,
+      "simulated_s": 5.999999999999394,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/corrected-parallel-check/parallel/b93892e09a77d42313a61e93629c86e7c3caff92539756689fbdd2810f83bbb0"
+      ]
+    },
+    {
+      "result_sha256": "a42856fa6a93853322b7a69e006c42461873bfa0f3ed63d86905b0df446d57eb",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 108.95662537496537,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/corrected-parallel-check/sequential/b5411bf4e15904a8f60b437016c8faae26868ec5bcf7458098e614542cd93dbd"
+      ]
+    },
+    {
+      "result_sha256": "1ddb6c612ca75035721973afbe728a772d4f4fed7715e40348e89497651ed3b9",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member is not awaiting release",
+      "wall_s": 13.63589186995523,
+      "simulated_s": 5.999999999999394,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/corrected-parallel-check/sequential/b93892e09a77d42313a61e93629c86e7c3caff92539756689fbdd2810f83bbb0"
+      ]
+    },
+    {
+      "result_sha256": "8bf0f9e529ccabd1e4337f4f5a80a031394b8b8a0cce5ada6b4a74ef3214538b",
+      "seed": 41001,
+      "success": false,
+      "error": null,
+      "wall_s": 1970.4010116250138,
+      "simulated_s": 626.8999999886317,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/feasibility-train41001"
+      ]
+    },
+    {
+      "result_sha256": "9816ab27cec4a35a58bd6aea3df7ce9f94a775ec3d3bc9f84212da7ba32d69a0",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member is not awaiting release",
+      "wall_s": 13.654146812972613,
+      "simulated_s": 5.999999999999394,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/parallel-check/parallel/051e64431c67e07b3c568f5cd56d3694b909148cf6bfebf5e4078f90a00ad59e"
+      ]
+    },
+    {
+      "result_sha256": "04ade92748ceb6df1af7caf7fe7bdc268f117fa21ee53bb9429d08f09138268b",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 112.16308054397814,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/parallel-check/parallel/1d3c6fce473d6412b1788b0d8816b0092bd549932329366d3d7cbafa4a66577e"
+      ]
+    },
+    {
+      "result_sha256": "025f63c7165a58cc1c16b268fe0308b364f9b8f846b71a6b98b832f218444a90",
+      "seed": 41002,
+      "success": false,
+      "error": "ValueError:Member is not awaiting release",
+      "wall_s": 13.727637559990399,
+      "simulated_s": 5.999999999999394,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/parallel-check/sequential/051e64431c67e07b3c568f5cd56d3694b909148cf6bfebf5e4078f90a00ad59e"
+      ]
+    },
+    {
+      "result_sha256": "0b9af9ce63b927364cb030f0b1a6e2b9c5fbf723cfa35f4f50903063c3a90e53",
+      "seed": 41001,
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "wall_s": 112.37228524999227,
+      "simulated_s": 43.90000000002759,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/parallel-check/sequential/1d3c6fce473d6412b1788b0d8816b0092bd549932329366d3d7cbafa4a66577e"
+      ]
+    },
+    {
+      "result_sha256": "a4949f9069121b3d4da774be724b92be1df436c2ada790d0436cdb725162d447",
+      "seed": 41004,
+      "success": true,
+      "error": null,
+      "wall_s": 2150.3567364339833,
+      "simulated_s": 641.7999999882794,
+      "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+      "copies": [
+        "/opt/cap-assembly/support-v2-train41004"
+      ]
+    }
+  ],
+  "excluded_integrity_errors": []
+}

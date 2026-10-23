@@ -286,3 +286,10 @@ physics waits. Final evaluation and independent replay are additional costs.
 The selected update-2 checkpoint was reached at 155.46 training-loop seconds,
 but reuses explicitly certified physical evidence computed earlier; this is
 not the total cost of discovering or verifying the policy.
+
+A separate training/development archive preserves **84 distinct physical
+execution records**, 15 copied records and six incomplete records. Its 736
+archived file hashes verify locally, with no certificate discrepancies. The
+[archive manifest and execution inventory](development/exploration-archive)
+exclude held-out test seeds. Summed parallel execution durations are not GPU
+allocation hours and must not be added to the run's elapsed GPU time.
