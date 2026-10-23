@@ -118,3 +118,28 @@ verifies available file certificates. It collapses copied cache records using
 the exact result bytes (which include measured wall duration), while retaining
 independent deterministic replays as separate executions. Summed parallel
 execution durations are explicitly not reported as allocated GPU hours.
+
+## Support-measurement diagnosis (training layout only)
+
+A read-only instrumented replay on training layout 41001 matches all 5,350 saved
+states of the uninstrumented reference prefix **exactly**. During simulated
+seconds 525–530, the panel weight is 67.06193 N; mean contact support is
+54.95869 N and the original finite nail connections supply another **12.10359 N**
+upward. Their sum balances weight to 0.00035 N, consistent with the near-zero
+vertical acceleration. The contact-only stability predicate omits that load
+path. This diagnosis does not excuse the independently missing frame fastener;
+this particular trajectory still has only 7/8 connections.
+
+An opt-in `support_measurement.py` observer captures the existing internal nail
+force before the simulator clears its scratch buffer, and a separate evaluator
+includes its signed vertical component in the same 5% support-balance check.
+The original benchmark/default evaluator and active RL run remain unchanged.
+Eight focused local tests pass, including downward preload, missing support,
+external support, bad geometry, and preservation of the full-task gates. A
+separate full GPU replay of training layout 41004 is in progress to check that
+this observer leaves every physical state unchanged. No corrected-profile
+full-task result is claimed yet, and no test layout has been used.
+
+The first diagnostic sampled after buffer clearing and therefore recorded zero
+rather than the actual internal force; it is retained with that limitation. The
+corrected measurement occurs immediately after the original force calculation.

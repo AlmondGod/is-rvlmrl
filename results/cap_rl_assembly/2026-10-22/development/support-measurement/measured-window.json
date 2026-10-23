@@ -1,0 +1,702 @@
+[
+  {
+    "time_s": 525.05999999104,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.88278770752362,
+    "nail_applied_z_N": 12.179193189164536,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 3.264729725837492e-06,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.1599999910376,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.76092886846109,
+    "nail_applied_z_N": 12.301243258839792,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 3.373636271902616e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.2599999910352,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.71946781688978,
+    "nail_applied_z_N": 12.343734260114699,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 0.0001828255004904299,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.3599999910329,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.785300741611934,
+    "nail_applied_z_N": 12.27665078982955,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -3.036897327036824e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.4599999910305,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.85199903420394,
+    "nail_applied_z_N": 12.20995378638209,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.9071154640979664e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.5599999910281,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.9184017196307,
+    "nail_applied_z_N": 12.143552286489518,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.8762505520702475e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.6599999910258,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.98450873895522,
+    "nail_applied_z_N": 12.077446417671947,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.846217271974746e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.7599999910234,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.05031997033596,
+    "nail_applied_z_N": 12.011636303129434,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.8170250255233866e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.859999991021,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.11583538124229,
+    "nail_applied_z_N": 11.946121976694586,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.788672490915557e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 525.9599999910187,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.18105502338821,
+    "nail_applied_z_N": 11.8809033879973,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.7610282674753953e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.0599999910163,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.24597902755656,
+    "nail_applied_z_N": 11.815980407434935,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.7341071733581735e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.1599999910139,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.849537991876666,
+    "nail_applied_z_N": 12.212789089478497,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 4.959682817938951e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.2599999910116,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.895374003219246,
+    "nail_applied_z_N": 12.1665878146065,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 1.8502812988018862e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.3599999910092,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.64810261799258,
+    "nail_applied_z_N": 12.413942474940288,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 1.7158875814612545e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.4599999910068,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.7603857919916,
+    "nail_applied_z_N": 12.301542153976152,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.4316917011745187e-06,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.5599999910045,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.82729787796411,
+    "nail_applied_z_N": 12.234645720380854,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.5953233584254774e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.6599999910021,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.89387634913935,
+    "nail_applied_z_N": 12.168068041673836,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.5703401499838436e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.7599999909997,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.74348254956746,
+    "nail_applied_z_N": 12.316176510823011,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -0.000333077717125956,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.8599999909974,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.806195653522934,
+    "nail_applied_z_N": 12.255743194846696,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -4.003777530412039e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 526.959999990995,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.87315148864396,
+    "nail_applied_z_N": 12.188789387060568,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.849938973624177e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.0599999909927,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.939788755792925,
+    "nail_applied_z_N": 12.12215334395216,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.8210776726417616e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.1599999909903,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.00611011760702,
+    "nail_applied_z_N": 12.05583317334276,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.7935195195156137e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.2599999909879,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.07211657969993,
+    "nail_applied_z_N": 11.989827871185021,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.7666901357330337e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.3599999909856,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.13780917656411,
+    "nail_applied_z_N": 11.924136404193703,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.740479892325364e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.4599999909832,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.20318897016423,
+    "nail_applied_z_N": 11.85875771147343,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.714918204343008e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.5599999909808,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.268257047971574,
+    "nail_applied_z_N": 11.79369070656055,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.69004121551531e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.6599999909785,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.1043121674692,
+    "nail_applied_z_N": 11.957765977560653,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 2.1256133809074868e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.7599999909761,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.94038477914743,
+    "nail_applied_z_N": 12.12175990694866,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 2.8588263759626168e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.8599999909737,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.97475672964975,
+    "nail_applied_z_N": 12.104192474017571,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 0.002483387526683761,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 527.9599999909714,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.7366191875264,
+    "nail_applied_z_N": 12.315148409731554,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -0.0014893324738561602,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.059999990969,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.79724864715784,
+    "nail_applied_z_N": 12.264698108027686,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -6.281977759898178e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.1599999909666,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.86295902033376,
+    "nail_applied_z_N": 12.198991157342185,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.825136752783323e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.2599999909643,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.928419621983835,
+    "nail_applied_z_N": 12.133531601292338,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.795774615811562e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.3599999909619,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.99363258213229,
+    "nail_applied_z_N": 12.068319655723103,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.768537814870918e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.4599999909595,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.0585953463718,
+    "nail_applied_z_N": 12.003357877372231,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.741949383379141e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.5599999909572,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.12330556779141,
+    "nail_applied_z_N": 11.938648614374593,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.716070875211374e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.6599999909548,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.187761098532874,
+    "nail_applied_z_N": 11.874194015789904,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.6908791240067684e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.7599999909525,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.88007321721986,
+    "nail_applied_z_N": 12.18197054097571,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 1.7149055222086728e-05,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.8599999909501,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.839698046431536,
+    "nail_applied_z_N": 12.222274475670883,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 2.38363621170479e-06,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 528.9599999909477,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.90387132366286,
+    "nail_applied_z_N": 12.15803753761408,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -6.8052561014413175e-06,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.0599999909454,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.89067111992459,
+    "nail_applied_z_N": 12.17906997226924,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 0.0011386241077057638,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.159999990943,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.77009231989878,
+    "nail_applied_z_N": 12.293485744455324,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 0.0002382412306947261,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.2599999909406,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.83489302815547,
+    "nail_applied_z_N": 12.227055773514257,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -3.2089807765832336e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.3599999909383,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.90125219657883,
+    "nail_applied_z_N": 12.160698037855205,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.9115054158482523e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.4599999909359,
+    "stable_s": 0.0,
+    "contact_frame_N": 54.967320563210606,
+    "nail_applied_z_N": 12.09463088507228,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.879854010878309e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.5599999909335,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.03309812560412,
+    "nail_applied_z_N": 12.028854500423346,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.849196554064187e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.6599999909312,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.09858456940033,
+    "nail_applied_z_N": 11.963369199753638,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.8194063441087617e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.7599999909288,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.163779679101644,
+    "nail_applied_z_N": 11.898175199971947,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.7904044030560626e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.8599999909264,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.22868333246299,
+    "nail_applied_z_N": 11.833272624599434,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.762200740707392e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  },
+  {
+    "time_s": 529.9599999909241,
+    "stable_s": 0.0,
+    "contact_frame_N": 55.29329549520009,
+    "nail_applied_z_N": 11.768661509201841,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": -2.73473679969485e-07,
+    "intact_nails": 7,
+    "gripper_N": [
+      0.0,
+      0.0
+    ],
+    "rack_N": 0.0
+  }
+]
