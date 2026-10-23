@@ -33,11 +33,11 @@ def summarize(directory):
     for phase, key in [('before', 'before'), ('after', 'after')]:
         rows = report[key]
         phases[phase] = {'successes': sum(r['success'] for r in rows), 'n': len(rows),
-            ('canonical_eight_call_program_matches' if metadata['task'] == 'frame_place' else 'canonical_four_call_program_matches'): sum(canonical(r) for r in rows),
+            ('canonical_eight_call_program_matches' if metadata['task'] in ('frame_place', 'frame_place_ordered') else 'canonical_four_call_program_matches'): sum(canonical(r) for r in rows),
             'outcomes': dict(Counter('success' if r['success'] else r['error'] or 'physical_criteria' for r in rows)),
             'max_success_penetration_m': max((r['final']['peak_penetration'] for r in rows if r['success']), default=None),
             'max_success_final_tilt_rad': max((r['final']['tilt'] for r in rows if r['success']), default=None)}
-        if metadata['task'] == 'frame_place':
+        if metadata['task'] in ('frame_place', 'frame_place_ordered'):
             successes = [r for r in rows if r['success']]
             counts = Counter()
             repeated_lifts = 0

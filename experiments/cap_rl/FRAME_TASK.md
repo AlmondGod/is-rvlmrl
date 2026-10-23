@@ -2,6 +2,8 @@
 
 **Known frozen-reward loophole:** `frame01` can reward sliding the rail to the target and then lifting there. Preserve that source and its rewards for reproducibility. Report ordered pickup-and-carry success only after applying `python -m experiments.cap_rl.frame_order RUN --out RUN/ordered_test_comparison.json`. The additional check was fixed after training and before inspecting held-out results; it requires a centrally grasped rail at the requested clearance within 12 mm of its original center, followed by a later call boundary at clearance within 8 mm of the target. It is an evaluation check, not a claim that the original training reward enforced this order.
 
+For new training, `--task frame_place_ordered` uses the corrected reward in `frame_order.execute`: elevation must be earned at the source, transport must follow that pickup, and placement must follow airborne arrival. The frozen `frame_place` mode remains only for reproducing frame01. No second training run or held-out-driven tuning was performed here.
+
 
 This is an isolated frame-assembly **pickup, transfer, placement, release and withdrawal** task. One native seven-joint xArm7 and its actuated two-finger gripper manipulate a free wooden rail under gravity in MuJoCo 3.3.7. It extends the earlier lift task by requiring a new target position and unsupported final placement. It does not assemble a joint, drive nails, use vision, or solve the full three-arm benchmark.
 

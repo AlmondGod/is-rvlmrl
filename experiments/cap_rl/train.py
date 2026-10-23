@@ -166,11 +166,11 @@ def train(args):
                     for p in (out / "initial_adapter").iterdir() if p.is_file()} if args.init_adapter else None),
                 "splits": {s: [layout.key for layout in rows] for s, rows in splits.items()},
                 "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
-    if args.task in ("mujoco_docking", "robot_lift", "frame_place"):
+    if args.task in ("mujoco_docking", "robot_lift", "frame_place", "frame_place_ordered"):
         import mujoco
         import numpy
         metadata["physics_runtime"] = {"mujoco": mujoco.__version__, "numpy": numpy.__version__}
-    if args.task in ("robot_lift", "frame_place"):
+    if args.task in ("robot_lift", "frame_place", "frame_place_ordered"):
         from .robot_lift import asset_hashes
         metadata["robot_assets_sha256"] = asset_hashes()
     dump(out / "metadata.json", metadata)
@@ -257,13 +257,17 @@ def test(args):
         raise RuntimeError("Task changed since training; restore the recorded task source.")
     if [layout.key for layout in layouts] != metadata["splits"]["test"]:
         raise RuntimeError("Test split changed since training.")
-    if metadata.get("task") in ("robot_lift", "frame_place"):
+    if metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered"):
         from .robot_lift import asset_hashes
         if asset_hashes() != metadata["robot_assets_sha256"]:
             raise RuntimeError("Robot assets changed since training")
         dependency = task_path.with_name("robot_lift.py")
         if hashlib.sha256(dependency.read_bytes()).hexdigest() != metadata["source_sha256"][dependency.name]:
             raise RuntimeError("Robot controller changed since training")
+        if metadata.get("task") == "frame_place_ordered":
+            dependency = task_path.with_name("task_frame.py")
+            if hashlib.sha256(dependency.read_bytes()).hexdigest() != metadata["source_sha256"][dependency.name]:
+                raise RuntimeError("Underlying frame task changed since training")
     initial_adapter = out / "initial_adapter"
     if metadata.get("initial_adapter_sha256"):
         for name, digest in metadata["initial_adapter_sha256"].items():
@@ -297,7 +301,7 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--revision")
-    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place"], default="pick_place")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place", "frame_place_ordered"], default="pick_place")
     parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=80)

@@ -1,6 +1,6 @@
 import unittest
 from . import task_frame as t
-from .frame_order import ordered_carry
+from .frame_order import ordered_carry, execute
 
 
 class OrderedCarryTests(unittest.TestCase):
@@ -10,6 +10,9 @@ class OrderedCarryTests(unittest.TestCase):
         r=t.execute(l,'\n'.join(calls))
         self.assertTrue(r['success'])  # Regression: the original reward loophole.
         self.assertFalse(ordered_carry(l,r['trace'])['passed'])
+        corrected = execute(l,'\n'.join(calls))
+        self.assertFalse(corrected['success'])
+        self.assertLess(corrected['reward'], .5)
 
     def test_real_pick_carry_place_passes(self):
         l=t.datasets()['train'][0]
@@ -17,6 +20,9 @@ class OrderedCarryTests(unittest.TestCase):
         check=ordered_carry(l,r['trace'])
         self.assertTrue(r['success'] and check['passed'])
         self.assertLess(check['pickup_call_index'],check['arrival_call_index'])
+        corrected = execute(l,t.oracle(l))
+        self.assertTrue(corrected['success'])
+        self.assertGreater(corrected['reward'], .98)
 
     def test_arrival_at_same_boundary_is_insufficient(self):
         l=t.datasets()['train'][0]

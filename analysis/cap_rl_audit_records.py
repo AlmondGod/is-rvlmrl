@@ -51,15 +51,15 @@ def audit_records(directory, workers=1):
         if hashlib.sha256((source/name).read_bytes()).hexdigest() != digest:
             raise ValueError(f'Source mismatch: {name}')
     task_name = {'ordered_two': 'task_ordered', 'mujoco_docking': 'task_mujoco',
-                 'frame_place': 'task_frame', 'robot_lift': 'task_robot',
+                 'frame_place_ordered': 'frame_order', 'frame_place': 'task_frame', 'robot_lift': 'task_robot',
                  'pick_place': 'task'}[metadata.get('task', 'pick_place')]
     task, namespace = load_frozen_task(source, task_name)
-    physics = metadata.get('task') in ('mujoco_docking', 'robot_lift', 'frame_place')
+    physics = metadata.get('task') in ('mujoco_docking', 'robot_lift', 'frame_place', 'frame_place_ordered')
     if physics:
         import mujoco
         if mujoco.__version__ != metadata['physics_runtime']['mujoco']:
             raise ValueError('MuJoCo runtime differs from training')
-    if metadata.get('task') in ('robot_lift', 'frame_place'):
+    if metadata.get('task') in ('robot_lift', 'frame_place', 'frame_place_ordered'):
         robot = importlib.import_module('.robot_lift', namespace)
         if robot.asset_hashes() != metadata['robot_assets_sha256']:
             raise ValueError('Robot assets differ from training')
@@ -101,7 +101,7 @@ def audit_records(directory, workers=1):
         # a replay only for identical layout, exact program, and truncation flag;
         # every saved record still has all fields checked against that replay.
         cache_key = (layout.key, row['completion'], row['truncated'])
-        if metadata.get('task') in ('robot_lift', 'frame_place') and cache_key in replay_cache:
+        if metadata.get('task') in ('robot_lift', 'frame_place', 'frame_place_ordered') and cache_key in replay_cache:
             replay = replay_cache[cache_key]
             cached_checks += 1
         else:
@@ -113,17 +113,19 @@ def audit_records(directory, workers=1):
                     replay.update(reward=0., success=False, valid=False, error='truncated')
                 replay = json.loads(json.dumps(replay))
             unique_executions += 1
-            if metadata.get('task') in ('robot_lift', 'frame_place'):
+            if metadata.get('task') in ('robot_lift', 'frame_place', 'frame_place_ordered'):
                 replay_cache[cache_key] = replay
         keys = ['success', 'valid', 'error', 'trace']
-        if metadata.get("task") == "frame_place":
+        if metadata.get("task") in ("frame_place", "frame_place_ordered"):
             keys += ["lifted", "arrived"]
-        if metadata.get('task') in ('robot_lift', 'frame_place'):
+        if metadata.get("task") == "frame_place_ordered":
+            keys += ["order_check"]
+        if metadata.get('task') in ('robot_lift', 'frame_place', 'frame_place_ordered'):
             keys += ['final', 'components', 'time']
         elif physics:
             keys += ['final_state', 'final_distance_m', 'final_speed_m_s', 'components']
         for key in keys:
-            if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-7 if metadata.get("task") in ("robot_lift", "frame_place") else 1e-8 if physics else 0.):
+            if (key in replay) != (key in row) or not equivalent(replay.get(key), row.get(key), 1e-7 if metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered") else 1e-8 if physics else 0.):
                 raise ValueError(f'Replay mismatch: {row["layout_id"]}/{key}')
         if abs(replay['reward']-row['reward']) > 1e-9:
             raise ValueError('Reward mismatch')
@@ -170,7 +172,7 @@ def audit_records(directory, workers=1):
             raise ValueError('Training reward aggregate mismatch')
         if sum(x['success'] for x in batch)/len(batch) != metric['success_rate']:
             raise ValueError('Training success aggregate mismatch')
-    if metadata.get('task') in ('robot_lift', 'frame_place'):
+    if metadata.get('task') in ('robot_lift', 'frame_place', 'frame_place_ordered'):
         return {'audit': 'passed', 'training_steps_verified': len(metrics),
                 'training_records_verified': len(rows), 'validation_records_verified': validation_count,
                 'unique_programs_executed': unique_executions, 'cached_record_checks': cached_checks,

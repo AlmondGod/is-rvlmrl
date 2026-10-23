@@ -12,13 +12,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--comparison", default="test_comparison.json")
     args = parser.parse_args()
     metadata = json.loads((args.directory/"metadata.json").read_text())
     ordered = metadata.get("task") == "ordered_two"
     physics = metadata.get("task") == "mujoco_docking"
-    placement = metadata.get("task") == "frame_place"
-    robot = metadata.get("task") in ("robot_lift", "frame_place")
-    report = json.loads((args.directory/"test_comparison.json").read_text())
+    placement = metadata.get("task") in ("frame_place", "frame_place_ordered")
+    robot = metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered")
+    report = json.loads((args.directory/args.comparison).read_text())
     selection = json.loads((args.directory/"selection.json").read_text())
     history = [json.loads(line) for line in (args.directory/"training.jsonl").read_text().splitlines()]
     validation = [(0, json.loads((args.directory/"validation_baseline.json").read_text())["metrics"])]

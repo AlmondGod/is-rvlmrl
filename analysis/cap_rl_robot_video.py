@@ -31,7 +31,7 @@ def render(directory, destination, index=0, validation_step=None):
     directory, destination = Path(directory), Path(destination)
     metadata = json.loads((directory/"metadata.json").read_text())
     task = get_task(metadata.get("task", "robot_lift"))
-    placement = metadata.get("task") == "frame_place"
+    placement = metadata.get("task") in ("frame_place", "frame_place_ordered")
     if validation_step is None:
         report = json.loads((directory/'test_comparison.json').read_text())
         layout = task.datasets()['test'][index]

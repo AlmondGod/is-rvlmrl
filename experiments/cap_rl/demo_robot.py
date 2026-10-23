@@ -25,16 +25,19 @@ def main():
     args = parser.parse_args()
     metadata = json.loads((args.directory/'metadata.json').read_text())
     task_name = metadata.get('task')
-    if task_name not in ('robot_lift', 'frame_place'):
+    if task_name not in ('robot_lift', 'frame_place', 'frame_place_ordered'):
         parser.error('This checkpoint is not a supported robot run.')
     task = get_task(task_name)
     layout = (task.Layout(tuple(args.start), tuple(args.center), tuple(args.target), args.lift)
-              if task_name == 'frame_place' else task.Layout(tuple(args.start), tuple(args.center), args.lift))
-    if task_name == 'frame_place' and any(abs(x)>4 for x in args.target):
+              if task_name in ('frame_place', 'frame_place_ordered') else task.Layout(tuple(args.start), tuple(args.center), args.lift))
+    if task_name in ('frame_place', 'frame_place_ordered') and any(abs(x)>4 for x in args.target):
         parser.error('Use target coordinates in [-4,4] cm.')
     if any(abs(x)>3 for x in layout.start) or any(abs(x)>4 for x in layout.center):
         parser.error('Use start coordinates in [-3,3] and center coordinates in [-4,4] cm.')
-    for name in (Path(task.__file__).name, 'robot_lift.py'):
+    dependencies = [Path(task.__file__).name, 'robot_lift.py']
+    if task_name == 'frame_place_ordered':
+        dependencies.append('task_frame.py')
+    for name in dependencies:
         if hashlib.sha256(Path(task.__file__).with_name(name).read_bytes()).hexdigest() != metadata['source_sha256'][name]:
             raise ValueError('Task or robot controller differs from training')
     if asset_hashes() != metadata['robot_assets_sha256']:

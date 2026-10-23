@@ -12,7 +12,8 @@ import math
 from pathlib import Path
 import random
 
-from .task_frame import datasets, ORIGIN, HEIGHT
+from .task_frame import (SYSTEM, Layout, Robot, asdict, datasets, prompt, parse_program,
+                         oracle, ORIGIN, HEIGHT, execute as legacy_execute)
 
 
 def ordered_carry(layout, trace):
@@ -32,6 +33,39 @@ def ordered_carry(layout, trace):
             break
     return {'passed': arrival_index is not None, 'pickup_call_index': pickup_index,
             'arrival_call_index': arrival_index}
+
+
+def execute(layout, text, record_frames=False):
+    """Corrected reward for future runs; frame01's frozen reward stays intact."""
+    result = legacy_execute(layout, text, record_frames)
+    check = ordered_carry(layout, result['trace'])
+    result.update(order_check=check, lifted=check['pickup_call_index'] is not None,
+                  arrived=check['passed'])
+    if 'components' not in result:
+        return result
+    result['success'] = bool(result['success'] and check['passed'])
+    source = [float(o)+v*.01 for o,v in zip(ORIGIN, layout.center)]
+    target = [float(o)+v*.01 for o,v in zip(ORIGIN, layout.target)]
+    elevation = transport = placement = 0.
+    for i, state in enumerate(result['trace']):
+        wood = state['wood']
+        grasped = math.dist(state['tcp'][:2], wood[:2]) <= .012 and state['grip_force'] > 5
+        height = wood[2]-HEIGHT/2
+        if grasped and math.dist(wood[:2], source) <= .012:
+            elevation = max(elevation, min(1., max(0., height/(layout.lift_cm*.01))))
+        if (check['pickup_call_index'] is not None and i > check['pickup_call_index']
+                and grasped and height >= layout.lift_cm*.01-.008):
+            transport = max(transport, max(0., 1-math.dist(wood[:2],target)/.08))
+        if (check['arrival_call_index'] is not None and i > check['arrival_call_index']
+                and abs(height) <= .003 and state['tilt'] <= .05 and abs(state['yaw']) <= .05
+                and state['gripper_command'] == 0 and state['grip_force'] < 1):
+            placement = max(placement, max(0., 1-math.dist(wood[:2],target)/.04))
+    result['components'].update(elevation=.15*elevation, transport=.15*transport,
+                                placement=.10*placement, success=.35*result['success'])
+    # Preserve the original zeroing of unsafe episodes and parser failures.
+    if result['reward'] > 0:
+        result['reward'] = sum(result['components'].values())
+    return result
 
 
 def verify_report(directory):
