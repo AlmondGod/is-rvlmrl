@@ -10,6 +10,8 @@ from .assembly import parse_program, provenance, run
 SYSTEM = 'Write only the requested Python API program. Do not explain it.'
 EXPECTED_PROVENANCE = None
 _FAILURES = {}
+PHYSICS_WORKERS = 1
+_POOL = None
 
 
 def terminal_failure_prefix(result, calls):
@@ -110,3 +112,51 @@ def execute(layout, text):
                    cache_reuse='terminal_failure_prefix' if key != requested_key else 'exact_program',
                    result_sha256=cert['files']['result.json'])
     return summary
+
+
+def _worker_init(expected):
+    global EXPECTED_PROVENANCE
+    EXPECTED_PROVENANCE = expected
+
+
+def execute_batch(layouts, texts):
+    """Parallel independent physical executions, with exact AST deduplication."""
+    global _POOL
+    if PHYSICS_WORKERS == 1:
+        return [execute(layout, text) for layout, text in zip(layouts, texts)]
+    from concurrent.futures import ProcessPoolExecutor
+    import multiprocessing
+    if _POOL is None:
+        _POOL = ProcessPoolExecutor(PHYSICS_WORKERS,
+            mp_context=multiprocessing.get_context('spawn'),
+            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE,))
+    manifest = provenance()
+    if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
+        raise RuntimeError('Assembly dependencies changed during this training/evaluation run')
+    root = Path(os.environ.get('CAP_RL_ASSEMBLY_CACHE', 'artifacts/assembly_rollouts')).resolve()
+    groups, results = {}, [None] * len(texts)
+    for i, (layout, text) in enumerate(zip(layouts, texts)):
+        try:
+            calls = parse_program(text)
+        except (SyntaxError, ValueError):
+            results[i] = execute(layout, text)
+            continue
+        identity = json.dumps(dict(seed=layout.seed, calls=calls, provenance=manifest), sort_keys=True)
+        key = hashlib.sha256(identity.encode()).hexdigest()
+        context = hashlib.sha256(json.dumps(dict(seed=layout.seed, provenance=manifest,
+                                      cache_root=str(root)), sort_keys=True).encode()).hexdigest()
+        if (root / key / 'certificate.json').exists() or any(
+                calls[:len(prefix)] == prefix for prefix, _ in _FAILURES.get(context, [])):
+            results[i] = execute(layout, text)
+        else:
+            groups.setdefault(key, []).append((i, layout, text, calls, context))
+    futures = [(group, _POOL.submit(execute, group[0][1], group[0][2])) for group in groups.values()]
+    for group, future in futures:
+        result = future.result()  # Infrastructure errors fail the run, never become reward zero.
+        measured = json.loads((Path(result['evidence']) / 'result.json').read_text())
+        for n, (i, layout, text, calls, context) in enumerate(group):
+            results[i] = dict(result, batch_duplicate=n > 0)
+            prefix = terminal_failure_prefix(measured, calls)
+            if prefix is not None and not any(p == prefix for p, _ in _FAILURES.get(context, [])):
+                _FAILURES.setdefault(context, []).append((prefix, result['evidence_id']))
+    return results

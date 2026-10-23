@@ -84,7 +84,8 @@ def rollout(model, tokenizer, layouts, max_tokens, sample):
     mask = completion_mask(completions, tokenizer.eos_token_id)
     attention = torch.cat([inputs.attention_mask, mask.long()], dim=1)
     texts = tokenizer.batch_decode(completions, skip_special_tokens=True)
-    results = [task.execute(layout, text) for layout, text in zip(layouts, texts)]
+    results = (task.execute_batch(layouts, texts) if hasattr(task, 'execute_batch') else
+               [task.execute(layout, text) for layout, text in zip(layouts, texts)])
     # A cut-off program is not a completed policy even if its prefix happened to work.
     for i, result in enumerate(results):
         result["truncated"] = not bool(completions[i].eq(tokenizer.eos_token_id).any())
@@ -145,6 +146,8 @@ def train(args):
     out.mkdir(parents=True, exist_ok=False)
     global task
     task = get_task(args.task)
+    if args.task == 'assembly_full':
+        task.PHYSICS_WORKERS = args.physics_workers
     set_seed(args.seed)
     torch.set_num_threads(4)
     if args.init_adapter:
@@ -257,6 +260,8 @@ def test(args):
         raise FileExistsError("Test results already exist; do not tune on this test set.")
     global task
     task = get_task(metadata.get("task", "pick_place"))
+    if metadata.get('task') == 'assembly_full':
+        task.PHYSICS_WORKERS = metadata.get('physics_workers', 1)
     set_seed(metadata["seed"])
     torch.set_num_threads(4)
     layouts = task.datasets()["test"]
@@ -322,12 +327,13 @@ def main():
     parser.add_argument("--group-size", type=int, default=8)
     parser.add_argument("--prompts-per-step", type=int, default=2)
     parser.add_argument("--microbatch", type=int, default=2)
+    parser.add_argument("--physics-workers", type=int, default=1, help="Independent full-assembly simulation workers")
     parser.add_argument("--max-tokens", type=int, default=96)
     parser.add_argument("--eval-every", type=int, default=20)
     parser.add_argument("--lr", type=float, default=2e-4)
     parser.add_argument("--beta", type=float, default=.02)
     args = parser.parse_args()
-    if args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch,
+    if args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch, args.physics_workers,
                                   args.max_tokens, args.eval_every) < 1:
         parser.error("positive sizes and group_size >= 2 required")
     train(args) if args.mode == "train" else test(args)

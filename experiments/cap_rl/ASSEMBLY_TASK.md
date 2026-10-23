@@ -59,10 +59,17 @@ surrogate; it is not validated nail-driving or real-world construction physics.
 
 Use Qwen3.5-4B revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`, raw base
 initialization, non-thinking mode, rank-16 all-linear LoRA and the existing
-GRPO trainer. Initial budget: 32 optimizer updates, one layout and eight sampled
-programs per update, 512 completion tokens, learning rate 0.0001, KL coefficient
+GRPO trainer. Initial budget: 32 optimizer updates, two layouts with four sampled
+programs each per update, 512 completion tokens, learning rate 0.0001, KL coefficient
 0.02, microbatch one, seed 42, validation every eight updates. Any later training
 extension must be selected using training/validation only, before held-out test.
+
+Throughput amendment before any optimizer update: the first sequential
+preparation run was stopped with zero updates and its partial baseline evidence
+retained. Four independent physics workers and two groups of four replace one
+group of eight, preserving 256 sampled programs and 32 updates. Duplicate parsed
+programs on the same layout are executed once per batch. A contact-driven
+sequential/parallel regression verifies states and rewards, not merely counts.
 
 Training seeds 41001–41008, validation 42001–42004 and held-out 43001–43008 are
 disjoint from historical benchmark seeds. Layouts randomize feeder-lane order,
@@ -92,8 +99,8 @@ python -m unittest experiments.cap_rl.test_assembly
 python -m experiments.cap_rl.train train --task assembly_full \
   --model Qwen/Qwen3.5-4B \
   --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
-  --out /absolute/path/to/new/run --steps 32 --prompts-per-step 1 \
-  --group-size 8 --microbatch 1 --max-tokens 512 --eval-every 8 --lr 0.0001
+  --out /absolute/path/to/new/run --steps 32 --prompts-per-step 2 \
+  --group-size 4 --microbatch 1 --physics-workers 4 --max-tokens 512 --eval-every 8 --lr 0.0001
 # Run once, only after validation-based selection is final:
 python -m experiments.cap_rl.train test --out /absolute/path/to/run
 ```
