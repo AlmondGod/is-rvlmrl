@@ -3,6 +3,9 @@ from . import task, task_ordered
 
 
 def get_task(name='pick_place'):
+    if name == 'assembly_full':
+        from . import task_assembly
+        return task_assembly
     if name == 'frame_place_ordered':
         from . import frame_order
         return frame_order

@@ -16,15 +16,17 @@ def main():
     p.add_argument('--model',required=True)
     p.add_argument('--revision',required=True)
     p.add_argument('--out',required=True)
+    p.add_argument('--task',default='frame_place')
+    p.add_argument('--max-tokens',type=int,default=160)
     a=p.parse_args()
     torch.set_num_threads(4)
-    tr.task=tr.get_task('frame_place')
+    tr.task=tr.get_task(a.task)
     start=time.monotonic()
     model,tok=tr.load_model(a.model,a.revision,trainable=True)
     layouts=tr.task.datasets()['train'][:2]
     inputs=tr.encode(tok,layouts)
     with torch.no_grad():
-        generated=model.generate(**inputs,max_new_tokens=160,do_sample=False,return_dict_in_generate=True,output_scores=True)
+        generated=model.generate(**inputs,max_new_tokens=a.max_tokens,do_sample=False,return_dict_in_generate=True,output_scores=True)
         sequences=generated.sequences
         length=sequences.shape[1]-inputs.input_ids.shape[1]
         tokens=sequences[:,-length:]
@@ -42,7 +44,7 @@ def main():
     finite=bool(gradients and all(torch.isfinite(g).all() for g in gradients))
     if not finite or not any(torch.count_nonzero(g) for g in gradients):
         raise RuntimeError('No finite nonzero LoRA gradients')
-    result={'model':a.model,'revision':a.revision,'finite_nonzero_gradients':finite,
+    result={'model':a.model,'revision':a.revision,'task':a.task,'max_tokens':a.max_tokens,'finite_nonzero_gradients':finite,
             'generated_programs':tok.batch_decode(tokens,skip_special_tokens=True),
             'generation_vs_teacher_logprob_abs_mean':float(difference.mean()),
             'generation_vs_teacher_logprob_abs_max':float(difference.max()),

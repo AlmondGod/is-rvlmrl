@@ -174,6 +174,14 @@ def train(args):
         from .robot_lift import asset_hashes
         metadata["robot_assets_sha256"] = asset_hashes()
     dump(out / "metadata.json", metadata)
+    if args.task == 'assembly_full':
+        from .assembly import provenance, ROOT
+        manifest = provenance()
+        dump(out / 'assembly_provenance.json', manifest)
+        for name in manifest['sha256']:
+            target = out / 'assembly_source' / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / name, target)
     (out / "source").mkdir()
     for source in Path(__file__).parent.glob("*.py"):
         (out / "source" / source.name).write_bytes(source.read_bytes())
@@ -257,6 +265,10 @@ def test(args):
         raise RuntimeError("Task changed since training; restore the recorded task source.")
     if [layout.key for layout in layouts] != metadata["splits"]["test"]:
         raise RuntimeError("Test split changed since training.")
+    if metadata.get('task') == 'assembly_full':
+        from .assembly import provenance
+        if provenance() != json.loads((out / 'assembly_provenance.json').read_text()):
+            raise RuntimeError('Full assembly source, assets or runtime changed since training')
     if metadata.get("task") in ("robot_lift", "frame_place", "frame_place_ordered"):
         from .robot_lift import asset_hashes
         if asset_hashes() != metadata["robot_assets_sha256"]:
@@ -301,7 +313,7 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--revision")
-    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place", "frame_place_ordered"], default="pick_place")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place", "frame_place_ordered", "assembly_full"], default="pick_place")
     parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=80)
