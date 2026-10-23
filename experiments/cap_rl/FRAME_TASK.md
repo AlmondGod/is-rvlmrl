@@ -1,5 +1,8 @@
 # Qwen3.5 rail placement experiment
 
+**Known frozen-reward loophole:** `frame01` can reward sliding the rail to the target and then lifting there. Preserve that source and its rewards for reproducibility. Report ordered pickup-and-carry success only after applying `python -m experiments.cap_rl.frame_order RUN --out RUN/ordered_test_comparison.json`. The additional check was fixed after training and before inspecting held-out results; it requires a centrally grasped rail at the requested clearance within 12 mm of its original center, followed by a later call boundary at clearance within 8 mm of the target. It is an evaluation check, not a claim that the original training reward enforced this order.
+
+
 This is an isolated frame-assembly **pickup, transfer, placement, release and withdrawal** task. One native seven-joint xArm7 and its actuated two-finger gripper manipulate a free wooden rail under gravity in MuJoCo 3.3.7. It extends the earlier lift task by requiring a new target position and unsupported final placement. It does not assemble a joint, drive nails, use vision, or solve the full three-arm benchmark.
 
 The rail is 0.038 × 0.9144 × 0.064 m, density 600 kg/m³. The existing `robot_lift.py` physics/controller is unchanged. No wood weld, mocap, external force or post-reset pose write is used. The native gripper's three linkage equalities remain.
@@ -30,7 +33,7 @@ After each attempted call and each final hold tick, track maxima of:
 5. **0.10 placement**: `max(0, 1 - rail-to-target XY distance / 0.04)`, only after airborne arrival within 8 mm, then grounded, correctly oriented, with fingers open and no contact.
 6. **0.35 strict success**.
 
-Success requires an observed central grasp and lift to at least the requested clearance minus 8 mm, followed by airborne arrival within 8 mm of the target. During every tick of the final 0.5 s, require XY target error ≤8 mm, rail center height within 3 mm of 0.032 m, tilt and absolute yaw ≤0.05 rad, linear speed ≤0.01 m/s, angular speed ≤0.05 rad/s, gripper command zero, finger contact <1 N, and TCP at least 0.10 m above the rail center. Thus sliding, carrying without release, or releasing without withdrawing cannot pass.
+Success requires an observed central grasp and lift to at least the requested clearance minus 8 mm, followed by airborne arrival within 8 mm of the target. During every tick of the final 0.5 s, require XY target error ≤8 mm, rail center height within 3 mm of 0.032 m, tilt and absolute yaw ≤0.05 rad, linear speed ≤0.01 m/s, angular speed ≤0.05 rad/s, gripper command zero, finger contact <1 N, and TCP at least 0.10 m above the rail center. Sliding without any lift, carrying without release, or releasing without withdrawing cannot pass. However, the original implementation allows sliding first and lifting at the target: the two stage flags can become true at the same call boundary. The separate pickup-first verification above closes this gap for reported ordered-carry results.
 
 All episodes require peak penetration <3 mm, no MuJoCo warnings, and no runtime error for success. Unsafe physics zeros the full reward. Parser failures and incomplete generations score zero; runtime errors retain earned prefix reward but cannot succeed. Physical tolerance means success is not equivalent to exact canonical code.
 
