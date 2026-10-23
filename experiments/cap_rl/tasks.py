@@ -3,6 +3,9 @@ from . import task, task_ordered
 
 
 def get_task(name='pick_place'):
+    if name == 'frame_place':
+        from . import task_frame
+        return task_frame
     if name == 'robot_lift':
         from . import task_robot
         return task_robot

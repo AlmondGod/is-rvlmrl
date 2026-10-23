@@ -15,6 +15,8 @@ import subprocess
 import time
 
 import torch
+import transformers
+import peft
 from peft import LoraConfig, PeftModel, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
@@ -60,7 +62,7 @@ def load_model(name, revision=None, adapter=None, trainable=False):
 def encode(tokenizer, layouts):
     texts = [tokenizer.apply_chat_template([
         {"role": "system", "content": task.SYSTEM}, {"role": "user", "content": task.prompt(layout)}
-    ], tokenize=False, add_generation_prompt=True) for layout in layouts]
+    ], tokenize=False, add_generation_prompt=True, enable_thinking=False) for layout in layouts]
     return tokenizer(texts, return_tensors="pt", padding=True).to("cuda")
 
 
@@ -152,17 +154,19 @@ def train(args):
                     for p in Path(__file__).parent.glob("*.py")}
     metadata = {**vars(args), "model_revision": model.config._commit_hash,
                 "gpu": torch.cuda.get_device_name(), "torch": torch.__version__,
+                "transformers": transformers.__version__, "peft": peft.__version__,
+                "thinking_enabled": False,
                 "trainable_parameters": sum(p.numel() for p in model.parameters() if p.requires_grad),
                 "source_sha256": source_files,
                 "initial_adapter_sha256": ({p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in (out / "initial_adapter").iterdir() if p.is_file()} if args.init_adapter else None),
                 "splits": {s: [layout.key for layout in rows] for s, rows in splits.items()},
                 "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
-    if args.task in ("mujoco_docking", "robot_lift"):
+    if args.task in ("mujoco_docking", "robot_lift", "frame_place"):
         import mujoco
         import numpy
         metadata["physics_runtime"] = {"mujoco": mujoco.__version__, "numpy": numpy.__version__}
-    if args.task == "robot_lift":
+    if args.task in ("robot_lift", "frame_place"):
         from .robot_lift import asset_hashes
         metadata["robot_assets_sha256"] = asset_hashes()
     dump(out / "metadata.json", metadata)
@@ -249,7 +253,7 @@ def test(args):
         raise RuntimeError("Task changed since training; restore the recorded task source.")
     if [layout.key for layout in layouts] != metadata["splits"]["test"]:
         raise RuntimeError("Test split changed since training.")
-    if metadata.get("task") == "robot_lift":
+    if metadata.get("task") in ("robot_lift", "frame_place"):
         from .robot_lift import asset_hashes
         if asset_hashes() != metadata["robot_assets_sha256"]:
             raise RuntimeError("Robot assets changed since training")
@@ -289,7 +293,7 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default=MODEL)
     parser.add_argument("--revision")
-    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift"], default="pick_place")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place"], default="pick_place")
     parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--steps", type=int, default=80)
