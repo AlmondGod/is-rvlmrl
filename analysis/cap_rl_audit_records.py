@@ -5,6 +5,8 @@ This verifies execution and accounting, not that model weights emitted the text.
 """
 import argparse
 from collections import defaultdict
+from concurrent.futures import ProcessPoolExecutor
+import multiprocessing
 import gzip
 import hashlib
 import importlib
@@ -16,22 +18,42 @@ import sys
 from experiments.cap_rl.audit import equivalent
 
 
-def audit_records(directory):
+def load_frozen_task(source, task_name):
+    source = Path(source)
+    namespace = '_cap_frozen_'+hashlib.sha256(str(source.resolve()).encode()).hexdigest()[:16]
+    spec = importlib.util.spec_from_file_location(namespace, source/'__init__.py',
+                                                 submodule_search_locations=[str(source)])
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[namespace] = module
+    spec.loader.exec_module(module)
+    return importlib.import_module('.'+task_name, namespace), namespace
+
+
+def init_replay_worker(source, task_name):
+    global worker_task, worker_layouts
+    worker_task, _ = load_frozen_task(source, task_name)
+    worker_layouts = {x.key: x for rows in worker_task.datasets().values() for x in rows}
+
+
+def replay_worker(key):
+    layout_id, completion, truncated = key
+    replay = worker_task.execute(worker_layouts[layout_id], completion)
+    if truncated:
+        replay.update(reward=0., success=False, valid=False, error='truncated')
+    return key, json.loads(json.dumps(replay))
+
+
+def audit_records(directory, workers=1):
     directory = Path(directory)
     metadata = json.loads((directory/'metadata.json').read_text())
     source = directory/'source'
     for name, digest in metadata['source_sha256'].items():
         if hashlib.sha256((source/name).read_bytes()).hexdigest() != digest:
             raise ValueError(f'Source mismatch: {name}')
-    namespace = '_cap_frozen_'+hashlib.sha256(str(directory.resolve()).encode()).hexdigest()[:16]
-    spec = importlib.util.spec_from_file_location(namespace, source/'__init__.py',
-                                                 submodule_search_locations=[str(source)])
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[namespace] = module
-    spec.loader.exec_module(module)
     task_name = {'ordered_two': 'task_ordered', 'mujoco_docking': 'task_mujoco',
-                 'frame_place': 'task_frame', 'robot_lift': 'task_robot', 'pick_place': 'task'}[metadata.get('task', 'pick_place')]
-    task = importlib.import_module('.'+task_name, namespace)
+                 'frame_place': 'task_frame', 'robot_lift': 'task_robot',
+                 'pick_place': 'task'}[metadata.get('task', 'pick_place')]
+    task, namespace = load_frozen_task(source, task_name)
     physics = metadata.get('task') in ('mujoco_docking', 'robot_lift', 'frame_place')
     if physics:
         import mujoco
@@ -46,6 +68,26 @@ def audit_records(directory):
         if [x.key for x in layouts] != metadata['splits'][name]:
             raise ValueError(f'Split mismatch: {name}')
     byid = {x.key: x for layouts in splits.values() for x in layouts}
+
+    # Optional CPU-only prefetch. Every row is still compared below, including
+    # duplicates; this changes execution scheduling, not the audit tolerance.
+    precomputed = {}
+    if workers < 1:
+        raise ValueError('workers must be positive')
+    if workers > 1:
+        pending = []
+        for path in directory.glob('validation_*.json'):
+            pending.extend(json.loads(path.read_text())['rows'])
+        path = directory/'rollouts.jsonl'
+        opener = open
+        if not path.exists():
+            path = directory/'rollouts.jsonl.gz'; opener = gzip.open
+        with opener(path, 'rt') as handle:
+            pending.extend(json.loads(line) for line in handle)
+        keys = list(dict.fromkeys((r['layout_id'], r['completion'], r['truncated']) for r in pending))
+        with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'),
+                                 initializer=init_replay_worker, initargs=(str(source.resolve()), task_name)) as pool:
+            precomputed = dict(pool.map(replay_worker, keys, chunksize=1))
 
     replay_cache = {}
     unique_executions = cached_checks = 0
@@ -63,10 +105,13 @@ def audit_records(directory):
             replay = replay_cache[cache_key]
             cached_checks += 1
         else:
-            replay = task.execute(layout, row['completion'])
-            if row['truncated']:
-                replay.update(reward=0., success=False, valid=False, error='truncated')
-            replay = json.loads(json.dumps(replay))
+            if cache_key in precomputed:
+                replay = precomputed[cache_key]
+            else:
+                replay = task.execute(layout, row['completion'])
+                if row['truncated']:
+                    replay.update(reward=0., success=False, valid=False, error='truncated')
+                replay = json.loads(json.dumps(replay))
             unique_executions += 1
             if metadata.get('task') in ('robot_lift', 'frame_place'):
                 replay_cache[cache_key] = replay
@@ -142,8 +187,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('directory', type=Path)
     parser.add_argument('--out', type=Path)
+    parser.add_argument('--workers', type=int, default=1)
     args = parser.parse_args()
-    text = json.dumps(audit_records(args.directory), indent=2)+'\n'
+    text = json.dumps(audit_records(args.directory, args.workers), indent=2)+'\n'
     if args.out:
         args.out.write_text(text)
     print(text, end='')

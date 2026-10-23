@@ -40,10 +40,13 @@ class RobotAuditTests(unittest.TestCase):
             self.assertEqual(result['cached_record_checks'], 14)
             self.assertEqual(result['unique_programs_executed'], 66)
             self.assertEqual(result['training_records_verified'], 16)
+            self.assertEqual(audit_records(out, workers=2), result)
             rows[1]['success'] = True  # same cached program, tampered outcome
             path.write_text('\n'.join(json.dumps(r) for r in rows)+'\n')
             with self.assertRaisesRegex(ValueError, 'Replay mismatch'):
                 audit_records(out)
+            with self.assertRaisesRegex(ValueError, 'Replay mismatch'):
+                audit_records(out, workers=2)
 
 
 if __name__ == '__main__':
