@@ -64,3 +64,36 @@ rank-16 all-linear LoRA. This does not continue the single-rail adapter.
 The cached model files on the mounted volume were unreadable; the same pinned
 official weights were downloaded to local pod storage. The failed setup log is
 retained separately and no optimizer update occurred during that failure.
+
+## First learning update (interim evidence)
+
+The first optimizer update completed with a finite nonzero gradient (norm
+0.15794); mean sampled reward was 0.15469 and strict success was 0/8.
+The correctly interleaved full program on layout 41001 earned 0.61875 but retained
+7/8 fasteners. An independent execution of its identical call sequence matches
+all 6,270 recorded states exactly (maximum difference zero). The comparison
+records the wrapper/helper source differences; physics, controllers, assets and
+runtime match. This is not presented as an identical-full-provenance audit.
+
+On layout 41002 the same sampled sequence placed all four rails and inserted all
+four frame fasteners, then failed the unchanged numerical gate during plywood
+positioning: peak penetration 0.755 mm versus a 0.5 mm limit. Reward is zero.
+Its program and compact result are preserved in `initial-training`. The terminal
+contact diagnostic is a post-hoc measurement; the peak occurred within an
+integration substep and cannot be attributed to a particular contact from the
+saved terminal state alone.
+
+To reduce waiting, an auxiliary process physically evaluates this already
+model-sampled program on additional **training layouts only**. It publishes
+complete hash-certified records only when their exact cache key is absent;
+existing or running records are never replaced. The learner receives a cached
+reward only if it independently samples the same parsed program for that layout.
+No program is injected into an optimizer batch or used as a demonstration target.
+The exact auxiliary driver is retained in `initial-training`; its extra physical
+executions are to be counted separately from the 256 on-policy training samples.
+The first helper setup was interrupted and retained after a result-aggregation
+bug was caught; the corrected helper uses a separate evidence directory.
+
+A tighter-placement controller candidate is being tested separately on training
+layout 41001. It is **not part of the active frozen RL run** and has no result yet.
+No held-out test has been run.

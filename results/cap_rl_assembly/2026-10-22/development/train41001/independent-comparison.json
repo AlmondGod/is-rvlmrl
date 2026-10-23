@@ -1,0 +1,26 @@
+{
+  "scope": "Independent scripted and model-sampled executions of the same parsed program on training layout 41001; provenance differs only in listed helper source files, so not a full identical-provenance audit.",
+  "source_differences": [
+    "experiments/cap_rl/ASSEMBLY_TASK.md",
+    "experiments/cap_rl/check_assembly_parallel.py",
+    "experiments/cap_rl/task_assembly.py",
+    "experiments/cap_rl/test_assembly.py",
+    "experiments/cap_rl/train.py"
+  ],
+  "runtime_equal": {
+    "versions": true,
+    "python": true,
+    "platform": true,
+    "settle_seconds": true
+  },
+  "shape_a": [
+    6270,
+    155
+  ],
+  "shape_b": [
+    6270,
+    155
+  ],
+  "maximum_state_difference": 0.0,
+  "all_states_match_1e_7": true
+}
