@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load(directory):
     directory = Path(directory)
+    certificate = None
+    if (directory/'certificate.json').exists():
+        certificate = json.loads((directory/'certificate.json').read_text())
+        for name, digest in certificate['files'].items():
+            if hashlib.sha256((directory/name).read_bytes()).hexdigest() != digest:
+                raise RuntimeError('Recorded evidence changed: '+str(directory/name))
     result = json.loads((directory / 'result.json').read_text())
     manifest = json.loads((directory / 'provenance.json').read_text())
     xml = ET.fromstring((directory / 'scene.xml').read_text())
@@ -36,7 +42,12 @@ def load(directory):
     if rows.ndim != 2 or not len(rows):
         raise ValueError('No recorded states to render')
     renderer = mujoco.Renderer(model, 480, 640)
-    return dict(result=result, rows=rows, model=model, data=mujoco.MjData(model), renderer=renderer)
+    evidence = dict(seed=result['seed'], certificate_verified=certificate is not None,
+        identity_sha256=certificate['identity_sha256'] if certificate else None,
+        result_sha256=hashlib.sha256((directory/'result.json').read_bytes()).hexdigest(),
+        states_sha256=hashlib.sha256((directory/'states.npz').read_bytes()).hexdigest())
+    return dict(result=result, rows=rows, model=model, data=mujoco.MjData(model), renderer=renderer,
+                evidence=evidence)
 
 
 def panel(episode, seconds, title):
@@ -102,6 +113,8 @@ def main():
     for episode in episodes:
         episode['renderer'].close()
     out.with_suffix('.json').write_text(json.dumps(dict(episodes=[args.episode, args.compare],
+        evidence=[e['evidence'] for e in episodes],
+        renderer_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         titles=titles[:len(episodes)], speed=args.speed, simulation_duration_s=float(duration),
         states_replayed=True, dynamics_rerun=False,
         display_headlight=dict(ambient=[.4]*3, diffuse=[.7]*3)), indent=2))
