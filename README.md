@@ -52,6 +52,13 @@ pickup-first verification. The report discloses a frozen-reward ordering loophol
 84 training rollouts rejected by the stricter check, and the learned extra lift.
 A corrected reward mode is included for future runs; frame01 was not retrained on it.
 
+A [full three-arm code-policy pilot](results/cap_rl_assembly/2026-10-22/README.md)
+now runs against the original assembly, fastening and flip physics. Its scripted
+development check passes all acceptance gates; model training is in progress,
+with no held-out improvement claimed yet. The model generates programs using
+the supplied camera-guided skills. This separate offline experiment does not
+replace or retrain the frozen live visual-language benchmark.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

@@ -1,0 +1,56 @@
+# Qwen3.5-4B full three-arm assembly pilot
+
+Status: the physical training integration is implemented and the pilot is in
+progress. **No trained-model full-task success or held-out improvement is
+claimed yet.** The historical live visual-language benchmark remains unchanged.
+
+The task starts with four loose frame members and a loose plywood sheet. Three
+torso-mounted UR10e arms place the members, make four frame connections, feed and
+place the sheet, make four sheet connections, then lift and flip the assembly.
+The model writes a complete program using supplied RGB/encoder feedback skills;
+it does not receive images or hidden workpiece state and does not learn motors.
+
+[Task, reward, splits, training budget and reproduction](../../../experiments/cap_rl/ASSEMBLY_TASK.md).
+Use [requirements-cap-assembly.txt](../../../requirements-cap-assembly.txt) for
+this pilot; it retains the full simulator's NumPy 2.5.4 pin alongside the Qwen
+dependencies, rather than the older single-rail runtime's NumPy 2.5.2 pin.
+
+## Completed development checks
+
+The scripted reference completed development seed 3 in **630.70 simulated
+seconds / 1,003.02 wall seconds** on macOS. It passed the existing independent
+full-task gates with **8/8 intact fasteners**, **12.74 seconds inverted hold**,
+**0.430 mm peak penetration** (limit 0.5 mm), **0.831 mm peak airborne relative
+displacement**, and **1.351 degrees peak relative angle**. This is a scripted
+feasibility result, not model inference or an RL result. No physics, nail strength
+or acceptance threshold was relaxed. Its exact 227 source/asset files were
+reconstructed against the recorded hashes for preservation.
+
+![Scripted full-task feasibility; not model-generated](development/scripted-feasibility.png)
+
+Qwen3.5-4B's initial greedy program picks all four members before releasing any.
+The second call tries to pick up another member with an occupied gripper. The
+physical executor rejects it with `Arm already carries a member`. The GPU smoke
+check produced finite nonzero LoRA gradients and used **14.06 GiB peak allocated
+memory** on the new 24 GB RTX PRO 4000 Blackwell.
+
+The new language/reward tests and inherited benchmark, geometry, perception,
+fastener and flip tests pass: **54 tests** on the GPU host. A separate parallel
+regression compares physical grasp trajectories and failure results against
+sequential execution at absolute tolerance **1e-7**, including AST-equivalent
+batch deduplication.
+
+The first sequential preparation run was stopped with **zero optimizer updates**
+to improve simulation throughput. Its partial baseline records are retained.
+The replacement uses four independent physics workers and 32 GRPO updates,
+two layouts × four samples per update (256 programs). Eight training layouts,
+four validation layouts and eight untouched test layouts are predeclared.
+Test evaluation must wait until validation-based selection is final.
+
+Model weights: `Qwen/Qwen3.5-4B` revision
+`851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`, raw initialization, non-thinking mode,
+rank-16 all-linear LoRA. This does not continue the single-rail adapter.
+
+The cached model files on the mounted volume were unreadable; the same pinned
+official weights were downloaded to local pod storage. The failed setup log is
+retained separately and no optimizer update occurred during that failure.

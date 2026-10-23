@@ -1,0 +1,8 @@
+{
+  "passes": true,
+  "cases": 3,
+  "unique_programs": 2,
+  "one_contact_grasp": true,
+  "absolute_tolerance": 1e-07,
+  "exact_ast_duplicate_verified": true
+}

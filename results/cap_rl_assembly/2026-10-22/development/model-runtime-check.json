@@ -1,0 +1,17 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "task": "assembly_full",
+  "max_tokens": 512,
+  "finite_nonzero_gradients": true,
+  "generated_programs": [
+    "position_member(0)\nposition_member(1)\nposition_member(2)\nposition_member(3)\nrelease_member(0)\nrelease_member(1)\nrelease_member(2)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(0)\nposition_member(1)\nposition_member(2)\nposition_member(3)\nrelease_member(0)\nrelease_member(1)\nrelease_member(2)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+  ],
+  "generation_vs_teacher_logprob_abs_mean": 0.0006895159021951258,
+  "generation_vs_teacher_logprob_abs_max": 0.05346496403217316,
+  "batch_vs_single_logprob_abs_mean": 0.0007195540820248425,
+  "batch_vs_single_logprob_abs_max": 0.05646595358848572,
+  "peak_memory_gib": 14.064078330993652,
+  "seconds": 112.61490895098541
+}
