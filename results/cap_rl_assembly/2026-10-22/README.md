@@ -259,3 +259,10 @@ The finisher evaluates the untouched eight test layouts only after the full
 budget and validation improvement, then audits records, regenerates every test
 completion, and freshly replays every distinct test trajectory. Results remain
 pending; eight test layouts constitute a small simulation pilot.
+
+The strict-success restart's greedy validation improves from 0/4 to **4/4 at
+update 2**, repeated at update 4. The retained original contact-only evaluator
+classifies those same trained validation trajectories as 3/4. Both measurements
+are preserved; no held-out score is claimed. The selected adapter matches the
+atomic update-2 checkpoint hash and has been backed up locally. Training is
+still completing the declared budget before the untouched test evaluation.
