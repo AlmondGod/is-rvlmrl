@@ -1,0 +1,43 @@
+{
+  "episodes": [
+    "work/assembly04-heldout-media/43001/before",
+    "work/assembly04-heldout-media/43001/after"
+  ],
+  "evidence": [
+    {
+      "seed": 43001,
+      "certificate_verified": true,
+      "identity_sha256": "50e485d7dfe0d247c0896478718cea9710f554c3336361f9bce0934a2d1ca22c",
+      "result_sha256": "fd8581285af8dd56d61f54ad11cbaf9e63a5459fee3a3eaf4a24e8ff79a274f2",
+      "states_sha256": "8de98e4ba5326a0b7453e59ed0d4f760cdf1522ed0cd553d5538240cf1ce8dbe"
+    },
+    {
+      "seed": 43001,
+      "certificate_verified": true,
+      "identity_sha256": "3bda21c14549bcf7951aac95c79b5452489cdd682d61b1c7ad9f2cf3210df6f9",
+      "result_sha256": "f9142bdba6b21c81afdf2275298b4dd93911583bea1c9751fa770fe59c827337",
+      "states_sha256": "b6fe6969381b6119f51d2f6cb8f1b0e70f1b5110f0cad2f21af7c6d0921fd06f"
+    }
+  ],
+  "renderer_source_sha256": "291a14db1fddfdbc51cba8a0083002c7b9996b50c025251daf793667ab82dcd8",
+  "titles": [
+    "Before RL | held-out 43001",
+    "Selected RL | held-out 43001"
+  ],
+  "speed": 20.0,
+  "simulation_duration_s": 621.9999999887476,
+  "states_replayed": true,
+  "dynamics_rerun": false,
+  "display_headlight": {
+    "ambient": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "diffuse": [
+      0.7,
+      0.7,
+      0.7
+    ]
+  }
+}

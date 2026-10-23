@@ -1,8 +1,11 @@
 # Qwen3.5-4B full three-arm assembly pilot
 
-Status: the physical training integration is implemented and the pilot is in
-progress. **Sampled training successes exist; no held-out improvement is
-claimed yet.** The historical live visual-language benchmark remains unchanged.
+Status: training completed six updates. Validation improved **0/4 → 4/4**.
+At the shutdown snapshot, paired completed held-out layouts improved **0/4 → 3/4**;
+four trained test layouts remain pending. **Independent held-out verification is
+unfinished; no completed verified-improvement claim is made.**
+See the [shutdown results, videos, preservation details and limitations](shutdown-snapshot/README.md).
+The sections below preserve the experiment's chronological development record.
 
 The task starts with four loose frame members and a loose plywood sheet. Three
 torso-mounted UR10e arms place the members, make four frame connections, feed and
