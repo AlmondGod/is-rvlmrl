@@ -18,6 +18,7 @@ import torch
 import transformers
 import peft
 from peft import LoraConfig, PeftModel, get_peft_model
+from huggingface_hub import model_info
 from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
 
 from .tasks import get_task
@@ -148,11 +149,14 @@ def train(args):
     torch.set_num_threads(4)
     if args.init_adapter:
         shutil.copytree(args.init_adapter, out / "initial_adapter")
-    model, tokenizer = load_model(args.model, args.revision, args.init_adapter, trainable=True)
+    # New Transformers text-only configs need not retain the outer commit hash.
+    # Resolve once and use that immutable revision for both loading and provenance.
+    resolved_revision = model_info(args.model, revision=args.revision).sha
+    model, tokenizer = load_model(args.model, resolved_revision, args.init_adapter, trainable=True)
     splits = task.datasets()
     source_files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in Path(__file__).parent.glob("*.py")}
-    metadata = {**vars(args), "model_revision": model.config._commit_hash,
+    metadata = {**vars(args), "model_revision": resolved_revision,
                 "gpu": torch.cuda.get_device_name(), "torch": torch.__version__,
                 "transformers": transformers.__version__, "peft": peft.__version__,
                 "thinking_enabled": False,
