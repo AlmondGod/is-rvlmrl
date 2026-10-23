@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 import gzip
 import json
+import math
 from pathlib import Path
 from experiments.cap_rl.tasks import get_task
 
@@ -36,6 +37,26 @@ def summarize(directory):
             'outcomes': dict(Counter('success' if r['success'] else r['error'] or 'physical_criteria' for r in rows)),
             'max_success_penetration_m': max((r['final']['peak_penetration'] for r in rows if r['success']), default=None),
             'max_success_final_tilt_rad': max((r['final']['tilt'] for r in rows if r['success']), default=None)}
+        if metadata['task'] == 'frame_place':
+            successes = [r for r in rows if r['success']]
+            counts = Counter()
+            repeated_lifts = 0
+            for row in rows:
+                try:
+                    calls = task.parse_program(row['completion'])
+                    counts[len(calls)] += 1
+                    repeated_lifts += sum(name == 'lift' for name, _ in calls) > 1
+                except (ValueError, SyntaxError):
+                    pass
+            phases[phase].update(
+                syntactically_valid_program_call_counts=dict(sorted(counts.items())),
+                programs_with_multiple_lift_calls=repeated_lifts,
+                max_success_target_error_m=max((math.dist(r['final']['wood'][:2],
+                    [float(o)+v*.01 for o, v in zip(task.ORIGIN, layouts[r['layout_id']].target)])
+                    for r in successes), default=None),
+                max_success_final_abs_yaw_rad=max((abs(r['final']['yaw']) for r in successes), default=None),
+                max_success_final_contact_n=max((r['final']['grip_force'] for r in successes), default=None),
+                failed_test_indices_one_based=[i+1 for i, r in enumerate(rows) if not r['success']])
     selected = [r for r in train if r['step'] <= selection['best_step']]
     return {'task': metadata['task'], 'training_programs': len(train),
             'selected_checkpoint_training_programs': len(selected),
