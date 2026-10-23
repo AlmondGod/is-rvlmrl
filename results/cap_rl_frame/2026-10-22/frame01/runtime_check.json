@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "finite_nonzero_gradients": true,
+  "generated_programs": [
+    "move(0, -2)\nlower()\nclose()\nlift(6)\nmove(1, 3)\nlower()\nopen()\nretreat()",
+    "move(2, 6)\nlower()\nclose()\nlift(10)\nmove(6, -1)\nlower()\nopen()\nretreat()"
+  ],
+  "generation_vs_teacher_logprob_abs_mean": 0.004951438866555691,
+  "generation_vs_teacher_logprob_abs_max": 0.05489054322242737,
+  "batch_vs_single_logprob_abs_mean": 0.004356826189905405,
+  "batch_vs_single_logprob_abs_max": 0.0445290207862854,
+  "peak_memory_gib": 11.781233310699463,
+  "seconds": 12.201683933002641
+}
