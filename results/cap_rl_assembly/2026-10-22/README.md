@@ -102,3 +102,19 @@ The full comparison is in `development/placement-precision-trial`. Local and GPU
 trajectories differ, so this comparison uses the same local runtime for both
 variants and does not attribute cross-platform differences to the controller.
 No held-out test has been run.
+
+After training-only prefetch freed workers, a separate auxiliary phase began
+simulating the same already sampled program on the four validation layouts.
+A scheduled checkpoint can consume these results only if its independently
+generated greedy program matches exactly. Validation rewards never enter
+optimizer batches; no test layouts are prefetched. The driver prints no success
+or reward values, and these candidate validation results are not consulted for
+controller development before the scheduled checkpoint evaluation. Its exact
+driver is preserved alongside the training-only driver. Unused candidate
+executions remain part of the compute record.
+
+`analysis/cap_rl_execution_inventory.py` inventories explicit evidence roots and
+verifies available file certificates. It collapses copied cache records using
+the exact result bytes (which include measured wall duration), while retaining
+independent deterministic replays as separate executions. Summed parallel
+execution durations are explicitly not reported as allocated GPU hours.
