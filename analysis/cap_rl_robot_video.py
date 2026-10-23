@@ -73,6 +73,18 @@ def render(directory, destination, index=0, validation_step=None):
                 d.qvel[:] = 0
                 mujoco.mj_forward(m, d)
                 renderer.update_scene(d, camera=camera)
+                if placement:
+                    # Rendering-only target outline: never added to collision physics.
+                    goal = task.ORIGIN + np.array(layout.target)*.01
+                    for delta, size in [((-.020, 0), (.001, .458, .001)),
+                                        ((.020, 0), (.001, .458, .001)),
+                                        ((0, -.458), (.020, .001, .001)),
+                                        ((0, .458), (.020, .001, .001))]:
+                        scene = renderer.scene
+                        mujoco.mjv_initGeom(scene.geoms[scene.ngeom], mujoco.mjtGeom.mjGEOM_BOX,
+                            np.array(size), np.r_[goal+delta, .001], np.eye(3).ravel(),
+                            np.array([.2, .9, .9, 1.], dtype=np.float32))
+                        scene.ngeom += 1
                 canvas.paste(Image.fromarray(renderer.render()), (offset, 65))
                 ended = elapsed >= times[panel][-1]-1e-8
                 status = ('SUCCESS' if row['success'] else 'FAIL: '+str(row['error'] or ('placement criteria' if placement else 'lift criteria'))) if ended else 'running'
@@ -106,6 +118,8 @@ def render(directory, destination, index=0, validation_step=None):
                     draw.text((offset+18, y), line, font=codefont, fill='#f4f7fa')
                 if len(wrapped) > 10:
                     draw.text((offset+18, 684), '... full program in episode JSON', font=body, fill='#dce8ef')
+                if placement:
+                    draw.text((offset+18, 692), 'Cyan outline: target footprint', font=body, fill='#77dddd')
                 draw.text((offset+18, 716), f'Gripper start: {layout.start} cm', font=body, fill='#77dda2')
                 footer = (f'Rail {layout.center} → {layout.target}; lift {layout.lift_cm} cm' if placement else
                           f'Rail center: {layout.center} cm; lift {layout.lift_cm} cm')
