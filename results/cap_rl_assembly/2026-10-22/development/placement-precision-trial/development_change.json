@@ -1,0 +1,8 @@
+{
+  "scope": "Controller-only development comparison on training layout41001; no model training; independent of active frozen GPU pilot",
+  "old_xy_stop_m": 0.003,
+  "new_xy_stop_m": 0.0015,
+  "unchanged": "All physics, fasteners, camera estimation, timeouts and independent success gates",
+  "original_source_sha256": "37d23a59a95059d5964ffe2c847d40cfc526ed1255a11a5a0888bf3927582a40",
+  "modified_source_sha256": "94f6b4d4c58214da1d315627cfddd5079224bc0167291d7484bb701cd0157fd4"
+}

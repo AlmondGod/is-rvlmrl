@@ -1,0 +1,28 @@
+{
+  "scope": "Paired scripted local development runs on training layout 41001. Neither is model-generated or part of active RL. Runtime/source provenance retained; do not compare controller effects across platforms.",
+  "decision": "Rejected: tighter placement stop tolerance did not repair the first missed corner connection. Both retain only 7/8 nails. Active RL controller remains unchanged.",
+  "rows": [
+    {
+      "variant": "reference",
+      "success": false,
+      "reward": 0.51875,
+      "preflip_stable_s": 0.0,
+      "inverted_hold_s": 0.0,
+      "wall_s": 935.9768926249817,
+      "simulated_s": 634.1999999884591,
+      "peak_penetration_m": 0.00023370891518964825,
+      "intact_fasteners": 7
+    },
+    {
+      "variant": "precise",
+      "success": false,
+      "reward": 0.61875,
+      "preflip_stable_s": 76.44000000000193,
+      "inverted_hold_s": 0.0,
+      "wall_s": 931.5732714161277,
+      "simulated_s": 630.6999999885419,
+      "peak_penetration_m": 0.00026330985053762805,
+      "intact_fasteners": 7
+    }
+  ]
+}

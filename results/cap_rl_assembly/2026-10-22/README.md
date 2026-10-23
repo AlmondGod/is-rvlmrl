@@ -94,6 +94,11 @@ executions are to be counted separately from the 256 on-policy training samples.
 The first helper setup was interrupted and retained after a result-aggregation
 bug was caught; the corrected helper uses a separate evidence directory.
 
-A tighter-placement controller candidate is being tested separately on training
-layout 41001. It is **not part of the active frozen RL run** and has no result yet.
+A tighter-placement controller candidate was tested separately on training
+layout 41001, reducing its XY stop tolerance from 3 mm to 1.5 mm. Both paired
+local scripted runs finish with only 7/8 fasteners; the first corner still misses.
+The candidate is rejected and is **not part of the active frozen RL run**.
+The full comparison is in `development/placement-precision-trial`. Local and GPU
+trajectories differ, so this comparison uses the same local runtime for both
+variants and does not attribute cross-platform differences to the controller.
 No held-out test has been run.
