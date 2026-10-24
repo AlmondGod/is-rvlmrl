@@ -1,6 +1,6 @@
 # Parallel rollouts and varied-placement RL
 
-Status: parallel execution and GPU model preflight verified; fresh varied-placement training is in initial validation. No new policy-performance claim yet.
+Status: parallel execution and GPU optimization preflights verified. The prior policy passes 4/8 fresh validation placements. Constrained-order GRPO is now training; the 24 held-out placements remain untouched. No new held-out policy-performance claim yet.
 
 Eight fresh training layouts (51001–51008) each execute the first 20 simulated seconds of the same complete program. Every run starts from reset, uses the vectorized backend, original physics/controller/camera parameters, and one OpenCV thread per worker. There is no rollout-cache reuse. Process startup is included.
 
@@ -23,3 +23,29 @@ The corrected `warp-probe-protocol.json` uses the actual task fixture half-width
 The 16-program Qwen GPU smoke check completed generation in 77.68 s including first-use kernel warmup, with peak allocated CUDA memory 19.42 GB. Backpropagation produced a finite gradient; the frozen reference received no gradients, initial policy/reference probabilities matched, and saved default-adapter weights matched the original checkpoint exactly. No optimizer update was performed in this smoke test. The training environment subsequently passed all 31 preflight tests.
 
 The optimizer-only necessary-call filter is specified in `static-rejection-protocol.md`. Its historical regression rejects 15 measured failures among 49 unique program/layout rows and rejects none of six successful rows. It does not replace physical evaluation for eligible programs.
+
+The unrestricted pilot completed one rollout round: 16 sampled programs, four
+optimizer epochs, four distinct physical executions, six successful samples,
+and three active groups in 1,318.26 s. Optimization itself took 27.62 s. It was
+retired because its successful samples repeated the same ordering; its weights
+are preserved but do not initialize the next run. Detailed generation/physics
+phase timing was omitted by a wrapper bug in this pilot; that reporting bug is
+fixed for the next run. See `unrestricted-pilot-retired.json`.
+
+The new action-space restriction and selection/stopping rules are declared in
+`constrained-exploration-protocol.md`. It supplies the necessary program
+structure while learning member/corner-nail/panel-nail permutations. Its initial
+greedy code exactly matches the unrestricted prior, so the starting 4/8 result
+is unchanged. Eight sampled plans contain seven distinct legal orderings.
+
+GPU preflight with real Qwen weights, frozen initial reference and backward
+passes: without activation checkpointing, microbatch 2 peaks at 20.18 GB and
+microbatch 4 fails with GPU OOM. Non-reentrant checkpointing in training mode,
+with dropout explicitly disabled, reduces microbatch-2 peak allocation to
+9.44 GB and supports all eight programs together at 11.36 GB. Choice-only
+vocabulary projection avoids computing optimization logits for forced syntax.
+Eight-program generation takes 10.77 s in this preflight. First-use backward
+measurements include kernel compilation and are not steady-state throughput.
+These checks deliberately stub physical rewards and perform no optimizer step;
+they verify implementation and capacity, not task improvement. Both preflight
+JSON files retain the raw measurements and sampled programs.

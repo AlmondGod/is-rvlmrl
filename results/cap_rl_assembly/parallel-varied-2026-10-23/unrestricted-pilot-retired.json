@@ -1,0 +1,53 @@
+{
+  "reason": "Insufficient useful ordering diversity in preflight sample; switch to declared constrained exploration",
+  "completed_rollout_rounds": 1,
+  "optimizer_steps": 4,
+  "checkpoint": "/opt/cap-speed/varied-run02/checkpoints/step-0001",
+  "test_evaluated": false,
+  "completed_updates": 1,
+  "last_metric": {
+    "step": 1,
+    "reward": 0.375,
+    "success_rate": 0.375,
+    "active_groups": 3,
+    "loss": -0.01503827369742794,
+    "kl": 0.1900476307964709,
+    "grad_norm": 0.2005060464143753,
+    "epoch_metrics": [
+      {
+        "epoch": 1,
+        "loss": 0.0,
+        "kl": 0.0,
+        "grad_norm": 0.32908570766448975
+      },
+      {
+        "epoch": 2,
+        "loss": -0.005772449837422755,
+        "kl": 0.0721260415884899,
+        "grad_norm": 0.1591942310333252
+      },
+      {
+        "epoch": 3,
+        "loss": -0.00905649459673441,
+        "kl": 0.42402097063313704,
+        "grad_norm": 0.20707106590270996
+      },
+      {
+        "epoch": 4,
+        "loss": -0.01503827369742794,
+        "kl": 0.1900476307964709,
+        "grad_norm": 0.2005060464143753
+      }
+    ],
+    "optimizer_steps_total": 4,
+    "elapsed_seconds": 1318.2626343099982,
+    "step_seconds": 1318.2626290000044,
+    "optimization_seconds": 27.624692104989663,
+    "logprob_s": 5.715967406984419,
+    "sampled_programs": 16,
+    "unique_evidence": 4,
+    "cache_hits": 0,
+    "batch_duplicates": 3
+  },
+  "trainer_elapsed_seconds": 1427.6150152683258
+}
