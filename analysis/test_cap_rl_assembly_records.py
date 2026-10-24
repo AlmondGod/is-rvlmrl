@@ -73,6 +73,15 @@ class RecordsAuditTests(unittest.TestCase):
     def test_valid_accounting(self):
         r=self.run_fixture();self.assertTrue(r['passes']);self.assertEqual(r['test_records'],4)
 
+    def test_unexecuted_truncation_has_no_physics_credit(self):
+        def mutate(root):
+            p=root/'rollouts.jsonl'; rows=[json.loads(s) for s in p.read_text().splitlines()]
+            row=rows[0]
+            for key in ('evidence','evidence_id','result_sha256','cache_reuse'):row.pop(key)
+            row.update(truncated=True,physics_started=False,error='truncated',valid=False)
+            p.write_text('\n'.join(json.dumps(r) for r in rows))
+        self.assertTrue(self.run_fixture(mutate)['passes'])
+
     def enable_strict(self,root):
         source=Path(__file__).with_name('train_assembly_strict.py').read_bytes()
         directory=root/'optimization_source';directory.mkdir()

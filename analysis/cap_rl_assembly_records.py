@@ -40,6 +40,9 @@ def audit(directory, pretest=False):
     directory = Path(directory)
     metadata = read(directory/'metadata.json')
     require(metadata['task'] == 'assembly_full', 'Wrong task')
+    if metadata.get('init_adapter'):
+        for name,digest in metadata['initial_adapter_sha256'].items():
+            require(sha(directory/'initial_adapter'/name)==digest, 'Initial adapter changed')
     reward_mode = metadata.get('optimization_reward','environment')
     require(reward_mode in ('environment','strict_success'), 'Unknown optimizer reward')
     if reward_mode == 'strict_success':
@@ -68,6 +71,14 @@ def audit(directory, pretest=False):
         layout = layouts[row['layout_id']]
         require(row['prompt'] == task.prompt(layout), 'Model prompt mismatch')
         if not row.get('evidence_id'):
+            if row.get('truncated'):
+                require(row.get('physics_started') is False and row['error'] == 'truncated'
+                        and not row['success'] and not row['valid'] and row['reward'] == 0,
+                        'Truncated unexecuted program received credit')
+                if reward_mode == 'strict_success':
+                    require(row['dense_reward'] == 0., 'Truncated program has dense credit')
+                records.append(row)
+                return
             try:
                 parse_program(row['completion'])
             except (SyntaxError, ValueError):
@@ -185,6 +196,10 @@ def audit(directory, pretest=False):
             require(sha(checkpoint/name)==digest, 'Checkpoint changed')
         require(sha(checkpoint/'adapter_model.safetensors')==sha(directory/'best_adapter/adapter_model.safetensors'),
                 'Selected adapter differs from selected update')
+    elif metadata.get('init_adapter'):
+        require(sha(directory/'initial_adapter/adapter_model.safetensors') ==
+                sha(directory/'best_adapter/adapter_model.safetensors'),
+                'Selected baseline differs from the initial adapter')
     if pretest:
         require(not (directory/'test_comparison.json').exists(), 'Test already evaluated')
         return dict(passes=True,scope='Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.',
@@ -216,7 +231,7 @@ def audit(directory, pretest=False):
         baseline=test['baseline'],trained=test['trained'],
         paired_wins=wins,paired_losses=losses,paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
         baseline_success_exact_95_ci=interval(test['baseline']['successes']),trained_success_exact_95_ci=interval(test['trained']['successes']),
-        limitation='Eight randomized layouts are a small simulator pilot; these intervals do not establish real-world reliability.')
+        limitation=f'{n} randomized layouts are a simulator pilot; these intervals do not establish real-world reliability.')
 
 
 if __name__=='__main__':

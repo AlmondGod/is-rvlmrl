@@ -23,28 +23,35 @@ def main():
                          **({'assembly_backend': metadata['assembly_backend']}
                             if 'assembly_backend' in metadata else {}))
     assert train.task.provenance()==json.loads((root/'assembly_provenance.json').read_text())
-    assert not metadata.get('init_adapter'), 'This verification is for raw-base initialization'
+    initial = root/'initial_adapter' if metadata.get('init_adapter') else None
+    if initial is not None:
+        for name,digest in metadata['initial_adapter_sha256'].items():
+            assert hashlib.sha256((initial/name).read_bytes()).hexdigest()==digest
     train.task.DATASET_PROFILE=metadata.get('assembly_split','pilot_v1')
     layouts=train.task.datasets()['test']
     set_seed(metadata['seed']);torch.set_num_threads(4)
     hashes={}
-    for label,adapter in [('before',None),('after',str(root/'best_adapter'))]:
+    for label,adapter in [('before',str(initial) if initial is not None else None),('after',str(root/'best_adapter'))]:
         model,tokenizer=train.load_model(metadata['model'],metadata['model_revision'],adapter)
-        inputs=train.encode(tokenizer,layouts)
-        with torch.no_grad():
-            generated=model.generate(**inputs,max_new_tokens=metadata['max_tokens'],do_sample=False,
-                pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id)
-        completions=generated[:,inputs.input_ids.shape[1]:]
-        texts=tokenizer.batch_decode(completions,skip_special_tokens=True)
+        texts=[];truncated=[]
+        for start in range(0,len(layouts),16):
+            inputs=train.encode(tokenizer,layouts[start:start+16])
+            with torch.no_grad():
+                generated=model.generate(**inputs,max_new_tokens=metadata['max_tokens'],do_sample=False,
+                    pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id)
+            completions=generated[:,inputs.input_ids.shape[1]:]
+            texts.extend(tokenizer.batch_decode(completions,skip_special_tokens=True))
+            truncated.extend((~completions.eq(tokenizer.eos_token_id).any(-1)).tolist())
         assert len(texts)==len(report[label])==len(layouts)
         for i,(text,row,layout) in enumerate(zip(texts,report[label],layouts)):
             assert row['layout_id']==layout.key and row['prompt']==train.task.prompt(layout)
             assert text==row['completion'], (label,layout.key,'generated program differs')
-            assert row['truncated']==(not bool(completions[i].eq(tokenizer.eos_token_id).any()))
+            assert row['truncated']==truncated[i]
         hashes[label]=[hashlib.sha256(t.encode()).hexdigest() for t in texts]
         del model,generated,completions,inputs;gc.collect();torch.cuda.empty_cache()
     result=dict(passes=True,programs_regenerated=2*len(layouts),greedy=True,model_revision=metadata['model_revision'],
         selected_adapter_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'best_adapter').iterdir() if p.is_file()},
-        program_sha256=hashes,scope='Exact regeneration from raw model and validation-selected adapter. No optimization or physics execution.')
+        program_sha256=hashes,initial_adapter=initial is not None,
+        scope='Exact regeneration from the recorded initial policy and validation-selected adapter. No optimization or physics execution.')
     Path(args.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
 if __name__=='__main__':main()
