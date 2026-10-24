@@ -1,0 +1,46 @@
+{
+  "time": "2026-10-24T09:11:52.322733+00:00",
+  "reason": "Evict only redundant local archives after fresh local/GitHub SHA256 and size verification. GitHub assets, pod originals and local verification receipts remain.",
+  "archives": [
+    {
+      "asset": {
+        "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671665889",
+        "contentType": "application/x-gtar",
+        "createdAt": "2026-10-24T08:07:31Z",
+        "digest": "sha256:9465fa0ab88575cf32359cb550671da86905ca059dbbd09f70d1b815bc48795c",
+        "downloadCount": 0,
+        "id": "RA_kwDOVR_WPc4oCM7h",
+        "label": "",
+        "name": "online21-step-0000.tar.gz",
+        "size": 1249583582,
+        "state": "uploaded",
+        "updatedAt": "2026-10-24T08:10:39Z",
+        "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online21-step-0000.tar.gz"
+      },
+      "removed_paths": [
+        "work/online-backups21/step-0000.tar.gz",
+        "work/varied-release-staging/online21-step-0000.tar.gz"
+      ]
+    },
+    {
+      "asset": {
+        "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671665890",
+        "contentType": "application/x-gtar",
+        "createdAt": "2026-10-24T08:07:31Z",
+        "digest": "sha256:c5095ebf9ebc87f80c19dac1da23723cadd419822b92c9014d919334b9087cd3",
+        "downloadCount": 0,
+        "id": "RA_kwDOVR_WPc4oCM7i",
+        "label": "",
+        "name": "online21-step-0001.tar.gz",
+        "size": 120705317,
+        "state": "uploaded",
+        "updatedAt": "2026-10-24T08:07:58Z",
+        "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online21-step-0001.tar.gz"
+      },
+      "removed_paths": [
+        "work/online-backups21/step-0001.tar.gz",
+        "work/varied-release-staging/online21-step-0001.tar.gz"
+      ]
+    }
+  ]
+}

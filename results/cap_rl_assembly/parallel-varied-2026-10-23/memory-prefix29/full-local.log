@@ -1,0 +1,25 @@
+initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+{"passes": true, "codec_source_sha256": "ea1a8221bd00898dfc8739001e707c63a456fdac81b5c73995593defa63d3009", "configuration": {"out": "../prefix29-full-local", "program": "../prefix16-full-local/continuous/program.py", "seed": 51002, "compact_model_bytes": false, "memory_copy": true, "seconds": 1000.0, "checkpoint_seconds": 300.0}, "rows": [{"restore": false, "elapsed_seconds": 880.2423349157907, "receipt": {"instrumented_source_sha256": "6f050127396665d3d5796decab74f9f9a6f27e1a3803ba6d032297b48e2596cf", "snapshot_seconds": 0.15931270876899362, "snapshot_bytes": 147, "checkpoint_step": 15000, "executed_calls": [["position_member", 3], ["release_member", 3], ["position_member", 1], ["release_member", 1], ["position_member", 2], ["release_member", 2], ["position_member", 0], ["release_member", 0], ["park_grippers", null], ["nail_corner", 0], ["nail_corner", 1], ["nail_corner", 2]]}}, {"restore": true, "elapsed_seconds": 465.4002994163893, "receipt": {"instrumented_source_sha256": "77839b35fb70a6a637e4c2d38ae390ee6717fcc7878511448a30109301a3bbb9", "restore_seconds": 0.35872887494042516, "checkpoint_step": 15000}}], "comparison": {"seed": 51002, "same_seed": true, "exact": true, "result_keys_differing_except_wall_s": [], "arrays": {"rows": {"shape_before": [6494, 155], "shape_after": [6494, 155], "exact": true, "max_abs_difference": 0.0}, "nq": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nv": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nu": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}}, "baseline_success": false, "optimized_success": false, "baseline_error": null, "optimized_error": null, "complete_assembly_sequence": true, "simulated_s": 649.2999999881021, "baseline_wall_s": 878.6720425831154, "optimized_wall_s": 464.3478681668639, "speedup": 1.892271081273412, "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.", "result_hashes": ["e28ede8577e96870d0e3520b64d8283ffa48aaaf96878b491c1f5cb396827a72", "e621735f0897c05c0e91e0190ff20c4bd4b52997e46d16506b45d3c4e886ad8e"], "state_hashes": ["f31da5be1edb13c6c1b6a72d5a5d3f94e87072a03dc5b1d18e8bb2b864302b91", "f31da5be1edb13c6c1b6a72d5a5d3f94e87072a03dc5b1d18e8bb2b864302b91"]}, "source_sha256": "96f900e8cc7bf020b2c03f63d25a8ad71c04c7de77838bb89089b25f06d424c8", "scope": "Experimental prefix replay only; no training integration, task success, or whole-loop speed claim.", "native_copy_receipts": [{"models": 2, "data": 3, "python_payload_bytes": 3928219, "method": "distinct_model_copy_and_mj_copyData_v1"}, {"models": 2, "data": 3, "python_payload_bytes": 3928487, "method": "distinct_model_copy_and_mj_copyData_v1"}], "snapshot_storage_scope": "snapshot_bytes counts only an on-disk marker, not memory. Full native/Python snapshots remain resident; measure peak RSS separately."}
+     1346.46 real      1309.60 user        27.30 sys
+          2546335744  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              411206  page reclaims
+                 284  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   0  messages received
+                   0  signals received
+                1000  voluntary context switches
+             1107733  involuntary context switches
+      13747599557561  instructions retired
+       3739380866600  cycles elapsed
+          3545205856  peak memory footprint

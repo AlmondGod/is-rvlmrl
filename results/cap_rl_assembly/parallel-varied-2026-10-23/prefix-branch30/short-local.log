@@ -1,0 +1,28 @@
+initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+{"passes": true, "configuration": {"base": "../prefix16-full-local/continuous/program.py", "branch": "../prefix30-short-branch.py", "out": "../prefix30-short-local", "seed": 51002, "prefix_calls": 1, "seconds": 70.0, "backend": "vectorized"}, "comparison": {"seed": 51002, "same_seed": true, "exact": true, "result_keys_differing_except_wall_s": [], "arrays": {"rows": {"shape_before": [574, 155], "shape_after": [574, 155], "exact": true, "max_abs_difference": 0.0}, "nq": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nv": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nu": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}}, "baseline_success": false, "optimized_success": false, "baseline_error": null, "optimized_error": null, "complete_assembly_sequence": false, "simulated_s": 57.30000000009157, "baseline_wall_s": 65.87441904190928, "optimized_wall_s": 7.333748959004879, "speedup": 8.982366237260434, "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.", "result_hashes": ["fe190e531959a930cd2847a79eb768152cd6396425a258466c937c0acba2dabc", "fbe7088c3b37350d43dfff769b7a42a2871dedbc9556ba3c0cdb869401888962"], "state_hashes": ["060a2b96b7c65ad8a574ea6389438719873409e2ddd1e7bdbc1eb9a3b6768e4a", "060a2b96b7c65ad8a574ea6389438719873409e2ddd1e7bdbc1eb9a3b6768e4a"]}, "seconds": {"fresh": 67.62000591680408, "origin": 80.72478691674769, "reused": 8.028080250136554}, "reuse_receipt": {"format": "experimental_full_state_prefix_v1", "reused": true, "seed": 51002, "identity_sha256": "56ea0e85ed517908b3cc3d0adc244b422d8bc4c9eb3599ab428b77cec6a07fea", "prefix_calls": 1, "source_sha256": {"/Users/almondgod/Documents/Codex/2026-10-22/with-this-repo-https-github-com/work/is-rvlmrl/analysis/assembly_prefix_runner.py": "eda38690894161fd00ee1a685dcaaf4143f5e743d238ee1fba7e5e484694b724", "/Users/almondgod/Documents/Codex/2026-10-22/with-this-repo-https-github-com/work/is-rvlmrl/analysis/assembly_memory_snapshot.py": "ea1a8221bd00898dfc8739001e707c63a456fdac81b5c73995593defa63d3009", "/Users/almondgod/Documents/Codex/2026-10-22/with-this-repo-https-github-com/work/is-rvlmrl/analysis/benchmark_assembly_prefix.py": "96f900e8cc7bf020b2c03f63d25a8ad71c04c7de77838bb89089b25f06d424c8"}, "base_function_sha256": "6c33a42bd79ca04be1e1bebf44ce1e71110335041bbb01ec1475bcea4804fca5", "scope": "Full physical prefix reuse, no reward prediction or policy observation from hidden state.", "instrumented_source_sha256": "8f5f6fc04b11e901dfc94cf0e8478801d86109f7c66b5448672adaf5ea9c935e", "restored_step": 2564, "origin_episode": "/Users/almondgod/Documents/Codex/2026-10-22/with-this-repo-https-github-com/work/prefix30-short-local/origin", "copy": {"models": 2, "data": 3, "python_payload_bytes": 754921, "method": "distinct_model_copy_and_mj_copyData_v1"}}, "source_sha256": "afc6faf6e138a05704079cc854ded8e45d61ed081da58fb720ef3b36c3a51f62", "scope": "Exact branch replay experiment only, not installed in training; timing includes a separately reported cold origin episode."}
+      157.20 real       150.62 user         4.31 sys
+          2778169344  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              370739  page reclaims
+                 400  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   0  messages received
+                   0  signals received
+                1603  voluntary context switches
+              148896  involuntary context switches
+       1463299388972  instructions retired
+        433104223360  cycles elapsed
+          3192081432  peak memory footprint

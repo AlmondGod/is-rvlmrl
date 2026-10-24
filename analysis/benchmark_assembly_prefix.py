@@ -79,7 +79,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out',required=True);parser.add_argument('--program',required=True)
     parser.add_argument('--seed',type=int,default=51001)
-    parser.add_argument('--compact-model-bytes',action='store_true')
+    codec_group=parser.add_mutually_exclusive_group()
+    codec_group.add_argument('--compact-model-bytes',action='store_true')
+    codec_group.add_argument('--memory-copy',action='store_true')
     parser.add_argument('--seconds',type=float,default=20.)
     parser.add_argument('--checkpoint-seconds',type=float,default=10.)
     args=parser.parse_args()
@@ -93,8 +95,13 @@ def main():
     snapshot=out/'prefix.pickle';text=Path(args.program).read_text()
     rows=[]
     serializer=pickle
+    codec_module=pickle
     if args.compact_model_bytes:
         from analysis import assembly_compact_snapshot as serializer
+        codec_module=serializer
+    elif args.memory_copy:
+        from analysis import assembly_memory_snapshot as codec_module
+        serializer=codec_module.ProbeCodec()
     for restore in (False,True):
         fn,receipt=instrument(run,round(args.checkpoint_seconds/.02),snapshot,restore,serializer)
         start=time.monotonic()
@@ -102,9 +109,12 @@ def main():
                   support_profile='contact_and_nails',controller_profile='southwest_approach')
         rows.append(dict(restore=restore,elapsed_seconds=time.monotonic()-start,receipt=receipt))
     comparison=compare(out/'continuous',out/'restored')
-    report=dict(passes=comparison['exact'],codec_source_sha256=hashlib.sha256(Path(serializer.__file__).read_bytes()).hexdigest(),configuration=vars(args),rows=rows,comparison=comparison,
+    report=dict(passes=comparison['exact'],codec_source_sha256=hashlib.sha256(Path(codec_module.__file__).read_bytes()).hexdigest(),configuration=vars(args),rows=rows,comparison=comparison,
                 source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 scope='Experimental prefix replay only; no training integration, task success, or whole-loop speed claim.')
+    if args.memory_copy:
+        report['native_copy_receipts']=serializer.receipts
+        report['snapshot_storage_scope']='snapshot_bytes counts only an on-disk marker, not memory. Full native/Python snapshots remain resident; measure peak RSS separately.'
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report),flush=True)
     # The large trusted scratch snapshot is not a model or reward artifact.
     # Keep the original/restored traces and instrumentation receipts instead.

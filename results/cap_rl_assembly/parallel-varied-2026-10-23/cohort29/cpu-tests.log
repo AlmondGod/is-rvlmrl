@@ -1,0 +1,8 @@
+test_global_gradient_matches_independent_per_sequence_mean (analysis.test_assembly_cohort_grpo.CohortTests.test_global_gradient_matches_independent_per_sequence_mean) ... ok
+test_no_reward_collection_between_dispatches (analysis.test_assembly_cohort_grpo.CohortTests.test_no_reward_collection_between_dispatches) ... ok
+test_rejects_mixed_versions_incomplete_groups_and_nonbinary_rewards (analysis.test_assembly_cohort_grpo.CohortTests.test_rejects_mixed_versions_incomplete_groups_and_nonbinary_rewards) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.061s
+
+OK
