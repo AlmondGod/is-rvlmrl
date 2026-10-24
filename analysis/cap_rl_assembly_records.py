@@ -24,6 +24,17 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def input_receipt(directory):
+    """Bind an audit to its complete set of scored records and selection inputs."""
+    directory = Path(directory)
+    names = ['metadata.json', 'selection.json', 'training.jsonl', 'rollouts.jsonl',
+             'validation_baseline.json', 'test_comparison.json', 'raw_test_baseline.json',
+             'unconstrained_validation_comparison.json', 'unconstrained_test_comparison.json',
+             'validation_ceiling_policy.json', 'validation_ceiling_stop.json']
+    names += [p.name for p in directory.glob('validation_[0-9]*.json')]
+    return {name: sha(directory/name) for name in sorted(names) if (directory/name).is_file()}
+
+
 def metrics(rows):
     return dict(n=len(rows), successes=sum(r['success'] for r in rows),
         success_rate=sum(r['success'] for r in rows)/len(rows),
@@ -297,6 +308,7 @@ def audit(directory, pretest=False):
         return [float(beta.ppf(.025,k,n-k+1)) if k else 0.,
                 float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]
     return dict(passes=True, scope='All records, hashes, reward accounting, split isolation and validation-only selection. Independent physics replay and model regeneration are separate checks.',
+        input_files_sha256=input_receipt(directory),
         rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
         stopped_at_validation_ceiling=bool(early_stop),

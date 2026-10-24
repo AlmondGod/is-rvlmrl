@@ -65,6 +65,9 @@ def main():
         hashes[label]=[hashlib.sha256(t.encode()).hexdigest() for t in texts]
         del model,generated,completions,inputs;gc.collect();torch.cuda.empty_cache()
     result=dict(passes=True,programs_regenerated=len(policies)*len(layouts),greedy=True,model_revision=metadata['model_revision'],
+        evaluation_inputs_sha256={name:hashlib.sha256((root/name).read_bytes()).hexdigest()
+            for name in ('metadata.json','selection.json','test_comparison.json',
+                         'raw_test_baseline.json','unconstrained_test_comparison.json') if (root/name).exists()},
         selected_adapter_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'best_adapter').iterdir() if p.is_file()},
         program_sha256=hashes,initial_adapter=initial is not None,
         scope='Exact regeneration from the recorded initial policy, validation-selected adapter and raw model when present. Includes declared unrestricted transfer comparisons. No optimization or physics execution.')

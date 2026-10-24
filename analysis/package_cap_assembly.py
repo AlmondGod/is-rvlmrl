@@ -10,6 +10,38 @@ import json
 from pathlib import Path
 import tarfile
 
+from analysis.cap_rl_assembly_records import input_receipt
+
+
+def verify_audit_receipts(run, replay):
+    reports = [json.loads(path.read_text()) for path in
+               (run/'record_audit.json', run/'generation_audit.json', replay/'audit.json')]
+    if not all(report['passes'] for report in reports):
+        raise ValueError('One or more verification stages did not pass')
+    inputs = input_receipt(run)
+    if reports[0].get('input_files_sha256') != inputs:
+        raise ValueError('Record audit is stale or lacks an input receipt; rerun it before packaging')
+    names = ('metadata.json', 'selection.json', 'test_comparison.json',
+             'raw_test_baseline.json', 'unconstrained_test_comparison.json')
+    generation_inputs = {name:inputs[name] for name in names if name in inputs}
+    if reports[1].get('evaluation_inputs_sha256') != generation_inputs:
+        raise ValueError('Generation audit does not cover the current evaluation reports')
+    if reports[2].get('test_comparison_sha256') != inputs['test_comparison.json']:
+        raise ValueError('Independent physical replay does not cover the current primary test')
+
+
+def scored_rows(run):
+    rows = [json.loads(s) for s in (run/'rollouts.jsonl').read_text().splitlines()]
+    for path in [run/'validation_baseline.json', *sorted(run.glob('validation_[0-9]*.json')),
+                 run/'raw_test_baseline.json']:
+        if path.exists(): rows.extend(json.loads(path.read_text())['rows'])
+    for path in [run/'test_comparison.json', run/'unconstrained_validation_comparison.json',
+                 run/'unconstrained_test_comparison.json']:
+        if path.exists():
+            report = json.loads(path.read_text())
+            rows.extend(report['before']+report['after'])
+    return rows
+
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -18,21 +50,15 @@ def main():
     p.add_argument('--out', required=True)
     args = p.parse_args()
     run, replay, out = map(Path, (args.run, args.replay, args.out))
-    for report in (run/'record_audit.json', run/'generation_audit.json', replay/'audit.json'):
-        if not json.loads(report.read_text())['passes']:
-            raise ValueError('Verification did not pass: '+str(report))
+    verify_audit_receipts(run, replay)
     selection = json.loads((run/'selection.json').read_text())
     checkpoint = run/'checkpoints'/f"step-{selection['best_step']:04d}"
-    if not (checkpoint/'checkpoint.json').is_file():
+    if selection['best_step'] and not (checkpoint/'checkpoint.json').is_file():
         raise ValueError('Selected trained checkpoint is absent')
-    rows = [json.loads(s) for s in (run/'rollouts.jsonl').read_text().splitlines()]
-    for path in [run/'validation_baseline.json', *sorted(run.glob('validation_[0-9]*.json'))]:
-        rows.extend(json.loads(path.read_text())['rows'])
-    test = json.loads((run/'test_comparison.json').read_text())
-    rows.extend(test['before']+test['after'])
+    rows = scored_rows(run)
     evidence = {r['evidence_id']: Path(r['evidence']) for r in rows if r.get('evidence_id')}
     sources = [(p, Path('run')/p.relative_to(run)) for p in run.rglob('*')
-               if p.is_file() and 'last_adapter' not in p.relative_to(run).parts
+               if p.is_file()
                and ('checkpoints' not in p.relative_to(run).parts or checkpoint in p.parents
                     or p.name == 'checkpoint.json')]
     for key, directory in evidence.items():
