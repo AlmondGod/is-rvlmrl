@@ -135,6 +135,22 @@ def audit_visual_grpo_inputs(directory,metadata):
         update_epochs=4,microbatch=8,lr=.0001,beta=.005,sampling_temperature=3.,seed=97)
     require(all(metadata.get(k)==v for k,v in expected.items()),'Balanced online hyperparameters changed')
     require(metadata['training_layout_schedule']==schedule(metadata['splits']['train'],97),'Balanced layout schedule changed')
+    if 'training_state_source_sha256' in metadata:
+        from analysis import assembly_training_state
+        digest=metadata['training_state_source_sha256']
+        require(sha(assembly_training_state.__file__)==digest==sha(directory/'preference_source/assembly_training_state.py'),
+                'Training-state source changed')
+        for label,files in metadata.get('prior_online_attempts_sha256',{}).items():
+            require(label in ('interrupted','failed_reconstruction'),'Unexpected prior online attempt')
+            for name,digest in files.items():
+                require(sha(directory/'prior_online_attempts'/label/name)==digest,'Prior online attempt changed')
+        for checkpoint in (directory/'checkpoints').glob('step-*'):
+            record=read(checkpoint/'checkpoint.json')
+            require(record.get('training_state_source_sha256')==metadata['training_state_source_sha256'],
+                    'Missing complete optimizer/RNG checkpoint')
+            require('training_state.pt' in record['files_sha256'],'Missing optimizer payload receipt')
+            require(sha(checkpoint/'training_state.pt')==record['files_sha256']['training_state.pt'],
+                    'Optimizer/RNG payload changed')
     return parent_audit
 
 

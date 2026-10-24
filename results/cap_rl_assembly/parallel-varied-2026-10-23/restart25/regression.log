@@ -1,0 +1,5 @@
+Frozen overlay /opt/cap-speed/visual-online-tools25
+python -m unittest discover -s analysis -p test_assembly*.py
+Ran 39 tests in 7.578s
+OK
+Overlay SHA256: 50c888338c425b47a64322cc9e86196d09e6e50fc66626b13415358ba6e58a27

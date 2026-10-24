@@ -38,6 +38,7 @@ def main():
     from analysis.cap_rl_assembly_records import audit
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--parent',required=True);p.add_argument('--after-visual-run',required=True);p.add_argument('--out',required=True)
+    p.add_argument('--prior-interrupted-run');p.add_argument('--prior-reconstruction-run')
     a=p.parse_args();parent=Path(a.parent).resolve();previous=Path(a.after_visual_run).resolve();out=Path(a.out).resolve()
     previous_meta=read(previous/'metadata.json');selected=read(previous/'selection.json')
     if (previous_meta.get('optimizer_algorithm')!='offline_dpo_v1' or not visual.enabled(previous_meta) or
@@ -76,6 +77,24 @@ def main():
         reference_policy='initial',init_adapter=str(out/'initial_adapter'),out=str(out),
         training_scope='On-policy GRPO, one balanced pass over all 32 training layouts, four samples per layout. Initial-RGB text inputs; unchanged strict physical reward.')
     metadata['training_layout_schedule']=schedule(metadata['splits']['train'],metadata['seed'])
+    if bool(a.prior_interrupted_run) != bool(a.prior_reconstruction_run):
+        raise ValueError('Supply both failed attempt paths')
+    if a.prior_interrupted_run:
+        attempts={}
+        for label,path in (('interrupted',a.prior_interrupted_run),('failed_reconstruction',a.prior_reconstruction_run)):
+            source=Path(path);destination=out/'prior_online_attempts'/label;destination.mkdir(parents=True)
+            if any((source/n).exists() for n in ('test_comparison.json','selection.json')):
+                raise ValueError('Expected interrupted pre-selection attempts')
+            for pattern in ('*.json','*.jsonl'):
+                for file in source.glob(pattern):shutil.copyfile(file,destination/file.name)
+            attempts[label]={file.name:sha(file) for file in destination.iterdir()}
+        if read(Path(a.prior_reconstruction_run)/'reconstruction_verification.json')['passes'] is not False:
+            raise ValueError('Expected explicitly failed exact reconstruction')
+        metadata['prior_online_attempts_sha256']=attempts
+        metadata['restart_scope']='Independent rerun from the original warm adapter and seed, not an exact optimizer continuation. Earlier interrupted and failed-reconstruction weights are not loaded; their costs remain separate.'
+    state_source=Path(__file__).with_name('assembly_training_state.py')
+    shutil.copyfile(state_source,source_dir/state_source.name)
+    metadata['training_state_source_sha256']=sha(state_source)
     dump(out/'metadata.json',metadata)
     grammar.install(trainer);trainer.task=trainer.get_task('assembly_full')
     trainer.task.DATASET_PROFILE=metadata['assembly_split']
@@ -93,7 +112,7 @@ def main():
 def optimize(metadata,out,trainer,grammar):
     import torch
     from transformers import set_seed
-    from experiments.cap_rl.checkpoints import save_step_adapter
+    from analysis.assembly_training_state import save as save_training_state
     from analysis.train_assembly_strict import strict_results
     from analysis.cap_rl_assembly_records import metrics
     set_seed(metadata['seed']);torch.set_num_threads(4)
@@ -139,7 +158,7 @@ def optimize(metadata,out,trainer,grammar):
             sampled_programs=len(results),unique_evidence=len({r['evidence_id'] for r in results if 'evidence_id' in r}),
             cache_hits=sum(bool(r.get('cache_hit')) for r in results),batch_duplicates=sum(bool(r.get('batch_duplicate')) for r in results))
         trainer.append(out/'training.jsonl',[metric]);trainer.append(out/'rollouts.jsonl',[dict(row,step=step) for row in trainer.rows_for(layouts,texts,results)])
-        print(json.dumps(metric),flush=True);save_step_adapter(model,out,metric)
+        print(json.dumps(metric),flush=True);save_training_state(model,optimizer,out,metric)
         if step%metadata['eval_every']==0:
             report=evaluate();dump(out/f'validation_{step:04d}.json',report)
             print(json.dumps(dict(stage='validation',step=step,**report['metrics'])),flush=True)

@@ -21,8 +21,10 @@ first batch and replays its four AdamW updates using verified physical rewards.
 Before continuing, it requires identical prompts, programs, rewards, evidence
 hashes and a bit-identical first checkpoint. It does not pretend an adapter-only
 checkpoint contains optimizer or random-number state. The interrupted attempt
-and reconstruction cost remain separately recorded. Recovery is pending until
-its verification receipt says it passed.
+and reconstruction cost remain separately recorded. Recovery failed its exact checkpoint comparison and stopped before round two.
+All 16 programs, rewards and evidence hashes matched, as did the first loss,
+but the first gradient norm differed (1.05099356 versus 1.05005527). After four
+updates the adapter SHA differed. This is not an exact optimizer continuation.
 
 No post-training validation result or held-out improvement has been observed.
 The 24 final test layouts remain untouched.
@@ -32,4 +34,19 @@ An independent check is available as
 It binds the reviewed recovery source, preserved interrupted records, unchanged
 protocol, exact first 16 programs and results, four optimizer update metrics,
 and checkpoint bytes. It supplements the physical-record audit. Four tamper
-and valid-prefix tests pass; the actual recovery receipt remains pending.
+and valid-prefix tests pass; the actual recovery receipt reports failure, as intended when weights differ.
+
+The original expected adapter SHA256 is
+`68445b1bf47a9739839e3e6191762e09dc1913763462bb4621416911c32dd279`;
+the failed reconstruction produced
+`6c2624adfb619f0e98b7dc785e465e6971a68c7496fd3ac203614f072b0e65dc`.
+The repeated four updates took 33.68 seconds within a 51.08-second cached
+rollout round. No new physics or held-out outcomes were used.
+
+A separate run 25 repeats the original eight-round balanced protocol from
+the original warm adapter and seed. It does not load either interrupted
+checkpoint. Both previous attempts and their costs remain recorded. It adds
+atomic adapter, AdamW and Python/NumPy/PyTorch/CUDA RNG checkpoints, with
+payload hashes and a matching restore helper. Saved RNG state does not promise
+bitwise deterministic GPU arithmetic. Three new checkpoint tests and the
+39-test frozen regression suite passed before launch.
