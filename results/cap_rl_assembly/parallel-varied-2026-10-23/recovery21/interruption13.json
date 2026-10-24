@@ -1,0 +1,72 @@
+{
+  "detected_utc": "2026-10-24T07:13:30Z",
+  "reason": "Host cgroup OOM during additional scheduling benchmark; trainer SIGKILL, launcher exit247.",
+  "memory_limit_bytes": 30999998464,
+  "memory_events": "low 0\nhigh 0\nmax 28130\noom 129\noom_kill 1\noom_group_kill 0\n",
+  "completed_rollout_rounds": 1,
+  "completed_optimizer_updates": 4,
+  "checkpoint_sha256": "68445b1bf47a9739839e3e6191762e09dc1913763462bb4621416911c32dd279",
+  "orphan_worker_pids": [
+    15563,
+    15566,
+    15567,
+    15568,
+    15569,
+    15570,
+    15571,
+    15572
+  ],
+  "inflight_physics": [
+    {
+      "path": "/opt/cap-speed/varied-evidence01/24aa473e48d971816e3ada1a4842ad2298f5fe2438d4b074b243888fcc14110f",
+      "has_result": false,
+      "started_epoch": 1792825417.5869505
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/cb696f2a984cb58fc85e05186a877ebf8f6cbba4e6b923fb36eecff2e52675ef",
+      "has_result": false,
+      "started_epoch": 1792825478.9964368
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/c879d61dabd743fc9f6a3ef5eaf111a3eee6aa6a5456c0f2686396d12223a18a",
+      "has_result": false,
+      "started_epoch": 1792825786.6408732
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/ae4029405ce29863fe63ab6bda964b3c4fdf0c9f7e0ef2ec17aa1546f160de72",
+      "has_result": false,
+      "started_epoch": 1792825786.6438732
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/686f76e5e9bd52497994d7f07f81b51684124d14b4ed746e6feab8ea755e116b",
+      "has_result": false,
+      "started_epoch": 1792825786.6548734
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/a5a23487502bf6a41561f4cba66e6a42d89770352b05dbebddb042d469c820de",
+      "has_result": false,
+      "started_epoch": 1792825786.6708734
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/3869f7c038e0b37340eb5c7e41435f07a7d3ee23c9ffffa6b0311772fb5e3be8",
+      "has_result": false,
+      "started_epoch": 1792825786.6748736
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/f7afed053632495f7705268b0f8f5196b30367c9a4868058f9efac8ce10f2c0c",
+      "has_result": false,
+      "started_epoch": 1792825786.6978736
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/412a39a8096a2dbc58b58e58f6ac080ca5454c065c26035e3ca90969f8014577",
+      "has_result": false,
+      "started_epoch": 1792825786.750874
+    },
+    {
+      "path": "/opt/cap-speed/varied-evidence01/94f565a7a6eea201ae0a44a3c53f5743e00993398a527989d4e9279fdf113f0e",
+      "has_result": false,
+      "started_epoch": 1792825786.7528741
+    }
+  ],
+  "scope": "Interrupted development attempt, no selection or held-out evaluation. Preserve in-flight physical evidence; reconstruct optimizer by deterministic replay from original warm start and verified cached first batch."
+}

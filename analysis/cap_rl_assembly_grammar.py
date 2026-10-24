@@ -155,10 +155,14 @@ def install(trainer):
             try:return original_generate(*args,**generation)
             finally:model.train(training)
         model.generate=generate
+        rollout.last_timing={}
         try:
             seq,attention,mask,texts,results=original_rollout(model,tokenizer,layouts,max_tokens,sample,**kwargs)
         finally:model.generate=original_generate
-        rollout.last_timing=dict(getattr(original_rollout,'last_timing',{}))
+        # The original function writes through its module-global `rollout`,
+        # which now refers to this wrapper. Do not erase that fresh measurement
+        # by reading an empty/stale attribute from the original function object.
+        rollout.last_timing=dict(rollout.last_timing or getattr(original_rollout,'last_timing',{}))
         for completion in seq[:,-mask.shape[1]:].tolist():_GRAMMAR.validate(completion)
         return seq,attention,_GRAMMAR.decision_mask(mask),texts,results
     rollout._assembly_grammar=True

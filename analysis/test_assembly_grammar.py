@@ -82,6 +82,7 @@ class GrammarTests(unittest.TestCase):
             seq=model.generate(input_ids=torch.tensor([[7,8]]*len(layouts)))
             attention=torch.ones_like(seq);mask=torch.ones(len(layouts),seq.shape[1]-2)
             if prepare:prepare(seq,attention,mask)
+            trainer.rollout.last_timing={'generation_s':2.,'generation_and_rewards_s':9.}
             return seq,attention,mask,['fixture']*len(layouts),[{}]*len(layouts)
         trainer=SimpleNamespace(rollout=original)
         module.install(trainer)
@@ -90,6 +91,7 @@ class GrammarTests(unittest.TestCase):
         self.assertEqual(rows[2].sum(-1).tolist(),[12.,12.])
         self.assertIs(model.generate,generate)
         self.assertTrue(model.training)
+        self.assertEqual(trainer.rollout.last_timing,{'generation_s':2.,'generation_and_rewards_s':9.})
         for row in rows[0][:,2:].tolist():self.g.validate(row)
 
     def test_checkpointing_uses_training_mode_with_dropout_disabled(self):

@@ -1,0 +1,1611 @@
+{
+  "passes": true,
+  "records": {
+    "coordinator": {
+      "elapsed_seconds": 54.989668469992466,
+      "rows": [
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1449791462275704e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1449791462275704e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51001,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 9.788743458979297,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/610635e26e1f4cd848376287263470876eaa4658ba60d16d363715248d5d65d6",
+            "evidence_id": "610635e26e1f4cd848376287263470876eaa4658ba60d16d363715248d5d65d6",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "114dc48f0aea07f22077ece26c767b37cab7ce5903edc13afcbe2b03bd714cb0",
+            "batch_duplicate": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1449791462275704e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1449791462275704e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51001,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 9.77740551502211,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/e91818c5e46e8159aa11f83acfff97c7f340cf2c7fca7f16cebade8568092890",
+            "evidence_id": "e91818c5e46e8159aa11f83acfff97c7f340cf2c7fca7f16cebade8568092890",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "f5e2bc5cbc76404943fafa0392d1a6c230e0e9ef1701ad5e8f9bb5fc8e30962c",
+            "batch_duplicate": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1001522752585358e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1001522752585358e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51002,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 9.855902620998677,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/261859144fe170211f750110a804f59e5c72658e7aec573dca2263d96ba008f8",
+            "evidence_id": "261859144fe170211f750110a804f59e5c72658e7aec573dca2263d96ba008f8",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "bb3e9642188bbb1804622eeeda4276a2c6058b8641902c12677829d85ada051c",
+            "batch_duplicate": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1001522752585358e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1001522752585358e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51002,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 9.682351241994184,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/64eb3e45433ec36b4c3cf0fb08db5b11f454655b58bb3f58ad3cc642960ace06",
+            "evidence_id": "64eb3e45433ec36b4c3cf0fb08db5b11f454655b58bb3f58ad3cc642960ace06",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "cdb9c18a47a71b238b1a9ba9d750f2fe2cf5129ea89a8189583ef407a1f0d199",
+            "batch_duplicate": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.119960541159684e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.119960541159684e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51003,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 12.861442018009257,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/ec8e9c615495d1d1bbe7e939ee1d2235a7974fcdffc61fb80f336a0d190067db",
+            "evidence_id": "ec8e9c615495d1d1bbe7e939ee1d2235a7974fcdffc61fb80f336a0d190067db",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "88e1c18ddf5d8a2f755edd85b2f6cb9b7d1b7033bfd3b6fb8efe4ffe879679f1",
+            "batch_duplicate": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.119960541159684e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.119960541159684e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51003,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 10.636187419004273,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/cc8ccb626314fc78b9bc1ecfff7286e3adc4138d99d626c581d141b8b89fdeb7",
+            "evidence_id": "cc8ccb626314fc78b9bc1ecfff7286e3adc4138d99d626c581d141b8b89fdeb7",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "af3708aca1f5770f83c692e852e96db59366073b316b2ff35b2e79053b7eb32b",
+            "batch_duplicate": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1410593876071029e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1410593876071029e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51004,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 10.056093483988661,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/2084cd9f9861525f67599b7d4e229d2a00de02e6bde7bb5232f89a7278b03c87",
+            "evidence_id": "2084cd9f9861525f67599b7d4e229d2a00de02e6bde7bb5232f89a7278b03c87",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "a71cefa1c8356ad92b0b7b01144b5c514b1ab92770c53e6474b9f7faddea49c2",
+            "batch_duplicate": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1410593876071029e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1410593876071029e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51004,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 9.944237750023603,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/coordinator/0a6a7ad7329248d5b7a46cc9ae2d866ab83aa5ff10595780b0bf02f740ebfaf6",
+            "evidence_id": "0a6a7ad7329248d5b7a46cc9ae2d866ab83aa5ff10595780b0bf02f740ebfaf6",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "02a9b4e040193a4d0738c7f177dc6611afcc211b71eb5fab07baa810366f312a",
+            "batch_duplicate": false
+          }
+        ]
+      ]
+    },
+    "independent": {
+      "elapsed_seconds": 34.32170560298255,
+      "rows": [
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1449791462275704e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1449791462275704e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51001,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 20.513450264988933,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/610635e26e1f4cd848376287263470876eaa4658ba60d16d363715248d5d65d6",
+            "evidence_id": "610635e26e1f4cd848376287263470876eaa4658ba60d16d363715248d5d65d6",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "d9ecc68338caec8af6f2ffb40df17c5ba7f80b48a720aa37040830ee82a81451",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1449791462275704e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1449791462275704e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51001,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 22.455496450013015,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/e91818c5e46e8159aa11f83acfff97c7f340cf2c7fca7f16cebade8568092890",
+            "evidence_id": "e91818c5e46e8159aa11f83acfff97c7f340cf2c7fca7f16cebade8568092890",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "8bad88c8bc0ee65a51828a07df68bfb98d7dc42fb48044202b5c3b80857aaab1",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1001522752585358e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1001522752585358e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51002,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 20.763131601037458,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/261859144fe170211f750110a804f59e5c72658e7aec573dca2263d96ba008f8",
+            "evidence_id": "261859144fe170211f750110a804f59e5c72658e7aec573dca2263d96ba008f8",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "11d0f361a07554a23edcaba5559430d45efe671c8f1184b1bcbce4dc39ec89b0",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1001522752585358e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1001522752585358e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51002,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 15.200592859997414,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/64eb3e45433ec36b4c3cf0fb08db5b11f454655b58bb3f58ad3cc642960ace06",
+            "evidence_id": "64eb3e45433ec36b4c3cf0fb08db5b11f454655b58bb3f58ad3cc642960ace06",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "ebea9a8e1afa2626b662a71edb33558829cd0e21325debc5a79d010152832f3b",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.119960541159684e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.119960541159684e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51003,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 14.817732891009655,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/ec8e9c615495d1d1bbe7e939ee1d2235a7974fcdffc61fb80f336a0d190067db",
+            "evidence_id": "ec8e9c615495d1d1bbe7e939ee1d2235a7974fcdffc61fb80f336a0d190067db",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "2caf915b7da1a1080b2a2912d14e1afb026137c999bf0947253c061987c7a84c",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.119960541159684e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.119960541159684e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51003,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 15.076529141981155,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/cc8ccb626314fc78b9bc1ecfff7286e3adc4138d99d626c581d141b8b89fdeb7",
+            "evidence_id": "cc8ccb626314fc78b9bc1ecfff7286e3adc4138d99d626c581d141b8b89fdeb7",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "f3c13f7b263c3530ed2d79533039b54d6a6a3b02dc19b4336f1c5ede06ebde9e",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          }
+        ],
+        [
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1410593876071029e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1410593876071029e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51004,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": false,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 15.021367301989812,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/2084cd9f9861525f67599b7d4e229d2a00de02e6bde7bb5232f89a7278b03c87",
+            "evidence_id": "2084cd9f9861525f67599b7d4e229d2a00de02e6bde7bb5232f89a7278b03c87",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "a4ccd4d2f9c9ebbc8259b2918c0be27953c13dcb084ce266a58ba472b839dc0d",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          },
+          {
+            "passes": false,
+            "preflip_stable_s": 0.0,
+            "inverted_hold_s": 0.0,
+            "airborne_relative_position_peak_m": 0.0,
+            "airborne_relative_angle_peak_deg": 0.0,
+            "unexpected_robot_contacts": [],
+            "nonfinite_or_warning": false,
+            "peak_penetration_m": 1.1410593876071029e-05,
+            "support_measurement": "frame_contact_plus_signed_internal_nail_force",
+            "preflip_support_forces": null,
+            "contact_only_acceptance": {
+              "passes": false,
+              "preflip_stable_s": 0.0,
+              "inverted_hold_s": 0.0,
+              "airborne_relative_position_peak_m": 0.0,
+              "airborne_relative_angle_peak_deg": 0.0,
+              "unexpected_robot_contacts": [],
+              "nonfinite_or_warning": false,
+              "peak_penetration_m": 1.1410593876071029e-05
+            },
+            "success": false,
+            "valid": true,
+            "error": null,
+            "seed": 51004,
+            "assembly_profiles": {
+              "support_profile": "contact_and_nails",
+              "controller_profile": "southwest_approach"
+            },
+            "reward": 0.0,
+            "verified_released_members": [],
+            "fasteners": {
+              "enabled": true,
+              "failure_events": [],
+              "inserted": 0,
+              "missed": 0,
+              "intact": 0,
+              "failed": 0,
+              "peak_utilization": 0.0,
+              "fracture_energy_J": 0,
+              "damping_work_J": 0.0,
+              "parameters": {
+                "length_m": 0.075,
+                "stiffness_N_m": 12000.0,
+                "damping_N_s_m": 4.0,
+                "withdrawal_N": 45.0,
+                "lateral_N": 70.0,
+                "failure_displacement_m": 0.004,
+                "max_standoff_m": 0.012,
+                "max_gap_m": 0.006,
+                "min_embed_m": 0.015
+              },
+              "physical_validation": false
+            },
+            "finished": true,
+            "flipped": false,
+            "simulated_s": 5.999999999999394,
+            "wall_s": 15.217252398026176,
+            "physics_started": true,
+            "physics_paused_for_inference": false,
+            "generated_before_simulation": true,
+            "physical_validation": false,
+            "full_visual_language_policy": false,
+            "evidence": "/opt/cap-speed/async-reward19/independent/0a6a7ad7329248d5b7a46cc9ae2d866ab83aa5ff10595780b0bf02f740ebfaf6",
+            "evidence_id": "0a6a7ad7329248d5b7a46cc9ae2d866ab83aa5ff10595780b0bf02f740ebfaf6",
+            "cache_hit": false,
+            "cache_reuse": "exact_program",
+            "result_sha256": "79fec77b1836a1dccac606a2b958f78746834897261eaa90d7c1ae758555bb7e",
+            "batch_duplicate": false,
+            "inflight_shared": false
+          }
+        ]
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "seed": 51001,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 9.788743458979297,
+      "optimized_wall_s": 20.513450264988933,
+      "speedup": 0.47718659379724676,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "114dc48f0aea07f22077ece26c767b37cab7ce5903edc13afcbe2b03bd714cb0",
+        "d9ecc68338caec8af6f2ffb40df17c5ba7f80b48a720aa37040830ee82a81451"
+      ],
+      "state_hashes": [
+        "2937f4340cba3552ec49de41d3220af01402ea108ddcaef0c05e35ce66765c58",
+        "2937f4340cba3552ec49de41d3220af01402ea108ddcaef0c05e35ce66765c58"
+      ]
+    },
+    {
+      "seed": 51001,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 9.77740551502211,
+      "optimized_wall_s": 22.455496450013015,
+      "speedup": 0.4354125742348681,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "f5e2bc5cbc76404943fafa0392d1a6c230e0e9ef1701ad5e8f9bb5fc8e30962c",
+        "8bad88c8bc0ee65a51828a07df68bfb98d7dc42fb48044202b5c3b80857aaab1"
+      ],
+      "state_hashes": [
+        "2937f4340cba3552ec49de41d3220af01402ea108ddcaef0c05e35ce66765c58",
+        "2937f4340cba3552ec49de41d3220af01402ea108ddcaef0c05e35ce66765c58"
+      ]
+    },
+    {
+      "seed": 51002,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 9.855902620998677,
+      "optimized_wall_s": 20.763131601037458,
+      "speedup": 0.4746828566316178,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "bb3e9642188bbb1804622eeeda4276a2c6058b8641902c12677829d85ada051c",
+        "11d0f361a07554a23edcaba5559430d45efe671c8f1184b1bcbce4dc39ec89b0"
+      ],
+      "state_hashes": [
+        "7d6ae1d826701e6f0e70af5408753acb85f7ec66036d23657b914eab32ebe7ee",
+        "7d6ae1d826701e6f0e70af5408753acb85f7ec66036d23657b914eab32ebe7ee"
+      ]
+    },
+    {
+      "seed": 51002,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 9.682351241994184,
+      "optimized_wall_s": 15.200592859997414,
+      "speedup": 0.63697194781624,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "cdb9c18a47a71b238b1a9ba9d750f2fe2cf5129ea89a8189583ef407a1f0d199",
+        "ebea9a8e1afa2626b662a71edb33558829cd0e21325debc5a79d010152832f3b"
+      ],
+      "state_hashes": [
+        "7d6ae1d826701e6f0e70af5408753acb85f7ec66036d23657b914eab32ebe7ee",
+        "7d6ae1d826701e6f0e70af5408753acb85f7ec66036d23657b914eab32ebe7ee"
+      ]
+    },
+    {
+      "seed": 51003,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 12.861442018009257,
+      "optimized_wall_s": 14.817732891009655,
+      "speedup": 0.8679763707856188,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "88e1c18ddf5d8a2f755edd85b2f6cb9b7d1b7033bfd3b6fb8efe4ffe879679f1",
+        "2caf915b7da1a1080b2a2912d14e1afb026137c999bf0947253c061987c7a84c"
+      ],
+      "state_hashes": [
+        "23f72710a5e6953610d1cb95e186e747fb4e8052531fd76dbce7d817541303a3",
+        "23f72710a5e6953610d1cb95e186e747fb4e8052531fd76dbce7d817541303a3"
+      ]
+    },
+    {
+      "seed": 51003,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 10.636187419004273,
+      "optimized_wall_s": 15.076529141981155,
+      "speedup": 0.7054798434599522,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "af3708aca1f5770f83c692e852e96db59366073b316b2ff35b2e79053b7eb32b",
+        "f3c13f7b263c3530ed2d79533039b54d6a6a3b02dc19b4336f1c5ede06ebde9e"
+      ],
+      "state_hashes": [
+        "23f72710a5e6953610d1cb95e186e747fb4e8052531fd76dbce7d817541303a3",
+        "23f72710a5e6953610d1cb95e186e747fb4e8052531fd76dbce7d817541303a3"
+      ]
+    },
+    {
+      "seed": 51004,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 10.056093483988661,
+      "optimized_wall_s": 15.021367301989812,
+      "speedup": 0.6694526058660836,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "a71cefa1c8356ad92b0b7b01144b5c514b1ab92770c53e6474b9f7faddea49c2",
+        "a4ccd4d2f9c9ebbc8259b2918c0be27953c13dcb084ce266a58ba472b839dc0d"
+      ],
+      "state_hashes": [
+        "5b74c850d3acabebe798598c03576d316c3774cf2ab9dbe261de331dc6359d1c",
+        "5b74c850d3acabebe798598c03576d316c3774cf2ab9dbe261de331dc6359d1c"
+      ]
+    },
+    {
+      "seed": 51004,
+      "same_seed": true,
+      "exact": true,
+      "result_keys_differing_except_wall_s": [],
+      "arrays": {
+        "rows": {
+          "shape_before": [
+            61,
+            155
+          ],
+          "shape_after": [
+            61,
+            155
+          ],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nq": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nv": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        },
+        "nu": {
+          "shape_before": [],
+          "shape_after": [],
+          "exact": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "baseline_success": false,
+      "optimized_success": false,
+      "baseline_error": null,
+      "optimized_error": null,
+      "complete_assembly_sequence": false,
+      "simulated_s": 5.999999999999394,
+      "baseline_wall_s": 9.944237750023603,
+      "optimized_wall_s": 15.217252398026176,
+      "speedup": 0.6534844458066206,
+      "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+      "result_hashes": [
+        "02a9b4e040193a4d0738c7f177dc6611afcc211b71eb5fab07baa810366f312a",
+        "79fec77b1836a1dccac606a2b958f78746834897261eaa90d7c1ae758555bb7e"
+      ],
+      "state_hashes": [
+        "5b74c850d3acabebe798598c03576d316c3774cf2ab9dbe261de331dc6359d1c",
+        "5b74c850d3acabebe798598c03576d316c3774cf2ab9dbe261de331dc6359d1c"
+      ]
+    }
+  ],
+  "speedup": 1.6021834435061957,
+  "scope": "Eight real early-terminal 6-second physics episodes in four groups, not complete assemblies or RL improvement. Separate caches; shared host; includes pool startup/shutdown."
+}
