@@ -79,7 +79,16 @@ provenance, and it requires a working C compiler. The current RL run and its
 verification checkout remain frozen on the earlier `vectorized` backend.
 The new backend's complete Linux test suite passes 50 tests, including exhaustive
 checks of all 16,777,216 RGB values for each of four predicate combinations.
-Full successful and failed episode equivalence runs are in progress; no complete
-episode speedup is claimed yet. The exploratory `pixel_probe03.json` uses
+Full successful and failed replays now match every recorded state and all result
+fields except elapsed time: 6,482×155 states on training layout 51002, and
+6,309×155 states on validation layout 52001. The latter retains its original
+strict failure; acceleration does not turn failures into successes. The measured
+full episode times are 1,143.3→1,029.3 seconds and 1,162.4→1,087.7 seconds,
+respectively (1.11× and 1.07× throughput). These shared-host observations are
+not isolated speed estimates. Production compiler flags avoid machine-specific
+instructions and fast-math; its synthetic color-mask/coordinate microbenchmarks
+measure 3.05×/2.80× median speedups. The exploratory `pixel_probe03.json` uses
 machine-specific compiler flags and measures only synthetic pixel predicates;
 it is not the production backend's full-episode performance result.
+
+The native-pixel evidence archive is attached to the [speed release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-speed-2026-10-23): `cap-rl-native-pixels-2026-10-24.tar.gz`, 44,786,925 bytes, SHA-256 `d31d81564bd0098ae41c7f0fd112e8e5c479bbe10efa566217d709da2582c678`. All 493 payloads were verified locally against the manifest before upload; see `native-pixels-archive-verification.json`.

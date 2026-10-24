@@ -1,0 +1,7 @@
+{
+  "passes": true,
+  "files": 493,
+  "archive_bytes": 44786925,
+  "archive_sha256": "d31d81564bd0098ae41c7f0fd112e8e5c479bbe10efa566217d709da2582c678",
+  "scope": "Local byte-for-byte verification of every archived payload against its manifest."
+}
