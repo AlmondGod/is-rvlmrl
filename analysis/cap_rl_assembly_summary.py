@@ -28,7 +28,8 @@ def main():
     validation.extend((int(path.stem.split('_')[-1]), read(path))
                       for path in sorted(run.glob('validation_[0-9]*.json')))
     records = rollouts + [row for _, v in validation for row in v['rows']]
-    records += test['before'] + test['after']
+    raw=read(run/'raw_test_baseline.json') if (run/'raw_test_baseline.json').exists() else None
+    records += test['before'] + test['after'] + (raw['rows'] if raw else [])
     unique = {r['evidence_id']: r for r in records if r.get('evidence_id')}
     failures = lambda rows: dict(Counter(r.get('error') or 'strict_acceptance_failure'
                                         for r in rows if not r['success']))
@@ -36,17 +37,20 @@ def main():
         support_profile=metadata.get('support_profile','contact_only'),
         controller_profile=metadata.get('controller_profile','original'),
         optimization_reward=metadata.get('optimization_reward','environment'),
-        task=metadata['task'], gpu=metadata['gpu'], optimizer_updates=len(training),
+        task=metadata['task'], gpu=metadata['gpu'], rollout_rounds=len(training),
+        optimizer_updates=len(training)*metadata.get('update_epochs',1),
+        policy_decoding=metadata.get('policy_decoding','unrestricted_program'),
+        policy_action_space=metadata.get('policy_action_space'),
         sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,
         compute_scope=selection.get('training_seconds_scope',
             'One GPU allocated during training including CPU physics and periodic validation; excludes setup, baseline validation, final test and audits.'),
-        planned_optimizer_updates=metadata['steps'],
+        planned_rollout_rounds=metadata['steps'],planned_optimizer_updates=metadata['steps']*metadata.get('update_epochs',1),
         stopped_at_validation_ceiling=(run/'validation_ceiling_stop.json').exists(),
         selected_step=selection['best_step'], validation=selection,
         selected_checkpoint_elapsed_seconds=next(
             (r['elapsed_seconds'] for r in training if r['step']==selection['best_step']), 0.),
-        baseline=test['baseline'], trained=test['trained'], paired_wins=test['paired_wins'],
+        baseline=test['baseline'], trained=test['trained'], raw_baseline=raw['metrics'] if raw else None,paired_wins=test['paired_wins'],
         paired_losses=test['paired_losses'], delta_success_rate=test['delta_success_rate'],
         paired_bootstrap_95_ci=test['paired_bootstrap_95_ci'],
         total_scored_records=len(records), distinct_measured_evidence_ids=len(unique),
@@ -56,6 +60,12 @@ def main():
         before_failure_counts=failures(test['before']), after_failure_counts=failures(test['after']),
         physically_successful_training_samples=sum(r['success'] for r in rollouts),
         active_group_updates=sum(r['active_groups']>0 for r in training),
+        sampled_unique_programs=len({r['completion'] for r in rollouts}),
+        statically_rejected_samples=sum(bool(r.get('static_rejection')) for r in rollouts),
+        generation_seconds=sum(r.get('generation_s',0.) for r in training),
+        logprob_seconds=sum(r.get('logprob_s',0.) for r in training),
+        exposed_simulation_wait_seconds=sum(r.get('reward_wait_after_preparation_s',0.) for r in training),
+        optimization_seconds=sum(r.get('optimization_seconds',0.) for r in training),
         full_visual_language_policy=False, learned_motor_controller=False,
         task_prompt_identical_across_layouts=True, physical_validation=False)
     summary['contact_only_shadow'] = {
@@ -101,22 +111,29 @@ def main():
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.8), constrained_layout=True)
     steps = [row['step'] for row in training]
     axes[0].plot(steps, [100*r['success_rate'] for r in training], alpha=.5, label='Sampled training success')
     axes[0].plot([s for s, _ in validation], [100*v['metrics']['success_rate'] for _, v in validation],
                  'o-', color='#087e8b', label='Greedy validation success')
     axes[0].axvline(selection['best_step'], color='#777777', ls=':', label='Selected checkpoint')
-    axes[0].set(xlabel='GRPO update', ylabel='Strict physical success (%)', ylim=(-3, 110), title='Learning and selection')
+    axes[0].set(xlabel='Rollout round (each followed by optimizer epochs)', ylabel='Strict physical success (%)', ylim=(-3, 110), title='Learning and selection')
     axes[0].legend(fontsize=8)
     values = [test['baseline'], test['trained']]
-    axes[1].bar(['Before RL', 'After RL'], [100*x['success_rate'] for x in values],
-                color=['#b1b9c4', '#087e8b'], width=.6)
+    labels=['Prior policy','Selected policy'];colors=['#b1b9c4','#087e8b']
+    if raw:
+        values=[raw['metrics']]+values;labels=['Raw Qwen']+labels;colors=['#d8dde5']+colors
+    axes[1].bar(labels,[100*x['success_rate'] for x in values],color=colors,width=.6)
     intervals = ([audit['baseline_success_exact_95_ci'], audit['trained_success_exact_95_ci']]
                  if audit else None)
+    if intervals and raw:
+        from scipy.stats import beta
+        k,n=raw['metrics']['successes'],raw['metrics']['n']
+        intervals=[[float(beta.ppf(.025,k,n-k+1)) if k else 0.,
+                    float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]]+intervals
     if intervals:
         rates = [100*x['success_rate'] for x in values]
-        axes[1].errorbar([0,1], rates,
+        axes[1].errorbar(list(range(len(values))), rates,
             yerr=[[v-100*c[0] for v,c in zip(rates,intervals)],
                   [100*c[1]-v for v,c in zip(rates,intervals)]],
             fmt='o', color='#253343', markersize=4, capsize=5,
