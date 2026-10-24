@@ -54,8 +54,12 @@ A corrected reward mode is included for future runs; frame01 was not retrained o
 
 A [full three-arm code-policy pilot](results/cap_rl_assembly/2026-10-22/README.md)
 now runs against the original assembly, fastening and flip physics. Its scripted
-development check passes all acceptance gates; model training is in progress,
-with no held-out improvement claimed yet. The model generates programs using
+development check passes all acceptance gates; the earlier model pilot has
+partial held-out results with verification unfinished. The subsequent
+[varied-placement experiment](results/cap_rl_assembly/parallel-varied-2026-10-23/shutdown38/README.md)
+is preserved at user-requested shutdown: 16 updates, latest validation 3/8
+versus baseline 4/8, with all 24 test layouts untouched. Exact simulator
+acceleration is verified separately; varied-task policy improvement is not. The model generates programs using
 the supplied camera-guided skills. This separate offline experiment does not
 replace or retrain the frozen live visual-language benchmark.
 

@@ -1,0 +1,15 @@
+{
+  "format": "online_no_improvement_policy_v1",
+  "declared_utc": "2026-10-24T09:37:00.014408+00:00",
+  "boundary": 4,
+  "condition": "Both scheduled validation checkpoints fail to exceed the initial 4/8 strict-success score.",
+  "rationale": "Retire the small-layout-batch configuration if still unimproved; prepare full-layout cohort updates and shared-prefix acceleration using training/validation evidence only.",
+  "fallback_scope": "No held-out outcomes, source changes, reward relaxation, or exact-resume claim. Any new phase freezes its own policy/rollout/selection protocol before execution.",
+  "learner_pid": 18156,
+  "learner_start_ticks": "39457640",
+  "metadata_sha256": "64421f819fb33770603bcfe4b2118f1bd342c574e90d1f86c8bd07f34f6fead5",
+  "sources_sha256": {
+    "retire_assembly_online.py": "254ff8c2ec249416da6d727c0a37510c4661eb64ba57910dd58033c20ed29297",
+    "audit_assembly_online_retirement.py": "f5caf484e4fc32d706b89e7cc689e7dbe84786093025e2ee8c10ff3b7ddff772"
+  }
+}

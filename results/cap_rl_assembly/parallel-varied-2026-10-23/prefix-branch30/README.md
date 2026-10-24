@@ -12,5 +12,8 @@ continues assembly, while the tested program calls `stop()`. Both the fresh
 and reused stop programs match all 574×155 states and every non-timing outcome.
 The fresh program takes 67.62 seconds, its reused execution 8.03 seconds, with a
 separately paid 80.72-second origin run. This early stop is not assembly success
-or whole-RL throughput. A complete 22-call branch comparison, changing only
-the last two panel-nailing indices, is running with a nine-call snapshot.
+or whole-RL throughput. The complete 22-call branch comparison, changing only
+the last two panel-nailing indices, passes with a nine-call snapshot: all
+6,550×155 states and all non-timing results match exactly. Both outcomes are
+strict failures. The complete report/archive is in `../memory-prefix29/`.
+Linux fused/worker integration remained incomplete at user-requested shutdown.

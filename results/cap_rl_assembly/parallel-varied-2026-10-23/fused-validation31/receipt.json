@@ -1,0 +1,38 @@
+{
+  "started_utc": "2026-10-24T09:03:47.059066+00:00",
+  "source_sha256": "41040f94d3155c6ab58c95825fdb28c1bdaaec3d1d6d5b0a1d7fef0e79168b09",
+  "initial_memory": {
+    "limit": 30999998464,
+    "anon": 17600118784,
+    "kernel": 212635648,
+    "shmem": 16130048,
+    "current": 30501527552
+  },
+  "maximum_concurrent_extra_simulators": 1,
+  "admission_working_limit_bytes": 21000000000,
+  "stop_working_limit_bytes": 25000000000,
+  "child_oom_score_adj": 1000,
+  "scope": "Integrated backend exactness only; no extra model or worker pool. Existing learner/frozen sources remain unchanged.",
+  "episodes": [
+    {
+      "name": "success",
+      "pid": 19547,
+      "started_utc": "2026-10-24T09:03:47.060281+00:00",
+      "peak_working_bytes": 21392683008,
+      "exit_code": 0,
+      "stop_reason": null,
+      "wall_s": 736.474522910954
+    },
+    {
+      "name": "failure",
+      "pid": 19810,
+      "started_utc": "2026-10-24T09:16:03.536444+00:00",
+      "peak_working_bytes": 21618540544,
+      "exit_code": 0,
+      "stop_reason": null,
+      "wall_s": 784.5167742649792
+    }
+  ],
+  "passes": true,
+  "completed_utc": "2026-10-24T09:29:08.052791+00:00"
+}

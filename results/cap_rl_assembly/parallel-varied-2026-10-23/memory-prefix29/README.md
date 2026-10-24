@@ -20,7 +20,11 @@ non-timing outcome match, retaining the original strict failure. Capture takes
 continuous run also exactly matches the earlier full baseline. Whole-run timings
 (880.24 seconds continuous, 465.40 seconds restored remainder) include shared-host
 load and are not an isolated speed comparison. The process peaks at 3.55 GB
-macOS memory footprint. A short different-suffix branch check also passed; a
-full branching comparison is running.
+macOS memory footprint. A short different-suffix branch check also passed; the
+full branching comparison also passes: all 6,550×155 recorded values and all
+non-timing outcomes are exactly equal. The full branch takes 841.65 seconds
+fresh and 624.27 seconds with a reused prefix, plus a separately reported
+919.14-second cold origin. These shared-host timings do not include amortization
+and are not a whole-training speed claim.
 This implementation is not installed in the active learner. Linux/runtime and
 worker memory validation remain required before deployment.
