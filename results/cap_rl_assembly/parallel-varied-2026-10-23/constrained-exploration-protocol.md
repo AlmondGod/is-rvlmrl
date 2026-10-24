@@ -24,6 +24,8 @@ frozen. The decoder and exact source digest are recorded separately from the
 unchanged physical provenance. Cached physics is reusable only for the exact
 program/layout/provenance or a previously certified terminal-failure prefix.
 
+Training uses non-reentrant activation checkpointing with dropout explicitly disabled. Cached generation runs in evaluation mode; optimization runs in training mode so checkpointing is actually active.
+
 Optimizer microbatch size is selected by a GPU forward/reference/backward preflight among 1, 2, 4 and 8 programs, retaining at least about 4 GB beyond PyTorch allocated memory for optimizer states, rendering and runtime overhead. This choice does not use physics rewards.
 
 Initial candidate budget: 16 rounds, two layouts per round, four programs per

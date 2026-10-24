@@ -125,6 +125,21 @@ def verify_source(directory,metadata):
 def install(trainer):
     if getattr(trainer.rollout,'_assembly_grammar',False):return
     original_rollout=trainer.rollout
+    original_load=trainer.load_model if hasattr(trainer,'load_model') else None
+    if original_load is not None:
+        def load_model(*args,**kwargs):
+            model,tokenizer=original_load(*args,**kwargs)
+            if kwargs.get('trainable',False):
+                import torch
+                # Checkpointing requires training mode. Disable dropout explicitly
+                # so rollout/reference/current probabilities remain deterministic.
+                for layer in model.modules():
+                    if isinstance(layer,torch.nn.Dropout):layer.p=0.
+                    if hasattr(layer,'attention_dropout'):layer.attention_dropout=0.
+                model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant':False})
+                model.train()
+            return model,tokenizer
+        trainer.load_model=load_model
     def rollout(model,tokenizer,layouts,max_tokens,sample,**kwargs):
         global _GRAMMAR
         # The original rollout preserves generation timing, async simulation,
@@ -135,7 +150,10 @@ def install(trainer):
             kwargs['prepare']=lambda seq,attention,mask:prepare(seq,attention,_GRAMMAR.decision_mask(mask))
         def generate(*args,**generation):
             generation.update(generation_kwargs(tokenizer,generation['input_ids'].shape[1],max_tokens))
-            return original_generate(*args,**generation)
+            training=model.training
+            model.eval()  # Cached generation; checkpointing is for optimization.
+            try:return original_generate(*args,**generation)
+            finally:model.train(training)
         model.generate=generate
         try:
             seq,attention,mask,texts,results=original_rollout(model,tokenizer,layouts,max_tokens,sample,**kwargs)
@@ -157,6 +175,7 @@ def main():
     def train(args):
         args.policy_decoding='assembly_permutations_v1'
         args.decoding_source_sha256=digest
+        args.gradient_checkpointing='non_reentrant_training_mode_no_dropout'
         args.policy_choice_tokens=12
         args.policy_action_space=24**3
         original_train(args)

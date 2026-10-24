@@ -75,7 +75,9 @@ class GrammarTests(unittest.TestCase):
             for p in range(len(self.g.tokens)):
                 ids=torch.cat([ids,processor(ids,torch.zeros(len(ids),256)).argmax(-1)[:,None]],dim=1)
             return ids
-        model=SimpleNamespace(generate=generate)
+        model=SimpleNamespace(generate=generate,training=True)
+        model.eval=lambda:setattr(model,'training',False)
+        model.train=lambda mode=True:setattr(model,'training',mode)
         def original(model,tokenizer,layouts,max_tokens,sample,prepare=None,**kwargs):
             seq=model.generate(input_ids=torch.tensor([[7,8]]*len(layouts)))
             attention=torch.ones_like(seq);mask=torch.ones(len(layouts),seq.shape[1]-2)
@@ -87,7 +89,18 @@ class GrammarTests(unittest.TestCase):
         self.assertEqual(seen,[[12.,12.]])
         self.assertEqual(rows[2].sum(-1).tolist(),[12.,12.])
         self.assertIs(model.generate,generate)
+        self.assertTrue(model.training)
         for row in rows[0][:,2:].tolist():self.g.validate(row)
+
+    def test_checkpointing_uses_training_mode_with_dropout_disabled(self):
+        import torch
+        model=torch.nn.Sequential(torch.nn.Dropout(.4));model.attention_dropout=.2;flags=[]
+        model.gradient_checkpointing_enable=lambda **kwargs:flags.append(kwargs)
+        trainer=SimpleNamespace(rollout=lambda:None,load_model=lambda *a,**k:(model,None))
+        module.install(trainer);trainer.load_model('fixture',trainable=True)
+        self.assertTrue(model.training);self.assertEqual(model[0].p,0.)
+        self.assertEqual(model.attention_dropout,0.)
+        self.assertEqual(flags,[{'gradient_checkpointing_kwargs':{'use_reentrant':False}}])
 
     def test_sampler_produces_distinct_legal_orders(self):
         import torch
