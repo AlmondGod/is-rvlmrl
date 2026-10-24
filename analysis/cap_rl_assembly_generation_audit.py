@@ -18,6 +18,10 @@ def main():
     args=p.parse_args();root=Path(args.run)
     metadata=json.loads((root/'metadata.json').read_text())
     report=json.loads((root/'test_comparison.json').read_text())
+    constrained=bool(metadata.get('policy_decoding'))
+    if constrained:
+        from analysis.cap_rl_assembly_grammar import verify_source,generation_kwargs
+        verify_source(root,metadata)
     train.task=train.get_task('assembly_full')
     train.task.configure(metadata['support_profile'],metadata['controller_profile'],
                          **({'assembly_backend': metadata['assembly_backend']}
@@ -40,9 +44,11 @@ def main():
         texts=[];truncated=[]
         for start in range(0,len(layouts),16):
             inputs=train.encode(tokenizer,layouts[start:start+16])
+            kwargs=(generation_kwargs(tokenizer,inputs.input_ids.shape[1],metadata['max_tokens'])
+                    if constrained and label!='raw' else {})
             with torch.no_grad():
                 generated=model.generate(**inputs,max_new_tokens=metadata['max_tokens'],do_sample=False,
-                    pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id)
+                    pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id,**kwargs)
             completions=generated[:,inputs.input_ids.shape[1]:]
             texts.extend(tokenizer.batch_decode(completions,skip_special_tokens=True))
             truncated.extend((~completions.eq(tokenizer.eos_token_id).any(-1)).tolist())

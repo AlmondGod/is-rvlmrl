@@ -48,6 +48,9 @@ def audit(directory, pretest=False):
     if reward_mode == 'strict_success':
         require(sha(directory/'optimization_source/train_assembly_strict.py') ==
                 metadata['optimization_adapter_sha256'], 'Optimizer reward adapter changed')
+    if metadata.get('policy_decoding'):
+        from analysis.cap_rl_assembly_grammar import verify_source
+        verify_source(directory,metadata)
     profiles = (metadata['support_profile'], metadata['controller_profile'])
     task.configure(*profiles, **({'assembly_backend': metadata['assembly_backend']}
                                 if 'assembly_backend' in metadata else {}))
