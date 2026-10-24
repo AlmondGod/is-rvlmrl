@@ -24,6 +24,7 @@ def main():
                             if 'assembly_backend' in metadata else {}))
     assert train.task.provenance()==json.loads((root/'assembly_provenance.json').read_text())
     assert not metadata.get('init_adapter'), 'This verification is for raw-base initialization'
+    train.task.DATASET_PROFILE=metadata.get('assembly_split','pilot_v1')
     layouts=train.task.datasets()['test']
     set_seed(metadata['seed']);torch.set_num_threads(4)
     hashes={}

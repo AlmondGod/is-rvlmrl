@@ -13,7 +13,10 @@ SYSTEM = 'Write only the requested Python API program. Do not explain it.'
 EXPECTED_PROVENANCE = None
 _FAILURES = {}
 PHYSICS_WORKERS = 1
+PHYSICS_THREADS = 1
+DATASET_PROFILE = 'pilot_v1'
 _POOL = None
+_BATCH_EXECUTOR = None
 SUPPORT_PROFILE = 'contact_only'
 CONTROLLER_PROFILE = 'original'
 ASSEMBLY_BACKEND = 'original'
@@ -59,6 +62,12 @@ def datasets():
     # Fresh layouts, distinct from historical development and model pilots.
     # The policy does not receive the seed. The same program must work through
     # supplied RGB feedback skills under lane, XY and yaw randomization.
+    if DATASET_PROFILE == 'varied_v2':
+        return {'train': [Layout(i) for i in range(51001, 51033)],
+                'validation': [Layout(i) for i in range(52001, 52009)],
+                'test': [Layout(i) for i in range(53001, 53025)]}
+    if DATASET_PROFILE != 'pilot_v1':
+        raise ValueError('Unknown assembly dataset profile')
     return {'train': [Layout(i) for i in range(41001, 41009)],
             'validation': [Layout(i) for i in range(42001, 42005)],
             'test': [Layout(i) for i in range(43001, 43009)]}
@@ -156,8 +165,10 @@ def execute(layout, text):
     return summary
 
 
-def _worker_init(expected, support_profile, controller_profile, assembly_backend='original'):
+def _worker_init(expected, support_profile, controller_profile, assembly_backend='original', threads=1):
     global EXPECTED_PROVENANCE
+    import cv2
+    cv2.setNumThreads(threads)
     configure(support_profile, controller_profile, assembly_backend)
     EXPECTED_PROVENANCE = expected
 
@@ -165,6 +176,8 @@ def _worker_init(expected, support_profile, controller_profile, assembly_backend
 def execute_batch(layouts, texts):
     """Parallel independent physical executions, with exact AST deduplication."""
     global _POOL
+    if len(layouts) != len(texts):
+        raise ValueError('Each generated program needs exactly one layout')
     if PHYSICS_WORKERS == 1:
         return [execute(layout, text) for layout, text in zip(layouts, texts)]
     from concurrent.futures import ProcessPoolExecutor
@@ -172,7 +185,7 @@ def execute_batch(layouts, texts):
     if _POOL is None:
         _POOL = ProcessPoolExecutor(PHYSICS_WORKERS,
             mp_context=multiprocessing.get_context('spawn'),
-            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE, SUPPORT_PROFILE, CONTROLLER_PROFILE, ASSEMBLY_BACKEND))
+            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE, SUPPORT_PROFILE, CONTROLLER_PROFILE, ASSEMBLY_BACKEND, PHYSICS_THREADS))
     manifest = provenance()
     if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
         raise RuntimeError('Assembly dependencies changed during this training/evaluation run')
@@ -203,3 +216,26 @@ def execute_batch(layouts, texts):
             if prefix is not None and not any(p == prefix for p, _ in _FAILURES.get(context, [])):
                 _FAILURES.setdefault(context, []).append((prefix, result['evidence_id']))
     return results
+
+
+def submit_batch(layouts, texts):
+    """Start physics while the unchanged GPU policy computes rollout log-probs.
+
+    A single coordinator owns the persistent process pool and failure cache.
+    No update occurs until the caller collects every physical reward.
+    """
+    global _BATCH_EXECUTOR
+    from concurrent.futures import ThreadPoolExecutor
+    if _BATCH_EXECUTOR is None:
+        _BATCH_EXECUTOR = ThreadPoolExecutor(max_workers=1, thread_name_prefix='assembly-rollouts')
+    return _BATCH_EXECUTOR.submit(execute_batch, list(layouts), list(texts))
+
+
+def shutdown_workers():
+    global _POOL, _BATCH_EXECUTOR
+    if _BATCH_EXECUTOR is not None:
+        _BATCH_EXECUTOR.shutdown(wait=True)
+        _BATCH_EXECUTOR = None
+    if _POOL is not None:
+        _POOL.shutdown(wait=True)
+        _POOL = None

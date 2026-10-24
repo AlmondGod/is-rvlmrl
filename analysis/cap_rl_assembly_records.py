@@ -54,6 +54,7 @@ def audit(directory, pretest=False):
         require(sha(directory/'assembly_source'/name) == digest, 'Frozen source mismatch: '+name)
     for name, digest in metadata['source_sha256'].items():
         require(sha(directory/'source'/name) == digest, 'Trainer source mismatch: '+name)
+    task.DATASET_PROFILE = metadata.get('assembly_split', 'pilot_v1')
     splits = task.datasets()
     require({k:[x.key for x in v] for k,v in splits.items()} == metadata['splits'], 'Split mismatch')
     layouts = {x.key:x for v in splits.values() for x in v}

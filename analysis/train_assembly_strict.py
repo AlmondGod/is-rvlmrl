@@ -23,6 +23,7 @@ def main():
 
     def rollout(*args, **kwargs):
         sequences, attention, mask, texts, results = original_rollout(*args, **kwargs)
+        rollout.last_timing = dict(getattr(original_rollout, 'last_timing', {}))
         return sequences, attention, mask, texts, strict_results(results)
 
     def train(args):
