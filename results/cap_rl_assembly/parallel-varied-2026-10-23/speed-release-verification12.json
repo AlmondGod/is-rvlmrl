@@ -1,0 +1,42 @@
+{
+  "passes": true,
+  "release": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-speed-2026-10-23",
+  "verified_assets": [
+    {
+      "name": "assembly-speed-evidence.tar.gz",
+      "bytes": 27775247,
+      "sha256": "645b6f0abc316f397b662363815852571169cc5c3f28e5f443172e84a5d6a897",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/assembly-speed-evidence.tar.gz"
+    },
+    {
+      "name": "cap-rl-native-connectors-2026-10-24.tar.gz",
+      "bytes": 81698492,
+      "sha256": "642da1e5b154558589485868dea63344585b34839de50eac388ae1113c1f0d07",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/cap-rl-native-connectors-2026-10-24.tar.gz"
+    },
+    {
+      "name": "cap-rl-native-pixels-2026-10-24.tar.gz",
+      "bytes": 44786925,
+      "sha256": "d31d81564bd0098ae41c7f0fd112e8e5c479bbe10efa566217d709da2582c678",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/cap-rl-native-pixels-2026-10-24.tar.gz"
+    },
+    {
+      "name": "native-connectors-archive-verification.json",
+      "bytes": 138,
+      "sha256": "657ea9fb906a5e1fcdf70ac74ae8bed901090fa70ae30ded8c3a7449891f89df",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/native-connectors-archive-verification.json"
+    },
+    {
+      "name": "native-pixel-microbenchmark03.json",
+      "bytes": 2329,
+      "sha256": "ddfc42cae976bf4e1256148b5926eb405fd575c4ab21a4b31da6555b4cef5498",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/native-pixel-microbenchmark03.json"
+    },
+    {
+      "name": "native-pixels-archive-verification.json",
+      "bytes": 249,
+      "sha256": "4629028202461045e6c1723b12166696b237283e0dcd7a0d50f18e328e52b84f",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-assembly-speed-2026-10-23/native-pixels-archive-verification.json"
+    }
+  ]
+}

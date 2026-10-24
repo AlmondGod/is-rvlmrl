@@ -1,6 +1,6 @@
 # Parallel rollouts and varied-placement RL
 
-Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and a training-only offline preference phase is active. No new held-out improvement claim yet.
+Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and the constant-prompt preference phase completed without improvement. A camera-conditioned preference phase is active. No new held-out improvement claim yet.
 
 The completed pilot in `run03-progress/` contains six rollout rounds, 48 sampled
 programs and 24 optimizer updates. Greedy validation at rounds 2, 4 and 6 remains
@@ -18,7 +18,7 @@ training layout, from the pilot's own certified programs. The next phase is
 **GRPO followed by offline DPO**, not additional on-policy GRPO rollouts. It
 uses the completed GRPO weights as its warm start, the original prior as its
 frozen reference/baseline, and the unchanged grammar, physics, reward and splits.
-Forty-eight preference optimizer updates are planned, with full eight-layout
+Forty-eight preference optimizer updates were completed, with full eight-layout
 validation every eight updates and earliest-maximum selection.
 
 `preference-failed04/` preserves an infrastructure-failed attempt: eight updates
@@ -27,9 +27,11 @@ fresh simulation could start. Those eight validation launches received no
 reward and their incomplete files were quarantined intact. `preference-progress05/`
 records the restart after an asset-path smoke check. The dataset and sampled
 pair sequence are identical, but GPU gradients/weights were not bit-reproducible;
-the recovery receipt discloses the difference. Validation at updates 8 and 16 is 4/8;
-update 16 changes the program and the per-layout outcomes, but gives no aggregate
-gain. Checkpoint 24 is undergoing full physical validation. The permanent source-
+the recovery receipt discloses the difference. Validation at updates
+8/16/24/32/40/48 is 4/8, 4/8, 2/8, 2/8, 2/8, 2/8. The earliest maximum
+remains the original baseline (step 0), so final testing was refused. The loop
+took 3,716.40 seconds (1.032 allocated GPU-hours), including validation.
+`preference05-final/` contains the final selection, updates and passing record audit. The permanent source-
 relative asset-path fix is separately tested to retain identical scene XML.
 Active experiments retain their frozen simulator source and resolve the original
 assets through the recorded overlay link.
@@ -122,10 +124,29 @@ it is not the production backend's full-episode performance result.
 
 The native-pixel evidence archive is attached to the [speed release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-speed-2026-10-23): `cap-rl-native-pixels-2026-10-24.tar.gz`, 44,786,925 bytes, SHA-256 `d31d81564bd0098ae41c7f0fd112e8e5c479bbe10efa566217d709da2582c678`. All 493 payloads were verified locally against the manifest before upload; see `native-pixels-archive-verification.json`.
 
-The [in-progress checkpoint release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-varied-assembly-2026-10-24) retains all seven GRPO snapshots, the failed preference attempt’s step 8, and preference05 snapshots through step 24. All 12 archives (2,552,507,073 bytes) passed local payload verification and their GitHub SHA-256 digests match. These are incremental adapter/evidence snapshots, not optimizer/RNG resume states; this release makes no held-out improvement claim.
+The [in-progress checkpoint release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-varied-assembly-2026-10-24) retains all seven GRPO snapshots, the failed preference attempt’s step 8, and all seven preference05 snapshots through step 48. Those 15 checkpoint archives passed local payload verification and their GitHub SHA-256 digests match. A separate final-record archive retains the completed selection, last validation and final adapter. These are incremental adapter/evidence snapshots, not optimizer/RNG resume states; this release makes no held-out improvement claim.
 
-An observation-conditioning feasibility probe uses the unchanged initial RGB frames, camera calibration and public robot packet on two training layouts (51001, 51002). The shared vision estimator localizes all four members; exact replay from saved PNGs and calibration reproduces the estimates. A proposed prompt includes only rounded visual XY/yaw and observed near/far ordering. Scene IDs, truth poses and outcome metadata are excluded. This is not integrated into the active constant-prompt experiment and is not a policy improvement claim. The full 18-file input/source archive `initial-observation09.tar.gz` is attached to the in-progress checkpoint release.
+An observation-conditioning feasibility probe uses the unchanged initial RGB frames, camera calibration and public robot packet on two training layouts (51001, 51002). The shared vision estimator localizes all four members; exact replay from saved PNGs and calibration reproduces the estimates. A proposed prompt includes only rounded visual XY/yaw and observed near/far ordering. Scene IDs, truth poses and outcome metadata are excluded. This probe motivated the separately declared camera-conditioned phase; it is not itself a policy improvement claim. The full 18-file input/source archive `initial-observation09.tar.gz` is attached to the in-progress checkpoint release.
 
 The optional `vectorized_native` backend combines native pixels with a checked C implementation of the existing connector arithmetic. It records compiler/source/binary identities, pins the reference implementation and rejects runtimes that fail a 512-case arithmetic compatibility check. The integrated GPU-host suite passes 18 tests, including 20,000 reference cases and irreversible failure/work-history checks. This is CPU force arithmetic, not native GPU physics.
 
-Its isolated prototype preserves the complete successful 51002 and failed 52001 trajectories: the state NPZ files have identical SHA-256 hashes and all result fields except wall time match. Full times are 1,143.3→966.7 seconds and 1,162.4→1,016.2 seconds (1.18×/1.14×), with both pixel and connector acceleration enabled on a shared host. The wrapper-only microbenchmark is 1.30× and includes data-copy overhead. An earlier arithmetic candidate failed exact comparison and was not deployed. Integrated full replays are still running; active training remains frozen on the earlier vectorized backend.
+Its isolated prototype preserves the complete successful 51002 and failed 52001 trajectories: the state NPZ files have identical SHA-256 hashes and all result fields except wall time match. Full times are 1,143.3→966.7 seconds and 1,162.4→1,016.2 seconds (1.18×/1.14×), with both pixel and connector acceleration enabled on a shared host. The wrapper-only microbenchmark is 1.30× and includes data-copy overhead. An earlier arithmetic candidate failed exact comparison and was not deployed. The integrated full replays also passed exact state/result comparison. Their instrumented times are 1,000.4 and 1,059.9 seconds; profiler overhead and overlapping host load prevent interpreting these as isolated speed estimates. Active training remains frozen on the earlier vectorized backend.
+
+The complete native-connector evidence archive contains 587 verified payloads,
+including successful and failed replays, source, binaries and exploratory
+arithmetic failures. It is attached to the speed release as
+`cap-rl-native-connectors-2026-10-24.tar.gz` (81,698,492 bytes, SHA-256
+`642da1e5b154558589485868dea63344585b34839de50eac388ae1113c1f0d07`).
+The runtime supplement retains the exact prototype binary and original
+microbenchmark wrapper.
+
+The active camera-conditioned phase follows `visual-conditioning-protocol.md`.
+Both baseline and trained models receive initial RGB-derived member locations
+and near/far ordering; the model never receives layout seeds or true object
+poses. Forty development observations were exactly reconstructed from saved
+images. Real Qwen forward/backward tests on two scene contexts passed, with
+9.77 GB peak GPU allocation, no reference gradients and no optimizer step.
+All 44 preflight tests passed on the pod. The actual run uses the same 23
+self-generated, certified within-layout preferences, now paired with the
+corresponding initial observation. It is offline DPO, not new training rollouts.
+Its learned 8/8 validation gate and untouched 24-layout final test remain in force.

@@ -6,7 +6,7 @@ import tarfile
 import unittest
 
 from analysis.cap_rl_assembly_records import input_receipt
-from analysis.package_cap_assembly import add_payload, scored_rows, verify_audit_receipts
+from analysis.package_cap_assembly import add_payload, scored_rows, verify_audit_receipts, verify_visual_replay
 
 
 class PackagingTests(unittest.TestCase):
@@ -77,6 +77,24 @@ class PackagingTests(unittest.TestCase):
             self.assertIn('parent-failure',{r['evidence_id'] for r in scored_rows(run)})
             self.assertIn('parent_run/metadata.json',input_receipt(run))
             with self.assertRaises(ValueError):verify_audit_receipts(run,replay)
+
+    def test_visual_packaging_rejects_changed_fresh_sensor_bytes(self):
+        from analysis.assembly_visual_prompt import PROFILE,sha
+        with tempfile.TemporaryDirectory() as directory:
+            run=Path(directory);rows=[]
+            (run/'metadata.json').write_text(json.dumps(dict(prompt_profile=PROFILE,
+                visual_source_sha256={'assembly_visual_observation_audit.py':'fixture-source'})))
+            for seed in (53001,53012,53024):
+                key=f'assembly-full-v1-{seed}'
+                before=run/'observations'/key;after=run/'initial_observation_replay'/key
+                before.mkdir(parents=True);after.mkdir(parents=True)
+                for folder in (before,after):(folder/'camera0.png').write_bytes(b'fixture-image')
+                (before/'receipt.json').write_text(json.dumps({'files_sha256':{'camera0.png':sha(before/'camera0.png')}}))
+                rows.append(dict(layout_id=key,exact_files={'camera0.png':True}))
+            (run/'observation_audit.json').write_text(json.dumps(dict(passes=True,source_sha256='fixture-source',fresh_initial_observations=rows)))
+            verify_visual_replay(run)
+            (after/'camera0.png').write_bytes(b'changed')
+            with self.assertRaises(ValueError):verify_visual_replay(run)
 
     def test_deduplicated_payloads_keep_every_path_and_byte(self):
         with tempfile.TemporaryDirectory() as directory:

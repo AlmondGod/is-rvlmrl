@@ -48,6 +48,27 @@ def verify_audit_receipts(run, replay):
         raise ValueError('Independent physical replay does not cover the current primary test')
 
 
+def verify_visual_replay(run):
+    """Bind fresh sensor replay to the frozen inputs before archiving a visual run."""
+    from analysis.assembly_visual_prompt import enabled, read, sha
+    metadata=read(run/'metadata.json')
+    if not enabled(metadata):return
+    report=read(run/'observation_audit.json')
+    keys=[f'assembly-full-v1-{seed}' for seed in (53001,53012,53024)]
+    if (report.get('passes') is not True or
+        report.get('source_sha256') != metadata['visual_source_sha256']['assembly_visual_observation_audit.py'] or
+        [row['layout_id'] for row in report['fresh_initial_observations']] != keys):
+        raise ValueError('Missing or changed fresh visual-input replay')
+    for row in report['fresh_initial_observations']:
+        key=row['layout_id'];before=run/'observations'/key;after=run/'initial_observation_replay'/key
+        files=read(before/'receipt.json')['files_sha256']
+        if row['exact_files'] != {name:True for name in files}:
+            raise ValueError('Incomplete fresh visual-input comparison')
+        for name,digest in files.items():
+            if sha(before/name)!=digest or sha(after/name)!=digest:
+                raise ValueError('Fresh visual-input payload changed: '+key+'/'+name)
+
+
 def scored_rows(run):
     rows = [json.loads(s) for s in (run/'rollouts.jsonl').read_text().splitlines()]
     if (run/'parent_run').is_dir():rows.extend(scored_rows(run/'parent_run'))
@@ -74,6 +95,7 @@ def main():
     checkpoint = run/'checkpoints'/f"step-{selection['best_step']:04d}"
     if selection['best_step'] and not (checkpoint/'checkpoint.json').is_file():
         raise ValueError('Selected trained checkpoint is absent')
+    verify_visual_replay(run)
     rows = scored_rows(run)
     evidence = {r['evidence_id']: Path(r['evidence']) for r in rows if r.get('evidence_id')}
     sources = [(p, Path('run')/p.relative_to(run)) for p in run.rglob('*')

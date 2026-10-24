@@ -1,0 +1,33 @@
+{
+  "passes": true,
+  "optimizer_updates": 0,
+  "physics_episodes": 0,
+  "initial_sensor_captures": 40,
+  "observation_audit": {
+    "passes": true,
+    "observations_recomputed": 40,
+    "scope": "Exact visual-estimate replay from saved sensor bytes; no task execution or reward."
+  },
+  "losses": [
+    0.6931471824645996,
+    0.6931471824645996
+  ],
+  "peak_allocated_bytes": 9770765824,
+  "forward_backward_seconds": 3.663067886023782,
+  "finite_gradients": true,
+  "reference_gradients": [],
+  "prompt_token_lengths": [
+    686,
+    686,
+    686,
+    686
+  ],
+  "layouts": [
+    "assembly-full-v1-51002",
+    "assembly-full-v1-51006"
+  ],
+  "context_programs": 26,
+  "weights_sha256": "57fca235f36e022b3aabab7cea6b3ec30e275c0ff82fe792e19c030b577f0cd9",
+  "source_sha256": "7a4ba7e9645ac786b2bca1b8fda70cfb8ca1a9a78cbd91c9bc2c27a9e52e86ec",
+  "scope": "Real Qwen with scene-matched RGB-derived prompts; two preference pairs, no optimizer step and no task outcome."
+}
