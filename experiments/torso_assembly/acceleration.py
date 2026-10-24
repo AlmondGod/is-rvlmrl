@@ -10,20 +10,28 @@ import inspect
 from scipy.spatial.transform import Rotation
 
 _INSTALLED = False
-BACKENDS = ('original', 'vectorized')
+_PIXELS_INSTALLED = False
+BACKENDS = ('original', 'vectorized', 'vectorized_pixels')
 
 
 def backend():
     if _INSTALLED:
         install()  # Verify that the selected methods were not replaced mid-run.
-    return 'vectorized' if _INSTALLED else 'original'
+    return 'vectorized_pixels' if _PIXELS_INSTALLED else 'vectorized' if _INSTALLED else 'original'
 
 
 def configure(name):
+    global _PIXELS_INSTALLED
     if name not in BACKENDS:
         raise ValueError('Unknown assembly execution backend: '+str(name))
-    if name == 'vectorized':
+    if name in ('vectorized', 'vectorized_pixels'):
+        if _PIXELS_INSTALLED and name != 'vectorized_pixels':
+            raise RuntimeError('Start a fresh process to disable native pixels')
         install()
+        if name == 'vectorized_pixels':
+            from .image_ops import enable_native
+            enable_native()
+            _PIXELS_INSTALLED = True
     elif _INSTALLED:
         raise RuntimeError('Start a fresh process to switch back to the original execution backend')
 

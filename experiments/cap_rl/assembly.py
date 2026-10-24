@@ -68,12 +68,13 @@ def provenance(*, support_profile='contact_only', controller_profile='original')
     """Hash every dependency, including skills, physics, assets and this adapter."""
     from experiments.assembly_benchmark.freeze import ASSETS, PACKAGES
     from experiments.torso_assembly.acceleration import backend
+    from experiments.torso_assembly.native_pixels import receipt as pixel_receipt
     paths = []
     for directory in [*(ROOT / 'experiments' / p for p in (*PACKAGES, 'cap_rl')),
                       *(ROOT / a for a in ASSETS)]:
         paths.extend(p for p in directory.rglob('*') if p.is_file() and
                      '__pycache__' not in p.parts and p.suffix not in ('.pyc', '.pyo'))
-    return {
+    manifest = {
         'profiles': profile_options(support_profile, controller_profile),
         'execution_backend': backend(),
         'sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -83,6 +84,9 @@ def provenance(*, support_profile='contact_only', controller_profile='original')
         'python': platform.python_version(), 'platform': platform.platform(),
         'settle_seconds': SETTLE_SECONDS,
     }
+    if manifest['execution_backend'] == 'vectorized_pixels':
+        manifest['native_pixels'] = pixel_receipt()
+    return manifest
 
 
 def score(released_members, intact_nails, preflip_stable, inverted_hold, success, unsafe):
@@ -245,7 +249,7 @@ def main():
     parser.add_argument('--video', action='store_true')
     parser.add_argument('--support-profile', choices=SUPPORT_PROFILES, default='contact_only')
     parser.add_argument('--controller-profile', choices=CONTROLLER_PROFILES, default='original')
-    parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original')
+    parser.add_argument('--assembly-backend', choices=('original', 'vectorized', 'vectorized_pixels'), default='original')
     parser.add_argument('--seconds', type=float, default=1200., help='Development timeout; full evaluation uses 1200.')
     args = parser.parse_args()
     from experiments.torso_assembly.acceleration import configure

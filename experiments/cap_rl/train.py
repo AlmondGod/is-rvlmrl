@@ -430,7 +430,7 @@ def main():
                         help='KL reference: raw base or frozen initial adapter for continued RL')
     parser.add_argument('--support-profile', choices=('contact_only', 'contact_and_nails'), default='contact_only')
     parser.add_argument('--controller-profile', choices=('original', 'southwest_approach'), default='original')
-    parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original',
+    parser.add_argument('--assembly-backend', choices=('original', 'vectorized', 'vectorized_pixels'), default='original',
                         help='Versioned assembly execution backend; recorded in metadata and physics cache identity')
     parser.add_argument("--max-tokens", type=int, default=96)
     parser.add_argument("--eval-every", type=int, default=20)

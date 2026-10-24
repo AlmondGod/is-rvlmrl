@@ -43,7 +43,7 @@ def install_execution_filter(task):
         return
     from experiments.cap_rl.assembly import ROOT
     expected = {
-        'experiments/cap_rl/assembly.py': '9b84e2156320273004e7e90b818923e84766bdf128295cc371a58e2bd0acea2d',
+        'experiments/cap_rl/assembly.py': 'a53f57c51097165412dc0955104a70dc9c514a737e4a45508642a80be3242814',
         'experiments/torso_assembly/live.py': 'cf35af630c8ff75e920c49d95ed26b25fb77cac2d577ab09bb0e11db76b09499',
         'experiments/assembly_benchmark/executor.py': 'b85b412aebff6d779b216b891c7ef01789869ba8c697097df848636e72b2cd12',
         'experiments/assembly_benchmark/evaluation.py': '3758bb1ecef1754a8806049fb5797e993752c3777ae24329530ca1d27d8a578d'}

@@ -7,13 +7,13 @@ import cv2,itertools,numpy as np
 from scipy.optimize import least_squares
 from experiments.astra_camera.perception import project,plane_points
 from .multiview_pose import fit_member
-from .image_ops import mask_pixels
+from .image_ops import mask_pixels,wood_mask
 from .environment import SIZES,YAWS,ASSIGN,GOALS,FIXTURE_HEIGHT
 
 class Vision:
  def __init__(self):self.previous=[None]*4;self.bias=[None]*4;self.last_robot=None;self.diagnostics=[];self.probe_reference=[None]*4;self.probe_residual=[None]*4;self.probe_tcp=[None]*4;self.probe_robot_R=[None]*4;self.rest_reference=[None]*4;self.probe_indices=[None]*4;self.released_prior=[None]*4
  def update(self,frames,cameras,robot,holding=(False,False,False,False),only=None):
-  im=frames[0] if frames[0].dtype==np.uint8 else frames[0].astype(float);cam=cameras[0];r,g,b=im[:,:,0],im[:,:,1],im[:,:,2];mask=((r>70)&(r>1.02*g)&(g>1.18*b)).astype(np.uint8);out=[];diag=[]
+  im=frames[0] if frames[0].dtype==np.uint8 else frames[0].astype(float);cam=cameras[0];mask=wood_mask(im,70,1.02);out=[];diag=[]
   T=np.array(cam['world_to_camera'])
   for i,size in enumerate(SIZES):
    if only is not None and i not in only:out.append(None);diag.append('not_requested');continue
