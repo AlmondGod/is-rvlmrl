@@ -34,6 +34,8 @@ def main():
     args = parser.parse_args()
     evidence = Path(args.evidence)
     recorded_provenance = json.loads((evidence / 'provenance.json').read_text())
+    from experiments.torso_assembly.acceleration import configure
+    configure(recorded_provenance.get('execution_backend', 'original'))
     profiles = recorded_provenance.get('profiles', {})
     if recorded_provenance != provenance(**profiles):
         raise RuntimeError('Replay must use the recorded source, assets and runtime')

@@ -45,7 +45,9 @@ def audit(directory, pretest=False):
     if reward_mode == 'strict_success':
         require(sha(directory/'optimization_source/train_assembly_strict.py') ==
                 metadata['optimization_adapter_sha256'], 'Optimizer reward adapter changed')
-    task.configure(metadata['support_profile'], metadata['controller_profile'])
+    profiles = (metadata['support_profile'], metadata['controller_profile'])
+    task.configure(*profiles, **({'assembly_backend': metadata['assembly_backend']}
+                                if 'assembly_backend' in metadata else {}))
     manifest = read(directory/'assembly_provenance.json')
     require(manifest == task.provenance(), 'Runtime/source/profile mismatch')
     for name, digest in manifest['sha256'].items():

@@ -16,14 +16,18 @@ PHYSICS_WORKERS = 1
 _POOL = None
 SUPPORT_PROFILE = 'contact_only'
 CONTROLLER_PROFILE = 'original'
+ASSEMBLY_BACKEND = 'original'
 
 
-def configure(support_profile='contact_only', controller_profile='original'):
-    global SUPPORT_PROFILE, CONTROLLER_PROFILE
+def configure(support_profile='contact_only', controller_profile='original', assembly_backend='original'):
+    global SUPPORT_PROFILE, CONTROLLER_PROFILE, ASSEMBLY_BACKEND
     profile_options(support_profile, controller_profile)
-    if _POOL is not None and (support_profile, controller_profile) != (SUPPORT_PROFILE, CONTROLLER_PROFILE):
+    if _POOL is not None and (support_profile, controller_profile, assembly_backend) != (SUPPORT_PROFILE, CONTROLLER_PROFILE, ASSEMBLY_BACKEND):
         raise RuntimeError('Cannot change assembly profiles with active physics workers')
+    from experiments.torso_assembly.acceleration import configure as configure_backend
+    configure_backend(assembly_backend)
     SUPPORT_PROFILE, CONTROLLER_PROFILE = support_profile, controller_profile
+    ASSEMBLY_BACKEND = assembly_backend
 
 
 def provenance():
@@ -152,9 +156,9 @@ def execute(layout, text):
     return summary
 
 
-def _worker_init(expected, support_profile, controller_profile):
+def _worker_init(expected, support_profile, controller_profile, assembly_backend='original'):
     global EXPECTED_PROVENANCE
-    configure(support_profile, controller_profile)
+    configure(support_profile, controller_profile, assembly_backend)
     EXPECTED_PROVENANCE = expected
 
 
@@ -168,7 +172,7 @@ def execute_batch(layouts, texts):
     if _POOL is None:
         _POOL = ProcessPoolExecutor(PHYSICS_WORKERS,
             mp_context=multiprocessing.get_context('spawn'),
-            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE, SUPPORT_PROFILE, CONTROLLER_PROFILE))
+            initializer=_worker_init, initargs=(EXPECTED_PROVENANCE, SUPPORT_PROFILE, CONTROLLER_PROFILE, ASSEMBLY_BACKEND))
     manifest = provenance()
     if EXPECTED_PROVENANCE is not None and manifest != EXPECTED_PROVENANCE:
         raise RuntimeError('Assembly dependencies changed during this training/evaluation run')

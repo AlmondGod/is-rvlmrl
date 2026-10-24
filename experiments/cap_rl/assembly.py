@@ -67,6 +67,7 @@ def parse_program(text):
 def provenance(*, support_profile='contact_only', controller_profile='original'):
     """Hash every dependency, including skills, physics, assets and this adapter."""
     from experiments.assembly_benchmark.freeze import ASSETS, PACKAGES
+    from experiments.torso_assembly.acceleration import backend
     paths = []
     for directory in [*(ROOT / 'experiments' / p for p in (*PACKAGES, 'cap_rl')),
                       *(ROOT / a for a in ASSETS)]:
@@ -74,6 +75,7 @@ def provenance(*, support_profile='contact_only', controller_profile='original')
                      '__pycache__' not in p.parts and p.suffix not in ('.pyc', '.pyo'))
     return {
         'profiles': profile_options(support_profile, controller_profile),
+        'execution_backend': backend(),
         'sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in sorted(set(paths))},
         'versions': {p: importlib.metadata.version(p) for p in
@@ -243,8 +245,11 @@ def main():
     parser.add_argument('--video', action='store_true')
     parser.add_argument('--support-profile', choices=SUPPORT_PROFILES, default='contact_only')
     parser.add_argument('--controller-profile', choices=CONTROLLER_PROFILES, default='original')
+    parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original')
     parser.add_argument('--seconds', type=float, default=1200., help='Development timeout; full evaluation uses 1200.')
     args = parser.parse_args()
+    from experiments.torso_assembly.acceleration import configure
+    configure(args.assembly_backend)
     result = run(args.seed, Path(args.program).read_text(), args.out,
                  video=args.video, seconds=args.seconds, progress=True,
                  support_profile=args.support_profile, controller_profile=args.controller_profile)

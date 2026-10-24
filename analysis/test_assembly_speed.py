@@ -1,5 +1,7 @@
 """Numerical equivalence checks for the opt-in execution backend."""
 import copy
+import json
+import tempfile
 import unittest
 from unittest.mock import patch
 from types import SimpleNamespace
@@ -11,12 +13,62 @@ from experiments.box_assembly.fastening import Frame, Connector
 from experiments.torso_assembly.image_ops import mask_pixels
 
 
+def worker_backend_probe():
+    from experiments.cap_rl import task_assembly as task
+    from experiments.torso_assembly.acceleration import backend
+    return backend(), task.ASSEMBLY_BACKEND, task.provenance() == task.EXPECTED_PROVENANCE
+
+
 class SpeedEquivalence(unittest.TestCase):
+    def test_spawned_worker_uses_requested_backend(self):
+        from concurrent.futures import ProcessPoolExecutor
+        import multiprocessing
+        from experiments.cap_rl import task_assembly as task
+        expected = dict(task.provenance(), execution_backend='vectorized')
+        with ProcessPoolExecutor(1, mp_context=multiprocessing.get_context('spawn'),
+                                 initializer=task._worker_init,
+                                 initargs=(expected, task.SUPPORT_PROFILE, task.CONTROLLER_PROFILE, 'vectorized')) as pool:
+            self.assertEqual(pool.submit(worker_backend_probe).result(timeout=30),
+                             ('vectorized', 'vectorized', True))
+
+    def test_backend_identity_separates_reward_caches(self):
+        from experiments.cap_rl import task_assembly as task
+        from experiments.torso_assembly import acceleration
+        from experiments.torso_assembly.fasteners import NailBank
+        from experiments.arm_corner.environment import Env
+        previous = (Env.step, NailBank.frame, Frame.velocity, acceleration._INSTALLED,
+                    task.SUPPORT_PROFILE, task.CONTROLLER_PROFILE, task.ASSEMBLY_BACKEND)
+        def measured(seed, text, out, **kwargs):
+            out.mkdir(parents=True)
+            result = dict(reward=0., success=False, valid=True, seed=seed)
+            (out/'result.json').write_text(json.dumps(result))
+            return result
+        try:
+            with tempfile.TemporaryDirectory() as root, \
+                 patch.dict('os.environ', CAP_RL_ASSEMBLY_CACHE=root), \
+                 patch.object(task, 'EXPECTED_PROVENANCE', None), \
+                 patch.object(task, '_POOL', None), patch.object(task, 'run', side_effect=measured) as run:
+                task.configure(assembly_backend='original')
+                a = task.execute(task.Layout(41002), 'finish()')
+                task.configure(assembly_backend='vectorized')
+                b = task.execute(task.Layout(41002), 'finish()')
+                c = task.execute(task.Layout(41002), 'finish()')
+                self.assertNotEqual(a['evidence_id'], b['evidence_id'])
+                self.assertFalse(b['cache_hit']); self.assertTrue(c['cache_hit'])
+                self.assertEqual(run.call_count, 2)
+                with self.assertRaisesRegex(RuntimeError, 'fresh process'):
+                    task.configure(assembly_backend='original')
+        finally:
+            (Env.step, NailBank.frame, Frame.velocity, acceleration._INSTALLED,
+             task.SUPPORT_PROFILE, task.CONTROLLER_PROFILE, task.ASSEMBLY_BACKEND) = previous
+
     def test_physical_steps_match_exactly(self):
         from experiments.torso_assembly.environment import Env
         from experiments.arm_corner.environment import Env as CornerEnv
         from experiments.torso_assembly.fasteners import NailBank
+        from experiments.torso_assembly import acceleration
         original_step, original_frame, original_velocity = CornerEnv.step, NailBank.frame, Frame.velocity
+        original_installed = acceleration._INSTALLED
         reference = Env(dt=.0005, layout_seed=41002, physical_nails=True)
         states = []
         for _ in range(100):
@@ -33,6 +85,7 @@ class SpeedEquivalence(unittest.TestCase):
             self.assertEqual(reference.saturation, candidate.saturation)
         finally:
             CornerEnv.step, NailBank.frame, Frame.velocity = original_step, original_frame, original_velocity
+            acceleration._INSTALLED = original_installed
 
     def test_mask_coordinates_exact(self):
         rng = np.random.default_rng(194)

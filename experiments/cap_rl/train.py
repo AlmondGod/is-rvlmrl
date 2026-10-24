@@ -148,7 +148,7 @@ def train(args):
     task = get_task(args.task)
     if args.task == 'assembly_full':
         task.PHYSICS_WORKERS = args.physics_workers
-        task.configure(args.support_profile, args.controller_profile)
+        task.configure(args.support_profile, args.controller_profile, args.assembly_backend)
     set_seed(args.seed)
     torch.set_num_threads(4)
     if args.init_adapter:
@@ -267,7 +267,8 @@ def test(args):
     if metadata.get('task') == 'assembly_full':
         task.PHYSICS_WORKERS = metadata.get('physics_workers', 1)
         task.configure(metadata.get('support_profile', 'contact_only'),
-                       metadata.get('controller_profile', 'original'))
+                       metadata.get('controller_profile', 'original'),
+                       metadata.get('assembly_backend', 'original'))
     set_seed(metadata["seed"])
     torch.set_num_threads(4)
     layouts = task.datasets()["test"]
@@ -335,6 +336,8 @@ def main():
     parser.add_argument("--physics-workers", type=int, default=1, help="Independent full-assembly simulation workers")
     parser.add_argument('--support-profile', choices=('contact_only', 'contact_and_nails'), default='contact_only')
     parser.add_argument('--controller-profile', choices=('original', 'southwest_approach'), default='original')
+    parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original',
+                        help='Versioned assembly execution backend; recorded in metadata and physics cache identity')
     parser.add_argument("--max-tokens", type=int, default=96)
     parser.add_argument("--eval-every", type=int, default=20)
     parser.add_argument('--checkpoint-every', type=int, default=0,

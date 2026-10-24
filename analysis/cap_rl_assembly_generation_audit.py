@@ -19,7 +19,9 @@ def main():
     metadata=json.loads((root/'metadata.json').read_text())
     report=json.loads((root/'test_comparison.json').read_text())
     train.task=train.get_task('assembly_full')
-    train.task.configure(metadata['support_profile'],metadata['controller_profile'])
+    train.task.configure(metadata['support_profile'],metadata['controller_profile'],
+                         **({'assembly_backend': metadata['assembly_backend']}
+                            if 'assembly_backend' in metadata else {}))
     assert train.task.provenance()==json.loads((root/'assembly_provenance.json').read_text())
     assert not metadata.get('init_adapter'), 'This verification is for raw-base initialization'
     layouts=train.task.datasets()['test']
