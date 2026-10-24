@@ -26,3 +26,10 @@ its verification receipt says it passed.
 
 No post-training validation result or held-out improvement has been observed.
 The 24 final test layouts remain untouched.
+
+An independent check is available as
+`python -m analysis.audit_assembly_reconstruction --run RUN --out AUDIT.json`.
+It binds the reviewed recovery source, preserved interrupted records, unchanged
+protocol, exact first 16 programs and results, four optimizer update metrics,
+and checkpoint bytes. It supplements the physical-record audit. Four tamper
+and valid-prefix tests pass; the actual recovery receipt remains pending.
