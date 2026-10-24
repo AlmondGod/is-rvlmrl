@@ -1,0 +1,18 @@
+{
+  "passes": true,
+  "optimizer_updates": 0,
+  "physics_episodes": 0,
+  "loss": 0.6931471824645996,
+  "initial_margin": 0.0,
+  "peak_allocated_bytes": 9437480448,
+  "forward_backward_seconds": 1.119070575980004,
+  "finite_gradients": true,
+  "reference_gradients": [],
+  "programs": [
+    "position_member(3)\nrelease_member(3)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(0)\nrelease_member(0)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(2)\nnail_corner(3)\nnail_corner(1)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(2)\nnail_panel(3)\nnail_panel(1)\nflip_structure()\nfinish()"
+  ],
+  "weights_sha256": "57fca235f36e022b3aabab7cea6b3ec30e275c0ff82fe792e19c030b577f0cd9",
+  "source_sha256": "abeaba5ff7d08a9cb769e05faec885230827270727f327781df65ad0f6f64a8c",
+  "scope": "Real Qwen pair forward/backward with certified training programs; no optimizer step or physical evaluation."
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "Read-only greedy decoding; no physical execution, reward, selection or optimizer update.",
+  "records": [
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/initial_adapter",
+      "weights_sha256": "57fca235f36e022b3aabab7cea6b3ec30e275c0ff82fe792e19c030b577f0cd9",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/checkpoints/step-0001",
+      "weights_sha256": "3177861aabcc02ef6bec45a10e0ae418f0cce5ea6ac325658ec42da745502256",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/checkpoints/step-0002",
+      "weights_sha256": "9a3af59ddfce26d32537259649ef8563aabf45fc12f5ff63ba622030c3c87f5f",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/checkpoints/step-0003",
+      "weights_sha256": "7743d25623ed7b1701f4c7b7053ffd4d074216139c326648b892a1180b0f9fa7",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/checkpoints/step-0004",
+      "weights_sha256": "bf3ea26ac57a9f1a1eb343907d8ef81c35bedab00a57ba1ae8433f2e59c7f337",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "checkpoint": "/opt/cap-speed/varied-run03/checkpoints/step-0005",
+      "weights_sha256": "ca5f4fa35bb5fb86d835f2928e0d091aa9928fe287884ef3f8bc69766dd16ee2",
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    }
+  ]
+}
