@@ -288,3 +288,44 @@ class RecordsAuditTests(unittest.TestCase):
             with self.subTest(target=target),self.assertRaises(ValueError):self.run_fixture(mutate)
 
 if __name__=='__main__':unittest.main()
+
+class PreferenceReplayAuditTests(unittest.TestCase):
+    # Reuse synthetic physical records to exercise new optimizer accounting.
+    def preference_fixture(self,root):
+        layouts,manifest=RecordsAuditTests().fixture(root)
+        original=[json.loads(s) for s in (root/'rollouts.jsonl').read_text().splitlines()]
+        parent=root/'parent_run';parent.mkdir();(parent/'rollouts.jsonl').write_text((root/'rollouts.jsonl').read_text())
+        pair=dict(layout_id=original[0]['layout_id'],chosen_row=1,rejected_row=0)
+        data={'pairs':[pair]}
+        p=root/'metadata.json';metadata=audit.read(p)
+        metadata.update(optimizer_algorithm='offline_dpo_v1',steps=48,eval_every=8,update_epochs=1,prompts_per_step=4)
+        p.write_text(json.dumps(metadata))
+        training=[];rows=[]
+        for step in range(1,9):
+            training.append(dict(step=step,optimizer_steps_total=step,pair_indices=[0]*4,new_training_physics_episodes=0,replayed_programs=8))
+            for _ in range(4):
+                for role,index in [('chosen',1),('rejected',0)]:
+                    rows.append(dict(original[index],step=step,preference_pair_id=0,preference_role=role,parent_source_row=index,offline_replay=True))
+        (root/'training.jsonl').write_text('\n'.join(json.dumps(r) for r in training))
+        (root/'rollouts.jsonl').write_text('\n'.join(json.dumps(r) for r in rows))
+        (root/'validation_0001.json').rename(root/'validation_0008.json')
+        (root/'checkpoints/step-0001').rename(root/'checkpoints/step-0008')
+        p=root/'selection.json';selection=audit.read(p)
+        selection.update(best_step=8,completed_optimizer_updates=8,planned_optimizer_updates=48,stopped_at_validation_ceiling=True)
+        p.write_text(json.dumps(selection))
+        return layouts,manifest,data
+
+    def test_preference_updates_are_not_new_rollouts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);layouts,manifest,data=self.preference_fixture(root)
+            with patch.object(audit.task,'provenance',return_value=manifest),\
+                 patch.object(audit.task,'datasets',return_value=layouts),\
+                 patch.object(audit.task,'prompt',return_value='fixture prompt'),\
+                 patch.object(audit,'audit_preference_inputs',return_value=(data,{'passes':True})):
+                report=audit.audit(root)
+                self.assertEqual(report['rollout_rounds'],0);self.assertEqual(report['optimizer_updates'],8)
+                self.assertEqual(report['training_samples'],0);self.assertEqual(report['replayed_training_programs'],64)
+                self.assertTrue(report['stopped_at_validation_ceiling'])
+                p=root/'rollouts.jsonl';rows=[json.loads(s) for s in p.read_text().splitlines()]
+                rows[0]['parent_source_row']=0;p.write_text('\n'.join(json.dumps(r) for r in rows))
+                with self.assertRaises((AssertionError,ValueError)):audit.audit(root)

@@ -60,5 +60,22 @@ class PackagingTests(unittest.TestCase):
                 path.write_text(json.dumps(report))
                 with self.assertRaises(ValueError): verify_audit_receipts(run, replay)
 
+    def test_new_or_changed_weights_invalidate_record_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run,replay=self.fixture(Path(directory))
+            (run/'best_adapter').mkdir()
+            (run/'best_adapter/adapter_model.safetensors').write_bytes(b'changed')
+            with self.assertRaises(ValueError):verify_audit_receipts(run,replay)
+
+    def test_parent_evidence_and_receipts_are_included(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run,replay=self.fixture(Path(directory))
+            parent=run/'parent_run';parent.mkdir()
+            (parent/'rollouts.jsonl').write_text('{"evidence_id":"parent-failure"}\n')
+            (parent/'metadata.json').write_text('{"parent":true}')
+            self.assertIn('parent-failure',{r['evidence_id'] for r in scored_rows(run)})
+            self.assertIn('parent_run/metadata.json',input_receipt(run))
+            with self.assertRaises(ValueError):verify_audit_receipts(run,replay)
+
 
 if __name__ == '__main__': unittest.main()

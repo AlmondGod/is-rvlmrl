@@ -30,9 +30,63 @@ def input_receipt(directory):
     names = ['metadata.json', 'selection.json', 'training.jsonl', 'rollouts.jsonl',
              'validation_baseline.json', 'test_comparison.json', 'raw_test_baseline.json',
              'unconstrained_validation_comparison.json', 'unconstrained_test_comparison.json',
-             'validation_ceiling_policy.json', 'validation_ceiling_stop.json']
+             'validation_ceiling_policy.json', 'validation_ceiling_stop.json',
+             'retirement_policy.json', 'retirement.json', 'preference_data.json', 'parent_record_audit.json',
+             'initial_adapter/adapter_model.safetensors','best_adapter/adapter_model.safetensors',
+             'warm_start_adapter/adapter_model.safetensors']
     names += [p.name for p in directory.glob('validation_[0-9]*.json')]
-    return {name: sha(directory/name) for name in sorted(names) if (directory/name).is_file()}
+    result={name: sha(directory/name) for name in sorted(names) if (directory/name).is_file()}
+    if (directory/'parent_run').is_dir():
+        result.update({'parent_run/'+name:digest for name,digest in input_receipt(directory/'parent_run').items()})
+    return result
+
+
+def audit_retirement(directory, metadata):
+    receipt=read(directory/'retirement.json')
+    policy=read(directory/'retirement_policy.json')
+    require(receipt['format']=='assembly_plateau_retirement_v1' and
+            receipt['completed_rounds']==6 and receipt['planned_rounds']==metadata['steps']==16 and
+            receipt['optimizer_updates']==24 and receipt['test_evaluated'] is False,
+            'Invalid declared plateau retirement')
+    require(policy['format']=='assembly_plateau_retirement_policy_v1' and policy['boundary']==6,
+            'Missing plateau contingency')
+    require(sha(directory/'retirement_source/retire_assembly_plateau.py')==receipt['source_sha256']==policy['source_sha256']
+            and sha(directory/'retirement_source/protocol.md')==policy['protocol_sha256'], 'Retirement source changed')
+    required={'metadata.json','training.jsonl','rollouts.jsonl','validation_baseline.json','retirement_policy.json',
+              'validation_0002.json','validation_0004.json','validation_0006.json'}
+    require(set(receipt['files_sha256'])==required,'Incomplete retirement evidence')
+    for name,digest in receipt['files_sha256'].items():require(sha(directory/name)==digest,'Retirement evidence changed')
+    from analysis.retire_assembly_plateau import same_policy_results
+    baseline=read(directory/'validation_baseline.json')
+    require(all(same_policy_results(baseline,read(directory/f'validation_{s:04d}.json')) for s in (2,4,6)),
+            'Plateau condition not met')
+    return 6
+
+
+def audit_preference_inputs(directory, metadata):
+    from analysis.assembly_preference_data import build
+    parent=directory/'parent_run'
+    require(sha(parent/'metadata.json')==metadata['parent_metadata_sha256'] and
+            sha(parent/'retirement.json')==metadata['parent_retirement_sha256'],'Parent run changed')
+    parent_audit=audit(parent,pretest=True)
+    compare(parent_audit,read(directory/'parent_record_audit.json'))
+    require(sha(directory/'preference_data.json')==metadata['preference_data_sha256'],'Preference dataset changed')
+    data=read(directory/'preference_data.json');rebuilt=build(parent)
+    rebuilt['parent_run']=metadata['parent_original_path']
+    compare(rebuilt,data)
+    for name,digest in metadata['preference_source_sha256'].items():
+        require(sha(directory/'preference_source'/name)==digest and sha(Path(__file__).with_name(name))==digest,
+                'Use the frozen preference implementation: '+name)
+    require(sha(directory/'warm_start_adapter/adapter_model.safetensors')==metadata['warm_start_weights_sha256'],
+            'Warm-start weights changed')
+    checkpoint=read(parent/'checkpoints/step-0006/checkpoint.json')
+    require(checkpoint['files_sha256']['adapter_model.safetensors']==metadata['warm_start_weights_sha256'],
+            'Preference phase did not start from declared GRPO checkpoint')
+    require(metadata['steps']==48 and metadata['eval_every']==8 and metadata['prompts_per_step']==4 and
+            metadata['group_size']==2 and metadata['update_epochs']==1 and metadata['lr']==.0001 and
+            metadata['dpo_beta']==.1 and metadata['sampling_temperature']==1. and metadata['seed']==42,
+            'Preference optimizer differs from declared protocol')
+    return data,parent_audit
 
 
 def metrics(rows):
@@ -200,8 +254,22 @@ def audit(directory, pretest=False):
         records.append(row)
 
     training = [json.loads(s) for s in (directory/'training.jsonl').read_text().splitlines()]
+    preference = metadata.get('optimizer_algorithm')=='offline_dpo_v1'
+    require(metadata.get('optimizer_algorithm') in (None,'offline_dpo_v1'),'Unknown optimizer algorithm')
     completed_steps = metadata['steps']
     early_stop = None
+    retired=(directory/'retirement.json').exists()
+    preference_data=parent_audit=None
+    if retired:
+        require(not preference,'Preference run cannot use GRPO retirement')
+        completed_steps=audit_retirement(directory,metadata)
+    if preference:
+        preference_data,parent_audit=audit_preference_inputs(directory,metadata)
+        selection=read(directory/'selection.json')
+        completed_steps=selection['completed_optimizer_updates']
+        require(0<completed_steps<=48 and completed_steps%8==0 and selection['planned_optimizer_updates']==48,
+                'Invalid preference stopping boundary')
+        require(selection['stopped_at_validation_ceiling']==(completed_steps<48),'Preference early stop lacks ceiling rule')
     if (directory/'validation_ceiling_stop.json').exists():
         early_stop = read(directory/'validation_ceiling_stop.json')
         require(reward_mode == 'strict_success', 'Ceiling stop requires binary success reward')
@@ -235,6 +303,21 @@ def audit(directory, pretest=False):
     epochs=metadata.get('update_epochs',1)
     require(type(epochs) is int and epochs>=1,'Invalid optimizer epoch count')
     for update in training:
+        if preference:
+            from analysis.train_assembly_preferences import sample_pairs
+            pair_ids=sample_pairs(preference_data,rng,metadata['prompts_per_step'])
+            require(update['pair_indices']==pair_ids and update['optimizer_steps_total']==update['step'] and
+                    update['new_training_physics_episodes']==0,'Preference optimizer accounting mismatch')
+            original=[json.loads(s) for s in (directory/'parent_run/rollouts.jsonl').read_text().splitlines()]
+            expected=[]
+            for pair_id in pair_ids:
+                pair=preference_data['pairs'][pair_id]
+                for role in ('chosen','rejected'):
+                    expected.append(dict(original[pair[role+'_row']],step=update['step'],preference_pair_id=pair_id,
+                        preference_role=role,parent_source_row=pair[role+'_row'],offline_replay=True))
+            compare(expected,by_step[update['step']])
+            require(update['replayed_programs']==len(expected),'Replayed sample count mismatch')
+            continue
         if 'update_epochs' in metadata:
             require(update['optimizer_steps_total']==update['step']*epochs,'Optimizer step count mismatch')
             require([x['epoch'] for x in update['epoch_metrics']]==list(range(1,epochs+1)),
@@ -261,6 +344,9 @@ def audit(directory, pretest=False):
     if early_stop:
         require(best == (1.,1.) and early_stop['selected_step'] == best_step,
                 'Early stop lacks the maximum validation score')
+    if retired:require(best_step==0 and selection.get('retired') is True,'Retired unchanged run selected new weights')
+    if preference and completed_steps<metadata['steps']:
+        require(best==(1.,1.) and best_step==completed_steps,'Preference early stop lacks first perfect validation')
     require(selection['best_step']==best_step and selection['selection_split']=='validation', 'Checkpoint selection mismatch')
     require((selection['validation_success_rate'],selection['validation_mean_reward'])==best, 'Selected score mismatch')
     if best_step:
@@ -278,10 +364,11 @@ def audit(directory, pretest=False):
     if pretest:
         require(not any((directory/name).exists() for name in ('test_comparison.json','raw_test_baseline.json','unconstrained_test_comparison.json')), 'Test already evaluated')
         return dict(passes=True,scope='Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.',
-                    rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
+                    rollout_rounds=0 if preference else len(training),planned_rollout_rounds=0 if preference else metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
                     selected_step=best_step,validation_score=list(best),unconstrained_validation=transfer_validation,
-                    stopped_at_validation_ceiling=bool(early_stop),
+                    stopped_at_validation_ceiling=bool(early_stop) or (preference and completed_steps<metadata['steps']),
+                    algorithm='offline_dpo_v1' if preference else 'grpo',retired=retired,parent_grpo_audit=parent_audit,
                     unique_certified_trajectories=len(checked))
     test = read(directory/'test_comparison.json')
     for key,label in [('before','baseline'),('after','trained')]:
@@ -309,10 +396,12 @@ def audit(directory, pretest=False):
                 float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]
     return dict(passes=True, scope='All records, hashes, reward accounting, split isolation and validation-only selection. Independent physics replay and model regeneration are separate checks.',
         input_files_sha256=input_receipt(directory),
-        rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
+        rollout_rounds=0 if preference else len(training),planned_rollout_rounds=0 if preference else metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
-        stopped_at_validation_ceiling=bool(early_stop),
-        training_samples=len(samples),validation_records=sum(len(v['rows']) for _,v in validation),
+        stopped_at_validation_ceiling=bool(early_stop) or (preference and completed_steps<metadata['steps']),
+        training_samples=0 if preference else len(samples),replayed_training_programs=len(samples) if preference else 0,
+        algorithm='offline_dpo_v1' if preference else 'grpo',parent_grpo_audit=parent_audit,retired=retired,
+        validation_records=sum(len(v['rows']) for _,v in validation),
         test_records=2*n,raw_test_records=n if raw_baseline is not None else 0,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
         selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
         baseline=test['baseline'],trained=test['trained'],raw_baseline=raw_baseline,

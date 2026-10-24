@@ -23,6 +23,7 @@ def main():
     metadata, selection, test = [read(run / name) for name in
                                 ('metadata.json', 'selection.json', 'test_comparison.json')]
     training = [json.loads(s) for s in (run/'training.jsonl').read_text().splitlines()]
+    preference=metadata.get('optimizer_algorithm')=='offline_dpo_v1'
     rollouts = [json.loads(s) for s in (run/'rollouts.jsonl').read_text().splitlines()]
     validation = [(0, read(run/'validation_baseline.json'))]
     validation.extend((int(path.stem.split('_')[-1]), read(path))
@@ -46,17 +47,19 @@ def main():
         support_profile=metadata.get('support_profile','contact_only'),
         controller_profile=metadata.get('controller_profile','original'),
         optimization_reward=metadata.get('optimization_reward','environment'),
-        task=metadata['task'], gpu=metadata['gpu'], rollout_rounds=len(training),
+        task=metadata['task'], gpu=metadata['gpu'], rollout_rounds=0 if preference else len(training),
+        optimizer_algorithm=metadata.get('optimizer_algorithm','grpo'),
         optimizer_updates=len(training)*metadata.get('update_epochs',1),
         policy_decoding=metadata.get('policy_decoding','unrestricted_program'),
         policy_action_space=metadata.get('policy_action_space'),
         unconstrained_transfer=transfers,
-        sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
+        sampled_training_programs=0 if preference else len(rollouts),
+        replayed_training_programs=len(rollouts) if preference else 0,training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,
         compute_scope=selection.get('training_seconds_scope', selection.get('timing_scope',
             'One GPU allocated during training including CPU physics and periodic validation; excludes setup, baseline validation, final test and audits.')),
-        planned_rollout_rounds=metadata['steps'],planned_optimizer_updates=metadata['steps']*metadata.get('update_epochs',1),
-        stopped_at_validation_ceiling=(run/'validation_ceiling_stop.json').exists(),
+        planned_rollout_rounds=0 if preference else metadata['steps'],planned_optimizer_updates=metadata['steps']*metadata.get('update_epochs',1),
+        stopped_at_validation_ceiling=(run/'validation_ceiling_stop.json').exists() or selection.get('stopped_at_validation_ceiling',False),
         selected_step=selection['best_step'], validation=selection,
         selected_checkpoint_elapsed_seconds=next(
             (r['elapsed_seconds'] for r in training if r['step']==selection['best_step']), 0.),
@@ -68,8 +71,8 @@ def main():
         within_batch_duplicates=sum(bool(r.get('batch_duplicate')) for r in records),
         terminal_failure_reuses=sum(r.get('cache_reuse')=='terminal_failure_prefix' for r in records),
         before_failure_counts=failures(test['before']), after_failure_counts=failures(test['after']),
-        physically_successful_training_samples=sum(r['success'] for r in rollouts),
-        active_group_updates=sum(r['active_groups']>0 for r in training),
+        physically_successful_training_samples=0 if preference else sum(r['success'] for r in rollouts),
+        active_group_updates=None if preference else sum(r['active_groups']>0 for r in training),
         sampled_unique_programs=len({r['completion'] for r in rollouts}),
         statically_rejected_samples=sum(bool(r.get('static_rejection')) for r in rollouts),
         generation_seconds=sum(r.get('generation_s',0.) for r in training),
@@ -79,6 +82,17 @@ def main():
         optimization_seconds=sum(r.get('optimization_seconds',0.) for r in training),
         full_visual_language_policy=False, learned_motor_controller=False,
         task_prompt_identical_across_layouts=True, physical_validation=False)
+    if preference:
+        parent=run/'parent_run'
+        parent_training=[json.loads(s) for s in (parent/'training.jsonl').read_text().splitlines()]
+        parent_selection=read(parent/'selection.json')
+        summary['parent_grpo']=dict(rollout_rounds=len(parent_training),optimizer_updates=parent_training[-1]['optimizer_steps_total'],
+            sampled_training_programs=sum(r['sampled_programs'] for r in parent_training),
+            training_loop_gpu_hours=parent_selection['training_seconds']/3600,
+            warm_start_checkpoint=6,weights_used_to_initialize_final_run=True,
+            greedy_validation_success_rate=parent_selection['validation_success_rate'])
+        summary['total_optimizer_updates_in_lineage']=summary['parent_grpo']['optimizer_updates']+summary['optimizer_updates']
+        summary['training_loop_gpu_hours_in_lineage']=summary['parent_grpo']['training_loop_gpu_hours']+summary['allocated_training_gpu_hours']
     summary['contact_only_shadow'] = {
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))
@@ -113,6 +127,11 @@ def main():
             'Includes CPU simulation waits; excludes earlier setup, exploration and '
             'prefetched physical evidence produced before this run.')
         summary['verification_stages'] = status['completed_stages']
+        if preference:
+            parent_start=read(run/'parent_run/process_start.json')['started_utc']
+            summary['lineage_end_to_end_allocated_gpu_hours']=(datetime.fromisoformat(status['utc'])-
+                datetime.fromisoformat(parent_start)).total_seconds()/3600
+            summary['lineage_end_to_end_timing_scope']='Continuous GPU allocation from parent GRPO process start through final verification, including setup, diagnostic work, environment waits and the phase transition.'
     summary['retired_exploratory_pilots'] = []
     for pilot in args.retired_pilot:
         retired = read(Path(pilot)/'retired.json')
@@ -135,11 +154,13 @@ def main():
     import matplotlib.pyplot as plt
     fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.8), constrained_layout=True)
     steps = [row['step'] for row in training]
-    axes[0].plot(steps, [100*r['success_rate'] for r in training], alpha=.5, label='Sampled training success')
+    if not preference:
+        axes[0].plot(steps, [100*r['success_rate'] for r in training], alpha=.5, label='Sampled training success')
     axes[0].plot([s for s, _ in validation], [100*v['metrics']['success_rate'] for _, v in validation],
                  'o-', color='#087e8b', label='Greedy validation success')
     axes[0].axvline(selection['best_step'], color='#777777', ls=':', label='Selected checkpoint')
-    axes[0].set(xlabel='Rollout round (each followed by optimizer epochs)', ylabel='Strict physical success (%)', ylim=(-3, 110), title='Learning and selection')
+    axes[0].set(xlabel='Offline preference optimizer update' if preference else 'Rollout round (each followed by optimizer epochs)',
+                ylabel='Strict physical success (%)', ylim=(-3,110),title='Learning and selection')
     axes[0].legend(fontsize=8)
     values = [test['baseline'], test['trained']]
     labels=['Prior policy','Selected policy'];colors=['#b1b9c4','#087e8b']

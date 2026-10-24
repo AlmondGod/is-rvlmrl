@@ -32,6 +32,7 @@ def verify_audit_receipts(run, replay):
 
 def scored_rows(run):
     rows = [json.loads(s) for s in (run/'rollouts.jsonl').read_text().splitlines()]
+    if (run/'parent_run').is_dir():rows.extend(scored_rows(run/'parent_run'))
     for path in [run/'validation_baseline.json', *sorted(run.glob('validation_[0-9]*.json')),
                  run/'raw_test_baseline.json']:
         if path.exists(): rows.extend(json.loads(path.read_text())['rows'])
