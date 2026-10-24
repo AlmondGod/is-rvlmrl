@@ -177,7 +177,13 @@ def audit(directory, pretest=False):
     require([r['step'] for r in training]==list(range(1,completed_steps+1)), 'Incomplete updates')
     require(sorted(by_step)==[r['step'] for r in training], 'Training row coverage mismatch')
     rng = random.Random(metadata['seed'])
+    epochs=metadata.get('update_epochs',1)
+    require(type(epochs) is int and epochs>=1,'Invalid optimizer epoch count')
     for update in training:
+        if 'update_epochs' in metadata:
+            require(update['optimizer_steps_total']==update['step']*epochs,'Optimizer step count mismatch')
+            require([x['epoch'] for x in update['epoch_metrics']]==list(range(1,epochs+1)),
+                    'Optimizer epoch coverage mismatch')
         rows = by_step[update['step']]
         expected_layouts = [x.key for x in rng.sample(splits['train'],metadata['prompts_per_step'])
                             for _ in range(metadata['group_size'])]
@@ -216,7 +222,8 @@ def audit(directory, pretest=False):
     if pretest:
         require(not (directory/'test_comparison.json').exists(), 'Test already evaluated')
         return dict(passes=True,scope='Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.',
-                    optimizer_updates=len(training),planned_optimizer_updates=metadata['steps'],
+                    rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
+                    optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
                     selected_step=best_step,validation_score=list(best),
                     stopped_at_validation_ceiling=bool(early_stop),
                     unique_certified_trajectories=len(checked))
@@ -226,6 +233,14 @@ def audit(directory, pretest=False):
         require([r['layout_id'] for r in rows]==metadata['splits']['test'], 'Held-out coverage mismatch')
         for row in rows:check(row,'test')
         compare(metrics(rows),test[label])
+    raw_baseline=None
+    if (directory/'raw_test_baseline.json').exists():
+        raw=read(directory/'raw_test_baseline.json')
+        require([r['layout_id'] for r in raw['rows']]==metadata['splits']['test'],'Raw baseline coverage mismatch')
+        require(raw['model_revision']==metadata['model_revision'],'Raw model revision mismatch')
+        for row in raw['rows']:check(row,'test')
+        compare(metrics(raw['rows']),raw['metrics'])
+        raw_baseline=raw['metrics']
     wins=sum(not a['success'] and b['success'] for a,b in zip(test['before'],test['after']))
     losses=sum(a['success'] and not b['success'] for a,b in zip(test['before'],test['after']))
     require(wins==test['paired_wins'] and losses==test['paired_losses'], 'Paired counts mismatch')
@@ -236,12 +251,13 @@ def audit(directory, pretest=False):
         return [float(beta.ppf(.025,k,n-k+1)) if k else 0.,
                 float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]
     return dict(passes=True, scope='All records, hashes, reward accounting, split isolation and validation-only selection. Independent physics replay and model regeneration are separate checks.',
-        optimizer_updates=len(training),planned_optimizer_updates=metadata['steps'],
+        rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
+                    optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
         stopped_at_validation_ceiling=bool(early_stop),
         training_samples=len(samples),validation_records=sum(len(v['rows']) for _,v in validation),
-        test_records=2*n,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
+        test_records=2*n,raw_test_records=n if raw_baseline is not None else 0,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
         selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
-        baseline=test['baseline'],trained=test['trained'],
+        baseline=test['baseline'],trained=test['trained'],raw_baseline=raw_baseline,
         paired_wins=wins,paired_losses=losses,paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
         baseline_success_exact_95_ci=interval(test['baseline']['successes']),trained_success_exact_95_ci=interval(test['trained']['successes']),
         limitation=f'{n} randomized layouts are a simulator pilot; these intervals do not establish real-world reliability.')

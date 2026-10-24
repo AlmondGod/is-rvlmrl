@@ -136,6 +136,29 @@ class RecordsAuditTests(unittest.TestCase):
                 rows[0][key]=value;p.write_text('\n'.join(json.dumps(r) for r in rows))
             with self.subTest(key=key),self.assertRaises(ValueError):self.run_fixture(mutate)
 
+    def test_rounds_are_distinct_from_optimizer_epochs(self):
+        def mutate(root):
+            p=root/'metadata.json';metadata=audit.read(p);metadata['update_epochs']=4;p.write_text(json.dumps(metadata))
+            p=root/'training.jsonl';row=json.loads(p.read_text());row.update(optimizer_steps_total=4,epoch_metrics=[{'epoch':i} for i in range(1,5)])
+            p.write_text(json.dumps(row))
+        result=self.run_fixture(mutate)
+        self.assertEqual(result['rollout_rounds'],1);self.assertEqual(result['optimizer_updates'],4)
+        def broken(root):
+            mutate(root)
+            p=root/'training.jsonl';row=json.loads(p.read_text());row['optimizer_steps_total']=3;p.write_text(json.dumps(row))
+        with self.assertRaises(ValueError):self.run_fixture(broken)
+
+    def test_optional_raw_baseline_is_audited(self):
+        def mutate(root):
+            p=root/'metadata.json';metadata=audit.read(p);metadata['model_revision']='fixture';p.write_text(json.dumps(metadata))
+            report=audit.read(root/'test_comparison.json')
+            (root/'raw_test_baseline.json').write_text(json.dumps(dict(rows=report['before'],metrics=report['baseline'],model_revision='fixture')))
+        result=self.run_fixture(mutate);self.assertEqual(result['raw_test_records'],2)
+        def broken(root):
+            mutate(root)
+            p=root/'raw_test_baseline.json';raw=audit.read(p);raw['rows'][0]['reward']=1.;p.write_text(json.dumps(raw))
+        with self.assertRaises((ValueError,AssertionError)):self.run_fixture(broken)
+
     def enable_ceiling_stop(self,root):
         self.enable_strict(root)
         p=root/'metadata.json';metadata=audit.read(p);metadata['steps']=3

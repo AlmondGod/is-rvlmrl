@@ -31,7 +31,11 @@ def main():
     layouts=train.task.datasets()['test']
     set_seed(metadata['seed']);torch.set_num_threads(4)
     hashes={}
-    for label,adapter in [('before',str(initial) if initial is not None else None),('after',str(root/'best_adapter'))]:
+    policies=[('before',str(initial) if initial is not None else None),('after',str(root/'best_adapter'))]
+    if (root/'raw_test_baseline.json').exists():
+        report['raw']=json.loads((root/'raw_test_baseline.json').read_text())['rows']
+        policies.append(('raw',None))
+    for label,adapter in policies:
         model,tokenizer=train.load_model(metadata['model'],metadata['model_revision'],adapter)
         texts=[];truncated=[]
         for start in range(0,len(layouts),16):
@@ -49,9 +53,9 @@ def main():
             assert row['truncated']==truncated[i]
         hashes[label]=[hashlib.sha256(t.encode()).hexdigest() for t in texts]
         del model,generated,completions,inputs;gc.collect();torch.cuda.empty_cache()
-    result=dict(passes=True,programs_regenerated=2*len(layouts),greedy=True,model_revision=metadata['model_revision'],
+    result=dict(passes=True,programs_regenerated=len(policies)*len(layouts),greedy=True,model_revision=metadata['model_revision'],
         selected_adapter_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'best_adapter').iterdir() if p.is_file()},
         program_sha256=hashes,initial_adapter=initial is not None,
-        scope='Exact regeneration from the recorded initial policy and validation-selected adapter. No optimization or physics execution.')
+        scope='Exact regeneration from the recorded initial policy, validation-selected adapter and raw model when present. No optimization or physics execution.')
     Path(args.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
 if __name__=='__main__':main()
