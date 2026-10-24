@@ -1,0 +1,319 @@
+"""Single-GPU CaP-RL-style GRPO: online programs -> execution -> policy update.
+
+This is an independent, small adaptation, not the upstream VeRL implementation.
+No demonstrations, teacher, answer injection, rejection-SFT, or test-set updates.
+Sampling is at temperature 1 with no top-k/p truncation, so policy probabilities
+match the rollout distribution. Dropout is disabled for rollout and optimization.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import random
+import shutil
+import subprocess
+import time
+
+import torch
+import transformers
+import peft
+from peft import LoraConfig, PeftModel, get_peft_model
+from huggingface_hub import model_info
+from transformers import AutoModelForCausalLM, AutoTokenizer, set_seed
+
+from .tasks import get_task
+
+task = get_task()
+
+
+MODEL = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+
+
+def dump(path, value):
+    Path(path).write_text(json.dumps(value, indent=2) + "\n")
+
+
+def append(path, rows):
+    with Path(path).open("a") as handle:
+        for row in rows:
+            handle.write(json.dumps(row) + "\n")
+
+
+def load_model(name, revision=None, adapter=None, trainable=False):
+    tokenizer = AutoTokenizer.from_pretrained(name, revision=revision, padding_side="left")
+    tokenizer.pad_token = tokenizer.eos_token
+    model = AutoModelForCausalLM.from_pretrained(
+        name, revision=revision, torch_dtype=torch.bfloat16, attn_implementation="sdpa")
+    # Model repositories can supply sampling processors. Raw policy log-probabilities
+    # are only correct when these are disabled (Qwen ships repetition_penalty=1.05).
+    from transformers import GenerationConfig
+    model.generation_config = GenerationConfig(
+        bos_token_id=tokenizer.bos_token_id, eos_token_id=tokenizer.eos_token_id,
+        pad_token_id=tokenizer.pad_token_id, repetition_penalty=1., top_k=0,
+        top_p=1., temperature=1., do_sample=False)
+    if adapter:
+        model = PeftModel.from_pretrained(model, adapter, is_trainable=trainable)
+    else:
+        model = get_peft_model(model, LoraConfig(
+            r=16, lora_alpha=32, lora_dropout=0., target_modules="all-linear",
+            task_type="CAUSAL_LM"))
+    return model.cuda().eval(), tokenizer
+
+
+def encode(tokenizer, layouts):
+    texts = [tokenizer.apply_chat_template([
+        {"role": "system", "content": task.SYSTEM}, {"role": "user", "content": task.prompt(layout)}
+    ], tokenize=False, add_generation_prompt=True, enable_thinking=False) for layout in layouts]
+    return tokenizer(texts, return_tensors="pt", padding=True).to("cuda")
+
+
+def completion_mask(tokens, eos):
+    end = tokens.eq(eos)
+    return (end.cumsum(-1) - end.long()).eq(0)
+
+
+@torch.no_grad()
+def rollout(model, tokenizer, layouts, max_tokens, sample):
+    inputs = encode(tokenizer, layouts)
+    kwargs = {"temperature": 1., "top_p": 1., "top_k": 0} if sample else {}
+    sequences = model.generate(**inputs, max_new_tokens=max_tokens, do_sample=sample,
+                               pad_token_id=tokenizer.pad_token_id,
+                               eos_token_id=tokenizer.eos_token_id, **kwargs)
+    prompt_length = inputs.input_ids.shape[1]
+    completions = sequences[:, prompt_length:]
+    mask = completion_mask(completions, tokenizer.eos_token_id)
+    attention = torch.cat([inputs.attention_mask, mask.long()], dim=1)
+    texts = tokenizer.batch_decode(completions, skip_special_tokens=True)
+    results = [task.execute(layout, text) for layout, text in zip(layouts, texts)]
+    # A cut-off program is not a completed policy even if its prefix happened to work.
+    for i, result in enumerate(results):
+        result["truncated"] = not bool(completions[i].eq(tokenizer.eos_token_id).any())
+        if result["truncated"]:
+            result.update(reward=0., success=False, valid=False, error="truncated")
+    return sequences, attention, mask, texts, results
+
+
+def token_logprobs(model, sequences, attention, completion_length):
+    # Supply position IDs: generation uses positions excluding left padding too.
+    position_ids = attention.long().cumsum(-1) - 1
+    position_ids.masked_fill_(attention == 0, 1)
+    logits = model(input_ids=sequences, attention_mask=attention,
+                   position_ids=position_ids, use_cache=False,
+                   logits_to_keep=completion_length + 1).logits[:, :-1].float()
+    labels = sequences[:, -completion_length:]
+    return -torch.nn.functional.cross_entropy(
+        logits.reshape(-1, logits.shape[-1]), labels.reshape(-1), reduction="none"
+    ).reshape(labels.shape)
+
+
+def advantages(rewards, group_size):
+    grouped = rewards.reshape(-1, group_size)
+    std = grouped.std(-1, unbiased=False, keepdim=True)
+    return ((grouped - grouped.mean(-1, keepdim=True)) / (std + 1e-4)).flatten()
+
+
+def policy_loss(logp, old, reference, mask, advantage, beta=.02, clip=.2):
+    ratio = (logp - old).exp()
+    surrogate = torch.minimum(ratio * advantage[:, None],
+                              ratio.clamp(1-clip, 1+clip) * advantage[:, None])
+    delta = reference - logp
+    kl = delta.exp() - delta - 1
+    per_sequence = ((-surrogate + beta * kl) * mask).sum(-1) / mask.sum(-1).clamp_min(1)
+    return per_sequence.mean(), (kl * mask).sum() / mask.sum().clamp_min(1)
+
+
+def rows_for(layouts, texts, results):
+    return [{"layout_id": layout.key, "prompt": task.prompt(layout), "completion": text, **result}
+            for layout, text, result in zip(layouts, texts, results)]
+
+
+@torch.no_grad()
+def evaluate(model, tokenizer, layouts, max_tokens, batch_size=16):
+    rows = []
+    for start in range(0, len(layouts), batch_size):
+        batch = layouts[start:start+batch_size]
+        _, _, _, texts, results = rollout(model, tokenizer, batch, max_tokens, False)
+        rows.extend(rows_for(batch, texts, results))
+    return {"n": len(rows), "successes": sum(r["success"] for r in rows),
+            "success_rate": sum(r["success"] for r in rows)/len(rows),
+            "mean_reward": sum(r["reward"] for r in rows)/len(rows),
+            "valid_rate": sum(r["valid"] for r in rows)/len(rows)}, rows
+
+
+def train(args):
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=False)
+    global task
+    task = get_task(args.task)
+    set_seed(args.seed)
+    torch.set_num_threads(4)
+    if args.init_adapter:
+        shutil.copytree(args.init_adapter, out / "initial_adapter")
+    # New Transformers text-only configs need not retain the outer commit hash.
+    # Resolve once and use that immutable revision for both loading and provenance.
+    resolved_revision = model_info(args.model, revision=args.revision).sha
+    model, tokenizer = load_model(args.model, resolved_revision, args.init_adapter, trainable=True)
+    splits = task.datasets()
+    source_files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in Path(__file__).parent.glob("*.py")}
+    metadata = {**vars(args), "model_revision": resolved_revision,
+                "gpu": torch.cuda.get_device_name(), "torch": torch.__version__,
+                "transformers": transformers.__version__, "peft": peft.__version__,
+                "thinking_enabled": False,
+                "trainable_parameters": sum(p.numel() for p in model.parameters() if p.requires_grad),
+                "source_sha256": source_files,
+                "initial_adapter_sha256": ({p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                    for p in (out / "initial_adapter").iterdir() if p.is_file()} if args.init_adapter else None),
+                "splits": {s: [layout.key for layout in rows] for s, rows in splits.items()},
+                "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()}
+    if args.task in ("mujoco_docking", "robot_lift", "frame_place"):
+        import mujoco
+        import numpy
+        metadata["physics_runtime"] = {"mujoco": mujoco.__version__, "numpy": numpy.__version__}
+    if args.task in ("robot_lift", "frame_place"):
+        from .robot_lift import asset_hashes
+        metadata["robot_assets_sha256"] = asset_hashes()
+    dump(out / "metadata.json", metadata)
+    (out / "source").mkdir()
+    for source in Path(__file__).parent.glob("*.py"):
+        (out / "source" / source.name).write_bytes(source.read_bytes())
+    optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad), lr=args.lr)
+    rng = random.Random(args.seed)
+    baseline, rows = evaluate(model, tokenizer, splits["validation"], args.max_tokens)
+    dump(out / "validation_baseline.json", {"metrics": baseline, "rows": rows})
+    print(json.dumps({"stage": "baseline_validation", **baseline}), flush=True)
+    best = (baseline["success_rate"], baseline["mean_reward"])
+    best_step = 0
+    model.save_pretrained(out / "best_adapter")
+    tokenizer.save_pretrained(out / "best_adapter")
+    started = time.monotonic()
+    for step in range(1, args.steps+1):
+        layouts = [layout for layout in rng.sample(splits["train"], args.prompts_per_step)
+                   for _ in range(args.group_size)]
+        sequences, attention, mask, texts, results = rollout(
+            model, tokenizer, layouts, args.max_tokens, True)
+        reward = torch.tensor([r["reward"] for r in results], device="cuda")
+        advantage = advantages(reward, args.group_size)
+        size, length = mask.shape
+        old, reference = [], []
+        with torch.no_grad():
+            for i in range(0, size, args.microbatch):
+                sl = slice(i, i+args.microbatch)
+                old.append(token_logprobs(model, sequences[sl], attention[sl], length))
+                with model.disable_adapter():
+                    reference.append(token_logprobs(model, sequences[sl], attention[sl], length))
+        old, reference = torch.cat(old), torch.cat(reference)
+        optimizer.zero_grad(set_to_none=True)
+        total_loss = total_kl = 0.
+        for i in range(0, size, args.microbatch):
+            sl = slice(i, i+args.microbatch)
+            logp = token_logprobs(model, sequences[sl], attention[sl], length)
+            loss, kl = policy_loss(logp, old[sl], reference[sl], mask[sl],
+                                   advantage[sl], args.beta)
+            fraction = sequences[sl].shape[0] / size
+            (loss * fraction).backward()
+            total_loss += float(loss.detach()) * fraction
+            total_kl += float(kl.detach()) * fraction
+        grad_norm = float(torch.nn.utils.clip_grad_norm_(model.parameters(), 1.))
+        if not all(map(lambda x: x == x and abs(x) != float("inf"), [total_loss, total_kl, grad_norm])):
+            raise RuntimeError("nonfinite update")
+        optimizer.step()
+        metric = {"step": step, "reward": float(reward.mean()),
+                  "success_rate": sum(r["success"] for r in results)/size,
+                  "active_groups": int((reward.reshape(-1, args.group_size).std(-1)>0).sum()),
+                  "loss": total_loss, "kl": total_kl, "grad_norm": grad_norm,
+                  "elapsed_seconds": time.monotonic()-started}
+        append(out / "training.jsonl", [metric])
+        append(out / "rollouts.jsonl", [{"step": step, **r} for r in rows_for(layouts,texts,results)])
+        print(json.dumps(metric), flush=True)
+        if step % args.eval_every == 0 or step == args.steps:
+            summary, rows = evaluate(model, tokenizer, splits["validation"], args.max_tokens)
+            dump(out / f"validation_{step:04d}.json", {"metrics": summary, "rows": rows})
+            print(json.dumps({"stage": "validation", "step": step, **summary}), flush=True)
+            score = (summary["success_rate"], summary["mean_reward"])
+            if score > best:
+                best, best_step = score, step
+                model.save_pretrained(out / "best_adapter")
+    model.save_pretrained(out / "last_adapter")
+    dump(out / "selection.json", {"best_step": best_step, "validation_success_rate": best[0],
+                                  "validation_mean_reward": best[1], "selection_split": "validation",
+                                  "training_seconds": time.monotonic()-started})
+
+
+def test(args):
+    out = Path(args.out)
+    metadata = json.loads((out / "metadata.json").read_text())
+    destination = out / "test_comparison.json"
+    if destination.exists():
+        raise FileExistsError("Test results already exist; do not tune on this test set.")
+    global task
+    task = get_task(metadata.get("task", "pick_place"))
+    set_seed(metadata["seed"])
+    torch.set_num_threads(4)
+    layouts = task.datasets()["test"]
+    task_path = Path(task.__file__)
+    task_hash = hashlib.sha256(task_path.read_bytes()).hexdigest()
+    if task_hash != metadata["source_sha256"][task_path.name]:
+        raise RuntimeError("Task changed since training; restore the recorded task source.")
+    if [layout.key for layout in layouts] != metadata["splits"]["test"]:
+        raise RuntimeError("Test split changed since training.")
+    if metadata.get("task") in ("robot_lift", "frame_place"):
+        from .robot_lift import asset_hashes
+        if asset_hashes() != metadata["robot_assets_sha256"]:
+            raise RuntimeError("Robot assets changed since training")
+        dependency = task_path.with_name("robot_lift.py")
+        if hashlib.sha256(dependency.read_bytes()).hexdigest() != metadata["source_sha256"][dependency.name]:
+            raise RuntimeError("Robot controller changed since training")
+    initial_adapter = out / "initial_adapter"
+    if metadata.get("initial_adapter_sha256"):
+        for name, digest in metadata["initial_adapter_sha256"].items():
+            if hashlib.sha256((initial_adapter/name).read_bytes()).hexdigest() != digest:
+                raise RuntimeError("Initial adapter changed since training")
+    model, tokenizer = load_model(metadata["model"], metadata["model_revision"],
+                                  str(initial_adapter) if metadata.get("init_adapter") else None)
+    baseline, before = evaluate(model, tokenizer, layouts, metadata["max_tokens"])
+    del model
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    model, tokenizer = load_model(metadata["model"], metadata["model_revision"], str(out/"best_adapter"))
+    trained, after = evaluate(model, tokenizer, layouts, metadata["max_tokens"])
+    wins = sum(not a["success"] and b["success"] for a,b in zip(before, after))
+    losses = sum(a["success"] and not b["success"] for a,b in zip(before, after))
+    deltas = [int(b["success"])-int(a["success"]) for a,b in zip(before, after)]
+    rng = random.Random(20261023)
+    boot = sorted(sum(rng.choices(deltas, k=len(deltas)))/len(deltas) for _ in range(10000))
+    result = {"baseline": baseline, "trained": trained, "paired_wins": wins,
+              "paired_losses": losses, "delta_success_rate": trained["success_rate"]-baseline["success_rate"],
+              "paired_bootstrap_95_ci": [boot[250], boot[9749]],
+              "before": before, "after": after}
+    dump(destination, result)
+    print(json.dumps({k:v for k,v in result.items() if k not in ("before", "after")}), flush=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("mode", choices=["train", "test"])
+    parser.add_argument("--out", required=True)
+    parser.add_argument("--model", default=MODEL)
+    parser.add_argument("--revision")
+    parser.add_argument("--task", choices=["pick_place", "ordered_two", "mujoco_docking", "robot_lift", "frame_place"], default="pick_place")
+    parser.add_argument("--init-adapter", help="Continue RL from a previous adapter; saved as test baseline")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--steps", type=int, default=80)
+    parser.add_argument("--group-size", type=int, default=8)
+    parser.add_argument("--prompts-per-step", type=int, default=2)
+    parser.add_argument("--microbatch", type=int, default=2)
+    parser.add_argument("--max-tokens", type=int, default=96)
+    parser.add_argument("--eval-every", type=int, default=20)
+    parser.add_argument("--lr", type=float, default=2e-4)
+    parser.add_argument("--beta", type=float, default=.02)
+    args = parser.parse_args()
+    if args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch,
+                                  args.max_tokens, args.eval_every) < 1:
+        parser.error("positive sizes and group_size >= 2 required")
+    train(args) if args.mode == "train" else test(args)
+
+
+if __name__ == "__main__":
+    main()

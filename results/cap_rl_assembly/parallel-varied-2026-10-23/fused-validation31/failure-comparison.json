@@ -1,0 +1,56 @@
+{
+  "seed": 52001,
+  "same_seed": true,
+  "exact": true,
+  "result_keys_differing_except_wall_s": [],
+  "arrays": {
+    "rows": {
+      "shape_before": [
+        6309,
+        155
+      ],
+      "shape_after": [
+        6309,
+        155
+      ],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nq": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nv": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nu": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    }
+  },
+  "baseline_success": false,
+  "optimized_success": false,
+  "baseline_error": null,
+  "optimized_error": null,
+  "complete_assembly_sequence": true,
+  "simulated_s": 630.7999999885395,
+  "baseline_wall_s": 1059.8615326720173,
+  "optimized_wall_s": 779.8587855200167,
+  "speedup": 1.3590428835975636,
+  "timing_caveat": "One bounded extra simulator overlaps the learner; this is an exactness check, not an isolated throughput measurement.",
+  "result_hashes": [
+    "a660a0105e370ff6bd88cdd91fd9660bfaa1960fb4828c13af66a2eb2f47ff5f",
+    "ea84f514f6d102f224277a7bda9bd7aa1e6fc58a5cc234986e5573e3024b606a"
+  ],
+  "state_hashes": [
+    "d46e485037677330610e461892a163e86fab965bb40a7571e6dd2801f317cbd7",
+    "d46e485037677330610e461892a163e86fab965bb40a7571e6dd2801f317cbd7"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "Initial recorded states of training-layout benchmark prefixes; not trained policy performance",
+  "seeds": [
+    51001,
+    51002,
+    51003,
+    51004
+  ],
+  "render_camera": "torso_context",
+  "frame_time_s": 0,
+  "source_archive_sha256": "12562a4bec4dc6f531989cc54413078fdf84369ebbe0a902ce2b6737b2e7681e",
+  "image_sha256": "1597869563f61899a8d97cf67f26f8628fdc241631c91d9b3928b55bcdff33a6",
+  "states_sha256": {
+    "51001": "28a342707378fa830b0edf2b0a680e2633b9411adfb2a3cfd6e1fb7e3444735b",
+    "51002": "b6c8bf8b2e9569b7a1f4ddb55afe341f54931e006e1009bbf546ceed19d6ac96",
+    "51003": "c72dc71f8301f652a124d8f15eb4de2088887bd1bd9ba1e10b49b87bc451c7a8",
+    "51004": "87e9d8fb5ddb96c299ca3a7d4f7c2c4be107794c64755746718f15d5baa86313"
+  }
+}

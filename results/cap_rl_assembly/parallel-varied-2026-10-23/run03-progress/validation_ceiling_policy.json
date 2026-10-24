@@ -1,0 +1,9 @@
+{
+  "upper_bound": [
+    1.0,
+    1.0
+  ],
+  "minimum_rounds": 2,
+  "selection_split": "validation",
+  "reason": "No later checkpoint can strictly exceed perfect binary validation; earliest maximum wins"
+}

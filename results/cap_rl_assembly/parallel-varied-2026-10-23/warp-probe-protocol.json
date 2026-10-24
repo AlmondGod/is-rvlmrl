@@ -1,0 +1,44 @@
+{
+  "mujoco": "3.17.0",
+  "warp": "1.18.0",
+  "scope": "Initial scene physics only; no task, fasteners or RGB-feedback equivalence claim.",
+  "environment": {
+    "dt": 0.0005,
+    "fixture_half_width": 0.38,
+    "shoulder_half_span": 0.55,
+    "physical_nails": true,
+    "flip_profile": "clearance-stack",
+    "control_period_s": 0.02,
+    "perception_period_s": 0.1,
+    "image_height": 960,
+    "image_width": 1280,
+    "camera_indices": [
+      0,
+      2,
+      3
+    ]
+  },
+  "nq": 68,
+  "nv": 63,
+  "ngeom": 159,
+  "rows": [
+    {
+      "worlds": 1,
+      "warmup_s": 1.9009206150076352,
+      "seconds": 0.25242281204555184,
+      "world_steps_per_second": 1584.6428330249985
+    },
+    {
+      "worlds": 8,
+      "warmup_s": 0.5369325979845598,
+      "seconds": 0.23127697000745684,
+      "world_steps_per_second": 13836.224159702651
+    },
+    {
+      "worlds": 32,
+      "warmup_s": 0.522744181973394,
+      "seconds": 0.24810382700525224,
+      "world_steps_per_second": 51591.304150778094
+    }
+  ]
+}

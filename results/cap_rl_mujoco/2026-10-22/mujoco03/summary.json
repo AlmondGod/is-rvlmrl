@@ -1,0 +1,64 @@
+{
+  "training_steps": 120,
+  "training_programs": 1920,
+  "distinct_training_layouts": 180,
+  "successful_training_programs": 545,
+  "selection": {
+    "best_step": 120,
+    "validation_success_rate": 0.796875,
+    "validation_mean_reward": 0.8945073669330714,
+    "selection_split": "validation",
+    "training_seconds": 949.1031665009941
+  },
+  "test": {
+    "baseline": {
+      "n": 128,
+      "successes": 1,
+      "success_rate": 0.0078125,
+      "mean_reward": 0.09587251977929347,
+      "valid_rate": 0.0078125
+    },
+    "trained": {
+      "n": 128,
+      "successes": 107,
+      "success_rate": 0.8359375,
+      "mean_reward": 0.9161974922959003,
+      "valid_rate": 0.8359375
+    },
+    "paired_wins": 106,
+    "paired_losses": 0,
+    "delta_success_rate": 0.828125,
+    "paired_bootstrap_95_ci": [
+      0.7578125,
+      0.890625
+    ]
+  },
+  "before": {
+    "errors": {
+      "force_range": 14,
+      "dock_position": 101,
+      "out_of_bounds": 12,
+      "success": 1
+    },
+    "docked_stations": {
+      "0": 116,
+      "1": 11,
+      "2": 1
+    },
+    "mean_final_distance_m": 0.30771835209024606,
+    "mean_final_speed_m_s": 0.3328188399652386
+  },
+  "after": {
+    "errors": {
+      "success": 107,
+      "dock_position": 21
+    },
+    "docked_stations": {
+      "2": 107,
+      "1": 20,
+      "0": 1
+    },
+    "mean_final_distance_m": 0.03450177942200663,
+    "mean_final_speed_m_s": 4.4654717728999354e-17
+  }
+}

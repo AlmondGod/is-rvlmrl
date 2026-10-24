@@ -1,0 +1,9 @@
+......../opt/cap-speed/preference-tools04/analysis/test_assembly_preferences.py:29: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  self.assertAlmostEqual(float(loss),.69314718,places=6)
+........{"stopped_at_validation_ceiling": true, "rollout_rounds": 1, "selected_step": 1}
+..................
+----------------------------------------------------------------------
+Ran 34 tests in 2.957s
+
+OK

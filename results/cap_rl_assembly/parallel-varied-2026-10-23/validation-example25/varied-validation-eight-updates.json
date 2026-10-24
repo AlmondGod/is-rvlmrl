@@ -1,0 +1,44 @@
+{
+  "episodes": [
+    "../varied-render-before/evidence/d6914a063df20b9e124fd7638e464fb5ce3248a9136744115a008d3c059b207c",
+    "../online25-validation-example/evidence/cfd21b1e04414142cb716d48ad353ece02fab07dd640c700229098f264cb9f0c"
+  ],
+  "evidence": [
+    {
+      "seed": 52001,
+      "certificate_verified": true,
+      "identity_sha256": "d6914a063df20b9e124fd7638e464fb5ce3248a9136744115a008d3c059b207c",
+      "result_sha256": "92f144d456c555eb3325e583bf0ea3c276f5327cf95508fa2b210730b331a0e2",
+      "states_sha256": "d46e485037677330610e461892a163e86fab965bb40a7571e6dd2801f317cbd7"
+    },
+    {
+      "seed": 52001,
+      "certificate_verified": true,
+      "identity_sha256": "cfd21b1e04414142cb716d48ad353ece02fab07dd640c700229098f264cb9f0c",
+      "result_sha256": "19235c3cc0508be31806b545ddf61131b55988d2e61a5553adaf8e210a23afd8",
+      "states_sha256": "950091e8f9e39a2ac93a6b2c5210a935861c5bd4e7b05ef745adc7502617cb6d"
+    }
+  ],
+  "renderer_source_sha256": "7aa6c54f4cd89b9a8fd66181f3ababb6a6baeb8575346e1590106b3dd01a24c4",
+  "titles": [
+    "Before varied-layout RL | validation 52001",
+    "After 8 GRPO updates | validation 52001"
+  ],
+  "note": "Unselected checkpoint: 3/8 overall versus 4/8 baseline. This is one illustrative validation win, not a held-out result.",
+  "speed": 20.0,
+  "simulation_duration_s": 630.7999999885395,
+  "states_replayed": true,
+  "dynamics_rerun": false,
+  "display_headlight": {
+    "ambient": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "diffuse": [
+      0.7,
+      0.7,
+      0.7
+    ]
+  }
+}

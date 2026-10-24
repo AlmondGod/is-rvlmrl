@@ -1,0 +1,58 @@
+{
+  "seed": 41002,
+  "optimized": true,
+  "python": "3.12.3",
+  "cpu_count": 48,
+  "source_sha256": "fa1871bb73b0523aeda486093aff0779ef7ba8bfb7572392fb1b0092be1abf49",
+  "timing_scope": "Inclusive nested wall times; do not sum parent and child categories.",
+  "execution_sources": {
+    "benchmark_assembly_speed.py": "fa1871bb73b0523aeda486093aff0779ef7ba8bfb7572392fb1b0092be1abf49",
+    "assembly_speed.py": "bcde8332fd680e9759abaf4676f8d4149dd3768ca89f63321f1ef728a904db90"
+  },
+  "result_sha256": "13b9df16c16a9ce0d37bc5657d8f2438024e475e2c0680774b7cb98cf5e09461",
+  "simulated_s": 19.99999999999874,
+  "complete": true,
+  "elapsed_s": 29.52334559999872,
+  "timings": {
+    "environment_step": {
+      "calls": 1000,
+      "seconds": 9.386895692616235
+    },
+    "camera_render": {
+      "calls": 200,
+      "seconds": 4.255052785796579
+    },
+    "inverse_kinematics": {
+      "calls": 3000,
+      "seconds": 0.15750081662554294
+    },
+    "metrics": {
+      "calls": 1000,
+      "seconds": 1.2914318182156421
+    },
+    "nail_forces": {
+      "calls": 40000,
+      "seconds": 0.05237866018433124
+    },
+    "frame_vision": {
+      "calls": 200,
+      "seconds": 11.315230054082349
+    },
+    "panel_vision": {
+      "calls": 0,
+      "seconds": 0.0
+    },
+    "controller": {
+      "calls": 1000,
+      "seconds": 0.015234868507832289
+    },
+    "acceptance": {
+      "calls": 1000,
+      "seconds": 0.007831431925296783
+    },
+    "physics_kernel": {
+      "calls": 40000,
+      "seconds": 7.064706986013334
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "passes": true,
+  "codec_source_sha256": "233d0171f45d7fc311d3bb011d38b42f46b7e60aeb89bf07bef69f412c5cfa77",
+  "configuration": {
+    "out": "../prefix27-probe-local",
+    "program": "../prefix16-full-local/continuous/program.py",
+    "seed": 51002,
+    "compact_model_bytes": true,
+    "seconds": 20.0,
+    "checkpoint_seconds": 10.0
+  },
+  "rows": [
+    {
+      "restore": false,
+      "elapsed_seconds": 17.22371129086241,
+      "receipt": {
+        "instrumented_source_sha256": "6f050127396665d3d5796decab74f9f9a6f27e1a3803ba6d032297b48e2596cf",
+        "snapshot_seconds": 1.1587330419570208,
+        "snapshot_bytes": 175416535,
+        "checkpoint_step": 500,
+        "executed_calls": [
+          [
+            "position_member",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "restore": true,
+      "elapsed_seconds": 10.076433083973825,
+      "receipt": {
+        "instrumented_source_sha256": "77839b35fb70a6a637e4c2d38ae390ee6717fcc7878511448a30109301a3bbb9",
+        "restore_seconds": 2.0155869582667947,
+        "checkpoint_step": 500
+      }
+    }
+  ],
+  "comparison": {
+    "seed": 51002,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          200,
+          155
+        ],
+        "shape_after": [
+          200,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": false,
+    "optimized_success": false,
+    "baseline_error": "simulation_deadline",
+    "optimized_error": "simulation_deadline",
+    "complete_assembly_sequence": false,
+    "simulated_s": 19.99999999999874,
+    "baseline_wall_s": 16.198185541667044,
+    "optimized_wall_s": 9.685955165885389,
+    "speedup": 1.6723374478046509,
+    "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+    "result_hashes": [
+      "46820f792ff5cab4498dd3393f5e4473f02c42f659f5b571e2af3fc576b52529",
+      "4c721bfc3a959de367c27ca90dd9f037180378973088cb2ca8564923ced2d7a6"
+    ],
+    "state_hashes": [
+      "0b7499e035541b44866cf91fa147bfbe1052ddbfa0d820be2b618340b8cfd512",
+      "0b7499e035541b44866cf91fa147bfbe1052ddbfa0d820be2b618340b8cfd512"
+    ]
+  },
+  "source_sha256": "0200bf633baca3fd4ffe8dc2030e108b7952a2295dc470e6ab92953da7f21ab1",
+  "scope": "Experimental prefix replay only; no training integration, task success, or whole-loop speed claim."
+}

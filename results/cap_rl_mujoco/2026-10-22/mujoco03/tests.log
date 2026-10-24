@@ -1,0 +1,40 @@
+nohup: ignoring input
+test_disjoint_feasible_splits (experiments.cap_rl.test_task.TaskTests.test_disjoint_feasible_splits) ... ok
+test_failure_after_success_is_failure (experiments.cap_rl.test_task.TaskTests.test_failure_after_success_is_failure) ... ok
+test_fence_contract (experiments.cap_rl.test_task.TaskTests.test_fence_contract) ... ok
+test_holding_is_not_success (experiments.cap_rl.test_task.TaskTests.test_holding_is_not_success) ... ok
+test_no_reward_for_textual_success_or_escape (experiments.cap_rl.test_task.TaskTests.test_no_reward_for_textual_success_or_escape) ... ok
+test_relative_not_absolute (experiments.cap_rl.test_task.TaskTests.test_relative_not_absolute) ... ok
+test_disjoint_feasible_both_orders (experiments.cap_rl.test_ordered.OrderedTests.test_disjoint_feasible_both_orders) ... ok
+test_grammar_and_budget (experiments.cap_rl.test_ordered.OrderedTests.test_grammar_and_budget) ... ok
+test_one_delivery_is_only_partial (experiments.cap_rl.test_ordered.OrderedTests.test_one_delivery_is_only_partial) ... ok
+test_order_is_enforced (experiments.cap_rl.test_ordered.OrderedTests.test_order_is_enforced) ... ok
+test_runtime_errors_preserve_prefix_but_never_succeed (experiments.cap_rl.test_ordered.OrderedTests.test_runtime_errors_preserve_prefix_but_never_succeed) ... ok
+test_second_pickup_beats_early_termination_even_if_later_error (experiments.cap_rl.test_ordered.OrderedTests.test_second_pickup_beats_early_termination_even_if_later_error) ... ok
+test_state_carries_across_deliveries (experiments.cap_rl.test_ordered.OrderedTests.test_state_carries_across_deliveries) ... ok
+test_centered_within_prompt_not_across_prompts (experiments.cap_rl.test_grpo.GrpoTests.test_centered_within_prompt_not_across_prompts) ... ok
+test_clipping_stops_excessive_positive_update (experiments.cap_rl.test_grpo.GrpoTests.test_clipping_stops_excessive_positive_update) ... ok
+test_padding_is_not_trained_and_eos_is (experiments.cap_rl.test_grpo.GrpoTests.test_padding_is_not_trained_and_eos_is) ... ok
+test_policy_gradient_rewards_success (experiments.cap_rl.test_grpo.GrpoTests.test_policy_gradient_rewards_success) ... /opt/cap-rl/repo/experiments/cap_rl/test_grpo.py:22: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  self.assertEqual(float(kl), 0.)
+ok
+test_checks_ordered_parser_dependency (experiments.cap_rl.test_audit.AuditTests.test_checks_ordered_parser_dependency) ... ok
+test_rejects_duplicate_cases (experiments.cap_rl.test_audit.AuditTests.test_rejects_duplicate_cases) ... ok
+test_rejects_fabricated_success (experiments.cap_rl.test_audit.AuditTests.test_rejects_fabricated_success) ... ok
+test_replays_all_programs (experiments.cap_rl.test_audit.AuditTests.test_replays_all_programs) ... ok
+test_replays_ordered_programs (experiments.cap_rl.test_audit.AuditTests.test_replays_ordered_programs) ... ok
+test_all_splits_feasible_and_disjoint (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_all_splits_feasible_and_disjoint) ... ok
+test_audit_rejects_tampered_physical_state (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_audit_rejects_tampered_physical_state) ... ok
+test_bounds_checked_during_physics (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_bounds_checked_during_physics) ... ok
+test_docking_order_and_prefix_credit (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_docking_order_and_prefix_credit) ... ok
+test_grammar_rejects_arbitrary_code (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_grammar_rejects_arbitrary_code) ... ok
+test_momentum_persists_without_braking (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_momentum_persists_without_braking) ... ok
+test_numeric_comparison_keeps_flags_exact (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_numeric_comparison_keeps_flags_exact) ... ok
+test_position_alone_does_not_dock (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_position_alone_does_not_dock) ... ok
+test_replay_is_deterministic_and_frames_are_physics (experiments.cap_rl.test_mujoco.MuJoCoTaskTests.test_replay_is_deterministic_and_frames_are_physics) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 126.135s
+
+OK

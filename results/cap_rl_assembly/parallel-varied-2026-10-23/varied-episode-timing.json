@@ -1,0 +1,39 @@
+{
+  "scope": "Disjoint measured regions; remaining wall time grouped as other. A single full training-layout episode on a shared host, not a population average.",
+  "seed": 51002,
+  "wall_seconds": 1117.6669009539764,
+  "simulated_seconds": 648.0999999881304,
+  "rows": [
+    {
+      "category": "Frame vision",
+      "seconds": 343.17828552483115,
+      "share": 0.30704880428320264
+    },
+    {
+      "category": "MuJoCo integration",
+      "seconds": 282.67726041650167,
+      "share": 0.252917269157049
+    },
+    {
+      "category": "Internal nail forces",
+      "seconds": 256.88393942744005,
+      "share": 0.22983944429970918
+    },
+    {
+      "category": "Other control, checks and overhead",
+      "seconds": 160.20927307213424,
+      "share": 0.14334259423392495
+    },
+    {
+      "category": "Camera rendering",
+      "seconds": 39.14066246134462,
+      "share": 0.035019971002036826
+    },
+    {
+      "category": "Plywood vision",
+      "seconds": 35.577480051724706,
+      "share": 0.031831917024077394
+    }
+  ],
+  "source_profile": "varied-full-profile03.profile.json"
+}

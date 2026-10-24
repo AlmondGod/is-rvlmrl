@@ -1,0 +1,146 @@
+{
+  "time": "2026-10-24T06:52:16.245969+00:00",
+  "reason": "Recover space after remote SHA-256 and size verification; receipts and published assets retained.",
+  "archives": [
+    {
+      "name": "preference05-step-0040.tar.gz",
+      "size": 172468490,
+      "sha256": "0bc089b20ffa0bc8099b03d9ac082c699f77cbb9455a6c5727e0ba0767fd50d6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0040.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0040.tar.gz",
+        "work/varied-release-staging/preference05-step-0040.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0048.tar.gz",
+      "size": 120665814,
+      "sha256": "1ff5368180e2b140a7c4f7e2a838fd4d375070c4d09a64185d5dbe988194280f",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0048.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0048.tar.gz",
+        "work/varied-release-staging/preference05-step-0048.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0032.tar.gz",
+      "size": 172419483,
+      "sha256": "4dff20abc775617cb6d975521834bfd522f7f3e50ff0f5a46d189a86f2b6e76a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0032.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0032.tar.gz",
+        "work/varied-release-staging/preference05-step-0032.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0016.tar.gz",
+      "size": 120649395,
+      "sha256": "557b6fa65fe0aa643d590869292f1a116bb9e817dfe1f038e7c619171f3fd1b8",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0016.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0016.tar.gz",
+        "work/varied-release-staging/preference05-step-0016.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0008.tar.gz",
+      "size": 120728873,
+      "sha256": "07e5f8c8b6a2e5a7a596469e63d0b95297a80dd92e5683e5282afa0d0e06813a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0008.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0008.tar.gz",
+        "work/varied-release-staging/preference05-step-0008.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0000.tar.gz",
+      "size": 893829367,
+      "sha256": "1e1e182e58488f169822a8747252a863b3f4b6f92576c51b0555db1e7f95f6c7",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0000.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0000.tar.gz",
+        "work/varied-release-staging/preference05-step-0000.tar.gz"
+      ]
+    },
+    {
+      "name": "preference05-step-0024.tar.gz",
+      "size": 172890147,
+      "sha256": "9fe1b370fd4f121105ec12a45b6c536414e7dcae3e08e8caa3287ef8c3a454f6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0024.tar.gz",
+      "removed_paths": [
+        "work/preference-backups05/step-0024.tar.gz",
+        "work/varied-release-staging/preference05-step-0024.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0040.tar.gz",
+      "size": 120665368,
+      "sha256": "756b8bd8b84d70106d4a1727836eee9dd0602b56aa8850d50553b3df8130ac14",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0040.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0040.tar.gz",
+        "work/varied-release-staging/visual12-step-0040.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0048.tar.gz",
+      "size": 120706045,
+      "sha256": "efa1356d74fa6b81a9dfba7498c1f70fc74e3466d300834b4eeb1936e93a924c",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0048.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0048.tar.gz",
+        "work/varied-release-staging/visual12-step-0048.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0032.tar.gz",
+      "size": 120647856,
+      "sha256": "6e72a32483e8dd75421f1aeafacb87a75979a32792e5f8e3da9e7e49b94dd9e6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0032.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0032.tar.gz",
+        "work/varied-release-staging/visual12-step-0032.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0016.tar.gz",
+      "size": 120675849,
+      "sha256": "76dc0e3f577ffc25a223d14b02b9856f2e9453a7b471af75a2741ff49402ed07",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0016.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0016.tar.gz",
+        "work/varied-release-staging/visual12-step-0016.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0008.tar.gz",
+      "size": 120754194,
+      "sha256": "9e545896004cff05befe3fbbe81500687905a132fe0cc44e5be0cc965a5c1e1c",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0008.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0008.tar.gz",
+        "work/varied-release-staging/visual12-step-0008.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0000.tar.gz",
+      "size": 1072082349,
+      "sha256": "879fd6b67e8e66febe33b7d3394d3d6735df1717c0e3792a321441d79e30001f",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0000.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0000.tar.gz",
+        "work/varied-release-staging/visual12-step-0000.tar.gz"
+      ]
+    },
+    {
+      "name": "visual12-step-0024.tar.gz",
+      "size": 120634118,
+      "sha256": "72f492b8177885cb26db68a01ca2ecd74cd270f0c56c7cf3b3a8ffa80eb7660f",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/visual12-step-0024.tar.gz",
+      "removed_paths": [
+        "work/visual-backups12/step-0024.tar.gz",
+        "work/varied-release-staging/visual12-step-0024.tar.gz"
+      ]
+    }
+  ]
+}

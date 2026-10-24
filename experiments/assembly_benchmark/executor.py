@@ -15,8 +15,11 @@ def update_frame_observations(executor):
 
 class Executor(ExistingExecutor):
     """Expose the explicit clearance step used by the successful run83 baseline."""
-    def __init__(self, env):
-        super().__init__(env)
+    def __init__(self, env, tool_factory=None):
+        if tool_factory is None:
+            super().__init__(env)
+        else:
+            super().__init__(env, tool_factory=tool_factory)
         self.parked = False
         self.frame_observation_locked = False
 

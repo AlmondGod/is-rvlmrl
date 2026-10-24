@@ -1,0 +1,11 @@
+{
+  "passes": true,
+  "cases": 3,
+  "unique_programs": 2,
+  "one_contact_grasp": true,
+  "support_profile": "contact_and_nails",
+  "controller_profile": "southwest_approach",
+  "independent_process_cache_contention_verified": true,
+  "absolute_tolerance": 1e-07,
+  "exact_ast_duplicate_verified": true
+}

@@ -1,0 +1,28 @@
+{
+  "source_sha256": "e634c896769ab8232917db8a471c6770d3cc81d990b6a9768677d3a2a1d6d505",
+  "wrapper_sha256": "1c421f949f4d5a0cb0a21a010cb1330143314cfdd11f4dfe1462216e423d5f85",
+  "binary_sha256": "c825005aae90480f8064475fe5f28848de8371b8fe2ee7f4fe697a02c68284d1",
+  "control_source_sha256": "56b4a4d77a65f3dd0eae678354b57ca755f60642f10f9c794c5c8d94f6a5c6d4",
+  "compiled_flags": [
+    "-O3",
+    "-std=c99",
+    "-shared",
+    "-fPIC",
+    "-ffp-contract=off",
+    "-fno-builtin-pow"
+  ],
+  "compatibility": {
+    "cases": 512,
+    "exact": true,
+    "scope": "Finite arithmetic compatibility sample; full-episode evidence is separate"
+  },
+  "mujoco": "3.3.7",
+  "numpy": "2.5.4",
+  "baseline_result_sha256": "ccb99716bbc3fcb34a414e1318138b0abdedb03018e09321625763ffbc9a5422",
+  "scope": "Experimental CPU inner-step fusion; unchanged physical task and no training-cache use.",
+  "sources": {
+    "native_substep18.py": "1c421f949f4d5a0cb0a21a010cb1330143314cfdd11f4dfe1462216e423d5f85",
+    "native_substep18.c": "e634c896769ab8232917db8a471c6770d3cc81d990b6a9768677d3a2a1d6d505",
+    "run_native_substep18.py": "0dcb2c63efc9614241ffc398b79cf31e429801174790d4f9a7e79f652b7bc063"
+  }
+}

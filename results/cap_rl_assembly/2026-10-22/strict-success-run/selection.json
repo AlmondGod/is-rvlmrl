@@ -1,0 +1,9 @@
+{
+  "best_step": 2,
+  "validation_success_rate": 1.0,
+  "validation_mean_reward": 1.0,
+  "selection_split": "validation",
+  "training_seconds": 2776.6188014639774,
+  "training_seconds_scope": "Training loop through last completed optimizer update, including prior periodic validation and CPU physics waits; excludes setup, baseline validation, terminal validation, final test and audits. End-to-end allocation is reported separately.",
+  "stopping_rule": "validation_ceiling_stop.json"
+}

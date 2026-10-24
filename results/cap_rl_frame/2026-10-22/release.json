@@ -1,0 +1,27 @@
+{
+  "release_tag": "cap-rl-frame-2026-10-22",
+  "release_url": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-frame-2026-10-22",
+  "assets": [
+    {
+      "filename": "cap-rl-frame01.tar.gz",
+      "bytes": 133202460,
+      "sha256": "0ccb120ddbd0bd257a91afccefe3e6d6eb3ac8bebc29cbb57590579368fa3191"
+    },
+    {
+      "filename": "qwen35-frame-before-after.mp4",
+      "bytes": 1347386,
+      "sha256": "fabd54f6acd9a344673aac05f62cdb41adc20f72ca56b771136c254ff9c7c8e2"
+    },
+    {
+      "filename": "qwen35-frame-before-after.gif",
+      "bytes": 5268183,
+      "sha256": "5c5861c5a5510958d98cc3fd85a6335eb2a812fc65d9dd613c2773f2976c4a36"
+    },
+    {
+      "filename": "qwen35-frame-results.png",
+      "bytes": 158922,
+      "sha256": "6f7b4b550c3dbc06e76eb28fc1a65f6384de34e4a87135c99106bfcac4eae9bb"
+    }
+  ],
+  "adapter_sha256": "cc43d31fb5c8409a9b10ab4cb5a6fb0ce22a44ffddb94fe09dd7f974f38d9647"
+}

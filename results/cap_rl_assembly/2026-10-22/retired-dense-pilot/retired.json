@@ -1,0 +1,42 @@
+{
+  "status": "retired_dense_reward_pilot",
+  "utc": "2026-10-23T09:23:26.373032+00:00",
+  "reason": "Confirmed uniform partial-program collapse and no strict validation improvement. Dense group-relative credit can reinforce incomplete programs; next candidate uses strict-success-only learning reward.",
+  "completed_updates": 8,
+  "planned_updates": 32,
+  "last_metric": {
+    "step": 8,
+    "reward": 0.15000000596046448,
+    "success_rate": 0.0,
+    "active_groups": 0,
+    "loss": 0.0011343491496518254,
+    "kl": 0.056717462837696075,
+    "grad_norm": 1.8413960560792475e-06,
+    "elapsed_seconds": 4553.51153633697
+  },
+  "validation": {
+    "n": 4,
+    "successes": 0,
+    "success_rate": 0.0,
+    "mean_reward": 0.15,
+    "valid_rate": 1.0
+  },
+  "trainer_elapsed_seconds": 5159.309999999998,
+  "trained_weights_retained": true,
+  "retained_checkpoint": "checkpoints/step-0008",
+  "selection_completed": false,
+  "test_evaluated": false,
+  "futility_policy": {
+    "created_utc": "2026-10-23T09:20:33.735862+00:00",
+    "criterion": "At update-8 validation, strict success zero AND updates 5..8 have zero strict training success and zero within-group reward variance.",
+    "action": "Retire dense optimizer before any held-out test; preserve all snapshots and restart raw with success-only reward. Physics, controller, prompts, splits and gates stay fixed.",
+    "next_candidate": {
+      "optimization_reward": "strict_success",
+      "lr": 3e-05,
+      "steps": 16,
+      "eval_every": 2,
+      "raw_initialization": true
+    }
+  },
+  "timing_scope": "Last metric excludes the final validation; process elapsed includes setup, baseline and final validation."
+}

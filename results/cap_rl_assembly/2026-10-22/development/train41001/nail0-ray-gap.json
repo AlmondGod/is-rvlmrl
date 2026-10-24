@@ -1,0 +1,17 @@
+{
+  "scope": "Posthoc ray geometry from saved state near first corner trigger; not model input and not a recorded original fire-event log",
+  "state_recording_sha256": "ecad821cd8f53eafeb1c69c87521d4f787685f95b01d1b6784cc89f95a4caee8",
+  "saved_time_s": 233.4999999979344,
+  "first_material": "wood1",
+  "first_material_ray_interval_m": [
+    0.003163744898970013,
+    0.027015831297342963
+  ],
+  "second_material": "wood0",
+  "second_material_ray_interval_m": [
+    0.03329562129054778,
+    0.075
+  ],
+  "gap_m": 0.006279789993204814,
+  "maximum_gap_m": 0.006
+}

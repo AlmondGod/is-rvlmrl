@@ -1,0 +1,155 @@
+{
+  "utc": "2026-10-24T01:28:40.326070+00:00",
+  "stage": "complete",
+  "full": {
+    "seed": 41002,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          6332,
+          155
+        ],
+        "shape_after": [
+          6332,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": false,
+    "optimized_success": false,
+    "baseline_error": null,
+    "optimized_error": null,
+    "complete_assembly_sequence": true,
+    "simulated_s": 633.0999999884851,
+    "baseline_wall_s": 2134.2594317000476,
+    "optimized_wall_s": 1275.0175348339835,
+    "speedup": 1.6739059451272122,
+    "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+    "result_hashes": [
+      "51a9187fa351bc66869bf2e9343b2c8ec4d45e170f1434ee690b9b0bfe9be892",
+      "066d957883ab630098b6485bec60455817e620020de8cd39e2bb60e0c4a0234f"
+    ],
+    "state_hashes": [
+      "7c45549dce39acbaa5cf9530dd63bc7b8abecec637eb5258920d52ca23b7d36b",
+      "7c45549dce39acbaa5cf9530dd63bc7b8abecec637eb5258920d52ca23b7d36b"
+    ]
+  },
+  "successful_regression": {
+    "seed": 41001,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          6216,
+          155
+        ],
+        "shape_after": [
+          6216,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": true,
+    "optimized_success": true,
+    "baseline_error": null,
+    "optimized_error": null,
+    "complete_assembly_sequence": true,
+    "simulated_s": 621.4999999887594,
+    "baseline_wall_s": 2070.9545706309727,
+    "optimized_wall_s": 1241.8318776679807,
+    "speedup": 1.6676609836429632,
+    "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+    "result_hashes": [
+      "34b28605ddf4c20422d788a28ecfbdcb8d3fa1dea680301aab30a1eb5a27f161",
+      "6e5fbf3c54748c4cf8c42c20eb0c3845882de9d7fee75229e16e55ddf5ce1d36"
+    ],
+    "state_hashes": [
+      "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646",
+      "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646"
+    ]
+  },
+  "isolated_trials": [
+    {
+      "repeat": 0,
+      "backend": "reference",
+      "wall_s": 45.39681034802925,
+      "simulated_s": 19.99999999999874
+    },
+    {
+      "repeat": 0,
+      "backend": "optimized",
+      "wall_s": 26.638972065004054,
+      "simulated_s": 19.99999999999874
+    },
+    {
+      "repeat": 1,
+      "backend": "optimized",
+      "wall_s": 26.800706716021523,
+      "simulated_s": 19.99999999999874
+    },
+    {
+      "repeat": 1,
+      "backend": "reference",
+      "wall_s": 45.36647047998849,
+      "simulated_s": 19.99999999999874
+    },
+    {
+      "repeat": 2,
+      "backend": "reference",
+      "wall_s": 45.061733950977214,
+      "simulated_s": 19.99999999999874
+    },
+    {
+      "repeat": 2,
+      "backend": "optimized",
+      "wall_s": 27.074555610015523,
+      "simulated_s": 19.99999999999874
+    }
+  ],
+  "isolated_scope": "20 simulated seconds of early assembly, three trials each, sequential alternating order, no concurrent benchmark jobs; not a full-episode latency measurement"
+}

@@ -1,0 +1,12 @@
+{
+  "audit": "passed",
+  "training_steps_verified": 20,
+  "training_records_verified": 320,
+  "validation_records_verified": 64,
+  "unique_programs_executed": 312,
+  "cached_record_checks": 72,
+  "source_hashes_verified": 23,
+  "robot_asset_hashes_verified": 20,
+  "trace_absolute_tolerance": 1e-07,
+  "reward_absolute_tolerance": 1e-09
+}

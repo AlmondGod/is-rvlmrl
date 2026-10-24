@@ -1,0 +1,33 @@
+{
+  "passes": true,
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671746029",
+      "contentType": "video/mp4",
+      "createdAt": "2026-10-24T08:46:46Z",
+      "digest": "sha256:6bc00521ee35e194955b32973560b3340929a2392c7b0ea976b94e69d60642ac",
+      "downloadCount": 0,
+      "id": "RA_kwDOVR_WPc4oCgft",
+      "label": "",
+      "name": "varied-validation-eight-updates.mp4",
+      "size": 1634567,
+      "state": "uploaded",
+      "updatedAt": "2026-10-24T08:46:47Z",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/varied-validation-eight-updates.mp4"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671746028",
+      "contentType": "application/x-gtar",
+      "createdAt": "2026-10-24T08:46:46Z",
+      "digest": "sha256:11d97f1974db6ae8d4caa1e28820deff06b890762e2ef20424df901800317b34",
+      "downloadCount": 0,
+      "id": "RA_kwDOVR_WPc4oCgfs",
+      "label": "",
+      "name": "online25-validation-example.tar.gz",
+      "size": 6570282,
+      "state": "uploaded",
+      "updatedAt": "2026-10-24T08:46:47Z",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online25-validation-example.tar.gz"
+    }
+  ]
+}

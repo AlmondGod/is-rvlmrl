@@ -17,7 +17,7 @@ SHUTTLE_START=1.55
 HOME=np.array([[-.9,.65,.65],[.9,.65,.65],[0,-.5,1.7]])
 SIDE_R=np.array([np.column_stack(([0,1,0],[0,0,1],[1,0,0])),np.column_stack(([0,-1,0],[0,0,1],[-1,0,0]))])
 OFFSETS=np.array([[-PANEL_SIZE[0]/2+.005,0,0],[PANEL_SIZE[0]/2-.005,0,0]])
-UR=Path('third_party/mujoco_menagerie/universal_robots_ur10e').resolve()
+UR=Path(__file__).resolve().parents[2]/'third_party/mujoco_menagerie/universal_robots_ur10e'
 
 def scene(dt=.001,layout_seed=None,fixture_half_width=.46,shoulder_half_span=.34):
  root=ET.fromstring(panel_scene(dt));root.set('model','torso_continuous_frame_wall');w=root.find('worldbody');act=root.find('actuator');con=root.find('contact')

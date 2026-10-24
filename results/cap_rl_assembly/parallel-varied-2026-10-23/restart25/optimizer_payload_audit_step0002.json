@@ -1,0 +1,12 @@
+{
+  "passes": true,
+  "checkpoint_step": 2,
+  "optimizer_steps": 8,
+  "parameters_with_optimizer_state": 496,
+  "trainable_parameter_tensors": 496,
+  "optimizer_tensor_elements": 64930288,
+  "checkpoint_receipt_sha256": "09af3442448d384f1739cce1e6ef90672834476a3f469da723bd3f1fe7c53328",
+  "training_state_sha256": "043232ac3655dfa4c8c547529d89d329b15d50cc95480527b5e4d369a86b9d05",
+  "source_sha256": "a6c8fd231e6c347b2a9315bce820cae3fdf88e8be5f0a939d3148df3d48c0cb6",
+  "scope": "Read-only CPU inspection of the real checkpoint: payload hashes, finite optimizer tensors, AdamW step counts and saved RNG payloads. No model instantiated, no update, no bitwise GPU reproducibility claim."
+}

@@ -1,0 +1,114 @@
+{
+  "utc": "2026-10-23T11:02:21.582489+00:00",
+  "status": "interim; heldout evaluation incomplete; independent replay not yet run",
+  "completed_test_records": [
+    {
+      "seed": 43001,
+      "evidence_id": "50e485d7dfe0d247c0896478718cea9710f554c3336361f9bce0934a2d1ca22c",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43002,
+      "evidence_id": "90cbd160356476cfc2556590ca45243abe53fb005217f04b93e9b7a4476e66fb",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43004,
+      "evidence_id": "89f1f6c1439153ab4366dcca0a8c483d10eab2b94dd25322d486a2a957bc24ae",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43003,
+      "evidence_id": "a1e54d1bc2c807874a1fadd10cded92d4f0919815a8e3dd6cd0e906afb74b39c",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43005,
+      "evidence_id": "b7784f88fdd243aef7b3ff231befdbf3de931c9e1706ed1e4f29a5bbcc8061f9",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43006,
+      "evidence_id": "4b6ef1fdbe04312f392d3eca0a91c92b21af14abb8fed5641fef3836bac97397",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43007,
+      "evidence_id": "4f983ad92e5dfeba8295e545d994616273050c7f83122db9f75ba8e5112f46f1",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43008,
+      "evidence_id": "54179d6ba9bef04dc68fa5effd322e016df6bbfa67963d33ef32f52b32302429",
+      "success": false,
+      "error": "ValueError:Arm already carries a member",
+      "inverted_hold_s": 0.0,
+      "angle_deg": 0.0,
+      "history_calls": 2
+    },
+    {
+      "seed": 43002,
+      "evidence_id": "279ca2241944f06b141b6b527be86647fcb04bdf9cd1ef8097219dedcade0257",
+      "success": true,
+      "error": null,
+      "inverted_hold_s": 12.759999999999817,
+      "angle_deg": 2.3184924806806753,
+      "history_calls": 22
+    },
+    {
+      "seed": 43001,
+      "evidence_id": "3bda21c14549bcf7951aac95c79b5452489cdd682d61b1c7ad9f2cf3210df6f9",
+      "success": false,
+      "error": null,
+      "inverted_hold_s": 12.759999999999817,
+      "angle_deg": 3.0130042470875487,
+      "history_calls": 22
+    },
+    {
+      "seed": 43004,
+      "evidence_id": "59a042df0e09bca5166e9c45b65ebff81c357d0b879d8f089a3d24bbbf99fb0f",
+      "success": true,
+      "error": null,
+      "inverted_hold_s": 12.819999999999816,
+      "angle_deg": 2.593445244072783,
+      "history_calls": 22
+    },
+    {
+      "seed": 43003,
+      "evidence_id": "665f9bba12629df6692aeb6ccb9f272a4f6cca44d9c480c3895caa2f22514dbb",
+      "success": true,
+      "error": null,
+      "inverted_hold_s": 12.799999999999816,
+      "angle_deg": 2.4462990434124605,
+      "history_calls": 22
+    }
+  ]
+}

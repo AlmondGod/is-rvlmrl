@@ -9,6 +9,7 @@ from scipy.spatial.transform import Rotation
 from experiments.astra_camera.perception import project
 from experiments.box_assembly.design import beveled_vertices
 from .environment import SIZES
+from .image_ops import mask_pixels,wood_mask
 
 DIRECTIONS=np.c_[np.cos(np.arange(24)*2*np.pi/24),np.sin(np.arange(24)*2*np.pi/24)]
 
@@ -16,8 +17,8 @@ def measurement(image,camera,estimates,index):
  e=estimates[index];p=np.array(e['center']);R=np.array(e['rotation']);v=np.array(beveled_vertices(SIZES[index],.0005))
  uv,_=project(v@R.T+p,camera);roi=np.zeros(image.shape[:2],np.uint8)
  cv2.fillConvexPoly(roi,cv2.convexHull(np.rint(uv).astype(np.int32)),1);target_region=cv2.dilate(roi,np.ones((7,7),np.uint8));roi=cv2.dilate(roi,np.ones((25,25),np.uint8));excluded=np.zeros_like(roi);T=np.array(camera['world_to_camera'])
- im=image.astype(float);r,g,b=im[:,:,0],im[:,:,1],im[:,:,2]
- mask=((r>35)&(r>1.05*g)&(g>1.18*b)).astype(np.uint8)&roi
+ im=image if image.dtype==np.uint8 else image.astype(float)
+ mask=wood_mask(im,35,1.05)&roi
  for j,other in enumerate(estimates):
   if j==index or other is None:continue
   y=other['yaw'];oR=np.array([[np.cos(y),-np.sin(y),0],[np.sin(y),np.cos(y),0],[0,0,1.]])
@@ -29,7 +30,7 @@ def measurement(image,camera,estimates,index):
  if n<=1:return None
  cutoff=max(150,.10*float(stats[1:,cv2.CC_STAT_AREA].max()))
  keep=np.where(stats[:,cv2.CC_STAT_AREA]>=cutoff)[0];keep=keep[keep!=0];mask=np.isin(labels,keep).astype(np.uint8)
- yy,xx=np.where(mask)
+ yy,xx=mask_pixels(mask)
  if len(xx)<400:return None
  # Interior cross-sections avoid merged joint endpoints and central fingers.
  ends,_=project(np.array([p-R[:,1]*.2,p+R[:,1]*.2]),camera)

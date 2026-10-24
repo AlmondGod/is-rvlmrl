@@ -1,0 +1,8 @@
+{
+  "format": "assembly_plateau_retirement_policy_v1",
+  "registered_utc": "2026-10-24T04:40:07.804579+00:00",
+  "boundary": 6,
+  "condition": "All scheduled greedy validation programs and strict outcomes unchanged from baseline",
+  "source_sha256": "35debe14690f973febd3c200a7b338aa6dfde5acad91df50934af7abfbe95c38",
+  "protocol_sha256": "72506401fc2651221749b06233d3f1f7420108add76011b8cbade6569a17968c"
+}

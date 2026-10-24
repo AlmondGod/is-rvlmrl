@@ -1,0 +1,22 @@
+{
+  "scope": "Training-layout scripted diagnostic, deliberately truncated at535s; not a full-task success or a model/RL result.",
+  "seed": 41001,
+  "window_s": [
+    525,
+    530
+  ],
+  "samples": 50,
+  "means": {
+    "contact_frame_N": 54.958691335329306,
+    "nail_applied_z_N": 12.103585269236,
+    "gravity_N": 67.06193098752001,
+    "panel_z_acceleration": 4.7500822744031984e-05
+  },
+  "mean_support_balance_residual_N": 0.0003456170452977858,
+  "maximum_state_difference": 0.0,
+  "compared_states": 5350,
+  "missing_corner_fasteners": 1,
+  "interpretation": "The original contact-only support test excludes an observed upward nail force. Correcting that support measurement does not repair the independently missing frame nail.",
+  "raw_trace_sha256": "94af25ac8711df4e2be16bbb95903b69ce3edbb4c4f66e8a44bbe22e124920ec",
+  "raw_states_sha256": "c14221fcd20c40b631299527e003065db59410d2cf84977ebf2b8a94e150ae58"
+}

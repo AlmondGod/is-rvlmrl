@@ -1,0 +1,10 @@
+{
+  "audit": "passed",
+  "baseline_validation_programs": 64,
+  "successes": 12,
+  "source_verified": true,
+  "seconds": 28.787730749696493,
+  "platform": "macOS independent replay",
+  "trace_tolerance": 1e-07,
+  "reward_tolerance": 1e-09
+}

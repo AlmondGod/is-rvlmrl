@@ -1,0 +1,9 @@
+# Full three-arm pilot. Python 3.12, PyTorch 2.8.0+cu128 from GPU image.
+# System EGL/OpenGL libraries and a working NVIDIA EGL driver are also needed.
+-r requirements.txt
+transformers==5.20.2
+peft==0.21.2
+accelerate==1.15.0
+flash-linear-attention==0.5.2
+fla-core==0.5.2
+causal-conv1d==1.7.0

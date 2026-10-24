@@ -1,0 +1,25 @@
+{
+  "format": "cap_rl_validation_ceiling_stop_v1",
+  "utc": "2026-10-23T10:11:38.319056+00:00",
+  "upper_bound": [
+    1.0,
+    1.0
+  ],
+  "planned_updates": 16,
+  "completed_updates": 6,
+  "selected_step": 2,
+  "test_evaluated": false,
+  "trainer_elapsed_seconds": 2814.9800000000396,
+  "files_sha256": {
+    "metadata.json": "6ccd1ccb609bcbc6f9e0a23e29ae8e70f499a910e23b293991ae2d265bd8c4bd",
+    "training.jsonl": "cf96008b2c002a5b46b323c5ada0f4dd32a6660930210aab3294803ca0ec2b08",
+    "rollouts.jsonl": "d8464fb3aef5f4a2e37bdcbc02145728118810ed24c2bff01d0aa1f1dcc60899",
+    "validation_ceiling_policy.json": "a15843e40e0e0f31e9ab058da1245ca501c98b915a2ba15b114e38db0c672c5c",
+    "validation_baseline.json": "8af53617c0c4c85eacd73ed7b200bb9c19b9d61c30cfb9f65fc1eea0421dd83e",
+    "validation_0002.json": "c91dd145bd31da41dced9a60d4fd9a97ea9578aa0b690908750f7ee832ab1227",
+    "validation_0004.json": "c91dd145bd31da41dced9a60d4fd9a97ea9578aa0b690908750f7ee832ab1227",
+    "validation_0006.json": "c91dd145bd31da41dced9a60d4fd9a97ea9578aa0b690908750f7ee832ab1227"
+  },
+  "reason": "Strict binary reward bounds both selection coordinates by one. Earliest-best tie handling means no future checkpoint can replace the existing first maximum. Finish the current update and scheduled validation, then test the already fixed selected model.",
+  "source_sha256": "314e114564b0aefea2a587f845a0dcccd28f1d04f8403a33655f7645e6226666"
+}

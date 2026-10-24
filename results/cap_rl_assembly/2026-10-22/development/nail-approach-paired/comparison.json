@@ -1,0 +1,53 @@
+{
+  "scope": "Scripted local paired training-layout development; original acceptance, not model/RL improvement. Fixed candidate before layouts 41006 and 41008.",
+  "rows": [
+    {
+      "seed": 41001,
+      "variant": "reference",
+      "success": false,
+      "reward": 0.51875,
+      "intact": 7,
+      "wall_s": 935.9768926249817
+    },
+    {
+      "seed": 41001,
+      "variant": "angle-v4",
+      "success": true,
+      "reward": 1.0,
+      "intact": 8,
+      "wall_s": 837.7217681249604
+    },
+    {
+      "seed": 41006,
+      "variant": "reference",
+      "success": true,
+      "reward": 1.0,
+      "intact": 8,
+      "wall_s": 926.133673958946
+    },
+    {
+      "seed": 41006,
+      "variant": "angle-v4",
+      "success": true,
+      "reward": 1.0,
+      "intact": 8,
+      "wall_s": 921.1517090001144
+    },
+    {
+      "seed": 41008,
+      "variant": "reference",
+      "success": false,
+      "reward": 0.61875,
+      "intact": 7,
+      "wall_s": 907.0249292496592
+    },
+    {
+      "seed": 41008,
+      "variant": "angle-v4",
+      "success": true,
+      "reward": 1.0,
+      "intact": 8,
+      "wall_s": 930.0437094997615
+    }
+  ]
+}

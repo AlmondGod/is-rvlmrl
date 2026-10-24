@@ -1,0 +1,8 @@
+{
+  "audit": "passed",
+  "replayed_programs": 256,
+  "paired_wins": 70,
+  "paired_losses": 3,
+  "delta_success_rate": 0.5234375,
+  "test_report_sha256": "a362fd41ffa0ae5c804b63bba427d3b2f55df84c1ea0cb8c35a653d857d6b720"
+}

@@ -1,0 +1,24 @@
+{
+  "passes": true,
+  "step": 4,
+  "local_payload_verification": {
+    "passes": true,
+    "step": 4,
+    "files": 78,
+    "archive_sha256": "c301f18e758c3e9011e9a88d71e40714b9737c97f623985ab26128f92d1f1090"
+  },
+  "github_asset": {
+    "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671889880",
+    "contentType": "application/x-gtar",
+    "createdAt": "2026-10-24T09:51:19Z",
+    "digest": "sha256:c301f18e758c3e9011e9a88d71e40714b9737c97f623985ab26128f92d1f1090",
+    "downloadCount": 0,
+    "id": "RA_kwDOVR_WPc4oDDnY",
+    "label": "",
+    "name": "online25-step-0004.tar.gz",
+    "size": 426268293,
+    "state": "uploaded",
+    "updatedAt": "2026-10-24T09:52:08Z",
+    "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online25-step-0004.tar.gz"
+  }
+}

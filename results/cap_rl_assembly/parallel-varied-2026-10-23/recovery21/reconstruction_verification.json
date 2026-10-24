@@ -1,0 +1,8 @@
+{
+  "passes": false,
+  "expected_weights_sha256": "68445b1bf47a9739839e3e6191762e09dc1913763462bb4621416911c32dd279",
+  "actual_weights_sha256": "6c2624adfb619f0e98b7dc785e465e6971a68c7496fd3ac203614f072b0e65dc",
+  "first_batch_records_equal": true,
+  "source_sha256": "263e5669129c0643247e9b27d0bc814ed4cbc530a161dd843630e73f418d4d32",
+  "scope": "Restarted from the original warm adapter and original seed; regenerated the first programs, verified real cached rewards, and replayed four AdamW updates. Optimizer is reconstructed, not approximated from adapter-only state."
+}

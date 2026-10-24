@@ -1,0 +1,8 @@
+{"step": 1, "reward": 0.44999998807907104, "success_rate": 0.25, "active_groups": 2, "loss": 0.0, "kl": 0.0, "grad_norm": 0.39498457312583923, "elapsed_seconds": 1923.7999774729833}
+{"step": 2, "reward": 0.675000011920929, "success_rate": 0.375, "active_groups": 2, "loss": 0.00010454654693603516, "kl": 0.0052250674343667924, "grad_norm": 0.4463600516319275, "elapsed_seconds": 1942.1729710679501}
+{"step": 3, "reward": 0.44062501192092896, "success_rate": 0.375, "active_groups": 2, "loss": 0.000373058021068573, "kl": 0.018649763078428805, "grad_norm": 0.5914453864097595, "elapsed_seconds": 2432.8652241259697}
+{"step": 4, "reward": 0.15000000596046448, "success_rate": 0.0, "active_groups": 0, "loss": 0.0011331579880788922, "kl": 0.05665789917111397, "grad_norm": 0.00017875588673632592, "elapsed_seconds": 2853.069841955963}
+{"step": 5, "reward": 0.15000000596046448, "success_rate": 0.0, "active_groups": 0, "loss": 0.0012010029167868197, "kl": 0.060050143394619226, "grad_norm": 0.006322066765278578, "elapsed_seconds": 3272.331872156996}
+{"step": 6, "reward": 0.15000000596046448, "success_rate": 0.0, "active_groups": 0, "loss": 0.0013432868145173416, "kl": 0.0671643391251564, "grad_norm": 0.07791420072317123, "elapsed_seconds": 3697.0481021869928}
+{"step": 7, "reward": 0.15000000596046448, "success_rate": 0.0, "active_groups": 0, "loss": 0.0011343347141519189, "kl": 0.056716740131378174, "grad_norm": 4.267430085747037e-06, "elapsed_seconds": 4124.352056011965}
+{"step": 8, "reward": 0.15000000596046448, "success_rate": 0.0, "active_groups": 0, "loss": 0.0011343491496518254, "kl": 0.056717462837696075, "grad_norm": 1.8413960560792475e-06, "elapsed_seconds": 4553.51153633697}

@@ -3,6 +3,9 @@ from scipy.spatial.transform import Rotation
 from experiments.arm_corner.environment import down_rotation
 from .environment import SIZES,CORNER_PAIRS,PANEL_SIZE
 class Tool:
+ @staticmethod
+ def frame_direction(index,sign,axis):
+  return sign*.8*axis+np.array([0,0,-.6])
  def __init__(self,robot,planner,kind,index,est,panel=None):
   self.targets=robot['tcp'].copy();self.rotations=robot['rotation'].copy();self.gripper=np.zeros(2);self.planner=planner;self.kind=kind;self.index=index;self.events=[];self.time=0.;self.settled=0.;self.state='route';self.failure=None
   if any(e is None for e in est):raise ValueError('Tool targeting requires current visual member estimates')
@@ -11,7 +14,7 @@ class Tool:
    e=est[v];yaw=e['yaw'];axis=np.array([-np.sin(yaw),np.cos(yaw),0.])
    if axis[1]<0:axis=-axis
    self.tip=np.array(e['center'])+sign*axis*(SIZES[v,1]/2-.018);self.tip[2]+=SIZES[v,2]/2
-   direction=sign*.8*axis+np.array([0,0,-.6]);x=np.cross(direction,[0,0,1.]);x/=np.linalg.norm(x);self.R=np.column_stack((x,np.cross(direction,x),direction))
+   direction=self.frame_direction(index,sign,axis);x=np.cross(direction,[0,0,1.]);x/=np.linalg.norm(x);self.R=np.column_stack((x,np.cross(direction,x),direction))
   else:
    if panel is None:raise ValueError('Panel fastening requires an observed sheet pose')
    n=np.array(panel['rotation'])[:,2];self.tip=np.array(est[index]['center']).copy()

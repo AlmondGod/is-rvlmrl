@@ -1,0 +1,86 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   7%|▋         | 30/426 [00:00<00:01, 219.75it/s]Loading weights:  12%|█▏        | 52/426 [00:01<00:10, 35.99it/s] Loading weights:  15%|█▍        | 63/426 [00:02<00:21, 17.14it/s]Loading weights:  16%|█▌        | 69/426 [00:02<00:18, 19.32it/s]Loading weights:  18%|█▊        | 75/426 [00:03<00:16, 21.80it/s]Loading weights:  20%|██        | 86/426 [00:03<00:12, 27.60it/s]Loading weights:  22%|██▏       | 92/426 [00:03<00:11, 29.68it/s]Loading weights:  27%|██▋       | 116/426 [00:03<00:05, 54.69it/s]Loading weights:  30%|██▉       | 126/426 [00:03<00:05, 52.58it/s]Loading weights:  31%|███▏      | 134/426 [00:04<00:11, 25.87it/s]Loading weights:  33%|███▎      | 140/426 [00:04<00:10, 26.43it/s]Loading weights:  34%|███▍      | 145/426 [00:06<00:21, 12.91it/s]Loading weights:  36%|███▌      | 154/426 [00:06<00:15, 17.31it/s]Loading weights:  38%|███▊      | 164/426 [00:06<00:11, 22.41it/s]Loading weights:  40%|███▉      | 169/426 [00:06<00:12, 20.21it/s]Loading weights:  41%|████      | 174/426 [00:07<00:14, 17.75it/s]Loading weights:  42%|████▏     | 178/426 [00:07<00:15, 16.09it/s]Loading weights:  42%|████▏     | 181/426 [00:07<00:15, 15.91it/s]Loading weights:  43%|████▎     | 184/426 [00:08<00:21, 11.50it/s]Loading weights:  44%|████▍     | 187/426 [00:08<00:20, 11.48it/s]Loading weights:  46%|████▌     | 196/426 [00:08<00:14, 15.81it/s]Loading weights:  46%|████▋     | 198/426 [00:09<00:15, 14.88it/s]Loading weights:  47%|████▋     | 201/426 [00:09<00:13, 16.17it/s]Loading weights:  48%|████▊     | 205/426 [00:09<00:17, 12.82it/s]Loading weights:  50%|████▉     | 211/426 [00:09<00:13, 15.90it/s]Loading weights:  52%|█████▏    | 221/426 [00:10<00:09, 21.02it/s]Loading weights:  53%|█████▎    | 224/426 [00:10<00:14, 13.83it/s]Loading weights:  54%|█████▍    | 231/426 [00:10<00:11, 17.58it/s]Loading weights:  55%|█████▍    | 234/426 [00:11<00:16, 11.71it/s]Loading weights:  57%|█████▋    | 243/426 [00:12<00:15, 11.63it/s]Loading weights:  59%|█████▉    | 252/426 [00:12<00:12, 14.15it/s]Loading weights:  60%|██████    | 257/426 [00:13<00:10, 15.61it/s]Loading weights:  62%|██████▏   | 264/426 [00:14<00:21,  7.57it/s]Loading weights:  62%|██████▏   | 266/426 [00:15<00:21,  7.49it/s]Loading weights:  66%|██████▌   | 281/426 [00:15<00:09, 15.65it/s]Loading weights:  67%|██████▋   | 286/426 [00:15<00:10, 13.68it/s]Loading weights:  68%|██████▊   | 290/426 [00:16<00:10, 13.26it/s]Loading weights:  71%|███████▏  | 304/426 [00:16<00:07, 15.62it/s]Loading weights:  74%|███████▍  | 315/426 [00:17<00:07, 15.23it/s]Loading weights:  79%|███████▊  | 335/426 [00:18<00:04, 20.88it/s]Loading weights:  81%|████████  | 345/426 [00:18<00:03, 21.71it/s]Loading weights:  82%|████████▏ | 348/426 [00:18<00:03, 20.48it/s]Loading weights:  83%|████████▎ | 355/426 [00:19<00:03, 21.26it/s]Loading weights:  85%|████████▍ | 361/426 [00:19<00:03, 21.26it/s]Loading weights:  85%|████████▌ | 364/426 [00:19<00:03, 19.39it/s]Loading weights:  86%|████████▋ | 368/426 [00:20<00:03, 14.90it/s]Loading weights:  88%|████████▊ | 376/426 [00:20<00:03, 13.76it/s]Loading weights:  90%|█████████ | 385/426 [00:21<00:02, 17.29it/s]Loading weights:  92%|█████████▏| 390/426 [00:21<00:01, 18.03it/s]Loading weights:  92%|█████████▏| 392/426 [00:21<00:02, 12.90it/s]Loading weights:  92%|█████████▏| 394/426 [00:22<00:02, 10.98it/s]Loading weights:  93%|█████████▎| 396/426 [00:23<00:04,  6.52it/s]Loading weights: 100%|██████████| 426/426 [00:23<00:00, 18.34it/s]
+[transformers] The following generation flags are not valid and may be ignored: ['top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"stage": "baseline_validation", "n": 8, "successes": 4, "success_rate": 0.5, "mean_reward": 0.5, "valid_rate": 1.0}
+{"step": 1, "optimizer_steps_total": 1, "loss": 0.267273873090744, "grad_norm": 2.088606357574463, "preference_accuracy": 1.0, "pair_indices": [18, 5, 12, 7], "elapsed_seconds": 3.2661758619942702, "optimization_seconds": 3.2661745119839907, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 2, "optimizer_steps_total": 2, "loss": 0.21201539412140846, "grad_norm": 2.15948224067688, "preference_accuracy": 1.0, "pair_indices": [18, 20, 16, 17], "elapsed_seconds": 5.965771912015043, "optimization_seconds": 2.6986331319785677, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 3, "optimizer_steps_total": 3, "loss": 0.4355389515403658, "grad_norm": 10.94239616394043, "preference_accuracy": 0.75, "pair_indices": [0, 1, 10, 16], "elapsed_seconds": 8.677017367968801, "optimization_seconds": 2.71038300904911, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 4, "optimizer_steps_total": 4, "loss": 0.8887100529391319, "grad_norm": 16.0571346282959, "preference_accuracy": 0.75, "pair_indices": [16, 20, 20, 15], "elapsed_seconds": 11.392688360996544, "optimization_seconds": 2.7148107949760742, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 5, "optimizer_steps_total": 5, "loss": 0.6070022191852331, "grad_norm": 13.002869606018066, "preference_accuracy": 0.75, "pair_indices": [15, 21, 21, 19], "elapsed_seconds": 14.321063595998567, "optimization_seconds": 2.927551847998984, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 6, "optimizer_steps_total": 6, "loss": 0.15891508846834768, "grad_norm": 4.419693470001221, "preference_accuracy": 1.0, "pair_indices": [13, 7, 22, 0], "elapsed_seconds": 17.04860479698982, "optimization_seconds": 2.726687863992993, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 7, "optimizer_steps_total": 7, "loss": 0.4091162062250078, "grad_norm": 5.047647953033447, "preference_accuracy": 0.75, "pair_indices": [15, 13, 17, 21], "elapsed_seconds": 19.782014866999816, "optimization_seconds": 2.73255718202563, "new_training_physics_episodes": 0, "replayed_programs": 8}
+{"step": 8, "optimizer_steps_total": 8, "loss": 0.25804041186347604, "grad_norm": 4.70540714263916, "preference_accuracy": 0.75, "pair_indices": [19, 16, 15, 17], "elapsed_seconds": 22.518270180968102, "optimization_seconds": 2.735373936011456, "new_training_physics_episodes": 0, "replayed_programs": 8}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/concurrent/futures/process.py", line 263, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/cap_rl/task_assembly.py", line 149, in execute
+    result = run(layout.seed, text, out,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/cap_rl/assembly.py", line 124, in run
+    env = Env(dt=config['dt'], layout_seed=seed, physical_nails=True,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/torso_assembly/environment.py", line 120, in __init__
+    self.fixture_half_width=fixture_half_width;self.shoulder_half_span=shoulder_half_span;self.xml=scene(dt,layout_seed,fixture_half_width,shoulder_half_span);self.m=mujoco.MjModel.from_xml_string(self.xml);self.d=mujoco.MjData(self.m);self.ikd=mujoco.MjData(self.m);m,d=self.m,self.d
+                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/torso_assembly/environment.py", line 23, in scene
+    root=ET.fromstring(panel_scene(dt));root.set('model','torso_continuous_frame_wall');w=root.find('worldbody');act=root.find('actuator');con=root.find('contact')
+                       ^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/wall_panel/environment.py", line 15, in scene
+    root=ET.fromstring(frame_scene(dt));root.set('model','wall_panel_station');root.find('./visual/headlight').set('ambient','.3 .3 .3');root.find('./visual/headlight').set('diffuse','.3 .3 .3');root.find('./worldbody/light').set('diffuse','.3 .3 .3');w=root.find('worldbody');contact=root.find('contact');act=root.find('actuator')
+                       ^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/frame_assembly_v2/environment.py", line 25, in scene
+    root=ET.fromstring(corner_scene(dt));root.set('model','four_member_frame_abstract_nailing')
+                       ^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/arm_corner/environment.py", line 21, in scene
+    r=ET.parse(SOURCE/'xarm7.xml').getroot();prefix=f'a{i}_'
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/xml/etree/ElementTree.py", line 1204, in parse
+    tree.parse(source, parser)
+  File "/usr/lib/python3.12/xml/etree/ElementTree.py", line 558, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/cap-speed/preference-tools04/third_party/3-PoinTr/simulation_assets/ufactory_xarm7/xarm7.xml'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/cap-speed/preference-tools04/analysis/train_assembly_preferences.py", line 181, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/opt/cap-speed/preference-tools04/analysis/train_assembly_preferences.py", line 167, in main
+    report=evaluate();trainer.dump(out/f'validation_{step:04d}.json',report)
+           ^^^^^^^^^^
+  File "/opt/cap-speed/preference-tools04/analysis/train_assembly_preferences.py", line 111, in evaluate
+    _,rows=trainer.evaluate(model,tokenizer,splits['validation'],metadata['max_tokens'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/cap_rl/train.py", line 205, in evaluate
+    _, _, _, texts, results = rollout(model, tokenizer, batch, max_tokens, False)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/preference-tools04/analysis/cap_rl_assembly_grammar.py", line 159, in rollout
+    seq,attention,mask,texts,results=original_rollout(model,tokenizer,layouts,max_tokens,sample,**kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/cap_rl/train.py", line 124, in rollout
+    results = (task.execute_batch(scored_layouts, scored_texts) if hasattr(task, 'execute_batch') else
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/cap-speed/varied-verification-repo/experiments/cap_rl/task_assembly.py", line 211, in execute_batch
+    result = future.result()  # Infrastructure errors fail the run, never become reward zero.
+             ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/cap-speed/preference-tools04/third_party/3-PoinTr/simulation_assets/ufactory_xarm7/xarm7.xml'

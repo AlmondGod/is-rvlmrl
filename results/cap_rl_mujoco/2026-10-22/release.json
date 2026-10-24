@@ -1,0 +1,8 @@
+{
+  "archive": "cap-rl-mujoco03.tar.gz",
+  "bytes": 145075398,
+  "sha256": "12d98f9a7f4ee459fd07f69f2f3bf0d9778dd43f954511b4b9aa6c4a325e9d7b",
+  "selected_adapter_sha256": "a383d8806b54ac3a99d365aad8c1376d3007f46cd31d75e30ebcd01d9948d827",
+  "initial_adapter_sha256": "805f0ea9439bc43d9bac935cb1728ba4d89c52b794b5586f51449c29b777a83e",
+  "release_url": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-mujoco-2026-10-22"
+}

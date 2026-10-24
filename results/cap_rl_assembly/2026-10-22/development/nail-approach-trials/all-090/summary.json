@@ -1,0 +1,19 @@
+{
+  "variant": "all-090",
+  "seed": 41001,
+  "success": false,
+  "reward": 0.39375,
+  "error": "RuntimeError:tool_timeout:seat",
+  "wall_s": 535.9014494172297,
+  "simulated_s": 337.8199999954676,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "peak_penetration_m": 0.0002255936358290466,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "intact_fasteners": 3,
+  "missed_fasteners": 0,
+  "failed_fasteners": 0,
+  "raw_result_sha256": "86dd20b044526fbc972089ac867e77c1f31e1bb8fbae933ec431db968ddde7a1",
+  "states_sha256": "a47aceea753d3fddbb5b3e44517aba33f385d3f982ecd57eab4a11bdcd4a24fd"
+}

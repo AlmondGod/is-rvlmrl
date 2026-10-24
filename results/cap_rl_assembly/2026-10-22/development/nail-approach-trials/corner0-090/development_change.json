@@ -1,0 +1,12 @@
+{
+  "scope": "Scripted training-layout development: use flatter approach only at southwest corner0 where .90 previously formed a connection; original approach on other corners, after all-corner variants failed. No active RL modification, no physics/acceptance/timeout change. Requires separate generalization validation before integration.",
+  "file": "experiments/torso_assembly/tool_skills.py",
+  "horizontal_by_corner": [
+    0.9,
+    0.8,
+    0.8,
+    0.8
+  ],
+  "original_source_sha256": "151afbac19919c4140626287d67226ac175a5898cc31b5e3b632e2d255f1187c",
+  "modified_source_sha256": "f9bb27dec8d43549625844f1cd7c3ff3f91c03e105c19f90831c633315a04b9d"
+}

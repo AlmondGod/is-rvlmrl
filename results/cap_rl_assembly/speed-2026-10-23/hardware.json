@@ -1,0 +1,8 @@
+{
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell, 24467 MiB, 595.91.07",
+  "cpu_quota": "1020000 100000",
+  "cpu_model": "AMD EPYC 7352 24-Core Processor",
+  "python": "3.12.3",
+  "reference_commit": "1d5ee70d8ba1d22368008168e0144c1671f0ad13",
+  "full_runs_overlap": true
+}

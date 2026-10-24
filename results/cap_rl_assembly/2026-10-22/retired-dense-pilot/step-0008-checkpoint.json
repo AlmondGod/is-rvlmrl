@@ -1,0 +1,20 @@
+{
+  "format": "cap_rl_adapter_checkpoint_v1",
+  "step": 8,
+  "metric": {
+    "step": 8,
+    "reward": 0.15000000596046448,
+    "success_rate": 0.0,
+    "active_groups": 0,
+    "loss": 0.0011343491496518254,
+    "kl": 0.056717462837696075,
+    "grad_norm": 1.8413960560792475e-06,
+    "elapsed_seconds": 4553.51153633697
+  },
+  "scope": "Adapter weights only, not optimizer/RNG resume state. A warm start reinitializes the optimizer. Validation selects the final policy separately.",
+  "files_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_model.safetensors": "742818ffbf7e780322b9be2b0e5ef6cd0dfe688ebe17fbc7fcc7bfa7c51ab07a",
+    "adapter_config.json": "e8190e74679a8d62f8700e2e7829e89c9272c1a734d62349d0ef479bf920fa70"
+  }
+}

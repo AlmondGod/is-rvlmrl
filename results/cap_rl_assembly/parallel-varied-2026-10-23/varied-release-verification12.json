@@ -1,0 +1,132 @@
+{
+  "passes": true,
+  "release": "https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-varied-assembly-2026-10-24",
+  "verified_assets": [
+    {
+      "name": "checkpoint-backup-final-0048.json",
+      "bytes": 1185,
+      "sha256": "7802dfc7560b42a6517a59b47deff11892a17264199a96431b18a64dc19acf8d",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/checkpoint-backup-final-0048.json"
+    },
+    {
+      "name": "checkpoint-backup-manifest.json",
+      "bytes": 2338,
+      "sha256": "4fe1e30f3e0b4487ea0e26f7aaa22252a0b557b3bb532606a19611fc34e20b09",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/checkpoint-backup-manifest.json"
+    },
+    {
+      "name": "checkpoint-backup-through-0024.json",
+      "bytes": 2538,
+      "sha256": "f50c4949f94c36662850cf7d60ad0a1b37036d2819b316bf3ad96d2cc53d45fc",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/checkpoint-backup-through-0024.json"
+    },
+    {
+      "name": "failed-preference04-step-0008.tar.gz",
+      "bytes": 120726435,
+      "sha256": "a145e067c966a4f1e79b4039569e61a0f144edd3cc0f355826d85f43fdd492d7",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/failed-preference04-step-0008.tar.gz"
+    },
+    {
+      "name": "github-backup-verification-0016.json",
+      "bytes": 279,
+      "sha256": "e1cd269dec14a1637ba23cc85e9996eece239ff45eba95bfb8b83085883def1d",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/github-backup-verification-0016.json"
+    },
+    {
+      "name": "github-backup-verification-0024.json",
+      "bytes": 324,
+      "sha256": "644e881632336178619dc705a216cda1425a45edc24bc6435a8c3b0bc64297db",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/github-backup-verification-0024.json"
+    },
+    {
+      "name": "grpo03-step-0000.tar.gz",
+      "bytes": 201710581,
+      "sha256": "158fdcd37ebd1dcca45f1feecfe38da0cb2a910f193bc3e95c279a948ee803cc",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0000.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0001.tar.gz",
+      "bytes": 144979088,
+      "sha256": "3b771a50a69101d0bec7e6aa0d716c0dbd3bb999d7dbb2187edc36ef609dc926",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0001.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0002.tar.gz",
+      "bytes": 153588139,
+      "sha256": "062460e2c9f464f7e2d889e403ed6f9983a40e9b30520d89e8efc293dc348477",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0002.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0003.tar.gz",
+      "bytes": 159845916,
+      "sha256": "ec56bceb0bfd57d62c6639faec3e3099478c16f045a6a3d7e571d85d805a1627",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0003.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0004.tar.gz",
+      "bytes": 171135981,
+      "sha256": "366755805f87f0262de5579b9e2be16fbbcaf69a08df98d928770933c2ad384b",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0004.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0005.tar.gz",
+      "bytes": 165072920,
+      "sha256": "2480a552bd35b5057b53aae218767c0e5801981af0994e0c604934041d7fd306",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0005.tar.gz"
+    },
+    {
+      "name": "grpo03-step-0006.tar.gz",
+      "bytes": 127350231,
+      "sha256": "042eb124c662af4aed606101d6247dacd2b2b672559bb2f1ab644560d6dbf780",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0006.tar.gz"
+    },
+    {
+      "name": "initial-observation09.tar.gz",
+      "bytes": 1100682,
+      "sha256": "ea88c2db081dd7bd11be2513dec7bb4d5daedeb9731ca86f2739258515fb0af6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/initial-observation09.tar.gz"
+    },
+    {
+      "name": "preference05-step-0000.tar.gz",
+      "bytes": 893829367,
+      "sha256": "1e1e182e58488f169822a8747252a863b3f4b6f92576c51b0555db1e7f95f6c7",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0000.tar.gz"
+    },
+    {
+      "name": "preference05-step-0008.tar.gz",
+      "bytes": 120728873,
+      "sha256": "07e5f8c8b6a2e5a7a596469e63d0b95297a80dd92e5683e5282afa0d0e06813a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0008.tar.gz"
+    },
+    {
+      "name": "preference05-step-0016.tar.gz",
+      "bytes": 120649395,
+      "sha256": "557b6fa65fe0aa643d590869292f1a116bb9e817dfe1f038e7c619171f3fd1b8",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0016.tar.gz"
+    },
+    {
+      "name": "preference05-step-0024.tar.gz",
+      "bytes": 172890147,
+      "sha256": "9fe1b370fd4f121105ec12a45b6c536414e7dcae3e08e8caa3287ef8c3a454f6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0024.tar.gz"
+    },
+    {
+      "name": "preference05-step-0032.tar.gz",
+      "bytes": 172419483,
+      "sha256": "4dff20abc775617cb6d975521834bfd522f7f3e50ff0f5a46d189a86f2b6e76a",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0032.tar.gz"
+    },
+    {
+      "name": "preference05-step-0040.tar.gz",
+      "bytes": 172468490,
+      "sha256": "0bc089b20ffa0bc8099b03d9ac082c699f77cbb9455a6c5727e0ba0767fd50d6",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0040.tar.gz"
+    },
+    {
+      "name": "preference05-step-0048.tar.gz",
+      "bytes": 120665814,
+      "sha256": "1ff5368180e2b140a7c4f7e2a838fd4d375070c4d09a64185d5dbe988194280f",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/preference05-step-0048.tar.gz"
+    }
+  ]
+}

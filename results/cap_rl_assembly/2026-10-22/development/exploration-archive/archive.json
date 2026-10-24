@@ -1,0 +1,7 @@
+{
+  "filename": "assembly-exploration-evidence.tar.gz",
+  "bytes": 336962839,
+  "sha256": "717368c478d3f9763f9f8ac853ab91025f624359030e14dc7416d2d08cfcd167",
+  "locally_verified_members": 736,
+  "scope": "Training, validation and development; excludes held-out seeds 43001..43008. Contains complete and incomplete historical evidence. Final held-out evidence is packaged separately."
+}

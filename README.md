@@ -10,6 +10,59 @@ benchmark, measurement protocols, tests, and available evidence. **It is not a
 validated real-world assembly policy. No distillation or RL has been applied to
 this benchmark.**
 
+## Small code-as-policy RL experiment (2026-10-22)
+
+A separate [CaP-RL-style experiment](experiments/cap_rl/README.md) now trains
+Qwen2.5-Coder-1.5B to generate programs for a discrete pick-and-place task. On 128
+untouched coordinate layouts, strict success improved from **4/128 (3.1%) to
+121/128 (94.5%)** after 120 GRPO updates on one 24 GB GPU. All 256 before/after
+test programs passed an independent execution replay audit.
+
+[Results, learning curve, checkpoint, and reproduction instructions](results/cap_rl/2026-10-22/README.md).
+A [harder two-object follow-up](results/cap_rl_ordered/2026-10-22/README.md)
+continues from that adapter and improves ordered delivery success from
+**3/128 (2.3%) to 103/128 (80.5%)**. Its typical program has eight calls and must
+track the gripper's position between deliveries. Both checkpoints and all
+before/after programs are available in the linked result.
+
+This is one training seed on a symbolic coordinate task. It does **not** establish
+RL improvement on the camera-controlled MuJoCo frame assembly benchmark below.
+
+A separate [MuJoCo inertial docking experiment](results/cap_rl_mujoco/2026-10-22/README.md)
+now improves two-station success from **1/128 (0.8%) to 107/128 (83.6%)** by
+continuing the one-object adapter with physical execution rewards. Generated
+programs accelerate and brake a force-controlled planar puck. Actual MuJoCo
+videos, all before/after code, checkpoints, and replay audits are included.
+This small task uses known dynamics and a supplied controller scaffold; it is
+independent of the articulated frame-assembly benchmark.
+
+A new [articulated robot subtask](results/cap_rl_robot/2026-10-22/README.md)
+uses the native xArm7 and contact-driven fingers to grasp and lift one free
+wooden frame rail. Starting from the raw 1.5B model, held-out physical success
+improves from **55/128 (43.0%) to 122/128 (95.3%)**. It includes actual before/after
+videos, generated code, checkpoint and audits. The model receives exact coordinates
+and fixed motion skills; this isolates pickup and does not train the full visual
+assembly benchmark below.
+
+A [Qwen3.5-4B rail-placement follow-up](results/cap_rl_frame/2026-10-22/README.md)
+adds carrying to a new target, release and withdrawal. Held-out physical success
+improves from **21/128 (16.4%) to 128/128 (100%)** after 80 GRPO updates
+(**1.12 A40 training GPU-hours**). Every reported success also passes an added
+pickup-first verification. The report discloses a frozen-reward ordering loophole,
+84 training rollouts rejected by the stricter check, and the learned extra lift.
+A corrected reward mode is included for future runs; frame01 was not retrained on it.
+
+A [full three-arm code-policy pilot](results/cap_rl_assembly/2026-10-22/README.md)
+now runs against the original assembly, fastening and flip physics. Its scripted
+development check passes all acceptance gates; the earlier model pilot has
+partial held-out results with verification unfinished. The subsequent
+[varied-placement experiment](results/cap_rl_assembly/parallel-varied-2026-10-23/shutdown38/README.md)
+is preserved at user-requested shutdown: 16 updates, latest validation 3/8
+versus baseline 4/8, with all 24 test layouts untouched. Exact simulator
+acceleration is verified separately; varied-task policy improvement is not. The model generates programs using
+the supplied camera-guided skills. This separate offline experiment does not
+replace or retrain the frozen live visual-language benchmark.
+
 ![Development scene: three arms, side racks, workholding and sheet feeder](results/development/environment_audit/overview.png)
 
 ## What is actually being compared?

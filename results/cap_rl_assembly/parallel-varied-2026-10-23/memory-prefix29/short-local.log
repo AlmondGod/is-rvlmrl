@@ -1,0 +1,25 @@
+initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+{"passes": true, "codec_source_sha256": "ea1a8221bd00898dfc8739001e707c63a456fdac81b5c73995593defa63d3009", "configuration": {"out": "../prefix29-probe-local", "program": "../prefix16-full-local/continuous/program.py", "seed": 51002, "compact_model_bytes": false, "memory_copy": true, "seconds": 20.0, "checkpoint_seconds": 10.0}, "rows": [{"restore": false, "elapsed_seconds": 25.127695832867175, "receipt": {"instrumented_source_sha256": "6f050127396665d3d5796decab74f9f9a6f27e1a3803ba6d032297b48e2596cf", "snapshot_seconds": 0.10820179199799895, "snapshot_bytes": 147, "checkpoint_step": 500, "executed_calls": [["position_member", 3]]}}, {"restore": true, "elapsed_seconds": 12.647355707827955, "receipt": {"instrumented_source_sha256": "77839b35fb70a6a637e4c2d38ae390ee6717fcc7878511448a30109301a3bbb9", "restore_seconds": 0.06265370780602098, "checkpoint_step": 500}}], "comparison": {"seed": 51002, "same_seed": true, "exact": true, "result_keys_differing_except_wall_s": [], "arrays": {"rows": {"shape_before": [200, 155], "shape_after": [200, 155], "exact": true, "max_abs_difference": 0.0}, "nq": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nv": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}, "nu": {"shape_before": [], "shape_after": [], "exact": true, "max_abs_difference": 0.0}}, "baseline_success": false, "optimized_success": false, "baseline_error": "simulation_deadline", "optimized_error": "simulation_deadline", "complete_assembly_sequence": false, "simulated_s": 19.99999999999874, "baseline_wall_s": 23.54143595835194, "optimized_wall_s": 12.06457362510264, "speedup": 1.9512861945961775, "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.", "result_hashes": ["2ead7ed706586558feb9179b518002f280ce2bc2c41b1879a9436fc5cfd9eb36", "d904689456272921e381d47fad2a7b986e39935c55f39d39c0cd61497f0c82d8"], "state_hashes": ["0b7499e035541b44866cf91fa147bfbe1052ddbfa0d820be2b618340b8cfd512", "0b7499e035541b44866cf91fa147bfbe1052ddbfa0d820be2b618340b8cfd512"]}, "source_sha256": "96f900e8cc7bf020b2c03f63d25a8ad71c04c7de77838bb89089b25f06d424c8", "scope": "Experimental prefix replay only; no training integration, task success, or whole-loop speed claim.", "native_copy_receipts": [{"models": 2, "data": 3, "python_payload_bytes": 228941, "method": "distinct_model_copy_and_mj_copyData_v1"}, {"models": 2, "data": 3, "python_payload_bytes": 229003, "method": "distinct_model_copy_and_mj_copyData_v1"}], "snapshot_storage_scope": "snapshot_bytes counts only an on-disk marker, not memory. Full native/Python snapshots remain resident; measure peak RSS separately."}
+       38.49 real        36.02 user         1.72 sys
+          2781609984  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              271578  page reclaims
+                2151  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   0  messages received
+                   0  signals received
+                1068  voluntary context switches
+               40174  involuntary context switches
+        350104497566  instructions retired
+        105301537148  cycles elapsed
+          3427322832  peak memory footprint

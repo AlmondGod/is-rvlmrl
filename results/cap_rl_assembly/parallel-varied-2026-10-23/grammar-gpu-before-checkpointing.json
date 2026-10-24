@@ -1,0 +1,55 @@
+{
+  "passes": true,
+  "decoding_source_sha256": "c4513e0ab6d4d15b8e674d63e20a0dba4ad9429cf3cc7d68776440ac4ca5317d",
+  "source_commit": "226b5e1bd25cd31e5800b625849ba28366f1ac22",
+  "unique_sampled_programs": 7,
+  "batch": 8,
+  "choice_tokens": [
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+  ],
+  "sampling_temperature": 3.0,
+  "generation_seconds": 10.929679169028532,
+  "peak_cuda_bytes": 20176582144,
+  "microbatch_trials": [
+    {
+      "microbatch": 1,
+      "passes": true,
+      "peak_cuda_bytes": 14486241280,
+      "forward_reference_backward_seconds": 0.9766452960320748,
+      "gradient_norm": 3.3584916591644287
+    },
+    {
+      "microbatch": 2,
+      "passes": true,
+      "peak_cuda_bytes": 20176582144,
+      "forward_reference_backward_seconds": 3.680470007995609,
+      "gradient_norm": 1.7592284679412842
+    },
+    {
+      "microbatch": 4,
+      "passes": false,
+      "error": "out_of_memory"
+    }
+  ],
+  "recommended_microbatch": 1,
+  "finite_gradient_norm": 1.7592284679412842,
+  "initial_constrained_matches_unrestricted_greedy": true,
+  "programs": [
+    "position_member(2)\nrelease_member(2)\nposition_member(0)\nrelease_member(0)\nposition_member(3)\nrelease_member(3)\nposition_member(1)\nrelease_member(1)\npark_grippers()\nnail_corner(0)\nnail_corner(3)\nnail_corner(2)\nnail_corner(1)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(3)\nnail_panel(2)\nnail_panel(1)\nflip_structure()\nfinish()",
+    "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\nposition_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(1)\nnail_panel(2)\nnail_panel(0)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(2)\nnail_corner(3)\nnail_corner(1)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(2)\nnail_panel(3)\nnail_panel(1)\nflip_structure()\nfinish()",
+    "position_member(3)\nrelease_member(3)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(0)\nrelease_member(0)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(0)\nrelease_member(0)\nposition_member(3)\nrelease_member(3)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\npark_grippers()\nnail_corner(1)\nnail_corner(0)\nnail_corner(3)\nnail_corner(2)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(1)\nnail_panel(0)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()",
+    "position_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(0)\nrelease_member(0)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(1)\nnail_corner(0)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+  ],
+  "scope": "GPU decoding and gradient preflight. Physics was explicitly stubbed; no optimizer step, measured reward or training result."
+}

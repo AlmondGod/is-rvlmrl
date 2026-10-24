@@ -1,0 +1,77 @@
+{
+  "scope": "In-progress experiment backups, not a verified held-out improvement claim. Incremental archives are applied in step order for each run.",
+  "assets": [
+    {
+      "name": "grpo03-step-0000.tar.gz",
+      "bytes": 201710581,
+      "sha256": "158fdcd37ebd1dcca45f1feecfe38da0cb2a910f193bc3e95c279a948ee803cc",
+      "verified_payloads": 359
+    },
+    {
+      "name": "grpo03-step-0001.tar.gz",
+      "bytes": 144979088,
+      "sha256": "3b771a50a69101d0bec7e6aa0d716c0dbd3bb999d7dbb2187edc36ef609dc926",
+      "verified_payloads": 52
+    },
+    {
+      "name": "grpo03-step-0002.tar.gz",
+      "bytes": 153588139,
+      "sha256": "062460e2c9f464f7e2d889e403ed6f9983a40e9b30520d89e8efc293dc348477",
+      "verified_payloads": 41
+    },
+    {
+      "name": "grpo03-step-0003.tar.gz",
+      "bytes": 159845916,
+      "sha256": "ec56bceb0bfd57d62c6639faec3e3099478c16f045a6a3d7e571d85d805a1627",
+      "verified_payloads": 48
+    },
+    {
+      "name": "grpo03-step-0004.tar.gz",
+      "bytes": 171135981,
+      "sha256": "366755805f87f0262de5579b9e2be16fbbcaf69a08df98d928770933c2ad384b",
+      "verified_payloads": 61
+    },
+    {
+      "name": "grpo03-step-0005.tar.gz",
+      "bytes": 165072920,
+      "sha256": "2480a552bd35b5057b53aae218767c0e5801981af0994e0c604934041d7fd306",
+      "verified_payloads": 55
+    },
+    {
+      "name": "grpo03-step-0006.tar.gz",
+      "bytes": 127350231,
+      "sha256": "042eb124c662af4aed606101d6247dacd2b2b672559bb2f1ab644560d6dbf780",
+      "verified_payloads": 20
+    },
+    {
+      "name": "failed-preference04-step-0008.tar.gz",
+      "bytes": 120726435,
+      "sha256": "a145e067c966a4f1e79b4039569e61a0f144edd3cc0f355826d85f43fdd492d7",
+      "verified_payloads": 13
+    },
+    {
+      "name": "preference05-step-0000.tar.gz",
+      "bytes": 893829367,
+      "sha256": "1e1e182e58488f169822a8747252a863b3f4b6f92576c51b0555db1e7f95f6c7",
+      "verified_payloads": 930
+    },
+    {
+      "name": "preference05-step-0008.tar.gz",
+      "bytes": 120728873,
+      "sha256": "07e5f8c8b6a2e5a7a596469e63d0b95297a80dd92e5683e5282afa0d0e06813a",
+      "verified_payloads": 14
+    },
+    {
+      "name": "preference05-step-0016.tar.gz",
+      "bytes": 120649395,
+      "sha256": "557b6fa65fe0aa643d590869292f1a116bb9e817dfe1f038e7c619171f3fd1b8",
+      "verified_payloads": 14
+    },
+    {
+      "name": "preference05-step-0024.tar.gz",
+      "bytes": 172890147,
+      "sha256": "9fe1b370fd4f121105ec12a45b6c536414e7dcae3e08e8caa3287ef8c3a454f6",
+      "verified_payloads": 64
+    }
+  ]
+}

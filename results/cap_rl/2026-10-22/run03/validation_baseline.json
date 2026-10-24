@@ -1,0 +1,1539 @@
+{
+  "metrics": {
+    "n": 64,
+    "successes": 0,
+    "success_rate": 0.0,
+    "mean_reward": 0.00546875,
+    "valid_rate": 0.015625
+  },
+  "rows": [
+    {
+      "layout_id": "cfc3764ce56227c2",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (-2, 1). Target is (-1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            0,
+            -2
+          ],
+          "member": [
+            -2,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "63729ed024453f58",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (-1, 1). Target is (-2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 0)\npick()\nmove(0, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            0
+          ],
+          "gripper": [
+            -1,
+            -2
+          ],
+          "member": [
+            -1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "494f4bf4493cfaa3",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, 0). Member is at (1, -1). Target is (1, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 2)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            2
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "member": [
+            1,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "023eab5d523c3654",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 1). Member is at (0, 2). Target is (-1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            -1,
+            2
+          ],
+          "member": [
+            0,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "c75426e1812044e2",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 2). Member is at (2, -1). Target is (0, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 1)\npick()\nmove(-2, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "818496ece1c35bb8",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 1). Member is at (-2, 1). Target is (2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(4, 0)\npick()\nmove(0, -4)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "1fcfc6bd08c47d4b",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -1). Member is at (2, 0). Target is (1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-1, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "member": [
+            2,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b036342a467768ab",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, -1). Member is at (2, 1). Target is (2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "member": [
+            2,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "9b3617e3bea48a29",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, -2). Member is at (0, 0). Target is (1, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 1)\npick()\nmove(-1, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "e32a604fae0ca912",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 1). Member is at (0, 0). Target is (-1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            0
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "member": [
+            0,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "121ecd6d5007c060",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (0, 2). Target is (2, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "d65857054d5b0bd3",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 0). Member is at (2, 2). Target is (2, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            2,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "2915e2dd97507a73",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, -1). Member is at (0, -1). Target is (-2, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 2)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            2
+          ],
+          "gripper": [
+            -2,
+            1
+          ],
+          "member": [
+            0,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "32bda721f1d005c3",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, -2). Member is at (-1, 2). Target is (-2, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -2,
+            -2
+          ],
+          "member": [
+            -1,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "eb6a9ecf83b184cc",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 1). Member is at (1, 0). Target is (1, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "cd5cb2313f64419e",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -2). Member is at (0, -1). Target is (0, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 2)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            2
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "member": [
+            0,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "2f3612596e4c4b70",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -2). Member is at (-2, 0). Target is (1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            -2
+          ],
+          "member": [
+            -2,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "ed7fd2fb56c5ebd9",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -1). Member is at (-1, -1). Target is (0, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 1)\npick()\nmove(0, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            1
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "member": [
+            -1,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "17cc2b09c0f9c965",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 1). Member is at (2, 1). Target is (-1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-2, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "member": [
+            2,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "f76bab2b002109e0",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 0). Member is at (1, 0). Target is (-2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\nmove(-1, 0)\n",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "truncated",
+      "trace": [],
+      "truncated": true
+    },
+    {
+      "layout_id": "a7986e4c15daff1a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, -2). Member is at (-2, -2). Target is (-1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "member": [
+            -2,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "136fc73d40d2d2f1",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, -1). Member is at (1, 1). Target is (0, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            -1,
+            -1
+          ],
+          "member": [
+            1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "00c3e615237039df",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, -2). Member is at (1, 0). Target is (1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "member": [
+            1,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "193f2635def3631e",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -2). Member is at (1, -1). Target is (0, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            1,
+            -2
+          ],
+          "member": [
+            1,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "83f39eed570352c0",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 0). Member is at (-1, -1). Target is (-2, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(-1, 1)\nmove(-1, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            -1,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "147c1f26f0c6befd",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -1). Member is at (2, -2). Target is (-1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "member": [
+            2,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "988a69cbf7ba7f18",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 2). Member is at (0, -2). Target is (-2, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 2)\npick()\nmove(-2, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "2653e19833fa8961",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 1). Member is at (0, 1). Target is (0, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            -1,
+            2
+          ],
+          "member": [
+            0,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0dbdacceb58e407a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, -1). Member is at (0, 0). Target is (1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 2)\npick()\nmove(-1, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            2
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "member": [
+            0,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "6733b222d25dcada",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 1). Member is at (0, 2). Target is (-1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "member": [
+            0,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b0b06bbc89667ec7",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (-2, 0). Target is (-1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            2,
+            -2
+          ],
+          "member": [
+            -2,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8b33d11707f0ea87",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (2, -1). Target is (1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "member": [
+            2,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "0cdf78f8879c552a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -1). Member is at (1, 1). Target is (0, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "9fe5a26f53c64dac",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -1). Member is at (2, -2). Target is (0, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, 3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            -1
+          ],
+          "member": [
+            2,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "30ed29f74b82fdeb",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, 1). Member is at (2, 0). Target is (0, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-2, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "2359cfe159790501",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, -1). Member is at (-2, -2). Target is (1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(4, 3)\npick()\nmove(-4, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "c889af5db5a0fe9a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 1). Member is at (2, 2). Target is (-2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 2)\npick()\nmove(-2, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "d871109886d55635",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 1). Member is at (0, 2). Target is (-1, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, -1)\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            -1,
+            1
+          ],
+          "member": [
+            0,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "d4a25142cd0a5cf7",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 0). Member is at (-1, -2). Target is (1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(3, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            3,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            -1,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "d334db4b98640ebe",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 0). Member is at (-1, 1). Target is (1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "member": [
+            -1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "d9c24737beb95d7a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 0). Member is at (0, 1). Target is (2, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            0,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "58b99f5b8a883be7",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 0). Member is at (-2, -1). Target is (-2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            0
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "member": [
+            -2,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "c5d92881e3afa2c6",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, -2). Member is at (-2, 2). Target is (-1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -1,
+            0
+          ],
+          "gripper": [
+            0,
+            -2
+          ],
+          "member": [
+            -2,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b014878892fe2c23",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 0). Member is at (2, 0). Target is (2, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            0,
+            0
+          ],
+          "member": [
+            2,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8e921a62557a8987",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 2). Member is at (-2, -1). Target is (1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(3, 3)\npick()\nmove(-1, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "492b989d5848e0db",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 2). Member is at (-1, -1). Target is (-2, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-1, 0)\npick()\nmove(0, -1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "faf3cdb28575b0f4",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 2). Member is at (0, 1). Target is (2, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "member": [
+            0,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8f0a64b516997935",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, -1). Member is at (1, 0). Target is (0, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(-1, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            0,
+            -1
+          ],
+          "member": [
+            1,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "9b15430c9e16e1dd",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 2). Member is at (2, -2). Target is (-1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            0,
+            2
+          ],
+          "member": [
+            2,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "157222c393c952c5",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, -1). Member is at (-1, -2). Target is (0, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 1)\npick()\nmove(-1, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            1
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "member": [
+            -1,
+            -2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "de4751c0e27dc8ca",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 1). Member is at (-2, -1). Target is (-1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 1)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "c07e2ac38b2ae39b",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 0). Member is at (1, -1). Target is (-2, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            -1,
+            0
+          ],
+          "member": [
+            1,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "1864c0c1db910d53",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, -2). Member is at (0, 2). Target is (-1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, 1)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            -2,
+            -1
+          ],
+          "member": [
+            0,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8ee8ceda23323365",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 0). Member is at (1, 1). Target is (-1, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-2, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            2,
+            0
+          ],
+          "member": [
+            1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "54e70cad98e3e080",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 2). Member is at (0, 0). Target is (1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "f815d474dce8c83e",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (2, 0). Member is at (1, -2). Target is (-2, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "4c2400183a5f9f7d",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 0). Member is at (-2, -1). Target is (0, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 0)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            -2,
+            0
+          ],
+          "gripper": [
+            -2,
+            0
+          ],
+          "member": [
+            -2,
+            -1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "b6cf27b6aeb6791d",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, 2). Member is at (0, 1). Target is (-2, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(-2, 0)\npick()\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\nmove(0, 1)\n",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "truncated",
+      "trace": [],
+      "truncated": true
+    },
+    {
+      "layout_id": "2b40745efba0ff17",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-1, 0). Member is at (-1, 1). Target is (1, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(0, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            1,
+            0
+          ],
+          "member": [
+            -1,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "8ac3435d7269e3ca",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (1, 2). Member is at (1, 1). Target is (1, 0).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(0, -1)\npick()\nmove(0, 1)\nplace()\n```",
+      "reward": 0.35,
+      "success": false,
+      "valid": true,
+      "error": null,
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            0,
+            -1
+          ],
+          "gripper": [
+            1,
+            1
+          ],
+          "member": [
+            1,
+            1
+          ],
+          "holding": false
+        },
+        {
+          "call": "pick",
+          "args": [],
+          "gripper": [
+            1,
+            1
+          ],
+          "member": [
+            1,
+            1
+          ],
+          "holding": true
+        },
+        {
+          "call": "move",
+          "args": [
+            0,
+            1
+          ],
+          "gripper": [
+            1,
+            2
+          ],
+          "member": [
+            1,
+            2
+          ],
+          "holding": true
+        },
+        {
+          "call": "place",
+          "args": [],
+          "gripper": [
+            1,
+            2
+          ],
+          "member": [
+            1,
+            2
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "bfaf0b23cd1e3c87",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -1). Member is at (1, 0). Target is (1, 2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(1, 0)\npick()\nmove(0, 2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            1,
+            0
+          ],
+          "gripper": [
+            1,
+            -1
+          ],
+          "member": [
+            1,
+            0
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "edb8935cc140343a",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (-2, 1). Member is at (2, 1). Target is (-1, -1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 0)\npick()\nmove(-1, 0)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "invalid_pick",
+      "trace": [
+        {
+          "call": "move",
+          "args": [
+            2,
+            0
+          ],
+          "gripper": [
+            0,
+            1
+          ],
+          "member": [
+            2,
+            1
+          ],
+          "holding": false
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "layout_id": "e6f560b6a8c838ff",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, -1). Member is at (-2, -2). Target is (2, 1).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(4, 3)\npick()\nmove(-4, -3)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    },
+    {
+      "layout_id": "af5314ffacef21b7",
+      "prompt": "Move the wooden member to the target and release it.\nGripper starts at (0, 1). Member is at (0, -1). Target is (2, -2).\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held member moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the member; the gripper must be at the member's current coordinates and empty.\nplace(): release the held member at the gripper's current coordinates.\nWrite at most 8 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nThe member must finish at the target and the gripper must finish empty.",
+      "completion": "```python\nmove(2, 2)\npick()\nmove(-2, -2)\nplace()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [],
+      "truncated": false
+    }
+  ]
+}

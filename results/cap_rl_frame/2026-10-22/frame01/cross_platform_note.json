@@ -1,0 +1,17 @@
+{
+  "status": "trace_mismatch_in_partial_training_replay",
+  "layout_id": "bf02df5e4c2b6a9e",
+  "training_step": 8,
+  "program": "move(5, -6)\nlower()\nclose()\nlift(8)\nmove(5, 5)\nlift(8)\nopen()\nretreat()",
+  "linux_reward": 0.0,
+  "macos_reward": 0.0,
+  "linux_success": false,
+  "macos_success": false,
+  "error_both": "penetration_limit",
+  "field": "trace.retreat.yaw",
+  "linux_value": -3.1411471257790025,
+  "macos_value": -3.1412101151223553,
+  "absolute_difference": 6.298934335280393e-05,
+  "audit_tolerance_unchanged": 1e-07,
+  "note": "Unsafe rail-flip trajectory differs slightly between Linux and macOS. Original-runtime strict replay is required; no acceptance criterion or reward changed."
+}

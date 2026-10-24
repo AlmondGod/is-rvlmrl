@@ -1,0 +1,8 @@
+{
+  "unique_historical_rows": 49,
+  "rejected": 15,
+  "rejected_measured_physical_failures": 15,
+  "successful_rows": 6,
+  "successful_rows_rejected": 0,
+  "scope": "Historical-program regression plus source-guarded necessary-condition proof; not a new policy result."
+}

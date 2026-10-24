@@ -1,0 +1,6 @@
+{
+  "status": "stopped",
+  "reason": "No positive execution reward in any sampled program; terminal invalidity erased all useful prefix progress. Test was not evaluated.",
+  "completed_updates": 9,
+  "positive_reward_updates": 0
+}

@@ -1,0 +1,23 @@
+{
+  "status": "retired_exploratory_pilot",
+  "utc": "2026-10-23T07:06:50.798278+00:00",
+  "reason": "Confirmed contact-only support reward omits actual internal nail forces. Restart raw Qwen under a separately frozen corrected profile; do not mix reward definitions.",
+  "completed_updates": 5,
+  "last_metric": {
+    "step": 5,
+    "reward": 0.3726562559604645,
+    "success_rate": 0.125,
+    "active_groups": 2,
+    "loss": 0.0001807957887649536,
+    "kl": 0.009039284836035222,
+    "grad_norm": 0.32598623633384705,
+    "elapsed_seconds": 9267.636378756026
+  },
+  "trainer_cmdline": "/opt/cap-assembly/venv/bin/python -u -m experiments.cap_rl.train train --task assembly_full --model Qwen/Qwen3.5-4B --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a --out /opt/cap-assembly/assembly02 --steps 32 --prompts-per-step 2 --group-size 4 --microbatch 1 --physics-workers 4 --max-tokens 512 --eval-every 8 --lr 0.0001 ",
+  "process_group": 4836,
+  "trained_weights_retained": false,
+  "selection_completed": false,
+  "test_evaluated": false,
+  "limitation": "No trained checkpoint was scheduled before update 8. This pilot is discarded as an initialization; logs and physical evidence are preserved.",
+  "trainer_elapsed_seconds": 9499.780000000028
+}

@@ -1,0 +1,9 @@
+test_distinct_models_are_not_merged (analysis.test_assembly_memory_snapshot.MemorySnapshotTests.test_distinct_models_are_not_merged) ... ok
+test_full_native_state_aliases_and_mutable_model_isolation (analysis.test_assembly_memory_snapshot.MemorySnapshotTests.test_full_native_state_aliases_and_mutable_model_isolation) ... ok
+test_exact_origin_required_and_mutation_or_deletion_rejected (analysis.test_assembly_prefix_evidence.PrefixOriginTests.test_exact_origin_required_and_mutation_or_deletion_rejected) ... ok
+test_incomplete_manifest_is_not_an_origin_certificate (analysis.test_assembly_prefix_evidence.PrefixOriginTests.test_incomplete_manifest_is_not_an_origin_certificate) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.034s
+
+OK

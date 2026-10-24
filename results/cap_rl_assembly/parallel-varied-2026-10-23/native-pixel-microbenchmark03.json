@@ -1,0 +1,70 @@
+{
+  "scope": "Synthetic image-operation microbenchmark; excludes compilation and does not measure full simulation speed.",
+  "iterations": 200,
+  "repeats": 5,
+  "image_shape": [
+    960,
+    1280,
+    3
+  ],
+  "rng_seed": 42,
+  "sparse_nonzero_pixels": 32841,
+  "opencv_threads": 1,
+  "exact_color_and_coordinate_check": true,
+  "native_runtime": {
+    "source_sha256": "c71ed9e34ed07e771d111513a274ff09f4e710889d749b7299616983efe5a50e",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "flags": [
+      "-O3",
+      "-std=c99",
+      "-shared",
+      "-fPIC"
+    ],
+    "system": "Linux",
+    "architecture": "x86_64",
+    "binary_sha256": "ff6f242a81003be8f3a1aceaf8f4f9cb673e50d38b1e24697965c5fdb93770b5",
+    "implementation": "exact_uint8_rgb_predicates_v1"
+  },
+  "source_sha256": {
+    "benchmark_native_pixels.py": "b63935532a0d6b78f677d9d78345141929b59a9f479fb78db0bdaa76fd4655d0",
+    "image_ops.py": "969ad4d28469ffe855f07e6513c196a45cb9cf87b2bad5c6af494e4967b8ec44",
+    "native_pixels.py": "f7b8b361dbd579247e8f28e0973a32ded56d203004642027024f5c1fe9cd1ab4",
+    "rgb_mask.c": "c71ed9e34ed07e771d111513a274ff09f4e710889d749b7299616983efe5a50e"
+  },
+  "measurements": [
+    {
+      "color_baseline_s": 1.2198094420018606,
+      "coordinates_baseline_s": 0.17434861103538424,
+      "color_native_s": 0.4004839379922487,
+      "coordinates_native_s": 0.06226041098125279
+    },
+    {
+      "color_native_s": 0.3998474719701335,
+      "coordinates_native_s": 0.06261597399134189,
+      "color_baseline_s": 1.2203625960391946,
+      "coordinates_baseline_s": 0.17443712201202288
+    },
+    {
+      "color_baseline_s": 1.2237472650012933,
+      "coordinates_baseline_s": 0.17380199598846957,
+      "color_native_s": 0.3998501820024103,
+      "coordinates_native_s": 0.06235820095753297
+    },
+    {
+      "color_native_s": 0.3996777909924276,
+      "coordinates_native_s": 0.06221034098416567,
+      "color_baseline_s": 1.2205326779512689,
+      "coordinates_baseline_s": 0.17432447097962722
+    },
+    {
+      "color_baseline_s": 1.2219716100371443,
+      "coordinates_baseline_s": 0.17433518101461232,
+      "color_native_s": 0.39944775798358023,
+      "coordinates_native_s": 0.06289549701614305
+    }
+  ],
+  "median_speedup": {
+    "color": 3.052495672756026,
+    "coordinates": 2.795705750609092
+  }
+}

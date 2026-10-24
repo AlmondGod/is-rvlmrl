@@ -1,0 +1,3739 @@
+{
+  "metrics": {
+    "n": 64,
+    "successes": 0,
+    "success_rate": 0.0,
+    "mean_reward": 0.018809734299909446,
+    "valid_rate": 0.0
+  },
+  "rows": [
+    {
+      "layout_id": "fa05d64615ba23f2",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.2) meters.\nStation 2: (-0.1, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -4)\nthrust(-4, -4)\ndock()\nthrust(-4, -4)\nthrust(-4, -4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.10000000000000013
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          -0.47122000000000047
+        ],
+        "velocity": [
+          0.2480000000000001,
+          -1.352000000000001
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6409880629153717,
+      "final_speed_m_s": 1.3745573833056235,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "93f2695ce05714e0",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, -0.2) meters.\nStation 2: (0.1, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(4, -2)\ndock()\nthrust(2, -2)\nthrust(-2, 0)\ndock()\n```",
+      "reward": 0.055273268619314454,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.3000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          -0.3904400000000001
+        ],
+        "velocity": [
+          1.1040000000000008,
+          -0.5520000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5454474933483519,
+      "final_speed_m_s": 1.2343095235798847,
+      "components": {
+        "progress": [
+          0.5527326861931445,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "9ffdbce57bd3d874",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.2) meters.\nStation 2: (0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 4)\nthrust(-4, 4)\ndock()\nthrust(-4, -4)\nthrust(4, -4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            0.10000000000000013
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          0.47122000000000047
+        ],
+        "velocity": [
+          0.2480000000000001,
+          1.352000000000001
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.465447845413426,
+      "final_speed_m_s": 1.3745573833056235,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "597767999f6bfc49",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (0.2, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.15000000000000005
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.17564500000000005
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.2460000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.46936806711258083,
+      "final_speed_m_s": 0.6633038519411752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "fb0814c5bfb7d1e2",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.0) meters.\nStation 2: (0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(2, 0)\nthrust(-2, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            -0.2
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            0
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.30000000000000027,
+            -0.2
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.30000000000000027,
+          -0.2
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.10000000000000026,
+      "final_speed_m_s": 5.551115123125783e-17,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "c4b098ef4bdbd87e",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.2) meters.\nStation 2: (0.0, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(-4, 2)\ndock()\nthrust(2, 1)\nthrust(-2, 1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            0.3000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8400000000000006,
+        "position": [
+          0.27952000000000027,
+          0.48224000000000017
+        ],
+        "velocity": [
+          0.2560000000000001,
+          0.6720000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.4735386446743288,
+      "final_speed_m_s": 0.7191105617358159,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "97d172290d468280",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, -0.2) meters.\nStation 2: (-0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(-4, -2)\ndock()\nthrust(2, 0)\nthrust(-2, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.10000000000000007
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.1512900000000001
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.4920000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6980128082635736,
+      "final_speed_m_s": 0.7883653975156449,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "4808f7ef2d9c6f96",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.1) meters.\nStation 2: (0.0, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          -0.10478000000000001
+        ],
+        "velocity": [
+          1.1040000000000008,
+          0.2760000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5693298014332293,
+      "final_speed_m_s": 1.1379771526704752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "49352b1e6f584952",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.2) meters.\nStation 2: (0.0, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.010555715355560292,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            7.45931094670027e-17
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.24225000000000022
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.7400000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6559918539890573,
+      "final_speed_m_s": 1.6546903033498457,
+      "components": {
+        "progress": [
+          0.10555715355560291,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "795f04d7d37ba32a",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (-0.1, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(-4, -1)\nthrust(4, -1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.27564500000000003
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.2460000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6073717003820644,
+      "final_speed_m_s": 0.6633038519411752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "e1dbc6379ef1c1ca",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, -0.2) meters.\nStation 2: (-0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(-4, -2)\ndock()\nthrust(-4, 0)\nthrust(4, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.2000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          -0.3856100000000002
+        ],
+        "velocity": [
+          0.2480000000000001,
+          -0.6760000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.78240429478627,
+      "final_speed_m_s": 0.7200555534123744,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "7d9b57b56d42beea",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, -0.1) meters.\nStation 2: (0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(4, -2)\nthrust(-4, -2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.15000000000000005
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.17564500000000005
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.2460000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.2824719144003526,
+      "final_speed_m_s": 0.6633038519411752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "465328bbe5d76582",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.2) meters.\nStation 2: (0.2, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.010555715355560292,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            7.45931094670027e-17
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.24225000000000022
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.7400000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.445056527308611,
+      "final_speed_m_s": 1.6546903033498457,
+      "components": {
+        "progress": [
+          0.10555715355560291,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "7c1f2bfbede3bcd8",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, -0.2) meters.\nStation 2: (0.0, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(-4, -2)\ndock()\nthrust(4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.2000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9750000000000008,
+        "position": [
+          0.3995000000000003,
+          -0.48025000000000023
+        ],
+        "velocity": [
+          0.039999999999999945,
+          -0.7800000000000006
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.7044787523410486,
+      "final_speed_m_s": 0.781024967590666,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "7b6ecc72f0bd4e35",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.0) meters.\nStation 2: (-0.2, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(2, 2)\nthrust(-2, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.0
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.0
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.710164217910196,
+      "final_speed_m_s": 0.6160000000000004,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "58531562a6e405e1",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.1) meters.\nStation 2: (0.1, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.002984832113735958,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            0.05000000000000004
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          0.12012500000000007
+        ],
+        "velocity": [
+          1.2400000000000009,
+          0.3100000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.3810318433215264,
+      "final_speed_m_s": 1.2781627439414756,
+      "components": {
+        "progress": [
+          0.02984832113735958,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "c9bc8ca5191052c4",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (0.0, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(2, 2)\nthrust(-2, 2)\ndock()\n```",
+      "reward": 0.002984832113735947,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.05000000000000004
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          -0.1711250000000001
+        ],
+        "velocity": [
+          1.480000000000001,
+          -0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6103064931860062,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.029848321137359468,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "1df3846b2eb012a8",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (0.0, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(4, 0)\nthrust(-4, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            -1
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.4000000000000003,
+            -0.40000000000000013
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.4000000000000003,
+          -0.40000000000000013
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          -0.4000000000000003
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.5656854249492383,
+      "final_speed_m_s": 0.4000000000000003,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "141e1bf0efe0bd0d",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.1) meters.\nStation 2: (0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(3, -2)\nthrust(-2, -2)\ndock()\n```",
+      "reward": 0.04854593104039291,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          0.079875
+        ],
+        "velocity": [
+          1.2400000000000009,
+          -0.3100000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.39624520896157234,
+      "final_speed_m_s": 1.2781627439414756,
+      "components": {
+        "progress": [
+          0.4854593104039291,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "d0a868a3a2180826",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, -0.2) meters.\nStation 2: (0.0, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(-4, -2)\ndock()\nthrust(2, -1)\nthrust(-2, -1)\ndock()\n```",
+      "reward": 0.027239312489100043,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            -2
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.20000000000000026,
+            -0.20000000000000026
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            -0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.20000000000000026,
+          -0.20000000000000026
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          -0.8000000000000006
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.22360679774997932,
+      "final_speed_m_s": 0.8000000000000006,
+      "components": {
+        "progress": [
+          0.2723931248910004,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "5a575e1831c22c94",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, -0.1) meters.\nStation 2: (-0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(-1, 2)\nthrust(-1, 2)\ndock()\n```",
+      "reward": 0.002984832113735947,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.05000000000000004
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.5950000000000004,
+        "position": [
+          0.48322000000000026,
+          -0.07080500000000005
+        ],
+        "velocity": [
+          0.9520000000000007,
+          -0.23800000000000018
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6430248178919693,
+      "final_speed_m_s": 0.981299138897004,
+      "components": {
+        "progress": [
+          0.029848321137359468,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "c198cea145889bd8",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.2) meters.\nStation 2: (-0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 4)\nthrust(4, 4)\ndock()\nthrust(2, 2)\nthrust(-2, -2)\ndock()\n```",
+      "reward": 0.08038534927466404,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            0.20000000000000015
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.3805000000000004,
+          0.48050000000000026
+        ],
+        "velocity": [
+          1.2400000000000009,
+          1.2400000000000009
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.8944610108886809,
+      "final_speed_m_s": 1.753624817342639,
+      "components": {
+        "progress": [
+          0.8038534927466403,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "4ef3a92f11e29c86",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.0) meters.\nStation 2: (-0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, -4)\nthrust(-4, -4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            0.0
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            0
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.30000000000000027,
+            0.0
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.30000000000000027,
+          0.0
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.5385164807134506,
+      "final_speed_m_s": 5.551115123125783e-17,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "4b4ba466938bf75b",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.1) meters.\nStation 2: (-0.1, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 4)\nthrust(4, 4)\ndock()\nthrust(2, 2)\nthrust(-2, -2)\ndock()\n```",
+      "reward": 0.08038534927466404,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            1.491862189340054e-16
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8550000000000006,
+        "position": [
+          0.4848200000000005,
+          0.3848200000000004
+        ],
+        "velocity": [
+          1.368000000000001,
+          1.368000000000001
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.7596478557858245,
+      "final_speed_m_s": 1.9346441533263954,
+      "components": {
+        "progress": [
+          0.8038534927466403,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "58247ed635f6893f",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, -0.1) meters.\nStation 2: (0.0, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          -0.3428050000000001
+        ],
+        "velocity": [
+          0.2480000000000001,
+          -0.33800000000000024
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6536250273857331,
+      "final_speed_m_s": 0.41922309096708904,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "8d2fce353c340002",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.1) meters.\nStation 2: (0.1, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.048545188757512694,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.04999999999999997
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          0.020125000000000077
+        ],
+        "velocity": [
+          1.2400000000000009,
+          0.3100000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.39901161088995923,
+      "final_speed_m_s": 1.2781627439414756,
+      "components": {
+        "progress": [
+          0.4854518875751269,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "3ed564d2af5f544b",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, -0.1) meters.\nStation 2: (-0.2, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(-2, -1)\nthrust(-2, -1)\ndock()\n```",
+      "reward": 0.0029851795829340614,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          0.10478000000000001
+        ],
+        "velocity": [
+          1.1040000000000008,
+          -0.2760000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.7110080328660152,
+      "final_speed_m_s": 1.1379771526704752,
+      "components": {
+        "progress": [
+          0.02985179582934061,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "b82037418103f213",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.1) meters.\nStation 2: (0.1, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-4, 0)\nthrust(-4, 0)\ndock()\n```",
+      "reward": 0.061189563259349926,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          -0.028874999999999956
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.38558269622092783,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.6118956325934992,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "dc5e40d040b02824",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, -0.2) meters.\nStation 2: (0.0, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(4, -2)\ndock()\nthrust(2, -2)\nthrust(-2, -2)\ndock()\n```",
+      "reward": 0.055269919237721024,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            -0.3000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8400000000000006,
+        "position": [
+          0.46448000000000045,
+          -0.48224000000000017
+        ],
+        "velocity": [
+          1.344000000000001,
+          -0.6720000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5435081305739597,
+      "final_speed_m_s": 1.5026376808798598,
+      "components": {
+        "progress": [
+          0.5526991923772102,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "0ee75425d1300cad",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, -0.1) meters.\nStation 2: (-0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(2, -1)\nthrust(-2, 1)\ndock()\n```",
+      "reward": 0.05294070922198879,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          -0.3711250000000001
+        ],
+        "velocity": [
+          1.480000000000001,
+          -0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.8309627041119239,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.5294070922198879,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "7f3fe1a33e5075f2",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.2) meters.\nStation 2: (0.0, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(-4, 2)\ndock()\nthrust(4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0023811492107607027,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            -0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            2
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.30000000000000027,
+            0.20000000000000026
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.30000000000000027,
+          0.20000000000000026
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.8000000000000006
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.3162277660168383,
+      "final_speed_m_s": 0.8000000000000006,
+      "components": {
+        "progress": [
+          0.023811492107607024,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "96a5d82c02371528",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(-4, 1)\nthrust(4, 1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          -0.3428050000000001
+        ],
+        "velocity": [
+          0.2480000000000001,
+          -0.33800000000000024
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5243221113256623,
+      "final_speed_m_s": 0.41922309096708904,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "7904328a01289305",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.0) meters.\nStation 2: (-0.2, -0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(4, 0)\ndock()\nthrust(2, 0)\nthrust(-2, -1)\ndock()\n```",
+      "reward": 0.05527547406623521,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            0.2
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.2
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.747355504428783,
+      "final_speed_m_s": 1.480000000000001,
+      "components": {
+        "progress": [
+          0.5527547406623521,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "601e482e6db45aa7",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.2) meters.\nStation 2: (0.1, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(3, 1)\nthrust(-3, 1)\ndock()\n```",
+      "reward": 0.055273268619314475,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            0.3000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8400000000000006,
+        "position": [
+          0.46448000000000045,
+          0.48224000000000017
+        ],
+        "velocity": [
+          1.344000000000001,
+          0.6720000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5281600969403126,
+      "final_speed_m_s": 1.5026376808798598,
+      "components": {
+        "progress": [
+          0.5527326861931448,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "f82eff0cfd3308fd",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.2) meters.\nStation 2: (-0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(-4, 2)\ndock()\nthrust(-4, 0)\nthrust(4, 0)\ndock()\n```",
+      "reward": 0.0023811492107607027,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.0487099999999999
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.4920000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6831587520481607,
+      "final_speed_m_s": 0.7883653975156449,
+      "components": {
+        "progress": [
+          0.023811492107607024,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "edb8bf33d2035e86",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, -0.2) meters.\nStation 2: (0.1, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -4)\nthrust(4, -4)\ndock()\nthrust(2, -2)\nthrust(-2, -2)\ndock()\n```",
+      "reward": 0.0683651812080423,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.20000000000000015
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          -0.3808800000000002
+        ],
+        "velocity": [
+          1.1040000000000008,
+          -1.1040000000000008
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.4216481338746803,
+      "final_speed_m_s": 1.561291772859898,
+      "components": {
+        "progress": [
+          0.683651812080423,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "817f65df734fbe85",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, -0.2) meters.\nStation 2: (0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -2)\nthrust(4, -2)\ndock()\nthrust(2, 0)\nthrust(-2, 0)\ndock()\n```",
+      "reward": 0.055273268619314475,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.3000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          -0.44025000000000014
+        ],
+        "velocity": [
+          1.2400000000000009,
+          -0.6200000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5220156247661561,
+      "final_speed_m_s": 1.3863621460498705,
+      "components": {
+        "progress": [
+          0.5527326861931448,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "9859ad3bfd123d89",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.2) meters.\nStation 2: (0.2, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.010556190648821307,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          -0.00955999999999988
+        ],
+        "velocity": [
+          1.1040000000000008,
+          0.5520000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.35044110489495967,
+      "final_speed_m_s": 1.2343095235798847,
+      "components": {
+        "progress": [
+          0.10556190648821306,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "05a6d0e3c73218cf",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.1) meters.\nStation 2: (-0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(-4, 1)\ndock()\nthrust(-4, -1)\nthrust(4, -1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          -0.05719499999999998
+        ],
+        "velocity": [
+          0.2480000000000001,
+          0.33800000000000024
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6955966334198294,
+      "final_speed_m_s": 0.41922309096708904,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "a4772dd2001128a2",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.1) meters.\nStation 2: (0.0, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0029851795829340614,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          -0.10478000000000001
+        ],
+        "velocity": [
+          1.1040000000000008,
+          0.2760000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.4902167100375101,
+      "final_speed_m_s": 1.1379771526704752,
+      "components": {
+        "progress": [
+          0.02985179582934061,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "c09888624b1fd586",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.0) meters.\nStation 2: (0.1, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, 4)\nthrust(-4, -4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            0.2
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          0.2
+        ],
+        "velocity": [
+          0.2480000000000001,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.3936920222712167,
+      "final_speed_m_s": 0.2480000000000001,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "2679f37222f3db8a",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.1, 0.2) meters.\nStation 2: (0.0, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.08757270993090052,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            0.10000000000000007
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.3422500000000002
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.7400000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5416874675493245,
+      "final_speed_m_s": 1.6546903033498457,
+      "components": {
+        "progress": [
+          0.8757270993090052,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "153bc823f97aad65",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.1) meters.\nStation 2: (-0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(-4, -1)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.12435500000000002
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.2460000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6818551036877266,
+      "final_speed_m_s": 0.6633038519411752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "04106eeaed2946f5",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, -0.1) meters.\nStation 2: (0.0, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -4)\nthrust(-4, -4)\ndock()\nthrust(4, 4)\nthrust(-4, 4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            -1.491862189340054e-16
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          -0.10258000000000023
+        ],
+        "velocity": [
+          0.6160000000000004,
+          -0.9840000000000008
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.4922274604286115,
+      "final_speed_m_s": 1.160909987897426,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "b0767afb80fa613f",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.2) meters.\nStation 2: (-0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.03999679675217332,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.14225000000000024
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.7400000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.5873459904519657,
+      "final_speed_m_s": 1.6546903033498457,
+      "components": {
+        "progress": [
+          0.39996796752173314,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "0d1b3e5ca509e0ee",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.1) meters.\nStation 2: (-0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(-4, 1)\ndock()\nthrust(-4, 2)\nthrust(4, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            -0.04999999999999997
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          0.04280500000000009
+        ],
+        "velocity": [
+          0.2480000000000001,
+          0.33800000000000024
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6016773856685993,
+      "final_speed_m_s": 0.41922309096708904,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "49aed6d7f9adbc5d",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.1) meters.\nStation 2: (-0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 4)\nthrust(-4, 4)\ndock()\nthrust(-4, -4)\nthrust(4, -4)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            0.10000000000000013
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8450000000000006,
+        "position": [
+          0.48078000000000026,
+          0.47122000000000047
+        ],
+        "velocity": [
+          0.2480000000000001,
+          1.352000000000001
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.9560322676562758,
+      "final_speed_m_s": 1.3745573833056235,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "8911567a90271a99",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, -0.1) meters.\nStation 2: (0.0, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(4, 0)\nthrust(-4, 0)\ndock()\n```",
+      "reward": 0.03491949842694821,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.25
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          -0.3711250000000001
+        ],
+        "velocity": [
+          1.480000000000001,
+          -0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.610306493186006,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.34919498426948214,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "d0d5dcc60f47d5ba",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.2) meters.\nStation 2: (-0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(-4, 2)\ndock()\nthrust(-4, 0)\nthrust(-4, -2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            0.2000000000000001
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9750000000000008,
+        "position": [
+          0.3995000000000003,
+          0.48025000000000023
+        ],
+        "velocity": [
+          0.039999999999999945,
+          0.7800000000000006
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.7681408155410052,
+      "final_speed_m_s": 0.781024967590666,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "6e31219fb095bf33",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.2) meters.\nStation 2: (0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(-4, 2)\ndock()\nthrust(-4, 2)\nthrust(4, 2)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.10000000000000007
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.1512900000000001
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.4920000000000004
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.38451772455895994,
+      "final_speed_m_s": 0.7883653975156449,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "8915029f63c4d8d0",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.1) meters.\nStation 2: (0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(-4, 1)\ndock()\nthrust(4, -1)\nthrust(-4, -1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.15000000000000005
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.17564500000000005
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.2460000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.46936806711258083,
+      "final_speed_m_s": 0.6633038519411752,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "32422473f8e8b73f",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, -0.2) meters.\nStation 2: (-0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -4)\nthrust(-4, -4)\ndock()\nthrust(4, 4)\nthrust(-4, 4)\ndock()\n```",
+      "reward": 0.010556529137113657,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -4
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            -0.10000000000000013
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.8000000000000006
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8550000000000006,
+        "position": [
+          0.28318000000000026,
+          -0.4848200000000005
+        ],
+        "velocity": [
+          0.2320000000000001,
+          -1.368000000000001
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.7847326581709219,
+      "final_speed_m_s": 1.3875330626691398,
+      "components": {
+        "progress": [
+          0.10556529137113657,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "1e1bb290cb57f7f4",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.1) meters.\nStation 2: (0.2, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(4, 2)\nthrust(-4, 2)\ndock()\n```",
+      "reward": 0.0782974208905946,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.04999999999999997
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.07112500000000012
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.3123283778733534,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.7829742089059459,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "6ed2bafedca72f7c",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.0) meters.\nStation 2: (0.1, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(2, 0)\nthrust(-2, 0)\ndock()\n```",
+      "reward": 0.010556529137113657,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            0.2
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            0
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.20000000000000026,
+            0.2
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.20000000000000026,
+          0.2
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.1414213562373097,
+      "final_speed_m_s": 5.551115123125783e-17,
+      "components": {
+        "progress": [
+          0.10556529137113657,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "03d0cbf98fba3922",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.0) meters.\nStation 2: (-0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(4, 0)\ndock()\nthrust(2, 0)\nthrust(-2, 1)\ndock()\n```",
+      "reward": 0.029286944628307866,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.30000000000000016,
+            0.1
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6900000000000005,
+        "position": [
+          0.4808800000000003,
+          0.1
+        ],
+        "velocity": [
+          1.1040000000000008,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6808800000000004,
+      "final_speed_m_s": 1.1040000000000008,
+      "components": {
+        "progress": [
+          0.29286944628307865,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "a1552a21d855206b",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.1) meters.\nStation 2: (-0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(4, 1)\ndock()\nthrust(-2, 0)\nthrust(2, 0)\ndock()\n```",
+      "reward": 0.002984832113735958,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            0.05000000000000004
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          0.12012500000000007
+        ],
+        "velocity": [
+          1.2400000000000009,
+          0.3100000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6910211759598981,
+      "final_speed_m_s": 1.2781627439414756,
+      "components": {
+        "progress": [
+          0.02984832113735958,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "432a8550ef35efe8",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.1, 0.0) meters.\nStation 2: (0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, 0)\nthrust(-4, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.1
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.1
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.29865903033392466,
+      "final_speed_m_s": 0.6160000000000004,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "19ccb85d9776039d",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, 0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.1) meters.\nStation 2: (0.1, 0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0029848321137359137,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            0.15000000000000002
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.028874999999999956
+        ],
+        "velocity": [
+          1.480000000000001,
+          -0.3700000000000003
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.42086104075454683,
+      "final_speed_m_s": 1.5255490814785355,
+      "components": {
+        "progress": [
+          0.029848321137359135,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "608a111564e1c3f9",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.2, -0.2) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, 0.2) meters.\nStation 2: (-0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 2)\nthrust(4, 2)\ndock()\nthrust(-4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.03999679675217332,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            2
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            1.491862189340054e-16,
+            -0.09999999999999994
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.9250000000000007,
+        "position": [
+          0.48450000000000043,
+          0.14225000000000024
+        ],
+        "velocity": [
+          1.480000000000001,
+          0.7400000000000005
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6858026775246657,
+      "final_speed_m_s": 1.6546903033498457,
+      "components": {
+        "progress": [
+          0.39996796752173314,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "45ae6a07b2049d91",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.2, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.2, 0.0) meters.\nStation 2: (-0.2, 0.1) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, 1)\nthrust(-4, 1)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.4000000000000002,
+            0.1
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.6150000000000004,
+        "position": [
+          0.48142000000000024,
+          0.1
+        ],
+        "velocity": [
+          0.6160000000000004,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.6814200000000002,
+      "final_speed_m_s": 0.6160000000000004,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "cd013b1313a14a8d",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (-0.1, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.0) meters.\nStation 2: (-0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, 0)\nthrust(-4, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.10000000000000013,
+            -0.1
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            0
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.30000000000000027,
+            -0.1
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.30000000000000027,
+          -0.1
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.5099019513592787,
+      "final_speed_m_s": 5.551115123125783e-17,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "f65f44eb46490d8f",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.1, 0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.0) meters.\nStation 2: (0.2, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(-4, 0)\nthrust(-4, 0)\ndock()\nthrust(4, 0)\nthrust(4, 0)\ndock()\n```",
+      "reward": 0.06836871422151795,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            0
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            -0.10000000000000013,
+            0.1
+          ],
+          "velocity": [
+            -0.8000000000000006,
+            0.0
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.8550000000000006,
+        "position": [
+          -0.4848200000000005,
+          0.1
+        ],
+        "velocity": [
+          -1.368000000000001,
+          0.0
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.692082677430956,
+      "final_speed_m_s": 1.368000000000001,
+      "components": {
+        "progress": [
+          0.6836871422151796,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "a042b877cac2e8af",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, 0.0) meters. Initial velocity: (0, 0) m/s.\nStation 1: (0.0, -0.1) meters.\nStation 2: (0.2, -0.2) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, -1)\nthrust(4, -1)\ndock()\nthrust(2, -2)\nthrust(2, -2)\ndock()\n```",
+      "reward": 0.002984832113735958,
+      "success": false,
+      "valid": false,
+      "error": "out_of_bounds",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            -1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.05000000000000004
+          ],
+          "velocity": [
+            0.8000000000000006,
+            -0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        }
+      ],
+      "final_state": {
+        "time": 0.7750000000000006,
+        "position": [
+          0.48050000000000026,
+          -0.12012500000000007
+        ],
+        "velocity": [
+          1.2400000000000009,
+          -0.3100000000000002
+        ],
+        "docked": 0,
+        "call_index": 1
+      },
+      "final_distance_m": 0.29165093112314955,
+      "final_speed_m_s": 1.2781627439414756,
+      "components": {
+        "progress": [
+          0.02984832113735958,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    },
+    {
+      "layout_id": "23fd912e9985a6b2",
+      "prompt": "Control a 1 kg puck in a MuJoCo simulation. Dock at station 1, then station 2.\nInitial position: (0.0, -0.1) meters. Initial velocity: (0, 0) m/s.\nStation 1: (-0.2, 0.1) meters.\nStation 2: (-0.1, 0.0) meters.\nAPI:\nthrust(fx, fy): apply force (0.4*fx, 0.4*fy) newtons for 0.5 seconds. fx and fy must be literal integers from -4 to 4. Both axes act simultaneously.\ndock(): check that the puck is within 0.015 m of the next station and its speed is below 0.025 m/s; then coast for 0.25 seconds. Call dock once at each station, in order. A failed dock ends the program.\nPhysics: there is NO friction or automatic braking. Velocity persists between calls. A thrust changes position by 0.5*current_velocity + 0.05*(fx, fy) meters, and velocity by 0.2*(fx, fy) m/s.\nCalibration: starting at rest, two equal and opposite thrust pulses move the puck by 0.1 times the FIRST pulse's (fx, fy) meters and return it to rest.\nThe puck must stay inside x,y = [-0.48, 0.48] meters throughout. Finish stopped at station 2; a final 0.5 second coast is checked too.\nUse exactly SIX calls in this order: thrust, thrust, dock, thrust, thrust, dock.\nFor EACH leg: accelerate toward that station with one thrust, BRAKE with the exact opposite thrust, then dock. Compute each leg's displacement from its own starting station, not from the original start.\nOutput only those six API calls with literal integer arguments. No imports, variables, loops, functions, prints, or other calls.",
+      "completion": "```python\nthrust(4, 1)\nthrust(-4, 1)\ndock()\nthrust(-4, 0)\nthrust(4, 0)\ndock()\n```",
+      "reward": 0.0,
+      "success": false,
+      "valid": false,
+      "error": "dock_position",
+      "trace": [
+        {
+          "call": "thrust",
+          "args": [
+            4,
+            1
+          ],
+          "time": 0.5000000000000003,
+          "position": [
+            0.20000000000000015,
+            -0.04999999999999997
+          ],
+          "velocity": [
+            0.8000000000000006,
+            0.20000000000000015
+          ],
+          "docked": 0,
+          "call_index": 0
+        },
+        {
+          "call": "thrust",
+          "args": [
+            -4,
+            1
+          ],
+          "time": 1.0000000000000007,
+          "position": [
+            0.4000000000000003,
+            0.10000000000000013
+          ],
+          "velocity": [
+            -5.551115123125783e-17,
+            0.4000000000000003
+          ],
+          "docked": 0,
+          "call_index": 1
+        }
+      ],
+      "final_state": {
+        "time": 1.0000000000000007,
+        "position": [
+          0.4000000000000003,
+          0.10000000000000013
+        ],
+        "velocity": [
+          -5.551115123125783e-17,
+          0.4000000000000003
+        ],
+        "docked": 0,
+        "call_index": 2
+      },
+      "final_distance_m": 0.5099019513592788,
+      "final_speed_m_s": 0.4000000000000003,
+      "components": {
+        "progress": [
+          0.0,
+          0.0
+        ],
+        "stopped": [
+          0.0,
+          0.0
+        ],
+        "docked": 0
+      },
+      "truncated": false
+    }
+  ]
+}

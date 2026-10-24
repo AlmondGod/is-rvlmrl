@@ -1,0 +1,12 @@
+{
+  "created_utc": "2026-10-23T09:20:33.735862+00:00",
+  "criterion": "At update-8 validation, strict success zero AND updates 5..8 have zero strict training success and zero within-group reward variance.",
+  "action": "Retire dense optimizer before any held-out test; preserve all snapshots and restart raw with success-only reward. Physics, controller, prompts, splits and gates stay fixed.",
+  "next_candidate": {
+    "optimization_reward": "strict_success",
+    "lr": 3e-05,
+    "steps": 16,
+    "eval_every": 2,
+    "raw_initialization": true
+  }
+}

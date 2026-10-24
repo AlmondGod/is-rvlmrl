@@ -1,0 +1,29 @@
+test_backend_receipts_and_no_silent_disable (analysis.test_native_connectors.NativeConnectorTests.test_backend_receipts_and_no_silent_disable) ... ok
+test_cannot_compare_replacement_against_itself (analysis.test_native_connectors.NativeConnectorTests.test_cannot_compare_replacement_against_itself) ... ok
+test_changed_runtime_method_is_rejected (analysis.test_native_connectors.NativeConnectorTests.test_changed_runtime_method_is_rejected) ... ok
+test_irreversible_failure_and_work_history (analysis.test_native_connectors.NativeConnectorTests.test_irreversible_failure_and_work_history) ... ok
+test_twenty_thousand_reference_cases (analysis.test_native_connectors.NativeConnectorTests.test_twenty_thousand_reference_cases) ... ok
+test_every_uint8_rgb_value_for_each_rule (analysis.test_native_pixels.NativePixelTests.test_every_uint8_rgb_value_for_each_rule) ... ok
+test_explicit_backend_and_build_are_recorded (analysis.test_native_pixels.NativePixelTests.test_explicit_backend_and_build_are_recorded) ... ok
+test_sparse_scan_preserves_every_coordinate_and_order (analysis.test_native_pixels.NativePixelTests.test_sparse_scan_preserves_every_coordinate_and_order) ... ok
+test_strides_and_non_uint8_fallback (analysis.test_native_pixels.NativePixelTests.test_strides_and_non_uint8_fallback) ... ok
+test_backend_identity_separates_reward_caches (analysis.test_assembly_speed.SpeedEquivalence.test_backend_identity_separates_reward_caches) ... ok
+test_connector_force_failure_and_energy_match (analysis.test_assembly_speed.SpeedEquivalence.test_connector_force_failure_and_energy_match) ... ok
+test_contact_audit_preserves_peak_and_first_tie (analysis.test_assembly_speed.SpeedEquivalence.test_contact_audit_preserves_peak_and_first_tie) ... ok
+test_cross_matches_bit_for_bit (analysis.test_assembly_speed.SpeedEquivalence.test_cross_matches_bit_for_bit) ... ok
+test_mask_coordinates_exact (analysis.test_assembly_speed.SpeedEquivalence.test_mask_coordinates_exact) ... ok
+test_mask_float_conversion_unnecessary_for_all_rgb_values (analysis.test_assembly_speed.SpeedEquivalence.test_mask_float_conversion_unnecessary_for_all_rgb_values) ... ok
+test_physical_steps_match_exactly (analysis.test_assembly_speed.SpeedEquivalence.test_physical_steps_match_exactly) ... initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+ok
+test_spawned_worker_uses_requested_backend (analysis.test_assembly_speed.SpeedEquivalence.test_spawned_worker_uses_requested_backend) ... ok
+test_same_scenes_outside_repository (analysis.test_robot_asset_paths.AssetPathsTests.test_same_scenes_outside_repository) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 15.562s
+
+OK

@@ -1,0 +1,56 @@
+{
+  "seed": 41001,
+  "same_seed": true,
+  "exact": true,
+  "result_keys_differing_except_wall_s": [],
+  "arrays": {
+    "rows": {
+      "shape_before": [
+        6216,
+        155
+      ],
+      "shape_after": [
+        6216,
+        155
+      ],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nq": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nv": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    },
+    "nu": {
+      "shape_before": [],
+      "shape_after": [],
+      "exact": true,
+      "max_abs_difference": 0.0
+    }
+  },
+  "baseline_success": true,
+  "optimized_success": true,
+  "baseline_error": null,
+  "optimized_error": null,
+  "complete_assembly_sequence": true,
+  "simulated_s": 621.4999999887594,
+  "baseline_wall_s": 2070.9545706309727,
+  "optimized_wall_s": 1241.8318776679807,
+  "speedup": 1.6676609836429632,
+  "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+  "result_hashes": [
+    "34b28605ddf4c20422d788a28ecfbdcb8d3fa1dea680301aab30a1eb5a27f161",
+    "6e5fbf3c54748c4cf8c42c20eb0c3845882de9d7fee75229e16e55ddf5ce1d36"
+  ],
+  "state_hashes": [
+    "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646",
+    "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646"
+  ]
+}

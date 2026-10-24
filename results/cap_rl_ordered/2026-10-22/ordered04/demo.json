@@ -1,0 +1,320 @@
+{
+  "layout_id": "3456a38914d02180",
+  "prompt": "Deliver BOTH objects to their matching targets and release them, in the required order.\nGripper starts at (0, 0).\nDelivery 1 (FIRST): blue object is at (2, 1); its target is (-1, 2).\nDelivery 2 (SECOND): red object is at (-2, 0); its target is (0, -2).\nFinish delivery 1, including release at its target, before picking up delivery 2.\nThe board coordinates are integers from -2 to 2 on both axes.\nAvailable API:\nmove(dx, dy): move the gripper by RELATIVE integer offsets dx and dy; a held object moves with it. Both axes may change in one call. Stay on the board.\npick(): grasp the object at the gripper's current coordinates; the gripper must be empty. Picking the second object before the first is correctly released is invalid. Do not pick up a delivered object.\nplace(): release the held object at the gripper's current coordinates. Do not place on another object.\nAfter place(), the gripper stays at that position: all subsequent moves are relative to its CURRENT position.\nWrite one complete program of at most 12 calls using move, pick, place with literal integers only.\nNo imports, variables, functions, loops, prints, or other API calls.\nBoth objects must finish at their own targets and the gripper must finish empty.",
+  "before": {
+    "program": "```python\nmove(2, 1)\npick()\nmove(-3, 1)\nplace()\nmove(2, -2)\npick()\nmove(2, -2)\nplace()\n```",
+    "reward": 0.45,
+    "success": false,
+    "valid": false,
+    "error": "invalid_pick",
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          2,
+          1
+        ],
+        "gripper": [
+          2,
+          1
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            2,
+            1
+          ]
+        },
+        "holding": null,
+        "delivered": []
+      },
+      {
+        "call": "pick",
+        "args": [],
+        "gripper": [
+          2,
+          1
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            2,
+            1
+          ]
+        },
+        "holding": "blue",
+        "delivered": []
+      },
+      {
+        "call": "move",
+        "args": [
+          -3,
+          1
+        ],
+        "gripper": [
+          -1,
+          2
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": "blue",
+        "delivered": []
+      },
+      {
+        "call": "place",
+        "args": [],
+        "gripper": [
+          -1,
+          2
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": null,
+        "delivered": [
+          "blue"
+        ]
+      },
+      {
+        "call": "move",
+        "args": [
+          2,
+          -2
+        ],
+        "gripper": [
+          1,
+          0
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": null,
+        "delivered": [
+          "blue"
+        ]
+      }
+    ],
+    "truncated": false
+  },
+  "after": {
+    "program": "```python\nmove(2, 1)\npick()\nmove(-3, 1)\nplace()\nmove(-1, -2)\npick()\nmove(2, -2)\nplace()\n```",
+    "reward": 1.0,
+    "success": true,
+    "valid": true,
+    "error": null,
+    "trace": [
+      {
+        "call": "move",
+        "args": [
+          2,
+          1
+        ],
+        "gripper": [
+          2,
+          1
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            2,
+            1
+          ]
+        },
+        "holding": null,
+        "delivered": []
+      },
+      {
+        "call": "pick",
+        "args": [],
+        "gripper": [
+          2,
+          1
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            2,
+            1
+          ]
+        },
+        "holding": "blue",
+        "delivered": []
+      },
+      {
+        "call": "move",
+        "args": [
+          -3,
+          1
+        ],
+        "gripper": [
+          -1,
+          2
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": "blue",
+        "delivered": []
+      },
+      {
+        "call": "place",
+        "args": [],
+        "gripper": [
+          -1,
+          2
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": null,
+        "delivered": [
+          "blue"
+        ]
+      },
+      {
+        "call": "move",
+        "args": [
+          -1,
+          -2
+        ],
+        "gripper": [
+          -2,
+          0
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": null,
+        "delivered": [
+          "blue"
+        ]
+      },
+      {
+        "call": "pick",
+        "args": [],
+        "gripper": [
+          -2,
+          0
+        ],
+        "objects": {
+          "red": [
+            -2,
+            0
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": "red",
+        "delivered": [
+          "blue"
+        ]
+      },
+      {
+        "call": "move",
+        "args": [
+          2,
+          -2
+        ],
+        "gripper": [
+          0,
+          -2
+        ],
+        "objects": {
+          "red": [
+            0,
+            -2
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": "red",
+        "delivered": [
+          "blue"
+        ]
+      },
+      {
+        "call": "place",
+        "args": [],
+        "gripper": [
+          0,
+          -2
+        ],
+        "objects": {
+          "red": [
+            0,
+            -2
+          ],
+          "blue": [
+            -1,
+            2
+          ]
+        },
+        "holding": null,
+        "delivered": [
+          "blue",
+          "red"
+        ]
+      }
+    ],
+    "truncated": false
+  }
+}

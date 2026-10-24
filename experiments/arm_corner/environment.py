@@ -5,7 +5,7 @@ import numpy as np,mujoco
 from scipy.spatial.transform import Rotation
 from experiments.box_assembly.design import beveled_vertices
 from experiments.box_assembly.environment import fmt
-SOURCE=Path('third_party/3-PoinTr/simulation_assets/ufactory_xarm7').resolve()
+SOURCE=Path(__file__).resolve().parents[2]/'third_party/3-PoinTr/simulation_assets/ufactory_xarm7'
 SIZE=np.array([.038,.9144,.064]);BASES=[(.80,-.28,.02),(-.45,.92,.02),(.95,.90,.02)]
 STARTS=[(.38,-.21,.032),(-.24,.37,.032)]
 

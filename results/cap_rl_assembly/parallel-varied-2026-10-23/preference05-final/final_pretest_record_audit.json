@@ -1,0 +1,37 @@
+{
+  "passes": true,
+  "scope": "Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.",
+  "rollout_rounds": 0,
+  "planned_rollout_rounds": 0,
+  "optimizer_updates": 48,
+  "planned_optimizer_updates": 48,
+  "selected_step": 0,
+  "validation_score": [
+    0.5,
+    0.5
+  ],
+  "unconstrained_validation": null,
+  "stopped_at_validation_ceiling": false,
+  "algorithm": "offline_dpo_v1",
+  "retired": false,
+  "parent_grpo_audit": {
+    "passes": true,
+    "scope": "Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.",
+    "rollout_rounds": 6,
+    "planned_rollout_rounds": 16,
+    "optimizer_updates": 24,
+    "planned_optimizer_updates": 64,
+    "selected_step": 0,
+    "validation_score": [
+      0.5,
+      0.5
+    ],
+    "unconstrained_validation": null,
+    "stopped_at_validation_ceiling": false,
+    "algorithm": "grpo",
+    "retired": true,
+    "parent_grpo_audit": null,
+    "unique_certified_trajectories": 45
+  },
+  "unique_certified_trajectories": 58
+}

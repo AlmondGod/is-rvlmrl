@@ -8,10 +8,11 @@ from scipy.spatial.transform import Rotation
 from experiments.astra_camera.perception import plane_points
 from .environment import SIZES,FIXTURE_HEIGHT,ASSIGN
 from .multiview_pose import fit_member
+from .image_ops import wood_mask
 
 def discover(frames,cameras,robot):
- im=frames[0].astype(float);r,g,b=im[:,:,0],im[:,:,1],im[:,:,2]
- mask=((r>70)&(r>1.05*g)&(g>1.18*b)).astype(np.uint8)
+ im=frames[0] if frames[0].dtype==np.uint8 else frames[0].astype(float)
+ mask=wood_mask(im,70,1.05)
  n,labels,stats,_=cv2.connectedComponentsWithStats(mask,8);candidates=[]
  for label in range(1,n):
   if stats[label,cv2.CC_STAT_AREA]<1000:continue

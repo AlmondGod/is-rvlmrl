@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-24T04:53:43.436016+00:00",
+  "completed_stages": [],
+  "source_sha256": "09c25e6e9132cfd15f575f8f7fcc0d7d86196941cd961b091eea3ea022ba5438",
+  "replay_path": "/opt/cap-speed/preference-replay04",
+  "state": "failed",
+  "utc": "2026-10-24T04:56:33.447977+00:00",
+  "error": "FileNotFoundError(2, 'No such file or directory')"
+}

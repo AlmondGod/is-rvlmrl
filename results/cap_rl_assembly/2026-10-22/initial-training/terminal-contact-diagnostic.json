@@ -1,0 +1,58 @@
+{
+  "scope": "Post-hoc contact diagnosis from terminal recorded state; no dynamics rerun or policy input",
+  "seed": 41002,
+  "simulated_s": 410.3999999937513,
+  "recorded_peak_penetration_m": 0.0007549375850884496,
+  "terminal_contacts": [
+    {
+      "geom1": "panel_geom",
+      "geom2": "a1_left_finger_pad_2",
+      "distance_m": -4.099647697984426e-05
+    },
+    {
+      "geom1": "panel_geom",
+      "geom2": "wood3_geom",
+      "distance_m": -2.8903035105070758e-05
+    },
+    {
+      "geom1": "panel_geom",
+      "geom2": "wood3_geom",
+      "distance_m": -2.8903035105070758e-05
+    },
+    {
+      "geom1": "panel_geom",
+      "geom2": "a0_left_finger_pad_2",
+      "distance_m": -2.3637454498123003e-05
+    },
+    {
+      "geom1": "panel_geom",
+      "geom2": "a0_right_finger_pad_2",
+      "distance_m": -2.0292640695020917e-05
+    },
+    {
+      "geom1": "fixture_ledge_-1_1",
+      "geom2": "wood2_geom",
+      "distance_m": -1.484603505985671e-05
+    },
+    {
+      "geom1": "fixture_ledge_-1_1",
+      "geom2": "wood2_geom",
+      "distance_m": -1.484603505985671e-05
+    },
+    {
+      "geom1": "fixture_ledge_-1_1",
+      "geom2": "wood2_geom",
+      "distance_m": -1.484603505985671e-05
+    },
+    {
+      "geom1": "fixture_ledge_-1_1",
+      "geom2": "wood2_geom",
+      "distance_m": -1.484603505985671e-05
+    },
+    {
+      "geom1": "frame_plinth",
+      "geom2": "wood2_geom",
+      "distance_m": -9.77792795172413e-06
+    }
+  ]
+}

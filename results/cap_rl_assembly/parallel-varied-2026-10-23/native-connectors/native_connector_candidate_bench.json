@@ -1,0 +1,34 @@
+{
+  "scope": "Random finite connector calls with state reset and result collection included; not whole-episode speedup",
+  "source_sha256": "a4129917bad57d0f15a5e0333b27c147afec23cd7a8668311aef02e8af0bb83d",
+  "wrapper_sha256": "cbc8702f93cba7d9843b04f538454fd2acc9c15ba76000653dbf53bfd1fa2ed6",
+  "binary_sha256": "f759ba7119e7dd94775b77fa91865bd907a655afe4b4bca9f081f0922e63790b",
+  "flags": [
+    "-O3",
+    "-std=c99",
+    "-shared",
+    "-fPIC",
+    "-ffp-contract=off",
+    "-fno-builtin-pow"
+  ],
+  "numpy": "2.5.4",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "exact_rows": 20000,
+  "times_seconds": {
+    "python": [
+      0.6756402680184692,
+      0.6331142890267074,
+      0.6375008749892004,
+      0.6345740509568714,
+      0.6850088160135783
+    ],
+    "native_wrapper": [
+      0.4858914600335993,
+      0.5277190640335903,
+      0.5237478109775111,
+      0.47460477700224146,
+      0.48973697097972035
+    ]
+  },
+  "median_speedup": 1.3017209497454887
+}

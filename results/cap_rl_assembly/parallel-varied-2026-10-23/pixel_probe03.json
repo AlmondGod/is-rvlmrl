@@ -1,0 +1,40 @@
+{
+  "scope": "Synthetic 960x1280 RGB-mask microbenchmark; not full-episode speed",
+  "exhaustive_rgb_values_per_rule": 16777216,
+  "rules_checked": 3,
+  "exact": true,
+  "command": [
+    "cc",
+    "-O3",
+    "-shared",
+    "-fPIC",
+    "-march=native",
+    "/opt/cap-speed/pixel_probe03.c",
+    "-o",
+    "/opt/cap-speed/pixel_probe03.so"
+  ],
+  "source_sha256": "049789de452b31a624a7f4069984f0a1340574be1d2f34093a8c010bff242e82",
+  "library_sha256": "da1dbcad5cdb342e1eb2fa907322a9da29581735b2c126637443ec9e7abfdbbd",
+  "measurements": [
+    {
+      "original": 1.0451053159777075,
+      "compiled": 0.18454833497526124
+    },
+    {
+      "original": 1.0366105160210282,
+      "compiled": 0.1844656449975446
+    },
+    {
+      "original": 1.0401489750365727,
+      "compiled": 0.1846532759955153
+    },
+    {
+      "original": 1.0344254790106788,
+      "compiled": 0.18490776797989383
+    },
+    {
+      "original": 1.024456596991513,
+      "compiled": 0.18511523003689945
+    }
+  ]
+}

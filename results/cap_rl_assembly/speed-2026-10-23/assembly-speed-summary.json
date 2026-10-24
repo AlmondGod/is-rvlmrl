@@ -1,0 +1,181 @@
+{
+  "full_episode": {
+    "seed": 41002,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          6332,
+          155
+        ],
+        "shape_after": [
+          6332,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": false,
+    "optimized_success": false,
+    "baseline_error": null,
+    "optimized_error": null,
+    "complete_assembly_sequence": true,
+    "simulated_s": 633.0999999884851,
+    "baseline_wall_s": 2134.2594317000476,
+    "optimized_wall_s": 1275.0175348339835,
+    "speedup": 1.6739059451272122,
+    "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+    "result_hashes": [
+      "51a9187fa351bc66869bf2e9343b2c8ec4d45e170f1434ee690b9b0bfe9be892",
+      "066d957883ab630098b6485bec60455817e620020de8cd39e2bb60e0c4a0234f"
+    ],
+    "state_hashes": [
+      "7c45549dce39acbaa5cf9530dd63bc7b8abecec637eb5258920d52ca23b7d36b",
+      "7c45549dce39acbaa5cf9530dd63bc7b8abecec637eb5258920d52ca23b7d36b"
+    ]
+  },
+  "successful_regression": {
+    "seed": 41001,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          6216,
+          155
+        ],
+        "shape_after": [
+          6216,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": true,
+    "optimized_success": true,
+    "baseline_error": null,
+    "optimized_error": null,
+    "complete_assembly_sequence": true,
+    "simulated_s": 621.4999999887594,
+    "baseline_wall_s": 2070.9545706309727,
+    "optimized_wall_s": 1241.8318776679807,
+    "timing_caveat": "Historical reference and current integrated run use different hosts/runtime. This is a correctness regression, not a controlled timing comparison.",
+    "result_hashes": [
+      "34b28605ddf4c20422d788a28ecfbdcb8d3fa1dea680301aab30a1eb5a27f161",
+      "6e5fbf3c54748c4cf8c42c20eb0c3845882de9d7fee75229e16e55ddf5ce1d36"
+    ],
+    "state_hashes": [
+      "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646",
+      "437ab956b36cd655c31b49e4c2637c36ae0b52c6ff2f8b868ea466c9c0772646"
+    ]
+  },
+  "isolated_prefix": {
+    "simulated_seconds": 20,
+    "repetitions_per_backend": 3,
+    "reference_seconds": [
+      45.39681034802925,
+      45.36647047998849,
+      45.061733950977214
+    ],
+    "optimized_seconds": [
+      26.638972065004054,
+      26.800706716021523,
+      27.074555610015523
+    ],
+    "reference_median_seconds": 45.36647047998849,
+    "optimized_median_seconds": 26.800706716021523,
+    "median_time_ratio": 1.692734111853413,
+    "exact_all_recorded_states_and_results": true,
+    "scope": "Isolated alternating runs of the early 20-second assembly prefix; not whole-episode latency."
+  },
+  "profiles": {
+    "reference": {
+      "exclusive_wall_seconds": {
+        "physics_kernel": 295.965917603462,
+        "nail_forces": 570.3496190363658,
+        "inverse_kinematics": 25.674614579766057,
+        "other_environment_step": 321.99491781706456,
+        "camera_render": 189.62198359816102,
+        "frame_vision": 640.2258972566342,
+        "panel_vision": 31.939024110790342,
+        "metrics": 42.049767092452385,
+        "controller": 1.7265616420190781,
+        "acceptance": 8.311579324072227,
+        "setup_io_and_other": 9.376827733183745
+      },
+      "profiler_total_seconds": 2137.2367097939714,
+      "physics_kernel_fraction": 0.13848064477237665,
+      "physics_steps": 1266200,
+      "camera_images": 18996
+    },
+    "optimized": {
+      "exclusive_wall_seconds": {
+        "physics_kernel": 284.3893687353702,
+        "nail_forces": 248.8669499589014,
+        "inverse_kinematics": 25.964772584149614,
+        "other_environment_step": 63.92439595243195,
+        "camera_render": 183.81351663795067,
+        "frame_vision": 375.7847214831272,
+        "panel_vision": 32.13700195378624,
+        "metrics": 43.713456149271224,
+        "controller": 1.7287880307412706,
+        "acceptance": 8.248347164946608,
+        "setup_io_and_other": 9.417194394336548
+      },
+      "profiler_total_seconds": 1277.988513045013,
+      "physics_kernel_fraction": 0.22252889273454177,
+      "physics_steps": 1266200,
+      "camera_images": 18996
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell, 24467 MiB, 595.91.07",
+    "cpu_quota": "1020000 100000",
+    "cpu_model": "AMD EPYC 7352 24-Core Processor",
+    "python": "3.12.3",
+    "reference_commit": "1d5ee70d8ba1d22368008168e0144c1671f0ad13",
+    "full_runs_overlap": true
+  },
+  "scope": "Execution acceleration of one fixed model-generated program on training layout 41002, plus a strict-success regression on training layout 41001. No new RL training or held-out policy-improvement claim."
+}

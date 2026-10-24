@@ -1,0 +1,17 @@
+{
+  "passes": true,
+  "github_asset": {
+    "apiUrl": "https://api.github.com/repos/AlmondGod/is-rvlmrl/releases/assets/671945177",
+    "contentType": "application/x-gtar",
+    "createdAt": "2026-10-24T10:18:27Z",
+    "digest": "sha256:e74e87c4182f7129cdb7e8ca8ac5041355eed7fafada93a9f1c24d6bbedcf6af",
+    "downloadCount": 0,
+    "id": "RA_kwDOVR_WPc4oDRHZ",
+    "label": "",
+    "name": "cap-rl-shutdown-2026-10-24.tar.gz",
+    "size": 20986864,
+    "state": "uploaded",
+    "updatedAt": "2026-10-24T10:18:34Z",
+    "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/cap-rl-shutdown-2026-10-24.tar.gz"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "passes": true,
+  "observations_recomputed": 40,
+  "scope": "Exact visual-estimate replay from saved sensor bytes; no task execution or reward."
+}

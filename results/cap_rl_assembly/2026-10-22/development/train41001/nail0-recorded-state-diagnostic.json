@@ -1,0 +1,29 @@
+{
+  "scope": "Posthoc ray test at saved states near first corner trigger; not a rerun or model input",
+  "events": [
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 233.29999999793912,
+      "physical_bond": false,
+      "rejection_reason": "joint_gap_too_large",
+      "parameters_provisional": true
+    },
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 233.39999999793676,
+      "physical_bond": false,
+      "rejection_reason": "joint_gap_too_large",
+      "parameters_provisional": true
+    },
+    {
+      "kind": "frame",
+      "index": 0,
+      "time": 233.4999999979344,
+      "physical_bond": false,
+      "rejection_reason": "joint_gap_too_large",
+      "parameters_provisional": true
+    }
+  ]
+}

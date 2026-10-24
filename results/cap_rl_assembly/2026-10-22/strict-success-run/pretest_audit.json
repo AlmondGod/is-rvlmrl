@@ -1,0 +1,13 @@
+{
+  "passes": true,
+  "scope": "Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.",
+  "optimizer_updates": 6,
+  "planned_optimizer_updates": 16,
+  "selected_step": 2,
+  "validation_score": [
+    1.0,
+    1.0
+  ],
+  "stopped_at_validation_ceiling": true,
+  "unique_certified_trajectories": 23
+}

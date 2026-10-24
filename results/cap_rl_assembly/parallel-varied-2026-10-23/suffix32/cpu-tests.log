@@ -1,0 +1,8 @@
+test_changed_prefix_rejected_even_when_full_program_is_legal (analysis.test_assembly_suffix_grammar.SuffixGrammarTests.test_changed_prefix_rejected_even_when_full_program_is_legal) ... ok
+test_logprob_and_gradient_only_include_free_suffix_choices (analysis.test_assembly_suffix_grammar.SuffixGrammarTests.test_logprob_and_gradient_only_include_free_suffix_choices) ... ok
+test_preserves_distinct_prefixes_and_samples_legal_suffixes (analysis.test_assembly_suffix_grammar.SuffixGrammarTests.test_preserves_distinct_prefixes_and_samples_legal_suffixes) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.238s
+
+OK

@@ -7,12 +7,13 @@ import cv2,itertools,numpy as np
 from scipy.optimize import least_squares
 from experiments.astra_camera.perception import project,plane_points
 from .multiview_pose import fit_member
+from .image_ops import mask_pixels,wood_mask
 from .environment import SIZES,YAWS,ASSIGN,GOALS,FIXTURE_HEIGHT
 
 class Vision:
  def __init__(self):self.previous=[None]*4;self.bias=[None]*4;self.last_robot=None;self.diagnostics=[];self.probe_reference=[None]*4;self.probe_residual=[None]*4;self.probe_tcp=[None]*4;self.probe_robot_R=[None]*4;self.rest_reference=[None]*4;self.probe_indices=[None]*4;self.released_prior=[None]*4
  def update(self,frames,cameras,robot,holding=(False,False,False,False),only=None):
-  im=frames[0].astype(float);cam=cameras[0];r,g,b=im[:,:,0],im[:,:,1],im[:,:,2];mask=((r>70)&(r>1.02*g)&(g>1.18*b)).astype(np.uint8);out=[];diag=[]
+  im=frames[0] if frames[0].dtype==np.uint8 else frames[0].astype(float);cam=cameras[0];mask=wood_mask(im,70,1.02);out=[];diag=[]
   T=np.array(cam['world_to_camera'])
   for i,size in enumerate(SIZES):
    if only is not None and i not in only:out.append(None);diag.append('not_requested');continue
@@ -46,7 +47,7 @@ class Vision:
     if j==i or other is None:continue
     ou=np.array([-np.sin(other['yaw']),np.cos(other['yaw']),0]);ov=np.array([ou[1],-ou[0],0]);ot=other['center']+[0,0,SIZES[j,2]/2];ol=SIZES[j,1]/2+.010;ow=SIZES[j,0]/2+.012
     uv,_=project(np.array([ot+ou*a+ov*b for a,b in [(-ol,-ow),(-ol,ow),(ol,ow),(ol,-ow)]]),cam);cv2.fillConvexPoly(mm,np.rint(uv).astype(np.int32),0)
-   yy,xx=np.where(mm)
+   yy,xx=mask_pixels(mm)
    if len(xx)<140:out.append(None);diag.append('wood_pixels_missing');continue
    pts=np.c_[xx,yy].astype(np.float32);rect=cv2.minAreaRect(pts);box=cv2.boxPoints(rect);vv=np.roll(box,-1,axis=0)-box;axis=vv[np.argmax(np.linalg.norm(vv,axis=1))];axis/=np.linalg.norm(axis)
    if carried_R is not None:

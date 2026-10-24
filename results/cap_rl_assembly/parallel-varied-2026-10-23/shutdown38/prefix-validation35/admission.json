@@ -1,0 +1,40 @@
+{
+  "started_utc": "2026-10-24T09:41:02.550159+00:00",
+  "source_sha256": "8050182a1c32f3aa64fcc03a65eda70e0685ad96e1816634636ad7e0c0906b79",
+  "pid": 20055,
+  "command": [
+    "/opt/cap-speed/train-venv/bin/python",
+    "-u",
+    "-m",
+    "analysis.benchmark_assembly_bound_prefix",
+    "--base",
+    "/opt/cap-speed/fused-validation31/success/program.py",
+    "--branch",
+    "/opt/cap-speed/prefix-validation35/branch.py",
+    "--out",
+    "/opt/cap-speed/prefix-validation35/episodes",
+    "--seed",
+    "51002",
+    "--prefix-calls",
+    "16",
+    "--seconds",
+    "1200",
+    "--backend",
+    "vectorized_fused"
+  ],
+  "initial_memory": {
+    "limit": 30999998464,
+    "working": 19179114496,
+    "current": 28610203648
+  },
+  "maximum_concurrent_extra_simulators": 1,
+  "peak_working_bytes": 20990107648,
+  "admission_working_limit_bytes": 21000000000,
+  "stop_working_limit_bytes": 25000000000,
+  "child_oom_score_adj": 1000,
+  "exit_code": -15,
+  "stop_reason": null,
+  "wall_s": 1234.7972571379505,
+  "completed_utc": "2026-10-24T10:01:37.347411+00:00",
+  "passes": false
+}

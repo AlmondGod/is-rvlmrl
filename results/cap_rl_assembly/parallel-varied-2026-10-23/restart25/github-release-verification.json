@@ -1,0 +1,19 @@
+{
+  "passes": true,
+  "release": "cap-rl-varied-assembly-2026-10-24",
+  "scope": "GitHub asset sizes and SHA256 digests match locally payload-verified archives.",
+  "assets": {
+    "online25-step-0000.tar.gz": [
+      1249635555,
+      "8dcc2e02a89951c7912e7c7a7590f4c45b8a961b159ead328b8d3a2dddcc1631"
+    ],
+    "online25-step-0001.tar.gz": [
+      362122780,
+      "6c4bfda60940e98a895404890c33f296941575eae0addfcd534f841d618d6081"
+    ],
+    "online25-step-0002.tar.gz": [
+      361208258,
+      "9a1363f7c572b7f0ffde0a1f05797fd913d3cae4c173f19665b7105fda1dbec3"
+    ]
+  }
+}

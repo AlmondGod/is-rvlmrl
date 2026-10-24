@@ -1,0 +1,19 @@
+{
+  "variant": "all-085",
+  "seed": 41001,
+  "success": false,
+  "reward": 0.0,
+  "error": "RuntimeError:numerical_gate",
+  "wall_s": 412.2370308749378,
+  "simulated_s": 272.09999999702165,
+  "preflip_stable_s": 0.0,
+  "inverted_hold_s": 0.0,
+  "peak_penetration_m": 0.0005109970437352993,
+  "airborne_relative_position_peak_m": 0.0,
+  "airborne_relative_angle_peak_deg": 0.0,
+  "intact_fasteners": 1,
+  "missed_fasteners": 1,
+  "failed_fasteners": 0,
+  "raw_result_sha256": "426674757769c3902caf2772a3fbcac032c56dcce107300fb726fdf4d328b85d",
+  "states_sha256": "8a0afeceec09c37526f8536ecb333d13c30dae773e4601668a62b0e888c688c9"
+}

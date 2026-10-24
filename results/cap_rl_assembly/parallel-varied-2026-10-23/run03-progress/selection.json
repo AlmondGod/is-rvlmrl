@@ -1,0 +1,9 @@
+{
+  "best_step": 0,
+  "validation_success_rate": 0.5,
+  "validation_mean_reward": 0.5,
+  "selection_split": "validation",
+  "training_seconds": 7400.26641010301,
+  "retired": true,
+  "timing_scope": "Loop elapsed plus final validation/checkpoint timestamp interval"
+}

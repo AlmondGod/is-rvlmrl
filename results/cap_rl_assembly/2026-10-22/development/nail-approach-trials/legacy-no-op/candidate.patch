@@ -1,0 +1,11 @@
+--- a/experiments/torso_assembly/frame_skills.py
++++ b/experiments/torso_assembly/frame_skills.py
+@@ -10,7 +10,7 @@
+ def nail_pose(corner):
+  left=corner in (0,3); south=corner in (0,1);sign=-1 if south else 1
+  p=np.array([(-1 if left else 1)*(OUTER-W)/2,sign*(OUTER/2-W-GAP-.018),H])
+- direction=np.array([0,sign*.8,-.6]);x=np.array([1.,0,0]);y=np.cross(direction,x);R=np.column_stack((x,y,direction))
++ direction=np.array([0,sign*.9,-np.sqrt(1-.9**2)]);x=np.array([1.,0,0]);y=np.cross(direction,x);R=np.column_stack((x,y,direction))
+  return p,R
+ 
+ def visual_frame_ok(est):

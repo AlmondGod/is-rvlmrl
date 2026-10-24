@@ -1,0 +1,11 @@
+--- a/experiments/torso_assembly/tool_skills.py
++++ b/experiments/torso_assembly/tool_skills.py
+@@ -11,7 +11,7 @@
+    e=est[v];yaw=e['yaw'];axis=np.array([-np.sin(yaw),np.cos(yaw),0.])
+    if axis[1]<0:axis=-axis
+    self.tip=np.array(e['center'])+sign*axis*(SIZES[v,1]/2-.018);self.tip[2]+=SIZES[v,2]/2
+-   direction=sign*.8*axis+np.array([0,0,-.6]);x=np.cross(direction,[0,0,1.]);x/=np.linalg.norm(x);self.R=np.column_stack((x,np.cross(direction,x),direction))
++   direction=sign*.9*axis+np.array([0,0,-np.sqrt(1-.9**2)]);x=np.cross(direction,[0,0,1.]);x/=np.linalg.norm(x);self.R=np.column_stack((x,np.cross(direction,x),direction))
+   else:
+    if panel is None:raise ValueError('Panel fastening requires an observed sheet pose')
+    n=np.array(panel['rotation'])[:,2];self.tip=np.array(est[index]['center']).copy()

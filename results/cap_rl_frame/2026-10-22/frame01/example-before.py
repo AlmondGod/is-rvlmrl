@@ -1,0 +1,8 @@
+move(7, 3)
+lower()
+close()
+lift(6)
+move(5, -2)
+lower()
+open()
+retreat()

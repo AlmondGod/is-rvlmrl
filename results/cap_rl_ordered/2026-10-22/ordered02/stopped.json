@@ -1,0 +1,5 @@
+{
+  "status": "stopped",
+  "reason": "Persistent fixed-list-order bias: zero correct first pickups on blue-first training samples through update 32; validation only 1/64 at update 40. Restart with deliveries listed in requested order. Test was not evaluated.",
+  "completed_updates": 45
+}
