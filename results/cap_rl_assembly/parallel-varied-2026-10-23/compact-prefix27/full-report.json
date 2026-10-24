@@ -1,0 +1,141 @@
+{
+  "passes": true,
+  "codec_source_sha256": "233d0171f45d7fc311d3bb011d38b42f46b7e60aeb89bf07bef69f412c5cfa77",
+  "configuration": {
+    "out": "../prefix27-full-local",
+    "program": "../prefix16-full-local/continuous/program.py",
+    "seed": 51002,
+    "compact_model_bytes": true,
+    "seconds": 1000.0,
+    "checkpoint_seconds": 300.0
+  },
+  "rows": [
+    {
+      "restore": false,
+      "elapsed_seconds": 603.9707263340242,
+      "receipt": {
+        "instrumented_source_sha256": "6f050127396665d3d5796decab74f9f9a6f27e1a3803ba6d032297b48e2596cf",
+        "snapshot_seconds": 1.3964397092349827,
+        "snapshot_bytes": 179173283,
+        "checkpoint_step": 15000,
+        "executed_calls": [
+          [
+            "position_member",
+            3
+          ],
+          [
+            "release_member",
+            3
+          ],
+          [
+            "position_member",
+            1
+          ],
+          [
+            "release_member",
+            1
+          ],
+          [
+            "position_member",
+            2
+          ],
+          [
+            "release_member",
+            2
+          ],
+          [
+            "position_member",
+            0
+          ],
+          [
+            "release_member",
+            0
+          ],
+          [
+            "park_grippers",
+            null
+          ],
+          [
+            "nail_corner",
+            0
+          ],
+          [
+            "nail_corner",
+            1
+          ],
+          [
+            "nail_corner",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "restore": true,
+      "elapsed_seconds": 325.1907168747857,
+      "receipt": {
+        "instrumented_source_sha256": "77839b35fb70a6a637e4c2d38ae390ee6717fcc7878511448a30109301a3bbb9",
+        "restore_seconds": 2.117074708919972,
+        "checkpoint_step": 15000
+      }
+    }
+  ],
+  "comparison": {
+    "seed": 51002,
+    "same_seed": true,
+    "exact": true,
+    "result_keys_differing_except_wall_s": [],
+    "arrays": {
+      "rows": {
+        "shape_before": [
+          6494,
+          155
+        ],
+        "shape_after": [
+          6494,
+          155
+        ],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nq": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nv": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      },
+      "nu": {
+        "shape_before": [],
+        "shape_after": [],
+        "exact": true,
+        "max_abs_difference": 0.0
+      }
+    },
+    "baseline_success": false,
+    "optimized_success": false,
+    "baseline_error": null,
+    "optimized_error": null,
+    "complete_assembly_sequence": true,
+    "simulated_s": 649.2999999881021,
+    "baseline_wall_s": 602.8147804578766,
+    "optimized_wall_s": 324.4547629998997,
+    "speedup": 1.8579316724595687,
+    "timing_caveat": "These exploratory full runs may overlap on one host; measure isolated throughput separately.",
+    "result_hashes": [
+      "f735a9892322705a29071186f1d7eb944e2e97f7a1b854eaceb8ee8e971553dc",
+      "bff3af2ff5e86aa3270004484ca5f0039f85f69525d1fe142e4d1d7865e8ec1b"
+    ],
+    "state_hashes": [
+      "f31da5be1edb13c6c1b6a72d5a5d3f94e87072a03dc5b1d18e8bb2b864302b91",
+      "f31da5be1edb13c6c1b6a72d5a5d3f94e87072a03dc5b1d18e8bb2b864302b91"
+    ]
+  },
+  "source_sha256": "0200bf633baca3fd4ffe8dc2030e108b7952a2295dc470e6ab92953da7f21ab1",
+  "scope": "Experimental prefix replay only; no training integration, task success, or whole-loop speed claim."
+}

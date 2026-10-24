@@ -19,8 +19,15 @@ bytes immediately after restoration, continued dynamics, object aliases and
 separation of distinct models. Native MuJoCo serialization includes wall-clock
 solver timers, so continued-dynamics comparisons exclude those elapsed timers.
 
-A complete episode comparison with a snapshot at 300 simulated seconds is
-running locally. This codec is experimental and is not installed in the active
+A complete episode comparison with a snapshot at 300 simulated seconds passed: all
+6,494 by 155 recorded values and every non-timing result match. Both runs retain
+the original strict failure. The continuous run also exactly matches the earlier
+full baseline recording. The full snapshot uses 179,173,283 bytes versus the
+original 898,214,220 bytes; capture takes 1.40 seconds and restoration 2.12 seconds.
+The continuous run takes 603.97 seconds, and the restored remainder 325.19 seconds.
+The combined local process peaks at 3,839,852,544 bytes RSS and 4,524,298,032 bytes
+of macOS memory footprint. This is not evidence that eight snapshot workers fit
+the GPU pod. This codec is experimental and is not installed in the active
 learner. Production use still needs memory-budget measurements, cache identity
 and prefix-boundary checks, and GPU-host validation. Pickle inputs must be
 trusted locally generated snapshots.

@@ -93,6 +93,7 @@ def main():
     parser.add_argument('--compare-title', default='After RL')
     parser.add_argument('--out', required=True, help='Output .mp4 path; adjacent .png poster and .json metadata')
     parser.add_argument('--speed', type=float, default=15.)
+    parser.add_argument('--note', default='', help='Context shown on every video frame and saved in metadata')
     args = parser.parse_args()
     if args.speed <= 0:
         parser.error('speed must be positive')
@@ -103,11 +104,13 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     with imageio.get_writer(out, fps=10, codec='libx264', quality=8, macro_block_size=16) as writer:
         for seconds in list(np.arange(0, duration, args.speed / 10)) + [duration] * 20:
-            frame = Image.new('RGB', (640*len(episodes), 672), '#101820')
+            frame = Image.new('RGB', (640*len(episodes), 704 if args.note else 672), '#101820')
             for i, episode in enumerate(episodes):
                 frame.paste(panel(episode, seconds, titles[i]), (640*i, 0))
             ImageDraw.Draw(frame).text((14, 648), f'{args.speed:g}x simulation speed | recorded MuJoCo states | paused side remains at its last recorded state',
                                       font=ImageFont.load_default(size=15), fill='#9eafba')
+            if args.note:
+                ImageDraw.Draw(frame).text((14, 680), args.note, font=ImageFont.load_default(size=15), fill='#f2cf8d')
             writer.append_data(np.array(frame))
         frame.save(out.with_suffix('.png'))
     for episode in episodes:
@@ -115,7 +118,7 @@ def main():
     out.with_suffix('.json').write_text(json.dumps(dict(episodes=[args.episode, args.compare],
         evidence=[e['evidence'] for e in episodes],
         renderer_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        titles=titles[:len(episodes)], speed=args.speed, simulation_duration_s=float(duration),
+        titles=titles[:len(episodes)], note=args.note, speed=args.speed, simulation_duration_s=float(duration),
         states_replayed=True, dynamics_rerun=False,
         display_headlight=dict(ambient=[.4]*3, diffuse=[.7]*3)), indent=2))
     print(out)
