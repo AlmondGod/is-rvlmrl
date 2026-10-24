@@ -1,0 +1,4 @@
+Linux CPU tensor fixtures only
+python -m unittest analysis.test_assembly_pipelined_rollouts
+Ran 4 tests in 0.017s
+OK

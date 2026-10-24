@@ -1,6 +1,6 @@
 # Parallel rollouts and varied-placement RL
 
-Status at 2026-10-24 08:10 UTC: run 25 has completed two balanced rollout rounds and eight GRPO updates. Its first post-training validation is running. The first two rounds reused certified rewards and took 102.60 seconds of loop time; this excludes the substantial earlier cost of generating those physical certificates. No held-out improvement is claimed; all 24 final test layouts remain untouched.
+Status at 2026-10-24 08:34 UTC: run 25 has completed two balanced rollout rounds and eight GRPO updates. Its first post-training validation is 3/8 versus the initial 4/8: one paired win and two losses. The baseline remains selected and training continues across the remaining layouts. The first two rounds reused certified rewards and took 102.60 seconds of loop time; this excludes the substantial earlier cost of generating those physical certificates. No held-out improvement is claimed; all 24 final test layouts remain untouched.
 
 The preceding run was interrupted by a host-memory OOM after four updates. Exact replay recovery correctly stopped when GPU gradients and checkpoint weights differed despite identical programs and rewards. Run 25 is a separately recorded rerun from the original warm adapter, with the same learning protocol, and saves complete AdamW/RNG state atomically with each adapter. Both failed attempts and costs are preserved in [recovery21](recovery21/README.md). The new state-checkpoint implementation and 39-test regression suite passed before launch.
 
