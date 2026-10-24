@@ -8,9 +8,27 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import stat
 import tarfile
 
 from analysis.cap_rl_assembly_records import input_receipt
+
+
+def add_payload(archive, source, member, seen):
+    """Represent repeated immutable bytes as tar hard links, not duplicate weights."""
+    if source.is_symlink():raise ValueError('Unexpected evidence symlink: '+str(source))
+    digest=hashlib.sha256(source.read_bytes()).hexdigest()
+    identity=(digest,stat.S_IMODE(source.stat().st_mode))
+    info=archive.gettarinfo(str(source),arcname=str(member))
+    duplicate=identity in seen
+    if duplicate:
+        info.type=tarfile.LNKTYPE;info.linkname=seen[identity];info.size=0
+        archive.addfile(info)
+    else:
+        with source.open('rb') as stream:archive.addfile(info,stream)
+        seen[identity]=str(member)
+    return dict(member=str(member),source=str(source),sha256=digest,
+                **({'content_link':info.linkname} if duplicate else {}))
 
 
 def verify_audit_receipts(run, replay):
@@ -76,13 +94,10 @@ def main():
                     evidence_root_mapping={str(v):'evidence/'+k for k,v in evidence.items()},
                     files=[])
     partial = out.with_suffix(out.suffix+'.partial')
+    seen={}
     with tarfile.open(partial, 'w:gz', compresslevel=1) as archive:
         for source, member in sorted(sources):
-            if source.is_symlink():
-                raise ValueError('Unexpected evidence symlink: '+str(source))
-            digest = hashlib.sha256(source.read_bytes()).hexdigest()
-            archive.add(source, arcname=str(member), recursive=False)
-            manifest['files'].append(dict(member=str(member), source=str(source), sha256=digest))
+            manifest['files'].append(add_payload(archive,source,member,seen))
         data = (json.dumps(manifest, indent=2)+'\n').encode()
         info = tarfile.TarInfo('bundle_manifest.json'); info.size = len(data)
         archive.addfile(info, io.BytesIO(data))

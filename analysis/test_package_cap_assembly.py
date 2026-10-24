@@ -2,10 +2,11 @@
 import json
 from pathlib import Path
 import tempfile
+import tarfile
 import unittest
 
 from analysis.cap_rl_assembly_records import input_receipt
-from analysis.package_cap_assembly import scored_rows, verify_audit_receipts
+from analysis.package_cap_assembly import add_payload, scored_rows, verify_audit_receipts
 
 
 class PackagingTests(unittest.TestCase):
@@ -76,6 +77,22 @@ class PackagingTests(unittest.TestCase):
             self.assertIn('parent-failure',{r['evidence_id'] for r in scored_rows(run)})
             self.assertIn('parent_run/metadata.json',input_receipt(run))
             with self.assertRaises(ValueError):verify_audit_receipts(run,replay)
+
+    def test_deduplicated_payloads_keep_every_path_and_byte(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);a=root/'a';b=root/'b'
+            a.write_bytes(b'weights fixture'*100);b.write_bytes(a.read_bytes())
+            archive=root/'payload.tar';seen={}
+            with tarfile.open(archive,'w') as stream:
+                first=add_payload(stream,a,'run/initial/weights',seen)
+                second=add_payload(stream,b,'run/parent/weights',seen)
+            self.assertEqual(first['sha256'],second['sha256'])
+            self.assertEqual(second['content_link'],'run/initial/weights')
+            with tarfile.open(archive) as stream:
+                self.assertTrue(stream.getmember('run/parent/weights').islnk())
+                self.assertEqual(stream.extractfile('run/parent/weights').read(),a.read_bytes())
+                stream.extractall(root/'extract',filter='data')
+            self.assertEqual((root/'extract/run/parent/weights').read_bytes(),a.read_bytes())
 
 
 if __name__ == '__main__': unittest.main()
