@@ -30,6 +30,15 @@ def main():
     records = rollouts + [row for _, v in validation for row in v['rows']]
     raw=read(run/'raw_test_baseline.json') if (run/'raw_test_baseline.json').exists() else None
     records += test['before'] + test['after'] + (raw['rows'] if raw else [])
+    transfers = {}
+    for split in ('validation', 'test'):
+        path = run/f'unconstrained_{split}_comparison.json'
+        if path.exists():
+            transfer = read(path)
+            records += transfer['before'] + transfer['after']
+            transfers[split] = {key: transfer[key] for key in (
+                'evaluation_decoding', 'selection_role', 'baseline', 'trained',
+                'paired_wins', 'paired_losses', 'delta_success_rate', 'scope')}
     unique = {r['evidence_id']: r for r in records if r.get('evidence_id')}
     failures = lambda rows: dict(Counter(r.get('error') or 'strict_acceptance_failure'
                                         for r in rows if not r['success']))
@@ -41,6 +50,7 @@ def main():
         optimizer_updates=len(training)*metadata.get('update_epochs',1),
         policy_decoding=metadata.get('policy_decoding','unrestricted_program'),
         policy_action_space=metadata.get('policy_action_space'),
+        unconstrained_transfer=transfers,
         sampled_training_programs=len(rollouts), training_wall_seconds=selection['training_seconds'],
         allocated_training_gpu_hours=selection['training_seconds']/3600,
         compute_scope=selection.get('training_seconds_scope',
@@ -65,6 +75,7 @@ def main():
         generation_seconds=sum(r.get('generation_s',0.) for r in training),
         logprob_seconds=sum(r.get('logprob_s',0.) for r in training),
         exposed_simulation_wait_seconds=sum(r.get('reward_wait_after_preparation_s',0.) for r in training),
+        exposed_simulation_wait_scope='Full environment reward wait after overlapping old/reference log-probabilities; includes physics, rendering, perception and scripted control. Not a pure MuJoCo kernel time.',
         optimization_seconds=sum(r.get('optimization_seconds',0.) for r in training),
         full_visual_language_policy=False, learned_motor_controller=False,
         task_prompt_identical_across_layouts=True, physical_validation=False)
@@ -76,6 +87,12 @@ def main():
     if audit:
         for name in ('paired_exact_two_sided_p','baseline_success_exact_95_ci','trained_success_exact_95_ci'):
             summary[name] = audit[name]
+        for split, transfer in transfers.items():
+            checked = audit.get('unconstrained_'+split)
+            if checked:
+                for name in ('paired_exact_two_sided_p', 'baseline_success_exact_95_ci',
+                             'trained_success_exact_95_ci'):
+                    transfer[name] = checked[name]
         summary['uncertainty_note'] = (
             'Exact success-rate intervals describe this small layout sample. '
             'The retained empirical paired bootstrap interval can collapse at all wins '
@@ -99,10 +116,15 @@ def main():
     summary['retired_exploratory_pilots'] = []
     for pilot in args.retired_pilot:
         retired = read(Path(pilot)/'retired.json')
+        pilot_metadata = read(Path(pilot)/'metadata.json')
+        pilot_metrics = retired['last_metric']
+        rounds = retired['completed_updates']
         summary['retired_exploratory_pilots'].append(dict(
             run=Path(pilot).name,
-            optimizer_updates=retired['completed_updates'],
-            training_loop_gpu_hours=retired['last_metric']['elapsed_seconds']/3600,
+            rollout_rounds=rounds,
+            optimizer_updates=pilot_metrics.get('optimizer_steps_total',
+                rounds*pilot_metadata.get('update_epochs', 1)),
+            training_loop_gpu_hours=pilot_metrics['elapsed_seconds']/3600,
             process_gpu_hours=retired['trainer_elapsed_seconds']/3600,
             weights_used_to_initialize_final_run=False,
             reason=retired['reason']))
@@ -151,6 +173,34 @@ def main():
     fig.suptitle('Qwen3.5-4B | Three-arm frame assembly, fastening and flip', fontsize=13)
     fig.savefig(out/'qwen35-three-arm-results.png', dpi=180)
     plt.close(fig)
+    if 'test' in transfers:
+        transfer = transfers['test']
+        fig, ax = plt.subplots(figsize=(8.8, 4.8), constrained_layout=True)
+        labels = ['Prior\nconstrained', 'Selected\nconstrained',
+                  'Prior\nfree-form', 'Selected\nfree-form']
+        values = [test['baseline'], test['trained'], transfer['baseline'], transfer['trained']]
+        rates = [100*item['success_rate'] for item in values]
+        ax.bar(labels, rates, color=['#b1b9c4', '#087e8b', '#b1b9c4', '#8a60a6'], width=.65)
+        intervals = None
+        if audit and 'baseline_success_exact_95_ci' in transfer:
+            intervals = [audit['baseline_success_exact_95_ci'], audit['trained_success_exact_95_ci'],
+                         transfer['baseline_success_exact_95_ci'], transfer['trained_success_exact_95_ci']]
+            ax.errorbar(range(4), rates,
+                yerr=[[v-100*c[0] for v,c in zip(rates,intervals)],
+                      [100*c[1]-v for v,c in zip(rates,intervals)]],
+                fmt='o', color='#253343', markersize=4, capsize=5,
+                label='Exact 95% success-rate interval')
+            ax.legend(loc='upper left', fontsize=8)
+        for i, item in enumerate(values):
+            height = 100*(intervals[i][1] if intervals else item['success_rate'])+3
+            ax.text(i, height, f"{item['successes']}/{item['n']}", ha='center')
+        ax.axvline(1.5, color='#dddddd')
+        ax.set(ylim=(0, 120), ylabel='Strict physical success (%)',
+               title='Same frozen weights and held-out layouts: constrained and free-form decoding')
+        ax.spines[['top', 'right']].set_visible(False)
+        ax.grid(axis='y', alpha=.15); ax.set_axisbelow(True)
+        fig.savefig(out/'qwen35-decoding-transfer.png', dpi=180)
+        plt.close(fig)
     print(json.dumps(summary, indent=2))
 
 
