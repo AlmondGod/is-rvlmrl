@@ -1,0 +1,28 @@
+{
+  "mujoco": "3.17.0",
+  "warp": "1.18.0",
+  "scope": "Initial scene physics only; no task, fasteners or RGB-feedback equivalence claim.",
+  "nq": 68,
+  "nv": 63,
+  "ngeom": 159,
+  "rows": [
+    {
+      "worlds": 1,
+      "warmup_s": 222.60769527003868,
+      "seconds": 0.21952803601743653,
+      "world_steps_per_second": 1822.0907327218517
+    },
+    {
+      "worlds": 8,
+      "warmup_s": 0.5220304760150611,
+      "seconds": 0.22866768098901957,
+      "world_steps_per_second": 13994.107020981515
+    },
+    {
+      "worlds": 32,
+      "warmup_s": 0.526080738985911,
+      "seconds": 0.24764958798186854,
+      "world_steps_per_second": 51685.93295191407
+    }
+  ]
+}
