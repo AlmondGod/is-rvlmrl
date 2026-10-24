@@ -1,0 +1,8 @@
+{
+  "passes": true,
+  "archive": "initial-observation09.tar.gz",
+  "bytes": 1100682,
+  "sha256": "ea88c2db081dd7bd11be2513dec7bb4d5daedeb9731ca86f2739258515fb0af6",
+  "payloads_verified": 18,
+  "scope": "Training-only initial RGB observations, no model update or task reward"
+}

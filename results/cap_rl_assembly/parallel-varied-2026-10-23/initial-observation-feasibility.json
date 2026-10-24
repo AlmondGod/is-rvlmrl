@@ -1,0 +1,21 @@
+{
+  "passes": true,
+  "scope": "Initial RGB observation feasibility, no training or held-out scores",
+  "source_sha256": "5d3dcff504665b8b146daf2f042e39f7a0b00993f213cd6bbd3c51614b7c9cd3",
+  "rows": [
+    {
+      "input": "initial-observation08/51001",
+      "exact_sensor_replay": true,
+      "observed_members": 4,
+      "prompt_fragment": "Initial camera estimates in the calibrated workspace frame (metres and degrees).\nThese are visual estimates, not exact object poses. Missing observations remain unknown.\nMember 0: x=-0.8435 m, y=0.0169 m, yaw=2.29 degrees.\nMember 1: x=-0.6887 m, y=-0.0336 m, yaw=2.93 degrees.\nMember 2: x=0.8526 m, y=0.0315 m, yaw=-0.80 degrees.\nMember 3: x=0.6868 m, y=-0.0097 m, yaw=2.19 degrees.\nLeft side, nearer to farther from workspace centre: members 1, 0.\nRight side, nearer to farther from workspace centre: members 3, 2.",
+      "receipt_sha256": "782b8dcdbb92056bd1de51a87b57b8191b55ad38b34b1a6f640241ac8b68a4ce"
+    },
+    {
+      "input": "initial-observation09/51002",
+      "exact_sensor_replay": true,
+      "observed_members": 4,
+      "prompt_fragment": "Initial camera estimates in the calibrated workspace frame (metres and degrees).\nThese are visual estimates, not exact object poses. Missing observations remain unknown.\nMember 0: x=-0.8457 m, y=-0.0075 m, yaw=-0.56 degrees.\nMember 1: x=-0.6838 m, y=-0.0208 m, yaw=2.32 degrees.\nMember 2: x=0.6887 m, y=-0.0084 m, yaw=-2.13 degrees.\nMember 3: x=0.8432 m, y=0.0089 m, yaw=-3.13 degrees.\nLeft side, nearer to farther from workspace centre: members 1, 0.\nRight side, nearer to farther from workspace centre: members 2, 3.",
+      "receipt_sha256": "6d8f4e327388c14e4bdeb72d637205ece32a3a2e0f4cb94e5b19857044e94f64"
+    }
+  ]
+}
