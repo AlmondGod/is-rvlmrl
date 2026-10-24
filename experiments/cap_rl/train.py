@@ -144,6 +144,30 @@ def policy_loss(logp, old, reference, mask, advantage, beta=.02, clip=.2):
     return per_sequence.mean(), (kl * mask).sum() / mask.sum().clamp_min(1)
 
 
+def update_policy(model, optimizer, sequences, attention, mask, old, reference, advantage,
+                  *, microbatch, epochs, beta, temperature):
+    """Several clipped GRPO updates reuse one expensive physical rollout batch."""
+    size, length = mask.shape
+    metrics = []
+    for epoch in range(epochs):
+        optimizer.zero_grad(set_to_none=True)
+        total_loss = total_kl = 0.
+        for i in range(0, size, microbatch):
+            sl = slice(i, i+microbatch)
+            logp = token_logprobs(model, sequences[sl], attention[sl], length, temperature)
+            loss, kl = policy_loss(logp, old[sl], reference[sl], mask[sl], advantage[sl], beta)
+            fraction = sequences[sl].shape[0] / size
+            (loss * fraction).backward()
+            total_loss += float(loss.detach()) * fraction
+            total_kl += float(kl.detach()) * fraction
+        grad_norm = float(torch.nn.utils.clip_grad_norm_(model.parameters(), 1.))
+        if not all(map(lambda x: x == x and abs(x) != float('inf'), [total_loss, total_kl, grad_norm])):
+            raise RuntimeError('nonfinite update')
+        optimizer.step()
+        metrics.append(dict(epoch=epoch+1, loss=total_loss, kl=total_kl, grad_norm=grad_norm))
+    return metrics
+
+
 def rows_for(layouts, texts, results):
     return [{"layout_id": layout.key, "prompt": task.prompt(layout), "completion": text, **result}
             for layout, text, result in zip(layouts, texts, results)]
@@ -251,26 +275,15 @@ def train(args):
             prepare(sequences, attention, mask)
         old, reference = torch.cat(old), torch.cat(reference)
         optimization_started = time.monotonic()
-        optimizer.zero_grad(set_to_none=True)
-        total_loss = total_kl = 0.
-        for i in range(0, size, args.microbatch):
-            sl = slice(i, i+args.microbatch)
-            logp = token_logprobs(model, sequences[sl], attention[sl], length, args.sampling_temperature)
-            loss, kl = policy_loss(logp, old[sl], reference[sl], mask[sl],
-                                   advantage[sl], args.beta)
-            fraction = sequences[sl].shape[0] / size
-            (loss * fraction).backward()
-            total_loss += float(loss.detach()) * fraction
-            total_kl += float(kl.detach()) * fraction
-        grad_norm = float(torch.nn.utils.clip_grad_norm_(model.parameters(), 1.))
-        if not all(map(lambda x: x == x and abs(x) != float("inf"), [total_loss, total_kl, grad_norm])):
-            raise RuntimeError("nonfinite update")
-        optimizer.step()
+        epoch_metrics = update_policy(model, optimizer, sequences, attention, mask, old, reference, advantage,
+            microbatch=args.microbatch, epochs=args.update_epochs, beta=args.beta, temperature=args.sampling_temperature)
         torch.cuda.synchronize()
         metric = {"step": step, "reward": float(reward.mean()),
                   "success_rate": sum(r["success"] for r in results)/size,
                   "active_groups": int((reward.reshape(-1, args.group_size).std(-1)>0).sum()),
-                  "loss": total_loss, "kl": total_kl, "grad_norm": grad_norm,
+                  "loss": epoch_metrics[-1]['loss'], "kl": epoch_metrics[-1]['kl'],
+                  "grad_norm": epoch_metrics[-1]['grad_norm'],
+                  "epoch_metrics": epoch_metrics, "optimizer_steps_total": step*args.update_epochs,
                   "elapsed_seconds": time.monotonic()-started,
                   "step_seconds": time.monotonic()-step_started,
                   "optimization_seconds": time.monotonic()-optimization_started,
@@ -384,6 +397,8 @@ def main():
                         help='Compute GPU old/reference log-probabilities while independent physics runs')
     parser.add_argument('--assembly-split', choices=('pilot_v1', 'varied_v2'), default='pilot_v1')
     parser.add_argument('--sampling-temperature', type=float, default=1.)
+    parser.add_argument('--update-epochs', type=int, default=1,
+                        help='Clipped GRPO optimizer steps per physical rollout batch')
     parser.add_argument('--support-profile', choices=('contact_only', 'contact_and_nails'), default='contact_only')
     parser.add_argument('--controller-profile', choices=('original', 'southwest_approach'), default='original')
     parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original',
@@ -398,7 +413,7 @@ def main():
     if not 0 < args.sampling_temperature < float('inf'):
         parser.error('A finite positive sampling temperature is required')
     if args.checkpoint_every < 0 or args.group_size < 2 or min(args.steps, args.prompts_per_step, args.microbatch, args.physics_workers,
-                                  args.max_tokens, args.eval_every, args.physics_threads) < 1:
+                                  args.max_tokens, args.eval_every, args.physics_threads, args.update_epochs) < 1:
         parser.error("positive sizes and group_size >= 2 required")
     try:
         train(args) if args.mode == "train" else test(args)

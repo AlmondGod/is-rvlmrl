@@ -21,14 +21,22 @@ progress remains diagnostic only. A truncated response is unscorable and is
 assigned zero before physical execution. Complete responses retain the actual
 physical evaluator; there is no positive reward predictor or repaired program.
 
-Initial training configuration: 16 updates, four prompts per update, four
+Initial training configuration: 16 rollout rounds, four prompts per round, four
 samples per prompt, temperature 1.2, 512 completion tokens, learning rate
 0.00005, KL coefficient 0.005, rank-16 all-linear LoRA, seed 42, validation
-every four updates, adapter snapshot every update. Temperature is applied to
+every four rounds, adapter snapshot every round. Four clipped GRPO optimizer
+epochs reuse each physical rollout batch: 64 optimizer steps and 256 sampled
+programs if all planned rounds complete. Old rollout and reference probabilities
+remain frozen across these epochs. Temperature is applied to
 both sampling and all old/current/reference log-probabilities. The unchanged
 rollout policy computes its log-probabilities concurrently with physics; the
 optimizer waits for every reward, so no stale-policy or off-policy update is
 introduced. Extensions or changes may use training/validation evidence only.
+
+Independent fresh physical replay is preselected for held-out seeds 53001,
+53012 and 53024, regardless of success/failure, after checkpoint selection and
+the primary evaluation. All test records also undergo certificate and model
+regeneration checks.
 
 Checkpoint selection uses validation strict success, with the initial adapter
 eligible. The intended final target is at least 20/24 held-out strict successes;

@@ -9,6 +9,27 @@ from experiments.cap_rl import train, task_assembly
 
 
 class ParallelRollouts(unittest.TestCase):
+    def test_reused_rollouts_keep_old_probabilities_and_microbatch_weighting(self):
+        class Model(torch.nn.Module):
+            def __init__(self):
+                super().__init__(); self.scores=torch.nn.Parameter(torch.tensor([.1,.2,-.1]))
+            def forward(self,input_ids,**kwargs):
+                return SimpleNamespace(logits=self.scores.expand(input_ids.shape[0],2,3))
+        tokens=torch.tensor([[0,1],[0,2]]); attention=torch.ones_like(tokens)
+        mask=torch.ones(2,1); advantage=torch.tensor([1.,-1.]); weights=[]
+        for microbatch in (1,2):
+            model=Model(); optimizer=torch.optim.SGD(model.parameters(),lr=.1)
+            old=train.token_logprobs(model,tokens,attention,1,1.2).detach().clone()
+            original=old.clone()
+            with patch.object(optimizer,'step',wraps=optimizer.step) as step:
+                metrics=train.update_policy(model,optimizer,tokens,attention,mask,old,old,advantage,
+                    microbatch=microbatch,epochs=3,beta=.02,temperature=1.2)
+                self.assertEqual(step.call_count,3);self.assertEqual(len(metrics),3)
+            torch.testing.assert_close(old,original)
+            self.assertGreater(float(model.scores[1].detach()),.2)
+            weights.append(model.scores.detach())
+        torch.testing.assert_close(weights[0],weights[1])
+
     def test_temperature_logprobs_match_sampling_distribution(self):
         logits = torch.tensor([[[1., 2., -1.], [2., -.5, 1.], [0., 0., 0.]]])
         model = lambda **kwargs: SimpleNamespace(logits=logits)
