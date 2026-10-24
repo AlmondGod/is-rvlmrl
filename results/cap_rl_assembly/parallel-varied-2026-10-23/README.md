@@ -2,6 +2,17 @@
 
 Status: parallel execution and GPU optimization preflights verified. The prior policy passes 4/8 fresh validation placements. Constrained-order GRPO is now training; the 24 held-out placements remain untouched. No new held-out policy-performance claim yet.
 
+Interim measured progress at 2026-10-24 03:32 UTC is preserved in
+`run03-progress/`: two rollout rounds, 16 sampled programs and eight optimizer
+updates. Sampled training successes were 1/8 and 6/8. Greedy validation remains
+4/8 because the generated ordering is unchanged; this is not yet a learned
+improvement. The training loop used 2,395.86 seconds (0.666 allocated GPU-hours),
+including CPU environment waits. Generation totaled 21.60 seconds and the eight
+optimizer updates totaled 25.32 seconds. Environment reward wait after overlap
+totaled 2,341.98 seconds; this includes rendering, vision and scripted control,
+not only the MuJoCo kernel. The first two checkpoints and all their certified
+evidence have hash-verified local backups. Training continues.
+
 Eight fresh training layouts (51001–51008) each execute the first 20 simulated seconds of the same complete program. Every run starts from reset, uses the vectorized backend, original physics/controller/camera parameters, and one OpenCV thread per worker. There is no rollout-cache reuse. Process startup is included.
 
 | Workers | Time for eight layouts | Throughput vs serial |
