@@ -73,8 +73,11 @@ def main():
         trainer.rollout, trainer.train, trainer.test, trainer.dump)
 
     def rollout(*args, **kwargs):
+        # The original trainer writes through its module-global rollout name,
+        # which now points to this wrapper. Capture that fresh timing first.
+        rollout.last_timing = {}
         sequences, attention, mask, texts, results = original_rollout(*args, **kwargs)
-        rollout.last_timing = dict(getattr(original_rollout, 'last_timing', {}))
+        rollout.last_timing = dict(rollout.last_timing or getattr(original_rollout, 'last_timing', {}))
         return sequences, attention, mask, texts, strict_results(results)
 
     def train(args):

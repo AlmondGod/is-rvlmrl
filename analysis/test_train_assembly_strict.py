@@ -34,7 +34,10 @@ class StrictRewardTests(unittest.TestCase):
             raw=[dict(success=False,reward=.8,valid=True)]
             observed=[]
             fake=SimpleNamespace()
-            fake.rollout=lambda: ('sequences','attention','mask','texts',raw)
+            def original_rollout():
+                fake.rollout.last_timing={'generation_s':2.,'generation_and_rewards_s':4.}
+                return ('sequences','attention','mask','texts',raw)
+            fake.rollout=original_rollout
             fake.dump=lambda path,value: Path(path).write_text(json.dumps(value))
             def original_train(arguments):
                 out.mkdir()
@@ -54,6 +57,7 @@ class StrictRewardTests(unittest.TestCase):
             self.assertEqual(observed[0][4][0]['dense_reward'],.8)
             self.assertEqual(raw[0]['reward'],.8)
             self.assertEqual(observed[1],'tested')
+            self.assertEqual(fake.rollout.last_timing,{'generation_s':2.,'generation_and_rewards_s':4.})
 
 
 class NecessaryCallTests(unittest.TestCase):
