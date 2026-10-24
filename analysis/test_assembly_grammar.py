@@ -48,7 +48,7 @@ class GrammarTests(unittest.TestCase):
         module._GRAMMAR=self.g
         values=self.completion([[3,1,0,2],[2,0,3,1],[1,3,2,0]])
         length=len(values);raw=torch.randn(1,length+1,256,requires_grad=True)
-        model=lambda **kwargs:SimpleNamespace(logits=raw)
+        model=lambda **kwargs:SimpleNamespace(logits=raw[:,kwargs['logits_to_keep']-1])
         seq=torch.tensor([[7,8]+values]);attention=torch.ones_like(seq)
         actual=module.constrained_logprobs(model,seq,attention,length,temperature=2.5)
         expected=[]

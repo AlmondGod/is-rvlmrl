@@ -92,14 +92,17 @@ def constrained_logprobs(model, sequences, attention, completion_length, tempera
     position_ids=attention.long().cumsum(-1)-1
     position_ids.masked_fill_(attention==0,1)
     # Normalize over the actually available index tokens, matching sampling.
+    # Qwen supports selecting hidden-state positions before its vocabulary head.
+    # Only 12 distributions are needed; avoid materializing logits for syntax.
+    positions=torch.tensor(grammar.choices,device=sequences.device)+sequences.shape[1]-completion_length-1
     logits=model(input_ids=sequences,attention_mask=attention,position_ids=position_ids,
-                 use_cache=False,logits_to_keep=completion_length+1).logits[:,:-1]
+                 use_cache=False,logits_to_keep=positions).logits
     labels=sequences[:,-completion_length:]
     completions=labels.tolist()
     for completion in completions:grammar.validate(completion)
     rows=[]
-    for position in grammar.choices:
-        choices=logits[:,position,grammar.digits].float()/temperature
+    for choice,position in enumerate(grammar.choices):
+        choices=logits[:,choice,grammar.digits].float()/temperature
         allowed=torch.tensor([[d in grammar.allowed(position,c) for d in grammar.digits]
                               for c in completions],device=choices.device,dtype=torch.bool)
         normalized=choices.masked_fill(~allowed,float('-inf')).log_softmax(-1)
