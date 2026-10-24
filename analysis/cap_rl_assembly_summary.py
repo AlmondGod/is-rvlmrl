@@ -10,6 +10,29 @@ def read(path):
     return json.loads(path.read_text())
 
 
+def discarded_preference_attempt(path):
+    """Report failed optimizer work separately without inventing physical rewards."""
+    path = Path(path)
+    receipt = read(path/'infrastructure_failure.json')
+    metadata = read(path/'metadata.json')
+    rows = [json.loads(line) for line in (path/'training.jsonl').read_text().splitlines()]
+    if metadata.get('optimizer_algorithm') != 'offline_dpo_v1':
+        raise ValueError('Expected a discarded offline preference attempt')
+    if ([row['step'] for row in rows] != list(range(1, len(rows)+1)) or
+            receipt['optimizer_updates'] != len(rows) or
+            any(row.get('new_training_physics_episodes') != 0 for row in rows)):
+        raise ValueError('Discarded attempt accounting is inconsistent')
+    return dict(run=path.name, algorithm='offline_dpo_v1', optimizer_updates=len(rows),
+        optimization_seconds=sum(row['optimization_seconds'] for row in rows),
+        last_update_elapsed_seconds=rows[-1]['elapsed_seconds'] if rows else 0.,
+        replayed_training_programs=sum(row['replayed_programs'] for row in rows),
+        new_training_physics_episodes=0,
+        completed_new_physical_episodes=receipt['new_physical_episodes_completed'],
+        validation_reward_assigned=receipt['validation_reward_assigned'],
+        weights_used_to_initialize_final_run=False, reason=receipt['reason'],
+        timing_scope='Optimizer and last-update loop measurements only; setup, failed validation launch and recovery are excluded. These intervals overlap the continuous lineage allocation window and must not be added to it.')
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', required=True)
@@ -17,6 +40,8 @@ def main():
     p.add_argument('--retired-pilot', action='append', default=[],
                    help='Separate exploratory pilot; repeat for multiple runs. Never added to final-run updates.')
     p.add_argument('--verification-status', help='Completed supervisor status for end-to-end allocation time')
+    p.add_argument('--discarded-preference-attempt', action='append', default=[],
+                   help='Infrastructure-failed preference run; reported separately from final policy lineage.')
     args = p.parse_args()
     run, out = Path(args.run), Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -133,6 +158,8 @@ def main():
                 datetime.fromisoformat(parent_start)).total_seconds()/3600
             summary['lineage_end_to_end_timing_scope']='Continuous GPU allocation from parent GRPO process start through final verification, including setup, diagnostic work, environment waits and the phase transition.'
     summary['retired_exploratory_pilots'] = []
+    summary['discarded_preference_attempts'] = [discarded_preference_attempt(path)
+                                              for path in args.discarded_preference_attempt]
     for pilot in args.retired_pilot:
         retired = read(Path(pilot)/'retired.json')
         pilot_metadata = read(Path(pilot)/'metadata.json')
