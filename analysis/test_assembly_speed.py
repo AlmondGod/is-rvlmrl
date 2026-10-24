@@ -56,6 +56,9 @@ class SpeedEquivalence(unittest.TestCase):
                 self.assertNotEqual(a['evidence_id'], b['evidence_id'])
                 self.assertFalse(b['cache_hit']); self.assertTrue(c['cache_hit'])
                 self.assertEqual(run.call_count, 2)
+                with patch.object(Frame, 'velocity', lambda self, p: np.zeros(3)):
+                    with self.assertRaisesRegex(RuntimeError, 'backend was modified'):
+                        task.provenance()
                 with self.assertRaisesRegex(RuntimeError, 'fresh process'):
                     task.configure(assembly_backend='original')
         finally:

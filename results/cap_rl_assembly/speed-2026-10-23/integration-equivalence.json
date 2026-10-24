@@ -14,6 +14,6 @@
   },
   "tested_candidate_archive_sha256": "1e51bd305b7ce8194ab0177a0f9fb93d602ec06aba7fe16534666c7e6dd8babf",
   "tested_backend_sha256": "bcde8332fd680e9759abaf4676f8d4149dd3768ca89f63321f1ef728a904db90",
-  "integrated_backend_sha256": "13113cf6d7476fc4745f87c76c27e331622adbb004dab4e586cdba2d7b531b75",
+  "integrated_backend_sha256": "f871203c6eea6c68ca944d79b2b7b634588f217428f9655f2f53e5688fba56f4",
   "integration_changes": "Module relocation, fail-closed original-source guards, idempotent installation, explicit backend selection and provenance/cache/worker wiring. Numerical functions and perception files unchanged from full-run candidate."
 }

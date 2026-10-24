@@ -14,6 +14,8 @@ BACKENDS = ('original', 'vectorized')
 
 
 def backend():
+    if _INSTALLED:
+        install()  # Verify that the selected methods were not replaced mid-run.
     return 'vectorized' if _INSTALLED else 'original'
 
 
