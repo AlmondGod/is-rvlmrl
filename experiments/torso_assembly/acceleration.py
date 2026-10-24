@@ -12,7 +12,8 @@ from scipy.spatial.transform import Rotation
 _INSTALLED = False
 _PIXELS_INSTALLED = False
 _CONNECTORS_INSTALLED = False
-BACKENDS = ('original', 'vectorized', 'vectorized_pixels', 'vectorized_native')
+_FUSED_INSTALLED = False
+BACKENDS = ('original', 'vectorized', 'vectorized_pixels', 'vectorized_native', 'vectorized_fused')
 
 
 def backend():
@@ -21,28 +22,38 @@ def backend():
     if _CONNECTORS_INSTALLED:
         from .native_connectors import enable
         enable()
+        if _FUSED_INSTALLED:
+            from .native_substeps import enable as enable_substeps
+            enable_substeps()
+            return 'vectorized_fused'
         return 'vectorized_native'
     return 'vectorized_pixels' if _PIXELS_INSTALLED else 'vectorized' if _INSTALLED else 'original'
 
 
 def configure(name):
-    global _PIXELS_INSTALLED, _CONNECTORS_INSTALLED
+    global _PIXELS_INSTALLED, _CONNECTORS_INSTALLED, _FUSED_INSTALLED
     if name not in BACKENDS:
         raise ValueError('Unknown assembly execution backend: '+str(name))
-    if name in ('vectorized', 'vectorized_pixels', 'vectorized_native'):
-        if _CONNECTORS_INSTALLED and name != 'vectorized_native':
+    if name in ('vectorized', 'vectorized_pixels', 'vectorized_native', 'vectorized_fused'):
+        if _FUSED_INSTALLED and name != 'vectorized_fused':
+            raise RuntimeError('Start a fresh process to disable fused substeps')
+        if _CONNECTORS_INSTALLED and name not in ('vectorized_native', 'vectorized_fused'):
             raise RuntimeError('Start a fresh process to disable native connectors')
-        if _PIXELS_INSTALLED and name not in ('vectorized_pixels', 'vectorized_native'):
+        if _PIXELS_INSTALLED and name not in ('vectorized_pixels', 'vectorized_native', 'vectorized_fused'):
             raise RuntimeError('Start a fresh process to disable native pixels')
         install()
-        if name in ('vectorized_pixels', 'vectorized_native'):
+        if name in ('vectorized_pixels', 'vectorized_native', 'vectorized_fused'):
             from .image_ops import enable_native
             enable_native()
             _PIXELS_INSTALLED = True
-        if name == 'vectorized_native':
+        if name in ('vectorized_native', 'vectorized_fused'):
             from .native_connectors import enable
             enable()
             _CONNECTORS_INSTALLED = True
+        if name == 'vectorized_fused':
+            from .native_substeps import enable as enable_substeps
+            enable_substeps()
+            _FUSED_INSTALLED = True
     elif _INSTALLED:
         raise RuntimeError('Start a fresh process to switch back to the original execution backend')
 
@@ -109,6 +120,10 @@ def step(self, targets=None, rotations=None, gripper=None):
     internal = getattr(self, '_joint_internal_forces', None)
     ids = np.concatenate(self.aids)
     limits = m.actuator_forcerange[ids, 1]-.01
+    if _FUSED_INSTALLED:
+        from .native_substeps import advance
+        if advance(self, ids, limits, internal):
+            return errors
     for _ in range(round(.02/m.opt.timestep)):
         assert not np.any(d.xfrc_applied)
         if internal is not None:

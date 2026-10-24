@@ -20,6 +20,7 @@ import numpy as np
 
 _LIBRARY = None
 _RECEIPT = None
+_REFERENCE_EVALUATE = None
 _ORIGINAL_SHA256 = 'f0808a76699335d70cfbf43489f5d21fb8b112f5f45e51c9ecc990d3e881aa59'
 
 
@@ -89,7 +90,7 @@ def compatibility_check(library, cases=512, reference=None):
 
 
 def enable():
-    global _LIBRARY, _RECEIPT
+    global _LIBRARY, _RECEIPT, _REFERENCE_EVALUATE
     from experiments.box_assembly.fastening import Connector
     if _LIBRARY is not None:
         if Connector.evaluate is not evaluate:
@@ -127,6 +128,7 @@ def enable():
     lib.connectors.argtypes = [array, array, ctypes.c_size_t]
     lib.connectors.restype = None
     checked = compatibility_check(lib)
+    _REFERENCE_EVALUATE = Connector.evaluate
     _LIBRARY = lib
     _RECEIPT = dict(specification, binary_sha256=sha(library), compatibility=checked,
                     reference_sha256=_ORIGINAL_SHA256, implementation='native_connector_arithmetic_v1')

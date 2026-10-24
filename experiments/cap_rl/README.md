@@ -158,3 +158,35 @@ The original reward admits an ordering loophole; the report preserves that
 training evidence and documents the stricter evaluation. For future training,
 use `--task frame_place_ordered`; `frame_place` remains the historical mode.
 [Task, original and corrected reward](FRAME_TASK.md).
+
+
+## Full three-arm assembly and faster execution
+
+[Varied-placement experiment and protocol](../../results/cap_rl_assembly/parallel-varied-2026-10-23/README.md)
+records the full frame task, strict reward, failed attempts and checkpoint
+selection. The current online run uses its frozen `vectorized` backend.
+
+New runs can opt into `--assembly-backend vectorized_fused` in
+`experiments.cap_rl.train` or `experiments.cap_rl.assembly`. This Linux backend
+fuses the internal MuJoCo step loop and uses native pixel and nail-force
+operations. Physics still runs on CPUs; batched policy generation and learning
+run on the GPU. It does not change the timestep, controller, nail law or reward.
+It requires a C compiler and the installed MuJoCo headers/shared library.
+Source guards, numerical compatibility checks and binary hashes bind the
+backend to each physical certificate; use a fresh process to switch backends.
+
+The integrated implementation passed 16 Linux regression tests, including
+4,000 exact internal steps for each of two force profiles, joint overrides,
+nail failure events and infrastructure error handling. Its prototype also
+matched all 6,482 saved states of a full successful episode and took 780.5
+seconds versus 1,143.3 seconds for the vectorized reference on the shared host
+([prototype evidence](../../results/cap_rl_assembly/parallel-varied-2026-10-23/native-substep18/README.md)).
+Full successful and failed episode replays of the integrated backend remain
+pending. These measurements do not establish whole-training speedup or a
+held-out policy improvement.
+
+Keep one simulation pool per learner and budget host RAM as well as GPU memory.
+The separate `analysis.assembly_async_rewards` queue supports independent
+reward groups and checks available cgroup RAM before allocating workers.
+A learner must still define its policy versions and update ordering; the queue
+alone is not an asynchronous RL algorithm.

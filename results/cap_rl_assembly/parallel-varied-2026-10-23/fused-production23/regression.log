@@ -1,0 +1,6 @@
+Linux isolated source tree /opt/cap-speed/fused-production23-repo
+Command: python -m unittest analysis.test_assembly_speed analysis.test_native_connectors analysis.test_native_substeps
+Ran 16 tests in 31.995s
+OK
+Overlay SHA256: 6d1a105ac16d7bfebf44da091fb9fe0f22d80bbd401b442a578f5fe9b18b089c
+Scope: numerical regression and guards; no full integrated episode throughput claim.
