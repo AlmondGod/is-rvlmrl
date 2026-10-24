@@ -159,3 +159,13 @@ on-policy continuation: all 32 training layouts, four samples per layout,
 The real-GPU preflight generated 16 programs (seven unique) in 23.01 seconds
 and passed an eight-program-microbatch gradient check at 12.31 GB peak memory.
 Synthetic preflight advantages are explicitly excluded from task evidence.
+
+An experimental grammar-aware decoder processes forced stretches together,
+reducing model forward calls from 129 token steps to nine choice steps. On a
+two-program development benchmark, median generation fell from 9.98 to 1.09
+seconds (9.13×). It matched all 32 training greedy programs and seven of eight
+validation programs; one greedy result changed. The maximum measured selected
+choice-log-probability difference versus a full teacher-forced pass was 0.0379.
+The all-layout equivalence check therefore failed. This experimental decoder
+is not installed into the active run; its changed RNG consumption and numerical
+behavior are explicit, and its speedup is inference-only.

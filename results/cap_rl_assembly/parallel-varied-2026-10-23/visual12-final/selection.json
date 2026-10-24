@@ -1,0 +1,11 @@
+{
+  "best_step": 0,
+  "validation_success_rate": 0.5,
+  "validation_mean_reward": 0.5,
+  "selection_split": "validation",
+  "training_seconds": 250.24112608202267,
+  "completed_optimizer_updates": 48,
+  "planned_optimizer_updates": 48,
+  "stopped_at_validation_ceiling": false,
+  "timing_scope": "Preference updates and scheduled validation; parent GRPO and this phase model setup/baseline costs are separate."
+}

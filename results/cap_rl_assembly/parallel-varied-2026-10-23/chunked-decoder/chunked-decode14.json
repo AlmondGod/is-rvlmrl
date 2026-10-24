@@ -1,0 +1,257 @@
+{
+  "passes": false,
+  "scope": "Development-only inference probe; no optimizer, task outcomes or held-out inputs. RNG streams differ; floating-point chunk effects measured separately.",
+  "rows": [
+    {
+      "layout_id": "assembly-full-v1-51001",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51002",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51003",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51004",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51005",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51006",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51007",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51008",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51009",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51010",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51011",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51012",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51013",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51014",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51015",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51016",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51017",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51018",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51019",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51020",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51021",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51022",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51023",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51024",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51025",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51026",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51027",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51028",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51029",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51030",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51031",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-51032",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52001",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52002",
+      "exact": false,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52003",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52004",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52005",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52006",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52007",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    },
+    {
+      "layout_id": "assembly-full-v1-52008",
+      "exact": true,
+      "completion": "position_member(0)\nrelease_member(0)\nposition_member(1)\nrelease_member(1)\nposition_member(2)\nrelease_member(2)\nposition_member(3)\nrelease_member(3)\npark_grippers()\nnail_corner(0)\nnail_corner(1)\nnail_corner(2)\nnail_corner(3)\nfeed_panel()\nposition_panel()\nrelease_panel()\nnail_panel(0)\nnail_panel(1)\nnail_panel(2)\nnail_panel(3)\nflip_structure()\nfinish()"
+    }
+  ],
+  "timings": [
+    {
+      "trial": 0,
+      "decoder": "hf",
+      "seconds": 9.932416566996835
+    },
+    {
+      "trial": 0,
+      "decoder": "chunked",
+      "seconds": 1.084732990944758
+    },
+    {
+      "trial": 1,
+      "decoder": "chunked",
+      "seconds": 1.0924108960316516
+    },
+    {
+      "trial": 1,
+      "decoder": "hf",
+      "seconds": 9.984982386988122
+    },
+    {
+      "trial": 2,
+      "decoder": "hf",
+      "seconds": 9.977376852999441
+    },
+    {
+      "trial": 2,
+      "decoder": "chunked",
+      "seconds": 1.0961607370409183
+    }
+  ],
+  "median_seconds": {
+    "hf": 9.977376852999441,
+    "chunked": 1.0924108960316516
+  },
+  "max_abs_choice_logprob_difference": 0.03786635398864746,
+  "mean_abs_choice_logprob_difference": 0.006037076935172081,
+  "chunked_info": {
+    "forward_calls": 9,
+    "forced_tokens": 120,
+    "completion_tokens": 129,
+    "batch": 2,
+    "scope": "Grammar-forced stretches batched through the cache; choice-only sampling has its own RNG stream."
+  },
+  "peak_allocated_bytes": 9081038848,
+  "source_sha256": "bca6c384b4b43689e533e60a69f5523a65745c46b2a0e5bcdc9d2490f2fe0f6b",
+  "benchmark_source_sha256": "73cc38eca15dd56c72bfe73cdd5256c7515e64ae5687c151e7e15022c5443347",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "weights_sha256": "76666d7420ca7588eac84a4f8b6de59faaed748f98eed7a4e9e0c05516166b9f",
+  "speedup": 9.13335530544759
+}
