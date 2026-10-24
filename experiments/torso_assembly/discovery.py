@@ -10,7 +10,7 @@ from .environment import SIZES,FIXTURE_HEIGHT,ASSIGN
 from .multiview_pose import fit_member
 
 def discover(frames,cameras,robot):
- im=frames[0].astype(float);r,g,b=im[:,:,0],im[:,:,1],im[:,:,2]
+ im=frames[0] if frames[0].dtype==np.uint8 else frames[0].astype(float);r,g,b=im[:,:,0],im[:,:,1],im[:,:,2]
  mask=((r>70)&(r>1.05*g)&(g>1.18*b)).astype(np.uint8)
  n,labels,stats,_=cv2.connectedComponentsWithStats(mask,8);candidates=[]
  for label in range(1,n):
