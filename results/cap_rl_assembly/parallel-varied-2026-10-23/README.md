@@ -1,6 +1,8 @@
 # Parallel rollouts and varied-placement RL
 
-Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and the constant-prompt preference phase completed without improvement. The camera-conditioned preference phase also completed without improvement. A balanced camera-conditioned on-policy GRPO continuation is prepared. No new held-out improvement claim yet.
+Status at 2026-10-24 08:10 UTC: run 25 has completed two balanced rollout rounds and eight GRPO updates. Its first post-training validation is running. The first two rounds reused certified rewards and took 102.60 seconds of loop time; this excludes the substantial earlier cost of generating those physical certificates. No held-out improvement is claimed; all 24 final test layouts remain untouched.
+
+The preceding run was interrupted by a host-memory OOM after four updates. Exact replay recovery correctly stopped when GPU gradients and checkpoint weights differed despite identical programs and rewards. Run 25 is a separately recorded rerun from the original warm adapter, with the same learning protocol, and saves complete AdamW/RNG state atomically with each adapter. Both failed attempts and costs are preserved in [recovery21](recovery21/README.md). The new state-checkpoint implementation and 39-test regression suite passed before launch.
 
 The completed pilot in `run03-progress/` contains six rollout rounds, 48 sampled
 programs and 24 optimizer updates. Greedy validation at rounds 2, 4 and 6 remains
@@ -169,3 +171,9 @@ choice-log-probability difference versus a full teacher-forced pass was 0.0379.
 The all-layout equivalence check therefore failed. This experimental decoder
 is not installed into the active run; its changed RNG consumption and numerical
 behavior are explicit, and its speedup is inference-only.
+
+The optional `vectorized_fused` backend is integrated and passes 16 Linux
+regression tests. Its prototype matched a complete successful trajectory exactly
+and measured a 1.465× shared-host speed ratio; full successful and failed
+episode checks of the integrated refactor remain pending. Current learning
+keeps the frozen vectorized physics source and certified cache.

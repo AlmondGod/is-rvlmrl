@@ -1,0 +1,86 @@
+{
+  "time": "2026-10-24T08:05:56.850238+00:00",
+  "reason": "Remove only redundant local archives after fresh GitHub size and SHA256 verification. Remote pod originals, GitHub assets and local verification receipts retained.",
+  "archives": [
+    {
+      "name": "online13-step-0000.tar.gz",
+      "size": 1072320853,
+      "sha256": "241354cf8624154e2e13fae151b8f504315eda3c030fa231bbe3c722967c6838",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online13-step-0000.tar.gz",
+      "removed_paths": [
+        "work/online-backups13/step-0000.tar.gz",
+        "work/varied-release-staging/online13-step-0000.tar.gz"
+      ]
+    },
+    {
+      "name": "online13-step-0001.tar.gz",
+      "size": 201916706,
+      "sha256": "f3a46cba61164dd99ce924640d4c6f330de145479f1e20760a02ee4cd77cf5b4",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/online13-step-0001.tar.gz",
+      "removed_paths": [
+        "work/online-backups13/step-0001.tar.gz",
+        "work/varied-release-staging/online13-step-0001.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0000.tar.gz",
+      "size": 201710581,
+      "sha256": "158fdcd37ebd1dcca45f1feecfe38da0cb2a910f193bc3e95c279a948ee803cc",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0000.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0000.tar.gz",
+        "work/varied-release-staging/grpo03-step-0000.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0001.tar.gz",
+      "size": 144979088,
+      "sha256": "3b771a50a69101d0bec7e6aa0d716c0dbd3bb999d7dbb2187edc36ef609dc926",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0001.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0001.tar.gz",
+        "work/varied-release-staging/grpo03-step-0001.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0002.tar.gz",
+      "size": 153588139,
+      "sha256": "062460e2c9f464f7e2d889e403ed6f9983a40e9b30520d89e8efc293dc348477",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0002.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0002.tar.gz",
+        "work/varied-release-staging/grpo03-step-0002.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0003.tar.gz",
+      "size": 159845916,
+      "sha256": "ec56bceb0bfd57d62c6639faec3e3099478c16f045a6a3d7e571d85d805a1627",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0003.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0003.tar.gz",
+        "work/varied-release-staging/grpo03-step-0003.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0004.tar.gz",
+      "size": 171135981,
+      "sha256": "366755805f87f0262de5579b9e2be16fbbcaf69a08df98d928770933c2ad384b",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0004.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0004.tar.gz",
+        "work/varied-release-staging/grpo03-step-0004.tar.gz"
+      ]
+    },
+    {
+      "name": "grpo03-step-0005.tar.gz",
+      "size": 165072920,
+      "sha256": "2480a552bd35b5057b53aae218767c0e5801981af0994e0c604934041d7fd306",
+      "url": "https://github.com/AlmondGod/is-rvlmrl/releases/download/cap-rl-varied-assembly-2026-10-24/grpo03-step-0005.tar.gz",
+      "removed_paths": [
+        "work/varied-backups03/step-0005.tar.gz",
+        "work/varied-release-staging/grpo03-step-0005.tar.gz"
+      ]
+    }
+  ]
+}

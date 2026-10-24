@@ -1,0 +1,19 @@
+{
+  "passes": true,
+  "release": "cap-rl-varied-assembly-2026-10-24",
+  "scope": "GitHub uploaded asset sizes and SHA256 digests match locally verified archives.",
+  "assets": {
+    "online21-reconstruction-failure-records.tar.gz": [
+      39535,
+      "a20a5a8081b5c4a9ecf18569bd0cbc553ddfd3b4f0f21685b612402a1390a015"
+    ],
+    "online21-step-0000.tar.gz": [
+      1249583582,
+      "9465fa0ab88575cf32359cb550671da86905ca059dbbd09f70d1b815bc48795c"
+    ],
+    "online21-step-0001.tar.gz": [
+      120705317,
+      "c5095ebf9ebc87f80c19dac1da23723cadd419822b92c9014d919334b9087cd3"
+    ]
+  }
+}
