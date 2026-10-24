@@ -35,7 +35,7 @@ def main():
     p.add_argument('--seconds', type=float, default=20)
     p.add_argument('--seed-start', type=int, default=51001)
     p.add_argument('--layouts', type=int, default=8)
-    p.add_argument('--backend', choices=['original', 'vectorized', 'vectorized_pixels'], default='vectorized')
+    p.add_argument('--backend', choices=['original', 'vectorized', 'vectorized_pixels', 'vectorized_native'], default='vectorized')
     a = p.parse_args()
     if min(*a.workers, a.threads, a.seconds, a.layouts) <= 0 or a.workers[0] != 1:
         p.error('Positive sizes required; the first worker count must be 1')

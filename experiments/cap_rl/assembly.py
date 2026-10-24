@@ -84,8 +84,11 @@ def provenance(*, support_profile='contact_only', controller_profile='original')
         'python': platform.python_version(), 'platform': platform.platform(),
         'settle_seconds': SETTLE_SECONDS,
     }
-    if manifest['execution_backend'] == 'vectorized_pixels':
+    if manifest['execution_backend'] in ('vectorized_pixels', 'vectorized_native'):
         manifest['native_pixels'] = pixel_receipt()
+    if manifest['execution_backend'] == 'vectorized_native':
+        from experiments.torso_assembly.native_connectors import receipt
+        manifest['native_connectors'] = receipt()
     return manifest
 
 
@@ -249,7 +252,7 @@ def main():
     parser.add_argument('--video', action='store_true')
     parser.add_argument('--support-profile', choices=SUPPORT_PROFILES, default='contact_only')
     parser.add_argument('--controller-profile', choices=CONTROLLER_PROFILES, default='original')
-    parser.add_argument('--assembly-backend', choices=('original', 'vectorized', 'vectorized_pixels'), default='original')
+    parser.add_argument('--assembly-backend', choices=('original', 'vectorized', 'vectorized_pixels', 'vectorized_native'), default='original')
     parser.add_argument('--seconds', type=float, default=1200., help='Development timeout; full evaluation uses 1200.')
     args = parser.parse_args()
     from experiments.torso_assembly.acceleration import configure

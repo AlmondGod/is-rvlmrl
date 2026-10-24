@@ -1,0 +1,47 @@
+{
+  "scope": "Isolated connector arithmetic probe; reference timing includes fixture construction and is not a speedup estimate.",
+  "cases": 20000,
+  "exact_rows": 20000,
+  "exact_columns": [
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000,
+    20000
+  ],
+  "max_abs_errors": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "source_sha256": "a4129917bad57d0f15a5e0333b27c147afec23cd7a8668311aef02e8af0bb83d",
+  "python_source_sha256": "e35af99a529884be4383d54cf666f281f8595dccbe9915f070f73c581202db01",
+  "compiler_flags": [
+    "-O3",
+    "-std=c99",
+    "-shared",
+    "-fPIC",
+    "-ffp-contract=off",
+    "-fno-builtin-pow"
+  ],
+  "fixture_and_reference_seconds": 3.8323472010088153,
+  "native_batch_seconds": 0.0032028870191425085
+}

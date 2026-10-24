@@ -1,0 +1,17 @@
+{
+  "scope": "Isolated prototype only, not the certified training backend",
+  "source_sha256": "a4129917bad57d0f15a5e0333b27c147afec23cd7a8668311aef02e8af0bb83d",
+  "wrapper_sha256": "2b60962ab8178af4bdebb2cf451f63e4c561195d8f3b7e1b428717a4da8ad1c4",
+  "binary_sha256": "f759ba7119e7dd94775b77fa91865bd907a655afe4b4bca9f081f0922e63790b",
+  "flags": [
+    "-O3",
+    "-std=c99",
+    "-shared",
+    "-fPIC",
+    "-ffp-contract=off",
+    "-fno-builtin-pow"
+  ],
+  "numpy": "2.5.4",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "runner_sha256": "504c12a0ca4c437d6b1b2e125b8c96b3dff06c1e8f32a7771239c5a3b88a86d5"
+}

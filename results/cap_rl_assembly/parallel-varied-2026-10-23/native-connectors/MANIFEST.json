@@ -1,0 +1,12 @@
+{
+  "connector-success07.comparison.json": "9eed908673ded3570b69334ba14c49d1747d769d39c2e066ceba6d5278222f71",
+  "connector-failure07.comparison.json": "193e94d6289f34f273af0140a009cff40bed89e78fc7256849dd1a8424a369aa",
+  "connector-success07.candidate.json": "04194333aa93e4150c40be94fe5868a93b77ef52579f8d3206aced80ae1577b5",
+  "connector-failure07.candidate.json": "04194333aa93e4150c40be94fe5868a93b77ef52579f8d3206aced80ae1577b5",
+  "native_connector_candidate_bench.json": "9ffb80124f78e02c8005e54f28578eea131ecc644893ebbc394930fdb11547ba",
+  "connector_probe.json": "e198a3a9a3c49571f6f38534f4c2dff7d015c9ae8cff8027f80eab7c3d4826a2",
+  "connector_probe02.json": "fb2144390ed41a5cf0f2b4ec7cb7d467fbf5a5e3bc960d946c3646b9ba4d5e7e",
+  "matvec_modes_probe.json": "4f2c5e9da96b10243af2641b50adae752bf10c0787ec880c5951f1a7a2c7d232",
+  "native-integrated11-tests.log": "9e8e2668960f98b3919c85cce44a256fa2c87860e17121c09939544c0978f4be",
+  "native-integrated11-launch.json": "ac5a40acb712d66df087ce48a63b7b1d019929342f9272ec26bc199ba15cacc5"
+}

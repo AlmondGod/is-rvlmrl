@@ -18,8 +18,14 @@ def main():
     p.add_argument('--seconds', type=float, default=1200.)
     p.add_argument('--optimized', action='store_true')
     p.add_argument('--native-pixels', action='store_true', help='Exact compiled color predicates and sparse-mask scan; requires --optimized')
+    p.add_argument('--native-connectors', action='store_true', help='Checked native connector arithmetic; also enables native pixels, requires --optimized')
+    p.add_argument('--physics-threads', type=int, default=1, help='OpenCV threads per episode process')
     a = p.parse_args()
+    if a.physics_threads < 1: p.error('--physics-threads must be positive')
+    import cv2
+    cv2.setNumThreads(a.physics_threads)
     if a.native_pixels and not a.optimized: p.error('--native-pixels requires --optimized')
+    if a.native_connectors and not a.optimized: p.error('--native-connectors requires --optimized')
     from experiments.cap_rl.assembly import run
     from experiments.torso_assembly.environment import Env
     from experiments.torso_assembly.fasteners import NailBank
@@ -30,14 +36,15 @@ def main():
     import mujoco
     if a.optimized:
         from experiments.torso_assembly.acceleration import configure
-        configure('vectorized_pixels' if a.native_pixels else 'vectorized')
+        configure('vectorized_native' if a.native_connectors else 'vectorized_pixels' if a.native_pixels else 'vectorized')
     stats = {}
     started = time.perf_counter()
     last_write = started
     report = Path(a.out).with_suffix('.profile.json')
     report.parent.mkdir(parents=True, exist_ok=True)
     metadata = dict(seed=a.seed, optimized=a.optimized, python=platform.python_version(),
-                    native_pixels=a.native_pixels,
+                    native_pixels=a.native_pixels or a.native_connectors, native_connectors=a.native_connectors,
+                    opencv_threads=cv2.getNumThreads(),
                     cpu_count=os.cpu_count(), source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     timing_scope='Inclusive nested wall times; do not sum parent and child categories.')
     sources = report.with_suffix('.sources')

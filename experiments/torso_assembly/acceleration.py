@@ -11,27 +11,38 @@ from scipy.spatial.transform import Rotation
 
 _INSTALLED = False
 _PIXELS_INSTALLED = False
-BACKENDS = ('original', 'vectorized', 'vectorized_pixels')
+_CONNECTORS_INSTALLED = False
+BACKENDS = ('original', 'vectorized', 'vectorized_pixels', 'vectorized_native')
 
 
 def backend():
     if _INSTALLED:
         install()  # Verify that the selected methods were not replaced mid-run.
+    if _CONNECTORS_INSTALLED:
+        from .native_connectors import enable
+        enable()
+        return 'vectorized_native'
     return 'vectorized_pixels' if _PIXELS_INSTALLED else 'vectorized' if _INSTALLED else 'original'
 
 
 def configure(name):
-    global _PIXELS_INSTALLED
+    global _PIXELS_INSTALLED, _CONNECTORS_INSTALLED
     if name not in BACKENDS:
         raise ValueError('Unknown assembly execution backend: '+str(name))
-    if name in ('vectorized', 'vectorized_pixels'):
-        if _PIXELS_INSTALLED and name != 'vectorized_pixels':
+    if name in ('vectorized', 'vectorized_pixels', 'vectorized_native'):
+        if _CONNECTORS_INSTALLED and name != 'vectorized_native':
+            raise RuntimeError('Start a fresh process to disable native connectors')
+        if _PIXELS_INSTALLED and name not in ('vectorized_pixels', 'vectorized_native'):
             raise RuntimeError('Start a fresh process to disable native pixels')
         install()
-        if name == 'vectorized_pixels':
+        if name in ('vectorized_pixels', 'vectorized_native'):
             from .image_ops import enable_native
             enable_native()
             _PIXELS_INSTALLED = True
+        if name == 'vectorized_native':
+            from .native_connectors import enable
+            enable()
+            _CONNECTORS_INSTALLED = True
     elif _INSTALLED:
         raise RuntimeError('Start a fresh process to switch back to the original execution backend')
 
