@@ -27,8 +27,9 @@ fresh simulation could start. Those eight validation launches received no
 reward and their incomplete files were quarantined intact. `preference-progress05/`
 records the restart after an asset-path smoke check. The dataset and sampled
 pair sequence are identical, but GPU gradients/weights were not bit-reproducible;
-the recovery receipt discloses the difference. Its first validation is 4/8;
-checkpoint 16 is undergoing fresh physical validation. The permanent source-
+the recovery receipt discloses the difference. Validation at updates 8 and 16 is 4/8;
+update 16 changes the program and the per-layout outcomes, but gives no aggregate
+gain. Checkpoint 24 is undergoing full physical validation. The permanent source-
 relative asset-path fix is separately tested to retain identical scene XML.
 Active experiments retain their frozen simulator source and resolve the original
 assets through the recorded overlay link.
@@ -120,3 +121,5 @@ machine-specific compiler flags and measures only synthetic pixel predicates;
 it is not the production backend's full-episode performance result.
 
 The native-pixel evidence archive is attached to the [speed release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-assembly-speed-2026-10-23): `cap-rl-native-pixels-2026-10-24.tar.gz`, 44,786,925 bytes, SHA-256 `d31d81564bd0098ae41c7f0fd112e8e5c479bbe10efa566217d709da2582c678`. All 493 payloads were verified locally against the manifest before upload; see `native-pixels-archive-verification.json`.
+
+The [in-progress checkpoint release](https://github.com/AlmondGod/is-rvlmrl/releases/tag/cap-rl-varied-assembly-2026-10-24) retains all seven GRPO snapshots, the failed preference attempt’s step 8, and preference05 snapshots through step 24. All 12 archives (2,552,507,073 bytes) passed local payload verification and their GitHub SHA-256 digests match. These are incremental adapter/evidence snapshots, not optimizer/RNG resume states; this release makes no held-out improvement claim.
