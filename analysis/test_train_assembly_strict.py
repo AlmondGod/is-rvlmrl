@@ -6,7 +6,7 @@ import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
-from analysis.train_assembly_strict import strict_results, main
+from analysis.train_assembly_strict import strict_results, main, required_call_failure, install_execution_filter
 
 
 class StrictRewardTests(unittest.TestCase):
@@ -54,6 +54,44 @@ class StrictRewardTests(unittest.TestCase):
             self.assertEqual(observed[0][4][0]['dense_reward'],.8)
             self.assertEqual(raw[0]['reward'],.8)
             self.assertEqual(observed[1],'tested')
+
+
+class NecessaryCallTests(unittest.TestCase):
+    def complete(self):
+        return [f'{name}({i})' for name in ('position_member','release_member','nail_corner','nail_panel')
+                for i in range(4)] + [name+'()' for name in
+                ('park_grippers','feed_panel','position_panel','release_panel','flip_structure','finish')]
+
+    def test_each_necessary_call_and_syntax(self):
+        calls=self.complete()
+        self.assertIsNone(required_call_failure('\n'.join(calls)))
+        self.assertIsNone(required_call_failure('\n'.join(list(reversed(calls[:-1]))+calls[-1:])))
+        for i in range(len(calls)):
+            with self.subTest(call=calls[i]):
+                proof=required_call_failure('\n'.join(calls[:i]+calls[i+1:]))
+                self.assertEqual(len(proof['missing']),1)
+        self.assertIsNone(required_call_failure('not python!!!'))
+
+    def test_batch_order_unknown_dense_and_idempotence(self):
+        complete='\n'.join(self.complete()); observed=[]
+        def execute(layouts,texts):
+            observed.append((layouts,texts))
+            return [dict(layout=x,reward=.8,success=False) for x in layouts]
+        task=SimpleNamespace(execute_batch=execute)
+        install_execution_filter(task); install_execution_filter(task)
+        rows=task.execute_batch([1,2,3],['finish()',complete,'stop()'])
+        self.assertEqual(observed,[([2],[complete])])
+        self.assertEqual(rows[1]['layout'],2)
+        self.assertIsNone(rows[0]['dense_reward'])
+        self.assertIsNone(strict_results(rows)[0]['dense_reward'])
+        self.assertFalse(rows[2]['physics_started'])
+        with self.assertRaises(ValueError):task.execute_batch([1],[])
+
+    def test_changed_dependencies_fail_closed(self):
+        task=SimpleNamespace(execute_batch=lambda a,b:[])
+        with patch('analysis.train_assembly_strict.hashlib.sha256') as digest:
+            digest.return_value.hexdigest.return_value='changed'
+            with self.assertRaisesRegex(RuntimeError,'Revalidate'):install_execution_filter(task)
 
 
 if __name__=='__main__':unittest.main()

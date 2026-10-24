@@ -114,6 +114,28 @@ class RecordsAuditTests(unittest.TestCase):
         result=self.run_fixture(self.enable_strict)
         self.assertEqual(result['optimization_reward'],'strict_success')
 
+    def static_fixture(self,root):
+        from analysis.train_assembly_strict import required_call_failure
+        self.enable_strict(root)
+        p=root/'metadata.json';metadata=audit.read(p)
+        metadata['static_strict_rejection']='strict_necessary_calls_v1';p.write_text(json.dumps(metadata))
+        p=root/'rollouts.jsonl';rows=[json.loads(s) for s in p.read_text().splitlines()]
+        row=rows[0]
+        for key in ('evidence','evidence_id','result_sha256','cache_reuse'):row.pop(key)
+        row.update(physics_started=False,error='strict_missing_required_calls',dense_reward=None,
+                   dense_reward_measured=False,static_rejection=required_call_failure(row['completion']))
+        p.write_text('\n'.join(json.dumps(r) for r in rows))
+
+    def test_static_proof_and_unknown_dense_are_audited(self):
+        self.assertTrue(self.run_fixture(self.static_fixture)['passes'])
+        for key,value in [('reward',1.),('dense_reward',0.),('physics_started',True),
+                          ('static_rejection',{'format':'strict_necessary_calls_v1','missing':[]})]:
+            def mutate(root):
+                self.static_fixture(root)
+                p=root/'rollouts.jsonl';rows=[json.loads(s) for s in p.read_text().splitlines()]
+                rows[0][key]=value;p.write_text('\n'.join(json.dumps(r) for r in rows))
+            with self.subTest(key=key),self.assertRaises(ValueError):self.run_fixture(mutate)
+
     def enable_ceiling_stop(self,root):
         self.enable_strict(root)
         p=root/'metadata.json';metadata=audit.read(p);metadata['steps']=3

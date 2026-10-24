@@ -71,6 +71,19 @@ def audit(directory, pretest=False):
         layout = layouts[row['layout_id']]
         require(row['prompt'] == task.prompt(layout), 'Model prompt mismatch')
         if not row.get('evidence_id'):
+            if row.get('static_rejection'):
+                from analysis.train_assembly_strict import required_call_failure
+                require(reward_mode=='strict_success' and metadata.get('static_strict_rejection')=='strict_necessary_calls_v1',
+                        'Static rejection is restricted to the declared strict optimizer')
+                require(sha(Path(__file__).with_name('train_assembly_strict.py'))==metadata['optimization_adapter_sha256'],
+                        'Use the recorded strict rejection proof implementation')
+                require(required_call_failure(row['completion'])==row['static_rejection'], 'Invalid necessary-call proof')
+                require(row.get('physics_started') is False and row['error']=='strict_missing_required_calls'
+                        and row['valid'] and not row['success'] and row['reward']==0
+                        and row['dense_reward'] is None and row.get('dense_reward_measured') is False,
+                        'Static proof received unsupported physics credit')
+                records.append(row)
+                return
             if row.get('truncated'):
                 require(row.get('physics_started') is False and row['error'] == 'truncated'
                         and not row['success'] and not row['valid'] and row['reward'] == 0,
