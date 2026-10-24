@@ -1,0 +1,56 @@
+[
+  {
+    "name": "visual12-checkpoint-backup-0008.json",
+    "passes": true,
+    "size": 431,
+    "sha256": "3f79d6613937b3382bee251c118072440dc9dcba8b5b0156aebd0c111980291f"
+  },
+  {
+    "name": "visual12-checkpoint-backup-final.json",
+    "passes": true,
+    "size": 928,
+    "sha256": "d3b96a223dd6b958a686404ac7de627487cb92be223e1752ea1a64cd344de0a6"
+  },
+  {
+    "name": "visual12-step-0000.tar.gz",
+    "passes": true,
+    "size": 1072082349,
+    "sha256": "879fd6b67e8e66febe33b7d3394d3d6735df1717c0e3792a321441d79e30001f"
+  },
+  {
+    "name": "visual12-step-0008.tar.gz",
+    "passes": true,
+    "size": 120754194,
+    "sha256": "9e545896004cff05befe3fbbe81500687905a132fe0cc44e5be0cc965a5c1e1c"
+  },
+  {
+    "name": "visual12-step-0016.tar.gz",
+    "passes": true,
+    "size": 120675849,
+    "sha256": "76dc0e3f577ffc25a223d14b02b9856f2e9453a7b471af75a2741ff49402ed07"
+  },
+  {
+    "name": "visual12-step-0024.tar.gz",
+    "passes": true,
+    "size": 120634118,
+    "sha256": "72f492b8177885cb26db68a01ca2ecd74cd270f0c56c7cf3b3a8ffa80eb7660f"
+  },
+  {
+    "name": "visual12-step-0032.tar.gz",
+    "passes": true,
+    "size": 120647856,
+    "sha256": "6e72a32483e8dd75421f1aeafacb87a75979a32792e5f8e3da9e7e49b94dd9e6"
+  },
+  {
+    "name": "visual12-step-0040.tar.gz",
+    "passes": true,
+    "size": 120665368,
+    "sha256": "756b8bd8b84d70106d4a1727836eee9dd0602b56aa8850d50553b3df8130ac14"
+  },
+  {
+    "name": "visual12-step-0048.tar.gz",
+    "passes": true,
+    "size": 120706045,
+    "sha256": "efa1356d74fa6b81a9dfba7498c1f70fc74e3466d300834b4eeb1936e93a924c"
+  }
+]
