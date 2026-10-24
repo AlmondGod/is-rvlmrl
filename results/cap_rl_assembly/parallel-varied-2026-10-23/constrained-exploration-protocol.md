@@ -32,7 +32,7 @@ programs and 64 optimizer steps. The initial constrained greedy policy is
 measured explicitly; compare its code/results with the unrestricted starting
 policy to distinguish a decoding change from learned improvement. Validation
 selects the earliest maximum strict success, with the initial policy eligible.
-Further changes may use training/validation evidence only and must be recorded.
+The run may stop at a scheduled perfect-validation boundary: no later checkpoint can strictly exceed 8/8 binary success, and the earliest maximum wins. The original budget, actual rounds/optimizer counts and stopping evidence are retained in a source-hashed receipt. Further changes may use training/validation evidence only and must be recorded.
 
 The 24 held-out seeds and the three predeclared replay seeds remain unchanged
 and unused until final checkpoint selection. Final comparisons identify the

@@ -67,6 +67,28 @@ class GrammarTests(unittest.TestCase):
             disallowed=[i for i in range(256) if i not in self.g.allowed(p,values)]
             self.assertEqual(float(raw.grad[:,p,disallowed].abs().sum()),0.)
 
+    def test_rollout_masks_choices_and_restores_generate(self):
+        import torch
+        tokenizer=CharacterTokenizer();seen=[]
+        def generate(**kwargs):
+            ids=kwargs['input_ids'];processor=kwargs['logits_processor'][0]
+            for p in range(len(self.g.tokens)):
+                ids=torch.cat([ids,processor(ids,torch.zeros(len(ids),256)).argmax(-1)[:,None]],dim=1)
+            return ids
+        model=SimpleNamespace(generate=generate)
+        def original(model,tokenizer,layouts,max_tokens,sample,prepare=None,**kwargs):
+            seq=model.generate(input_ids=torch.tensor([[7,8]]*len(layouts)))
+            attention=torch.ones_like(seq);mask=torch.ones(len(layouts),seq.shape[1]-2)
+            if prepare:prepare(seq,attention,mask)
+            return seq,attention,mask,['fixture']*len(layouts),[{}]*len(layouts)
+        trainer=SimpleNamespace(rollout=original)
+        module.install(trainer)
+        rows=trainer.rollout(model,tokenizer,[1,2],1024,True,prepare=lambda s,a,m:seen.append(m.sum(-1).tolist()))
+        self.assertEqual(seen,[[12.,12.]])
+        self.assertEqual(rows[2].sum(-1).tolist(),[12.,12.])
+        self.assertIs(model.generate,generate)
+        for row in rows[0][:,2:].tolist():self.g.validate(row)
+
     def test_sampler_produces_distinct_legal_orders(self):
         import torch
         torch.manual_seed(4);ids=torch.tensor([[7,8]]*16)

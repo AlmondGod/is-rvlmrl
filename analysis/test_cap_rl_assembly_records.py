@@ -173,6 +173,25 @@ class RecordsAuditTests(unittest.TestCase):
                     source_sha256=audit.sha(source),files_sha256={name:audit.sha(root/name) for name in names})
         (root/'validation_ceiling_stop.json').write_text(json.dumps(record))
 
+    def test_modern_ceiling_finalizer_preserves_and_audits_checkpoint(self):
+        from analysis import finalize_assembly_ceiling as finalizer
+        def mutate(root):
+            self.enable_strict(root)
+            (root/'test_comparison.json').unlink();(root/'selection.json').unlink()
+            p=root/'metadata.json';metadata=audit.read(p);metadata['steps']=3;p.write_text(json.dumps(metadata))
+            p=root/'training.jsonl';update=audit.read(p);update['elapsed_seconds']=1.;p.write_text(json.dumps(update))
+            (root/'validation_ceiling_policy.json').write_text(json.dumps({'upper_bound':[1.,1.]}))
+            original=Path.read_bytes
+            def read_bytes(path):
+                if str(path)=='/proc/123456/cmdline':return ('python -m analysis.cap_rl_assembly_grammar --out '+str(root)).encode()
+                return original(path)
+            with patch.object(Path,'read_bytes',read_bytes),patch.object(finalizer,'running',return_value=False),patch.object(finalizer.os,'kill') as kill:
+                finalizer.finalize(root,123456,1)
+                kill.assert_called_once()
+            self.assertEqual(audit.sha(root/'last_adapter/adapter_model.safetensors'),audit.sha(root/'best_adapter/adapter_model.safetensors'))
+        result=self.run_fixture(mutate,pretest=True)
+        self.assertTrue(result['passes']);self.assertTrue(result['stopped_at_validation_ceiling'])
+
     def test_ceiling_stop_preserves_planned_budget(self):
         result=self.run_fixture(self.enable_ceiling_stop)
         self.assertEqual(result['optimizer_updates'],1)

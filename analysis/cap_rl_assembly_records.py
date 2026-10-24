@@ -158,13 +158,18 @@ def audit(directory, pretest=False):
     if (directory/'validation_ceiling_stop.json').exists():
         early_stop = read(directory/'validation_ceiling_stop.json')
         require(reward_mode == 'strict_success', 'Ceiling stop requires binary success reward')
-        require(early_stop['format'] == 'cap_rl_validation_ceiling_stop_v1' and
+        require(early_stop['format'] in ('cap_rl_validation_ceiling_stop_v1','cap_rl_validation_ceiling_stop_v2') and
                 early_stop['upper_bound'] == [1.,1.] and
                 early_stop['test_evaluated'] is False, 'Invalid ceiling stopping rule')
-        require(sha(directory/'selection_source/stop_assembly04_at_validation_ceiling.py') ==
-                early_stop['source_sha256'], 'Selection finalizer source changed')
-        completed_steps = early_stop['completed_updates']
-        require(early_stop['planned_updates'] == metadata['steps'] and
+        modern=early_stop['format']=='cap_rl_validation_ceiling_stop_v2'
+        source='selection_source/finalize_assembly_ceiling.py' if modern else 'selection_source/stop_assembly04_at_validation_ceiling.py'
+        if modern:
+            require(early_stop['source_path']==source,'Unexpected selection finalizer path')
+        require(sha(directory/source)==early_stop['source_sha256'],'Selection finalizer source changed')
+        completed_steps=early_stop['completed_rollout_rounds' if modern else 'completed_updates']
+        if modern:
+            require(early_stop['optimizer_updates']==completed_steps*metadata.get('update_epochs',1),'Stopping optimizer count mismatch')
+        require(early_stop['planned_rollout_rounds' if modern else 'planned_updates'] == metadata['steps'] and
                 0 < completed_steps < metadata['steps'] and
                 completed_steps % metadata['eval_every'] == 0, 'Invalid early-stop boundary')
         required = {'metadata.json','training.jsonl','rollouts.jsonl','validation_ceiling_policy.json',
