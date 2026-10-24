@@ -22,7 +22,7 @@ class SnapshotFailure(BaseException):
     """Infrastructure failure must bypass the simulator's measured-error catch."""
 
 
-def instrument(run, checkpoint_step, snapshot, restore=False):
+def instrument(run, checkpoint_step, snapshot, restore=False, serializer=pickle):
     """Instrument only the loop boundary, preserving the physical execution body."""
     import numpy as np
     import mujoco
@@ -50,7 +50,7 @@ def instrument(run, checkpoint_step, snapshot, restore=False):
                       random_state=random.getstate(), numpy_state=np.random.get_state())
         temporary = snapshot.with_suffix('.partial')
         try:
-            with temporary.open('xb') as f:pickle.dump(bundle,f,protocol=5)
+            with temporary.open('xb') as f:serializer.dump(bundle,f,protocol=5)
             temporary.rename(snapshot)
         except Exception as error:
             temporary.unlink(missing_ok=True)
@@ -61,7 +61,7 @@ def instrument(run, checkpoint_step, snapshot, restore=False):
         start=time.monotonic()
         # Only a locally generated snapshot from this probe is accepted. Pickle
         # is executable data; this API is not an untrusted archive importer.
-        with snapshot.open('rb') as f:bundle=pickle.load(f)
+        with snapshot.open('rb') as f:bundle=serializer.load(f)
         if (seed!=bundle['seed'] or profiles!=bundle['profiles'] or
             calls[:len(bundle['executed_calls'])]!=bundle['executed_calls']):
             raise ValueError('Restore does not have the identical physical/program prefix')
@@ -79,6 +79,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out',required=True);parser.add_argument('--program',required=True)
     parser.add_argument('--seed',type=int,default=51001)
+    parser.add_argument('--compact-model-bytes',action='store_true')
     parser.add_argument('--seconds',type=float,default=20.)
     parser.add_argument('--checkpoint-seconds',type=float,default=10.)
     args=parser.parse_args()
@@ -91,14 +92,17 @@ def main():
     out=Path(args.out);out.mkdir(parents=True,exist_ok=False)
     snapshot=out/'prefix.pickle';text=Path(args.program).read_text()
     rows=[]
+    serializer=pickle
+    if args.compact_model_bytes:
+        from analysis import assembly_compact_snapshot as serializer
     for restore in (False,True):
-        fn,receipt=instrument(run,round(args.checkpoint_seconds/.02),snapshot,restore)
+        fn,receipt=instrument(run,round(args.checkpoint_seconds/.02),snapshot,restore,serializer)
         start=time.monotonic()
         result=fn(args.seed,text,out/('restored' if restore else 'continuous'),seconds=args.seconds,
                   support_profile='contact_and_nails',controller_profile='southwest_approach')
         rows.append(dict(restore=restore,elapsed_seconds=time.monotonic()-start,receipt=receipt))
     comparison=compare(out/'continuous',out/'restored')
-    report=dict(passes=comparison['exact'],configuration=vars(args),rows=rows,comparison=comparison,
+    report=dict(passes=comparison['exact'],codec_source_sha256=hashlib.sha256(Path(serializer.__file__).read_bytes()).hexdigest(),configuration=vars(args),rows=rows,comparison=comparison,
                 source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 scope='Experimental prefix replay only; no training integration, task success, or whole-loop speed claim.')
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report),flush=True)
