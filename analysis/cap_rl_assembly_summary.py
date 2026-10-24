@@ -108,7 +108,7 @@ def main():
         full_visual_language_policy=False, learned_motor_controller=False,
         task_prompt_identical_across_layouts=metadata.get('prompt_profile','constant')=='constant',
         prompt_profile=metadata.get('prompt_profile','constant'),physical_validation=False)
-    if preference:
+    if (run/'parent_run').is_dir():
         parent=run/'parent_run'
         parent_training=[json.loads(s) for s in (parent/'training.jsonl').read_text().splitlines()]
         parent_selection=read(parent/'selection.json')
@@ -129,6 +129,15 @@ def main():
             selected_validation_success_rate=previous_selection['validation_success_rate'],
             weights_used_to_initialize_final_run=False,
             timing_scope='Separate completed preference phase; already included in the continuous lineage allocation window, never added to that window twice.')
+    if (run/'visual_prompt_attempt').is_dir():
+        previous=run/'visual_prompt_attempt';previous_selection=read(previous/'selection.json')
+        previous_rows=[json.loads(s) for s in (previous/'training.jsonl').read_text().splitlines()]
+        summary['earlier_visual_preference_attempt']=dict(optimizer_updates=len(previous_rows),
+            optimization_seconds=sum(r['optimization_seconds'] for r in previous_rows),
+            training_loop_gpu_hours=previous_selection['training_seconds']/3600,
+            selected_validation_success_rate=previous_selection['validation_success_rate'],
+            weights_used_to_initialize_final_run=False,
+            timing_scope='Separate completed visual preference phase; included in the continuous allocation window, not added twice.')
     summary['contact_only_shadow'] = {
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))
@@ -163,7 +172,7 @@ def main():
             'Includes CPU simulation waits; excludes earlier setup, exploration and '
             'prefetched physical evidence produced before this run.')
         summary['verification_stages'] = status['completed_stages']
-        if preference:
+        if (run/'parent_run').is_dir():
             parent_start=read(run/'parent_run/process_start.json')['started_utc']
             summary['lineage_end_to_end_allocated_gpu_hours']=(datetime.fromisoformat(status['utc'])-
                 datetime.fromisoformat(parent_start)).total_seconds()/3600

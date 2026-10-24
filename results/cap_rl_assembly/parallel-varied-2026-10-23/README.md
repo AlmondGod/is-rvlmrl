@@ -1,6 +1,6 @@
 # Parallel rollouts and varied-placement RL
 
-Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and the constant-prompt preference phase completed without improvement. A camera-conditioned preference phase is active. No new held-out improvement claim yet.
+Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and the constant-prompt preference phase completed without improvement. The camera-conditioned preference phase also completed without improvement. A balanced camera-conditioned on-policy GRPO continuation is prepared. No new held-out improvement claim yet.
 
 The completed pilot in `run03-progress/` contains six rollout rounds, 48 sampled
 programs and 24 optimizer updates. Greedy validation at rounds 2, 4 and 6 remains
@@ -140,7 +140,7 @@ arithmetic failures. It is attached to the speed release as
 The runtime supplement retains the exact prototype binary and original
 microbenchmark wrapper.
 
-The active camera-conditioned phase follows `visual-conditioning-protocol.md`.
+The completed camera-conditioned replay phase follows `visual-conditioning-protocol.md`.
 Both baseline and trained models receive initial RGB-derived member locations
 and near/far ordering; the model never receives layout seeds or true object
 poses. Forty development observations were exactly reconstructed from saved
@@ -150,3 +150,12 @@ All 44 preflight tests passed on the pod. The actual run uses the same 23
 self-generated, certified within-layout preferences, now paired with the
 corresponding initial observation. It is offline DPO, not new training rollouts.
 Its learned 8/8 validation gate and untouched 24-layout final test remain in force.
+
+The camera-conditioned replay phase finished all 48 updates in 250.24 seconds,
+including cached validation, and still selected the initial 4/8 policy. It did
+not run held-out evaluation. `visual-online-protocol.md` declares the next
+on-policy continuation: all 32 training layouts, four samples per layout,
+16-program GPU batches, eight physics workers and four GRPO updates per batch.
+The real-GPU preflight generated 16 programs (seven unique) in 23.01 seconds
+and passed an eight-program-microbatch gradient check at 12.31 GB peak memory.
+Synthetic preflight advantages are explicitly excluded from task evidence.

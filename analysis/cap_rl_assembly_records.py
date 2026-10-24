@@ -38,7 +38,7 @@ def input_receipt(directory):
     result={name: sha(directory/name) for name in sorted(names) if (directory/name).is_file()}
     if (directory/'parent_run').is_dir():
         result.update({'parent_run/'+name:digest for name,digest in input_receipt(directory/'parent_run').items()})
-    for folder in ('observations','constant_prompt_attempt'):
+    for folder in ('observations','constant_prompt_attempt','visual_prompt_attempt'):
         for path in sorted((directory/folder).rglob('*')):
             if path.is_file():result[str(path.relative_to(directory))]=sha(path)
     for name in ('observations_manifest.json','test_observations_manifest.json','observation_preflight.json'):
@@ -102,6 +102,40 @@ def audit_preference_inputs(directory, metadata):
             metadata['dpo_beta']==.1 and metadata['sampling_temperature']==1. and metadata['seed']==42,
             'Preference optimizer differs from declared protocol')
     return data,parent_audit
+
+
+def audit_visual_grpo_inputs(directory,metadata):
+    from analysis.train_assembly_visual_grpo import ALGORITHM,schedule
+    parent=directory/'parent_run'
+    require(metadata['optimizer_algorithm']==ALGORITHM,'Wrong balanced online algorithm')
+    require(sha(parent/'metadata.json')==metadata['parent_metadata_sha256'] and
+            sha(parent/'retirement.json')==metadata['parent_retirement_sha256'],'Warm-start parent changed')
+    parent_audit=audit(parent,pretest=True);compare(parent_audit,read(directory/'parent_record_audit.json'))
+    from analysis.assembly_visual_prompt import SOURCES
+    require(set(metadata['online_source_sha256'])==set(SOURCES)|{'train_assembly_visual_grpo.py','cap_rl_assembly_records.py'},
+            'Incomplete balanced online source receipt')
+    require(sha(directory/'initial_adapter/adapter_model.safetensors')==sha(parent/'initial_adapter/adapter_model.safetensors'),
+            'Balanced online reference differs from parent initial policy')
+    for name,digest in metadata['online_source_sha256'].items():
+        require(sha(directory/'preference_source'/name)==digest and sha(Path(__file__).with_name(name))==digest,
+                'Use frozen balanced online source: '+name)
+    require(sha(directory/'warm_start_adapter/adapter_model.safetensors')==metadata['warm_start_weights_sha256']==
+            read(parent/'checkpoints/step-0006/checkpoint.json')['files_sha256']['adapter_model.safetensors'],
+            'Wrong balanced online warm start')
+    for folder in ('visual_prompt_attempt','constant_prompt_attempt'):
+        for name,digest in metadata[folder+'_sha256'].items():
+            require(sha(directory/folder/name)==digest,'Earlier unsuccessful attempt changed')
+    previous=read(directory/'visual_prompt_attempt/selection.json')
+    previous_meta=read(directory/'visual_prompt_attempt/metadata.json')
+    from analysis.assembly_visual_prompt import enabled
+    require(enabled(previous_meta) and previous_meta['optimizer_algorithm']=='offline_dpo_v1' and
+            previous['completed_optimizer_updates']==48 and previous['validation_success_rate']<1.,
+            'Balanced online contingency not satisfied')
+    expected=dict(steps=8,eval_every=2,checkpoint_every=1,prompts_per_step=4,group_size=4,
+        update_epochs=4,microbatch=8,lr=.0001,beta=.005,sampling_temperature=3.,seed=97)
+    require(all(metadata.get(k)==v for k,v in expected.items()),'Balanced online hyperparameters changed')
+    require(metadata['training_layout_schedule']==schedule(metadata['splits']['train'],97),'Balanced layout schedule changed')
+    return parent_audit
 
 
 def metrics(rows):
@@ -272,7 +306,8 @@ def audit(directory, pretest=False):
 
     training = [json.loads(s) for s in (directory/'training.jsonl').read_text().splitlines()]
     preference = metadata.get('optimizer_algorithm')=='offline_dpo_v1'
-    require(metadata.get('optimizer_algorithm') in (None,'offline_dpo_v1'),'Unknown optimizer algorithm')
+    balanced=metadata.get('optimizer_algorithm')=='grpo_visual_balanced_v1'
+    require(metadata.get('optimizer_algorithm') in (None,'offline_dpo_v1','grpo_visual_balanced_v1'),'Unknown optimizer algorithm')
     completed_steps = metadata['steps']
     early_stop = None
     retired=(directory/'retirement.json').exists()
@@ -287,6 +322,12 @@ def audit(directory, pretest=False):
         require(0<completed_steps<=48 and completed_steps%8==0 and selection['planned_optimizer_updates']==48,
                 'Invalid preference stopping boundary')
         require(selection['stopped_at_validation_ceiling']==(completed_steps<48),'Preference early stop lacks ceiling rule')
+    if balanced:
+        parent_audit=audit_visual_grpo_inputs(directory,metadata)
+        selected=read(directory/'selection.json');completed_steps=selected['completed_rollout_rounds']
+        require(completed_steps in (2,4,6,8) and selected['planned_rollout_rounds']==8 and
+                selected['completed_optimizer_updates']==completed_steps*4 and
+                selected['stopped_at_validation_ceiling']==(completed_steps<8),'Invalid balanced online stopping boundary')
     if (directory/'validation_ceiling_stop.json').exists():
         early_stop = read(directory/'validation_ceiling_stop.json')
         require(reward_mode == 'strict_success', 'Ceiling stop requires binary success reward')
@@ -340,8 +381,10 @@ def audit(directory, pretest=False):
             require([x['epoch'] for x in update['epoch_metrics']]==list(range(1,epochs+1)),
                     'Optimizer epoch coverage mismatch')
         rows = by_step[update['step']]
-        expected_layouts = [x.key for x in rng.sample(splits['train'],metadata['prompts_per_step'])
-                            for _ in range(metadata['group_size'])]
+        expected_layouts = ([key for key in metadata['training_layout_schedule'][update['step']-1]
+                             for _ in range(metadata['group_size'])] if balanced else
+                            [x.key for x in rng.sample(splits['train'],metadata['prompts_per_step'])
+                             for _ in range(metadata['group_size'])])
         require([r['layout_id'] for r in rows]==expected_layouts, 'Unexpected optimization layouts')
         summary = metrics(rows)
         require(abs(summary['mean_reward']-update['reward'])<1e-6 and
@@ -362,7 +405,7 @@ def audit(directory, pretest=False):
         require(best == (1.,1.) and early_stop['selected_step'] == best_step,
                 'Early stop lacks the maximum validation score')
     if retired:require(best_step==0 and selection.get('retired') is True,'Retired unchanged run selected new weights')
-    if preference and completed_steps<metadata['steps']:
+    if (preference or balanced) and completed_steps<metadata['steps']:
         require(best==(1.,1.) and best_step==completed_steps,'Preference early stop lacks first perfect validation')
     require(selection['best_step']==best_step and selection['selection_split']=='validation', 'Checkpoint selection mismatch')
     require((selection['validation_success_rate'],selection['validation_mean_reward'])==best, 'Selected score mismatch')
@@ -384,8 +427,8 @@ def audit(directory, pretest=False):
                     rollout_rounds=0 if preference else len(training),planned_rollout_rounds=0 if preference else metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
                     selected_step=best_step,validation_score=list(best),unconstrained_validation=transfer_validation,
-                    stopped_at_validation_ceiling=bool(early_stop) or (preference and completed_steps<metadata['steps']),
-                    algorithm='offline_dpo_v1' if preference else 'grpo',retired=retired,parent_grpo_audit=parent_audit,
+                    stopped_at_validation_ceiling=bool(early_stop) or ((preference or balanced) and completed_steps<metadata['steps']),
+                    algorithm=metadata.get('optimizer_algorithm') or 'grpo',retired=retired,parent_grpo_audit=parent_audit,
                     unique_certified_trajectories=len(checked),
                     **({'initial_rgb_observations':observation_audit} if observation_audit is not None else {}))
     test = read(directory/'test_comparison.json')
@@ -416,9 +459,9 @@ def audit(directory, pretest=False):
         input_files_sha256=input_receipt(directory),
         rollout_rounds=0 if preference else len(training),planned_rollout_rounds=0 if preference else metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
-        stopped_at_validation_ceiling=bool(early_stop) or (preference and completed_steps<metadata['steps']),
+        stopped_at_validation_ceiling=bool(early_stop) or ((preference or balanced) and completed_steps<metadata['steps']),
         training_samples=0 if preference else len(samples),replayed_training_programs=len(samples) if preference else 0,
-        algorithm='offline_dpo_v1' if preference else 'grpo',parent_grpo_audit=parent_audit,retired=retired,
+        algorithm=metadata.get('optimizer_algorithm') or 'grpo',parent_grpo_audit=parent_audit,retired=retired,
         validation_records=sum(len(v['rows']) for _,v in validation),
         test_records=2*n,raw_test_records=n if raw_baseline is not None else 0,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
         selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
