@@ -60,3 +60,26 @@ measurements include kernel compilation and are not steady-state throughput.
 These checks deliberately stub physical rewards and perform no optimizer step;
 they verify implementation and capacity, not task improvement. Both preflight
 JSON files retain the raw measurements and sampled programs.
+
+A complete successful training-layout episode (51002, 648.1 simulated seconds)
+was profiled separately. Its 6,482×155 recorded states and all result fields
+except wall time exactly match its original certified execution. Of the 1,117.7
+seconds of instrumented wall time, frame vision uses 30.7%, native MuJoCo stepping
+25.3%, custom nail forces 23.0%, camera rendering 3.5% and panel vision 3.2%.
+These are disjoint regions; the remaining 14.3% includes control, checks and
+overhead. The raw profile also contains inclusive parent timers, which must not
+be added to their children. This is one episode on a shared host, not a
+population average or isolated speed comparison.
+
+An additional **opt-in** `vectorized_pixels` backend compiles the integer RGB
+predicates and restricts pixel-coordinate scans to each mask's nonzero bounds.
+It retains full-resolution images, the original masks and row-major pixel
+coordinates. Its compiler/source/binary identity is recorded in physical
+provenance, and it requires a working C compiler. The current RL run and its
+verification checkout remain frozen on the earlier `vectorized` backend.
+The new backend's complete Linux test suite passes 50 tests, including exhaustive
+checks of all 16,777,216 RGB values for each of four predicate combinations.
+Full successful and failed episode equivalence runs are in progress; no complete
+episode speedup is claimed yet. The exploratory `pixel_probe03.json` uses
+machine-specific compiler flags and measures only synthetic pixel predicates;
+it is not the production backend's full-episode performance result.
