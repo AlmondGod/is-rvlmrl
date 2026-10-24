@@ -12,7 +12,8 @@ def save_step_adapter(model, output, metric):
     if pending.exists() or complete.exists():
         raise FileExistsError('Checkpoint already exists or is incomplete: '+name)
     pending.mkdir()
-    model.save_pretrained(pending)
+    kwargs = {'selected_adapters': ['default']} if getattr(model, '_cap_reference_adapter', None) else {}
+    model.save_pretrained(pending, **kwargs)
     record = dict(format='cap_rl_adapter_checkpoint_v1', step=metric['step'], metric=metric,
         scope='Adapter weights only, not optimizer/RNG resume state. A warm start reinitializes the optimizer. Validation selects the final policy separately.',
         files_sha256={p.name: hashlib.sha256(p.read_bytes()).hexdigest()

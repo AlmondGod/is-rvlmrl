@@ -27,7 +27,10 @@ samples per prompt, temperature 1.2, 512 completion tokens, learning rate
 every four rounds, adapter snapshot every round. Four clipped GRPO optimizer
 epochs reuse each physical rollout batch: 64 optimizer steps and 256 sampled
 programs if all planned rounds complete. Old rollout and reference probabilities
-remain frozen across these epochs. Temperature is applied to
+remain frozen across these epochs. KL uses a separate frozen copy of the initial
+adapter, so continued training is regularized toward its starting policy rather
+than pulled back toward raw Qwen. Only the trainable default adapter is saved
+as the selected/checkpoint policy. Temperature is applied to
 both sampling and all old/current/reference log-probabilities. The unchanged
 rollout policy computes its log-probabilities concurrently with physics; the
 optimizer waits for every reward, so no stale-policy or off-policy update is

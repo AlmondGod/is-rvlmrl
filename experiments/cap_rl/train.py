@@ -6,6 +6,7 @@ Sampling has no top-k/p truncation; log-probabilities use the same temperature
 as generation. Dropout is disabled for rollout and optimization.
 """
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 from pathlib import Path
@@ -39,7 +40,7 @@ def append(path, rows):
             handle.write(json.dumps(row) + "\n")
 
 
-def load_model(name, revision=None, adapter=None, trainable=False):
+def load_model(name, revision=None, adapter=None, trainable=False, reference_adapter=None):
     tokenizer = AutoTokenizer.from_pretrained(name, revision=revision, padding_side="left")
     tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(
@@ -57,7 +58,30 @@ def load_model(name, revision=None, adapter=None, trainable=False):
         model = get_peft_model(model, LoraConfig(
             r=16, lora_alpha=32, lora_dropout=0., target_modules="all-linear",
             task_type="CAUSAL_LM"))
+    if reference_adapter is not None:
+        model.load_adapter(reference_adapter, adapter_name='reference', is_trainable=False)
+        model.set_adapter('default')
+        model._cap_reference_adapter = 'reference'
     return model.cuda().eval(), tokenizer
+
+
+@contextmanager
+def reference_policy(model):
+    if getattr(model, '_cap_reference_adapter', None):
+        previous = model.active_adapter
+        model.set_adapter(model._cap_reference_adapter)
+        try:
+            yield
+        finally:
+            model.set_adapter(previous)
+    else:
+        with model.disable_adapter():
+            yield
+
+
+def save_policy(model, path):
+    kwargs = {'selected_adapters': ['default']} if getattr(model, '_cap_reference_adapter', None) else {}
+    model.save_pretrained(path, **kwargs)
 
 
 def encode(tokenizer, layouts):
@@ -203,7 +227,10 @@ def train(args):
     # New Transformers text-only configs need not retain the outer commit hash.
     # Resolve once and use that immutable revision for both loading and provenance.
     resolved_revision = model_info(args.model, revision=args.revision).sha
-    model, tokenizer = load_model(args.model, resolved_revision, args.init_adapter, trainable=True)
+    if args.reference_policy == 'initial' and not args.init_adapter:
+        raise ValueError('Initial-adapter reference requires --init-adapter')
+    model, tokenizer = load_model(args.model, resolved_revision, args.init_adapter, trainable=True,
+        reference_adapter=args.init_adapter if args.reference_policy == 'initial' else None)
     splits = task.datasets()
     source_files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in Path(__file__).parent.glob("*.py")}
@@ -244,7 +271,7 @@ def train(args):
     print(json.dumps({"stage": "baseline_validation", **baseline}), flush=True)
     best = (baseline["success_rate"], baseline["mean_reward"])
     best_step = 0
-    model.save_pretrained(out / "best_adapter")
+    save_policy(model, out / "best_adapter")
     tokenizer.save_pretrained(out / "best_adapter")
     started = time.monotonic()
     for step in range(1, args.steps+1):
@@ -260,7 +287,7 @@ def train(args):
             for i in range(0, size, args.microbatch):
                 sl = slice(i, i+args.microbatch)
                 old.append(token_logprobs(model, sequences[sl], attention[sl], length, args.sampling_temperature))
-                with model.disable_adapter():
+                with reference_policy(model):
                     reference.append(token_logprobs(model, sequences[sl], attention[sl], length, args.sampling_temperature))
             torch.cuda.synchronize()
             preparation['logprob_s'] = time.monotonic()-t
@@ -305,8 +332,8 @@ def train(args):
             score = (summary["success_rate"], summary["mean_reward"])
             if score > best:
                 best, best_step = score, step
-                model.save_pretrained(out / "best_adapter")
-    model.save_pretrained(out / "last_adapter")
+                save_policy(model, out / "best_adapter")
+    save_policy(model, out / "last_adapter")
     dump(out / "selection.json", {"best_step": best_step, "validation_success_rate": best[0],
                                   "validation_mean_reward": best[1], "selection_split": "validation",
                                   "training_seconds": time.monotonic()-started})
@@ -399,6 +426,8 @@ def main():
     parser.add_argument('--sampling-temperature', type=float, default=1.)
     parser.add_argument('--update-epochs', type=int, default=1,
                         help='Clipped GRPO optimizer steps per physical rollout batch')
+    parser.add_argument('--reference-policy', choices=('base', 'initial'), default='base',
+                        help='KL reference: raw base or frozen initial adapter for continued RL')
     parser.add_argument('--support-profile', choices=('contact_only', 'contact_and_nails'), default='contact_only')
     parser.add_argument('--controller-profile', choices=('original', 'southwest_approach'), default='original')
     parser.add_argument('--assembly-backend', choices=('original', 'vectorized'), default='original',
