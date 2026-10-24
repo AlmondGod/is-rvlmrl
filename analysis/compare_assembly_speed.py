@@ -26,6 +26,8 @@ def compare(before, after):
                   result_keys_differing_except_wall_s=differing_keys, arrays=arrays,
                   baseline_success=a['success'], optimized_success=b['success'],
                   baseline_error=a['error'], optimized_error=b['error'],
+                  complete_assembly_sequence=all(x.get('finished') and x.get('flipped') and x['error'] is None
+                                                 for x in (a, b)),
                   simulated_s=a['simulated_s'], baseline_wall_s=a['wall_s'], optimized_wall_s=b['wall_s'],
                   speedup=a['wall_s']/b['wall_s'],
                   timing_caveat='These exploratory full runs may overlap on one host; measure isolated throughput separately.',

@@ -1,0 +1,11 @@
+......initialize 0
+initialize 1
+initialize 2
+initialize 0
+initialize 1
+initialize 2
+..
+----------------------------------------------------------------------
+Ran 8 tests in 2.939s
+
+OK

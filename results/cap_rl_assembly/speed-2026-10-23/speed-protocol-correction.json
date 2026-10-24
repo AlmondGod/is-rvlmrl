@@ -1,0 +1,7 @@
+{
+  "utc": "2026-10-24T01:02:02.846652+00:00",
+  "change": "Require exact complete assembly/flip trajectories with identical strict outcomes, rather than requiring strict success in both runs.",
+  "reason": "The selected development case was already a strict failure in historical training record 9818cffb3beae859995f477c983b0c15c0db8604e1783200d2673f33149896ec: angle 3.0867533885582095 degrees. Fidelity includes preserving failures.",
+  "physical_or_acceptance_changes": false,
+  "reference_result_available": false
+}

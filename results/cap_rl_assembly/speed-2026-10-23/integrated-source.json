@@ -1,0 +1,6 @@
+{
+  "commit": "b00aca719f81297bd71e03eac11b66aff07af15c",
+  "backend": "vectorized",
+  "historical_reference_runtime_differs": true,
+  "comparison_scope": "Numerical state/result equivalence across preserved historical source/runtime and integrated optimized implementation; historical wall-time ratio is not a controlled speed measurement."
+}
