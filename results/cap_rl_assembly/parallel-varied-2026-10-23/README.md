@@ -1,17 +1,45 @@
 # Parallel rollouts and varied-placement RL
 
-Status: parallel execution and GPU optimization preflights verified. The prior policy passes 4/8 fresh validation placements. Constrained-order GRPO is now training; the 24 held-out placements remain untouched. No new held-out policy-performance claim yet.
+Status: parallel execution is verified; policy improvement is still under evaluation. The 24 held-out placements remain untouched. The constrained GRPO pilot was explicitly retired at its declared round-six unchanged-policy boundary, and a training-only offline preference phase is active. No new held-out improvement claim yet.
 
-Interim measured progress at 2026-10-24 03:32 UTC is preserved in
-`run03-progress/`: two rollout rounds, 16 sampled programs and eight optimizer
-updates. Sampled training successes were 1/8 and 6/8. Greedy validation remains
-4/8 because the generated ordering is unchanged; this is not yet a learned
-improvement. The training loop used 2,395.86 seconds (0.666 allocated GPU-hours),
-including CPU environment waits. Generation totaled 21.60 seconds and the eight
-optimizer updates totaled 25.32 seconds. Environment reward wait after overlap
-totaled 2,341.98 seconds; this includes rendering, vision and scripted control,
-not only the MuJoCo kernel. The first two checkpoints and all their certified
-evidence have hash-verified local backups. Training continues.
+The completed pilot in `run03-progress/` contains six rollout rounds, 48 sampled
+programs and 24 optimizer updates. Greedy validation at rounds 2, 4 and 6 remains
+4/8 with the identical original program. Sampled training successes total
+27/48 across changing/repeated layouts; that is not a paired improvement estimate.
+The loop and final validation/checkpoint interval used 7400.27 seconds
+(2.056 allocated GPU-hours), including environment waits.
+Generation totaled 65.05 seconds and optimization
+75.45 seconds. All six checkpoints
+and their certified physical evidence have hash-verified local backups.
+
+The sample-efficiency contingency is documented in `preference-replay-protocol.md`.
+It constructs 23 strict success-versus-failure preferences within the same
+training layout, from the pilot's own certified programs. The next phase is
+**GRPO followed by offline DPO**, not additional on-policy GRPO rollouts. It
+uses the completed GRPO weights as its warm start, the original prior as its
+frozen reference/baseline, and the unchanged grammar, physics, reward and splits.
+Forty-eight preference optimizer updates are planned, with full eight-layout
+validation every eight updates and earliest-maximum selection.
+
+`preference-failed04/` preserves an infrastructure-failed attempt: eight updates
+in 22.52 seconds, followed by a missing cwd-relative robot-asset error before
+fresh simulation could start. Those eight validation launches received no
+reward and their incomplete files were quarantined intact. `preference-progress05/`
+records the restart after an asset-path smoke check. The dataset and sampled
+pair sequence are identical, but GPU gradients/weights were not bit-reproducible;
+the recovery receipt discloses the difference. Its first validation is 4/8;
+checkpoint 16 is undergoing fresh physical validation. The permanent source-
+relative asset-path fix is separately tested to retain identical scene XML.
+Active experiments retain their frozen simulator source and resolve the original
+assets through the recorded overlay link.
+
+The preference GPU preflight verifies finite gradients, an untouched frozen
+reference, exact initial/reference forward probabilities, and 9.44 GB peak
+allocated memory for one pair. It performs no optimizer step or task evaluation.
+All 34 preference/data/accounting tests pass on the GPU host. Archived data now
+retains parent-pilot evidence and counts replayed examples separately from new
+physical executions; repeated identical payloads can be stored as verified tar
+hard links instead of duplicated model bytes.
 
 Eight fresh training layouts (51001–51008) each execute the first 20 simulated seconds of the same complete program. Every run starts from reset, uses the vectorized backend, original physics/controller/camera parameters, and one OpenCV thread per worker. There is no rollout-cache reuse. Process startup is included.
 

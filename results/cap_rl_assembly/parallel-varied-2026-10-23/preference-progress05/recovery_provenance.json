@@ -1,0 +1,22 @@
+{
+  "format": "assembly_infrastructure_recovery_v1",
+  "utc": "2026-10-24T05:04:04.769925+00:00",
+  "prior_attempt": "/opt/cap-speed/varied-preference04",
+  "prior_failure_sha256": "e0ddd8673efb4d6d59c8364a5769b7814fba29c6b04215b034e41f56385fa0d8",
+  "data_identical": true,
+  "sampling_choices_identical": true,
+  "seed": 42,
+  "first_loss_identical": true,
+  "first_gradient_norms": [
+    2.088606357574463,
+    2.0906763076782227
+  ],
+  "checkpoint8_weights_sha256": [
+    "3e8af8218a95c4dfc757e41a544eef19d5cd7f9d0064ad29272f1d7e19a2ef5b",
+    "8d040b40b4439478dd00d49de8df4d837f2396fbeb66e5a152a913728b35ee69"
+  ],
+  "optimizer_bit_reproducible": false,
+  "note": "Same frozen parent weights, data, algorithm and sampling choices; GPU backward gradients differed slightly from the first step and optimization diverged. Do not claim bit-exact training replay. Failed attempt is preserved; it supplied no validation reward and no selected policy.",
+  "asset_root": "/opt/cap-speed/varied-verification-repo/third_party",
+  "smoke_result_sha256": "2f9960817c5f1e84becd2e5ed0f4f0d9cfaf6359604a2e5196c4b2d97dfb93d0"
+}

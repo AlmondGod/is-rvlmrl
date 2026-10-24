@@ -1,0 +1,8 @@
+{
+  "started_utc": "2026-10-24T04:59:10.725839+00:00",
+  "completed_stages": [],
+  "source_sha256": "09c25e6e9132cfd15f575f8f7fcc0d7d86196941cd961b091eea3ea022ba5438",
+  "replay_path": "/opt/cap-speed/preference-replay05",
+  "state": "waiting_for_selection",
+  "utc": "2026-10-24T04:59:10.725915+00:00"
+}

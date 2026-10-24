@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-24T03:29:52.247782+00:00",
+  "completed_stages": [],
+  "source_sha256": "09c25e6e9132cfd15f575f8f7fcc0d7d86196941cd961b091eea3ea022ba5438",
+  "replay_path": "/opt/cap-speed/varied-replay03",
+  "state": "failed",
+  "utc": "2026-10-24T04:53:42.442249+00:00",
+  "error": "ValueError('Automatic final evaluation requires a learned policy selected at 8/8 varied validation')"
+}

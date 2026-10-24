@@ -1,0 +1,19 @@
+{
+  "format": "assembly_plateau_retirement_v1",
+  "completed_rounds": 6,
+  "planned_rounds": 16,
+  "optimizer_updates": 24,
+  "test_evaluated": false,
+  "reason": "Unchanged scheduled greedy validation; reallocate remaining development budget to certified preference replay",
+  "files_sha256": {
+    "metadata.json": "bf4db2b8e067ca0014484bf48f1828da649561a45aac01e6ae8dd7f91eb85062",
+    "training.jsonl": "baa0f739efda45f904344753177cd3086afd49f65e4b6355e28ed0abd1ae3356",
+    "rollouts.jsonl": "6bcae8152c1072d7c44356c816f839fff9a7bb4052cc847a981dcc6bbd811a7b",
+    "validation_baseline.json": "9cc5c0665ca22d511e455984dcde169c082f95d3a7c27fd47131d2a2d07a874a",
+    "retirement_policy.json": "c7210889a2eed1338c456e4d7de819e7f55f847519e9271981e025303e2f02f8",
+    "validation_0002.json": "9cc5c0665ca22d511e455984dcde169c082f95d3a7c27fd47131d2a2d07a874a",
+    "validation_0004.json": "9cc5c0665ca22d511e455984dcde169c082f95d3a7c27fd47131d2a2d07a874a",
+    "validation_0006.json": "9cc5c0665ca22d511e455984dcde169c082f95d3a7c27fd47131d2a2d07a874a"
+  },
+  "source_sha256": "35debe14690f973febd3c200a7b338aa6dfde5acad91df50934af7abfbe95c38"
+}

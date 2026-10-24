@@ -1,0 +1,79 @@
+{
+  "format": "assembly_infrastructure_failure_v1",
+  "utc": "2026-10-24T04:58:40.159160+00:00",
+  "reason": "Fresh simulator initialization could not resolve cwd-relative robot assets in isolated analysis overlay",
+  "new_physical_episodes_completed": 0,
+  "validation_reward_assigned": false,
+  "optimizer_updates": 8,
+  "checkpoint_weights_sha256": "3e8af8218a95c4dfc757e41a544eef19d5cd7f9d0064ad29272f1d7e19a2ef5b",
+  "source_sha256": "0d4b36afb0d1f45d7a578b276a3cb55a0f2c1abf74855648c76bdb0e14a5451b",
+  "log_sha256": "6da9baba398b8849fb706cc767a938993c59a31d23881f04c29e10f8f2616540",
+  "quarantine": "/opt/cap-speed/preference-infrastructure-failure04",
+  "uncertified_attempts": [
+    {
+      "identity": "e87c5b05da48a73f204c8d7a3836cb405f35f98c2512ce7dbd6b8439e1827adf",
+      "seed": 52001,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "94314b7d1b3ded8f6e563baaf976321b1fbfb1a5a4f985720d6f4bc0347effad",
+      "seed": 52002,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "137a06a9b66f6c3b6309027259eeda3bffb277702a4c77d4685117879441fb36",
+      "seed": 52003,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "ac0be3700523eb05da89f9ee5f712a235f07a717e03c59f0c8bb3a3fbad98746",
+      "seed": 52004,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "782125df843c7a91fb3b8d5efb67f613ee37b4ebc0037f39de42a2ec476e31d9",
+      "seed": 52005,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "81ceeadca5facc02c356a938d61827df712c0e0cfa36a2cd869e9d48fa18f7a8",
+      "seed": 52007,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "4c3126b8c8586b2b651967cb2822b02bf6d169829cf214b1c3cdde9d53022bd2",
+      "seed": 52008,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    },
+    {
+      "identity": "9cefdae18d50dc414bd6ae3e97b26287bcd9c76381c740ab07ffea8166b54391",
+      "seed": 52006,
+      "files_sha256": {
+        "program.py": "60fa7aa338176b5f1f84995ce23d5f185cdbb1a0b83d3b3cecd6f6ea26920f02",
+        "provenance.json": "a59b75d769406ecbf6b250fde2a72ec23a892f4098207ea56fc4fa0a6e985c97"
+      }
+    }
+  ],
+  "recovery": "Preserve failed phase and all bytes; replay optimizer phase deterministically from same GRPO checkpoint/data with correct asset link. No held-out evaluation."
+}
