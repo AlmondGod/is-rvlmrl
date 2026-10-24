@@ -56,13 +56,8 @@ def describe(observation):
     return '\n'.join(lines)
 
 
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--seed', type=int, required=True)
-    p.add_argument('--out', required=True)
-    args = p.parse_args()
-    if args.seed not in range(51001, 51033):
-        raise ValueError('This feasibility probe is restricted to the declared training layouts')
+def capture(seed, out, expected_provenance=None):
+    """Capture reset-time sensors only; callers own split access authorization."""
     import cv2
     import imageio.v2 as imageio
     import mujoco
@@ -74,10 +69,13 @@ def main():
     from experiments.torso_assembly.environment import Env
     cv2.setNumThreads(1)
     configure('vectorized')
-    out = Path(args.out)
+    manifest = provenance(support_profile='contact_and_nails', controller_profile='southwest_approach')
+    if expected_provenance is not None and manifest != expected_provenance:
+        raise ValueError('Initial observation must use the frozen physical environment')
+    out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
     config = json.loads(PROTOCOL.read_text())['environment']
-    env = Env(dt=config['dt'], layout_seed=args.seed, physical_nails=True,
+    env = Env(dt=config['dt'], layout_seed=seed, physical_nails=True,
               fixture_half_width=config['fixture_half_width'],
               shoulder_half_span=config['shoulder_half_span'])
     if env.d.time != 0.: raise ValueError('Expected the untouched initial observation')
@@ -92,13 +90,23 @@ def main():
     (out/'sensor_inputs.json').write_text(json.dumps(clean(dict(cameras=cameras, robot=packet)), indent=2)+'\n')
     (out/'observation.json').write_text(json.dumps(observation, indent=2)+'\n')
     (out/'prompt_fragment.txt').write_text(describe(observation)+'\n')
-    receipt = dict(scope='Observation feasibility only; no policy update, task reward or held-out evaluation.',
-        seed=args.seed, observation_time_s=float(env.d.time),
+    receipt = dict(scope='Reset-time RGB observation only; no task execution, reward or policy update.',
+        seed=seed, observation_time_s=float(env.d.time),
         source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        physical_provenance=provenance(support_profile='contact_and_nails', controller_profile='southwest_approach'),
+        physical_provenance=manifest,
         files_sha256={q.name:hashlib.sha256(q.read_bytes()).hexdigest() for q in out.iterdir() if q.is_file()})
     (out/'receipt.json').write_text(json.dumps(receipt, indent=2)+'\n')
-    print(json.dumps(observation), flush=True)
+    return observation
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--seed', type=int, required=True)
+    p.add_argument('--out', required=True)
+    args = p.parse_args()
+    if args.seed not in range(51001, 51033):
+        raise ValueError('This feasibility probe is restricted to the declared training layouts')
+    print(json.dumps(capture(args.seed, args.out)), flush=True)
 
 
 if __name__ == '__main__': main()

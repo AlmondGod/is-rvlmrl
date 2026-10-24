@@ -295,7 +295,7 @@ class PreferenceReplayAuditTests(unittest.TestCase):
         layouts,manifest=RecordsAuditTests().fixture(root)
         original=[json.loads(s) for s in (root/'rollouts.jsonl').read_text().splitlines()]
         parent=root/'parent_run';parent.mkdir();(parent/'rollouts.jsonl').write_text((root/'rollouts.jsonl').read_text())
-        pair=dict(layout_id=original[0]['layout_id'],chosen_row=1,rejected_row=0)
+        pair=dict(layout_id=original[0]['layout_id'],prompt=original[0]['prompt'],chosen_row=1,rejected_row=0)
         data={'pairs':[pair]}
         p=root/'metadata.json';metadata=audit.read(p)
         metadata.update(optimizer_algorithm='offline_dpo_v1',steps=48,eval_every=8,update_epochs=1,prompts_per_step=4)

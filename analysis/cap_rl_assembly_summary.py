@@ -106,7 +106,8 @@ def main():
         exposed_simulation_wait_scope='Full environment reward wait after overlapping old/reference log-probabilities; includes physics, rendering, perception and scripted control. Not a pure MuJoCo kernel time.',
         optimization_seconds=sum(r.get('optimization_seconds',0.) for r in training),
         full_visual_language_policy=False, learned_motor_controller=False,
-        task_prompt_identical_across_layouts=True, physical_validation=False)
+        task_prompt_identical_across_layouts=metadata.get('prompt_profile','constant')=='constant',
+        prompt_profile=metadata.get('prompt_profile','constant'),physical_validation=False)
     if preference:
         parent=run/'parent_run'
         parent_training=[json.loads(s) for s in (parent/'training.jsonl').read_text().splitlines()]
@@ -118,6 +119,16 @@ def main():
             greedy_validation_success_rate=parent_selection['validation_success_rate'])
         summary['total_optimizer_updates_in_lineage']=summary['parent_grpo']['optimizer_updates']+summary['optimizer_updates']
         summary['training_loop_gpu_hours_in_lineage']=summary['parent_grpo']['training_loop_gpu_hours']+summary['allocated_training_gpu_hours']
+    if (run/'constant_prompt_attempt').is_dir():
+        previous=run/'constant_prompt_attempt'
+        previous_selection=read(previous/'selection.json')
+        previous_rows=[json.loads(s) for s in (previous/'training.jsonl').read_text().splitlines()]
+        summary['earlier_constant_prompt_preference_attempt']=dict(
+            optimizer_updates=len(previous_rows),optimization_seconds=sum(r['optimization_seconds'] for r in previous_rows),
+            training_loop_gpu_hours=previous_selection['training_seconds']/3600,
+            selected_validation_success_rate=previous_selection['validation_success_rate'],
+            weights_used_to_initialize_final_run=False,
+            timing_scope='Separate completed preference phase; already included in the continuous lineage allocation window, never added to that window twice.')
     summary['contact_only_shadow'] = {
         label: dict(n=len(test[key]), successes=sum(bool(r.get('contact_only_acceptance',{}).get('passes'))
                                                   for r in test[key]))

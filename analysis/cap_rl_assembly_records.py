@@ -38,6 +38,11 @@ def input_receipt(directory):
     result={name: sha(directory/name) for name in sorted(names) if (directory/name).is_file()}
     if (directory/'parent_run').is_dir():
         result.update({'parent_run/'+name:digest for name,digest in input_receipt(directory/'parent_run').items()})
+    for folder in ('observations','constant_prompt_attempt'):
+        for path in sorted((directory/folder).rglob('*')):
+            if path.is_file():result[str(path.relative_to(directory))]=sha(path)
+    for name in ('observations_manifest.json','test_observations_manifest.json','observation_preflight.json'):
+        if (directory/name).is_file():result[name]=sha(directory/name)
     return result
 
 
@@ -73,6 +78,16 @@ def audit_preference_inputs(directory, metadata):
     require(sha(directory/'preference_data.json')==metadata['preference_data_sha256'],'Preference dataset changed')
     data=read(directory/'preference_data.json');rebuilt=build(parent)
     rebuilt['parent_run']=metadata['parent_original_path']
+    from analysis import assembly_visual_prompt as visual
+    if visual.enabled(metadata):
+        rebuilt=visual.augment_preferences(rebuilt,directory,metadata)
+        for name,digest in metadata['constant_prompt_attempt_sha256'].items():
+            require(sha(directory/'constant_prompt_attempt'/name)==digest,'Earlier constant-prompt attempt changed')
+        previous=read(directory/'constant_prompt_attempt/selection.json')
+        previous_meta=read(directory/'constant_prompt_attempt/metadata.json')
+        require(previous['completed_optimizer_updates']==48 and previous['validation_success_rate']<1.
+                and previous_meta.get('prompt_profile','constant')=='constant'
+                and previous_meta.get('optimizer_algorithm')=='offline_dpo_v1', 'Visual contingency was not met')
     compare(rebuilt,data)
     for name,digest in metadata['preference_source_sha256'].items():
         require(sha(directory/'preference_source'/name)==digest and sha(Path(__file__).with_name(name))==digest,
@@ -167,13 +182,15 @@ def audit(directory, pretest=False):
     layouts = {x.key:x for v in splits.values() for x in v}
     require(sum(len(v) for v in splits.values()) == len(layouts), 'Overlapping splits')
     criterion = read(PROTOCOL)['acceptance']
+    from analysis import assembly_visual_prompt as visual
+    observation_audit=visual.audit_observations(directory,metadata,include_test=not pretest) if visual.enabled(metadata) else None
     checked = {}
     records = []
 
     def check(row, split):
         require(row['layout_id'] in metadata['splits'][split], 'Layout outside split')
         layout = layouts[row['layout_id']]
-        require(row['prompt'] == task.prompt(layout), 'Model prompt mismatch')
+        require(row['prompt'] == visual.expected_prompt(directory,metadata,layout), 'Model prompt mismatch')
         if not row.get('evidence_id'):
             if row.get('static_rejection'):
                 from analysis.train_assembly_strict import required_call_failure
@@ -313,7 +330,7 @@ def audit(directory, pretest=False):
             for pair_id in pair_ids:
                 pair=preference_data['pairs'][pair_id]
                 for role in ('chosen','rejected'):
-                    expected.append(dict(original[pair[role+'_row']],step=update['step'],preference_pair_id=pair_id,
+                    expected.append(dict(original[pair[role+'_row']],prompt=pair['prompt'],step=update['step'],preference_pair_id=pair_id,
                         preference_role=role,parent_source_row=pair[role+'_row'],offline_replay=True))
             compare(expected,by_step[update['step']])
             require(update['replayed_programs']==len(expected),'Replayed sample count mismatch')
@@ -369,7 +386,8 @@ def audit(directory, pretest=False):
                     selected_step=best_step,validation_score=list(best),unconstrained_validation=transfer_validation,
                     stopped_at_validation_ceiling=bool(early_stop) or (preference and completed_steps<metadata['steps']),
                     algorithm='offline_dpo_v1' if preference else 'grpo',retired=retired,parent_grpo_audit=parent_audit,
-                    unique_certified_trajectories=len(checked))
+                    unique_certified_trajectories=len(checked),
+                    **({'initial_rgb_observations':observation_audit} if observation_audit is not None else {}))
     test = read(directory/'test_comparison.json')
     for key,label in [('before','baseline'),('after','trained')]:
         rows = test[key]
@@ -408,7 +426,8 @@ def audit(directory, pretest=False):
         unconstrained_validation=transfer_validation,unconstrained_test=transfer_test,
         paired_wins=wins,paired_losses=losses,paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
         baseline_success_exact_95_ci=interval(test['baseline']['successes']),trained_success_exact_95_ci=interval(test['trained']['successes']),
-        limitation=f'{n} randomized layouts are a simulator pilot; these intervals do not establish real-world reliability.')
+        limitation=f'{n} randomized layouts are a simulator pilot; these intervals do not establish real-world reliability.',
+        **({'initial_rgb_observations':observation_audit} if observation_audit is not None else {}))
 
 
 if __name__=='__main__':

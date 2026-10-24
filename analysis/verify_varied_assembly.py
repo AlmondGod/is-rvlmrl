@@ -77,6 +77,15 @@ def main():
             ('physical_replay', 'analysis.cap_rl_assembly_test_replay',
              ['--run',str(root),'--out',str(replay),'--seeds','53001','53012','53024',
               '--workers',str(metadata['physics_workers']),'--physics-threads',str(metadata['physics_threads'])], replay/'audit.json')]
+        from analysis.assembly_visual_prompt import enabled, verify_sources
+        if enabled(metadata):
+            verify_sources(root,metadata)
+            visual_stages={'primary_test','raw_baseline','unconstrained_transfer','generation_audit'}
+            stages=[(name,'analysis.assembly_visual_stage',['--run',str(root),'--stage',name],output)
+                    if name in visual_stages else (name,module,arguments,output)
+                    for name,module,arguments,output in stages]
+            stages.insert(-1,('observation_audit','analysis.assembly_visual_observation_audit',
+                ['--run',str(root),'--out',str(root/'observation_audit.json')],root/'observation_audit.json'))
         for index,(name,module,arguments,output) in enumerate(stages):
             if {name:sha(root/name) for name in frozen_names} != frozen:
                 raise ValueError('Frozen selection changed during verification')
