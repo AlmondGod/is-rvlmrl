@@ -36,6 +36,42 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def audit_transfer(directory, metadata, split, check):
+    path=directory/f'unconstrained_{split}_comparison.json'
+    if not path.exists():return None
+    report=read(path)
+    require(metadata.get('policy_decoding')=='assembly_permutations_v1','Unexpected transfer evaluation')
+    require(report['format']=='assembly_unconstrained_transfer_v1' and report['split']==split
+            and report['evaluation_decoding']=='unrestricted_program' and report['selection_role']=='diagnostic_only',
+            'Wrong transfer evaluation protocol')
+    require(report['model_revision']==metadata['model_revision'],'Transfer model revision mismatch')
+    for name,key in [('metadata.json','metadata_sha256'),('selection.json','selection_sha256'),
+                     ('initial_adapter/adapter_model.safetensors','initial_weights_sha256'),
+                     ('best_adapter/adapter_model.safetensors','selected_weights_sha256'),
+                     ('evaluation_source/cap_rl_assembly_unconstrained.py','evaluator_source_sha256')]:
+        require(sha(directory/name)==report[key],'Transfer source/weights changed: '+name)
+    require(sha(Path(__file__).with_name('cap_rl_assembly_unconstrained.py'))==report['evaluator_source_sha256'],
+            'Use the recorded transfer evaluator')
+    for key,label in [('before','baseline'),('after','trained')]:
+        require([r['layout_id'] for r in report[key]]==metadata['splits'][split],'Transfer split coverage mismatch')
+        for row in report[key]:check(row,split)
+        compare(metrics(report[key]),report[label])
+    wins=sum(not a['success'] and b['success'] for a,b in zip(report['before'],report['after']))
+    losses=sum(a['success'] and not b['success'] for a,b in zip(report['before'],report['after']))
+    n=len(report['before'])
+    require((wins,losses)==(report['paired_wins'],report['paired_losses']),'Transfer paired counts mismatch')
+    require(abs((wins-losses)/n-report['delta_success_rate'])<1e-12,'Transfer paired delta mismatch')
+    from scipy.stats import binomtest,beta
+    def interval(k):
+        return [float(beta.ppf(.025,k,n-k+1)) if k else 0.,
+                float(beta.ppf(.975,k+1,n-k)) if k<n else 1.]
+    return dict(passes=True,split=split,evaluation_decoding='unrestricted_program',records=2*n,
+                baseline=report['baseline'],trained=report['trained'],paired_wins=wins,paired_losses=losses,
+                paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
+                baseline_success_exact_95_ci=interval(report['baseline']['successes']),
+                trained_success_exact_95_ci=interval(report['trained']['successes']))
+
+
 def audit(directory, pretest=False):
     directory = Path(directory)
     metadata = read(directory/'metadata.json')
@@ -227,12 +263,13 @@ def audit(directory, pretest=False):
         require(sha(directory/'initial_adapter/adapter_model.safetensors') ==
                 sha(directory/'best_adapter/adapter_model.safetensors'),
                 'Selected baseline differs from the initial adapter')
+    transfer_validation=audit_transfer(directory,metadata,'validation',check)
     if pretest:
-        require(not (directory/'test_comparison.json').exists(), 'Test already evaluated')
+        require(not any((directory/name).exists() for name in ('test_comparison.json','raw_test_baseline.json','unconstrained_test_comparison.json')), 'Test already evaluated')
         return dict(passes=True,scope='Pre-test source, training, validation, reward, stopping and selected-weight audit; no test outcomes read.',
                     rollout_rounds=len(training),planned_rollout_rounds=metadata['steps'],
                     optimizer_updates=len(training)*epochs,planned_optimizer_updates=metadata['steps']*epochs,
-                    selected_step=best_step,validation_score=list(best),
+                    selected_step=best_step,validation_score=list(best),unconstrained_validation=transfer_validation,
                     stopped_at_validation_ceiling=bool(early_stop),
                     unique_certified_trajectories=len(checked))
     test = read(directory/'test_comparison.json')
@@ -249,6 +286,7 @@ def audit(directory, pretest=False):
         for row in raw['rows']:check(row,'test')
         compare(metrics(raw['rows']),raw['metrics'])
         raw_baseline=raw['metrics']
+    transfer_test=audit_transfer(directory,metadata,'test',check)
     wins=sum(not a['success'] and b['success'] for a,b in zip(test['before'],test['after']))
     losses=sum(a['success'] and not b['success'] for a,b in zip(test['before'],test['after']))
     require(wins==test['paired_wins'] and losses==test['paired_losses'], 'Paired counts mismatch')
@@ -266,6 +304,7 @@ def audit(directory, pretest=False):
         test_records=2*n,raw_test_records=n if raw_baseline is not None else 0,unique_certified_trajectories=len(checked),source_asset_files=len(manifest['sha256']),
         selected_step=best_step,profiles=manifest['profiles'],optimization_reward=reward_mode,
         baseline=test['baseline'],trained=test['trained'],raw_baseline=raw_baseline,
+        unconstrained_validation=transfer_validation,unconstrained_test=transfer_test,
         paired_wins=wins,paired_losses=losses,paired_exact_two_sided_p=float(binomtest(wins,wins+losses,.5).pvalue) if wins+losses else 1.,
         baseline_success_exact_95_ci=interval(test['baseline']['successes']),trained_success_exact_95_ci=interval(test['trained']['successes']),
         limitation=f'{n} randomized layouts are a simulator pilot; these intervals do not establish real-world reliability.')

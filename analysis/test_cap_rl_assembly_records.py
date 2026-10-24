@@ -232,6 +232,35 @@ class RecordsAuditTests(unittest.TestCase):
             with self.subTest(target=target),self.assertRaises((ValueError,AssertionError)):
                 self.run_fixture(mutate)
 
+    def test_pretest_rejects_secondary_test_reports(self):
+        for name in ('raw_test_baseline.json','unconstrained_test_comparison.json'):
+            def mutate(root):
+                (root/'test_comparison.json').unlink();(root/name).write_text('{}')
+            with self.subTest(name=name),self.assertRaisesRegex(ValueError,'Test already evaluated'):
+                self.run_fixture(mutate,pretest=True)
+
+    def test_secondary_transfer_binds_weights_source_and_all_cases(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            metadata=dict(policy_decoding='assembly_permutations_v1',model_revision='fixture',splits={'test':['a','b']})
+            (root/'metadata.json').write_text(json.dumps(metadata));(root/'selection.json').write_text('{}')
+            for folder,value in [('initial_adapter',b'initial'),('best_adapter',b'selected')]:
+                (root/folder).mkdir();(root/folder/'adapter_model.safetensors').write_bytes(value)
+            source=root/'evaluation_source/cap_rl_assembly_unconstrained.py';source.parent.mkdir()
+            source.write_bytes(Path(__file__).with_name('cap_rl_assembly_unconstrained.py').read_bytes())
+            before=[dict(layout_id=k,success=s,reward=float(s),valid=True) for k,s in [('a',False),('b',True)]]
+            after=[dict(layout_id=k,success=True,reward=1.,valid=True) for k in ('a','b')]
+            report=dict(format='assembly_unconstrained_transfer_v1',split='test',evaluation_decoding='unrestricted_program',
+                selection_role='diagnostic_only',model_revision='fixture',metadata_sha256=audit.sha(root/'metadata.json'),
+                selection_sha256=audit.sha(root/'selection.json'),initial_weights_sha256=audit.sha(root/'initial_adapter/adapter_model.safetensors'),
+                selected_weights_sha256=audit.sha(root/'best_adapter/adapter_model.safetensors'),evaluator_source_sha256=audit.sha(source),
+                before=before,after=after,baseline=audit.metrics(before),trained=audit.metrics(after),paired_wins=1,paired_losses=0,delta_success_rate=.5)
+            path=root/'unconstrained_test_comparison.json';path.write_text(json.dumps(report));seen=[]
+            result=audit.audit_transfer(root,metadata,'test',lambda r,s:seen.append((r,s)))
+            self.assertTrue(result['passes']);self.assertEqual(len(seen),4)
+            report['selected_weights_sha256']='changed';path.write_text(json.dumps(report))
+            with self.assertRaises(ValueError):audit.audit_transfer(root,metadata,'test',lambda r,s:None)
+
     def test_tampered_test_rows_rejected(self):
         for key,value in [('reward',0.),('completion','stop()'),('prompt','leaked prompt'),
                           ('layout_id','assembly-full-v1-41001'),('result_sha256','wrong')]:

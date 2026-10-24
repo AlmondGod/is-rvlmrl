@@ -42,3 +42,12 @@ The 24 held-out seeds and the three predeclared replay seeds remain unchanged
 and unused until final checkpoint selection. Final comparisons identify the
 constrained initial/selected policies and the unrestricted raw model explicitly.
 No held-out result may be used to choose a new order or train another candidate.
+
+A predeclared secondary transfer evaluation removes the decoding grammar and
+measures unrestricted greedy programs from the same frozen initial/selected
+weights. It does not repair outputs. A validation diagnostic may be run after
+selection. The 24-layout secondary held-out comparison runs only after the
+primary comparison is complete; both outcomes are reported and neither is used
+to select a decoder, alter the chosen weights, or tune on held-out placements.
+This distinguishes constrained program-order improvement from unrestricted
+code-generation transfer rather than assuming they are equivalent.

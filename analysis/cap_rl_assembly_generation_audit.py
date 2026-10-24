@@ -39,13 +39,18 @@ def main():
     if (root/'raw_test_baseline.json').exists():
         report['raw']=json.loads((root/'raw_test_baseline.json').read_text())['rows']
         policies.append(('raw',None))
+    if (root/'unconstrained_test_comparison.json').exists():
+        transfer=json.loads((root/'unconstrained_test_comparison.json').read_text())
+        for label,adapter in [('before',str(initial)),('after',str(root/'best_adapter'))]:
+            report['unconstrained_'+label]=transfer[label]
+            policies.append(('unconstrained_'+label,adapter))
     for label,adapter in policies:
         model,tokenizer=train.load_model(metadata['model'],metadata['model_revision'],adapter)
         texts=[];truncated=[]
         for start in range(0,len(layouts),16):
             inputs=train.encode(tokenizer,layouts[start:start+16])
             kwargs=(generation_kwargs(tokenizer,inputs.input_ids.shape[1],metadata['max_tokens'])
-                    if constrained and label!='raw' else {})
+                    if constrained and label in ('before','after') else {})
             with torch.no_grad():
                 generated=model.generate(**inputs,max_new_tokens=metadata['max_tokens'],do_sample=False,
                     pad_token_id=tokenizer.pad_token_id,eos_token_id=tokenizer.eos_token_id,**kwargs)
@@ -62,6 +67,6 @@ def main():
     result=dict(passes=True,programs_regenerated=len(policies)*len(layouts),greedy=True,model_revision=metadata['model_revision'],
         selected_adapter_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/'best_adapter').iterdir() if p.is_file()},
         program_sha256=hashes,initial_adapter=initial is not None,
-        scope='Exact regeneration from the recorded initial policy, validation-selected adapter and raw model when present. No optimization or physics execution.')
+        scope='Exact regeneration from the recorded initial policy, validation-selected adapter and raw model when present. Includes declared unrestricted transfer comparisons. No optimization or physics execution.')
     Path(args.out).write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result),flush=True)
 if __name__=='__main__':main()
